@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function showLogin()
     {
+        if (Auth::check()){
+            return redirect()->intended('admin.dashboard');
+        }
         return view('auth.admin.login');
-    }
 
+    }
     public function login(Request $request)
     {
         $data = $request->validate([
@@ -19,10 +23,20 @@ class AuthController extends Controller
             'password' => ['required']
         ]);
 
-        if (auth('admin')->attempt($data))
+        if (Auth::guard('admin')->attempt($data))
         {
             return redirect(route('admin.dashboard'));
+        }else{
+            return redirect(route('admin.login'))->withErrors(['email' => 'Пользователь не найден']);
         }
-        return redirect(route('admin.login'))->withErrors(['email' => 'Пользователь не найден']);
+
     }
+
+    public function logout(){
+        Auth::logout();
+        return redirect(route("admin.login"));
+    }
+
 }
+
+
