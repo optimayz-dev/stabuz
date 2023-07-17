@@ -14,7 +14,9 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        //
+        $catalogs = Catalog::find(1)->with('getSubcategories')->get();
+        dd($catalogs);
+        return view('admin.catalogs.index', compact('catalogs'));
     }
 
     /**

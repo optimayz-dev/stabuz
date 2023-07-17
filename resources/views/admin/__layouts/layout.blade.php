@@ -13,6 +13,8 @@
     <link href="{{ asset('/assets/admin/css/nprogress.css') }}" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
     <link href="{{ asset('/assets/admin/css/prettify.min.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('/assets/admin/css/green.css') }}" rel="stylesheet">
 
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('/assets/admin/css/custom.min.css') }}" rel="stylesheet">
@@ -51,32 +53,22 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="">Dashboard</a></li>
                                     <li><a href="index2.html">Dashboard2</a></li>
                                     <li><a href="index3.html">Dashboard3</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-edit"></i> Ресурсы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="form.html">General Form</a></li>
-                                    <li><a href="form_advanced.html">Advanced Components</a></li>
-                                    <li><a href="form_validation.html">Form Validation</a></li>
-                                    <li><a href="form_wizards.html">Form Wizard</a></li>
-                                    <li><a href="form_upload.html">Form Upload</a></li>
-                                    <li><a href="form_buttons.html">Form Buttons</a></li>
+                                    <li><a href="{{ route('admin.catalog.index') }}">Каталог</a></li>
+                                    <li><a href="{{ route('admin.category.index') }}">Категории</a></li>
+                                    <li><a href="{{ route('admin.subcategory.index') }}">Подкатегории</a></li>
+                                    <li><a href="{{ route('admin.product.index') }}">Товары</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-desktop"></i> Бренды <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="general_elements.html">General Elements</a></li>
-                                    <li><a href="media_gallery.html">Media Gallery</a></li>
-                                    <li><a href="typography.html">Typography</a></li>
-                                    <li><a href="icons.html">Icons</a></li>
-                                    <li><a href="glyphicons.html">Glyphicons</a></li>
-                                    <li><a href="widgets.html">Widgets</a></li>
-                                    <li><a href="invoice.html">Invoice</a></li>
-                                    <li><a href="inbox.html">Inbox</a></li>
-                                    <li><a href="calendar.html">Calendar</a></li>
+                                    <li><a href="{{ route('admin.brand.index') }}">Бренды</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
@@ -171,6 +163,9 @@
             </div>
         </div>
         @yield('content')
+        <!-- footer content -->
+
+        <!-- /footer content -->
     </div>
 </div>
 
@@ -186,6 +181,8 @@
 <script src="{{ asset('/assets/admin/js/bootstrap-wysiwyg.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/jquery.hotkeys.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/prettify.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ asset('/assets/admin/js/icheck.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('/assets/admin/js/custom.min.js') }}"></script>
 </body>

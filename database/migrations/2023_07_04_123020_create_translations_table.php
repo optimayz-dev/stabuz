@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
+            $table->string('table_name');
+            $table->string('column_name');
+            $table->integer('foreign_key')->unsigned();
+            $table->string('locale');
+            $table->text('value');
+            $table->unique(['table_name', 'column_name', 'foreign_key', 'locale']);
             $table->timestamps();
         });
     }
