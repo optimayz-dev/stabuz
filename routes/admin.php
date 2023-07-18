@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/category', CategoryController::class);
             Route::resource('/admin/product', ProductController::class);
             Route::resource('/admin/subcategory', SubcategoryController::class);
+            Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
+            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
+            Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
     });
 
 

@@ -15,9 +15,14 @@
     <link href="{{ asset('/assets/admin/css/prettify.min.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ asset('/assets/admin/css/green.css') }}" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="{{ asset('assets/admin/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+
+
 
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('/assets/admin/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/admin/css/style.css') }}" rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -183,6 +188,10 @@
 <script src="{{ asset('/assets/admin/js/prettify.js') }}"></script>
 <!-- iCheck -->
 <script src="{{ asset('/assets/admin/js/icheck.min.js') }}"></script>
+<!-- Datatables -->
+<script src="{{ asset('assets/admin/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/dataTables.bootstrap.min.js') }}"></script>
+@stack('scripts')
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('/assets/admin/js/custom.min.js') }}"></script>
 </body>
