@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
             Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
+            Route::get('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
+            Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateCategories'])->name('updateCategories');
+            Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
+            Route::post('/admin/subcategories-import', [SubcategoryController::class, 'import'])->name('subcategories.import');
     });
 
 

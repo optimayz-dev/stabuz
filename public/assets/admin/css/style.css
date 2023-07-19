@@ -15,4 +15,8 @@ body{
 .btn-wrapper{
     padding-top: 15px;
     padding-left: 15px;
+    margin-bottom: 25px;
+}
+.x_content .table-responsive{
+    overflow-x: unset !important;
 }

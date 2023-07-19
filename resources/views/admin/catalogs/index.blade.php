@@ -173,17 +173,7 @@
                     </div>
                 </div>
             </div>
-{{--                @foreach($catalogs as $catalog)--}}
-{{--                    <h4>{{ $catalog->title }}</h4>--}}
-{{--                    @foreach($catalog->categories as $category)--}}
-{{--                        <span>{{ $category->title }}</span></br>--}}
-{{--                    @endforeach--}}
-{{--                    @foreach($catalog->getSubcategories as $subcategory)--}}
-{{--                            <span>{{ $subcategory->title }} (subcategory)</span></br>--}}
-{{--                    @endforeach--}}
-{{--                @endforeach--}}
             </div>
-
         </div>
     </div>
 
