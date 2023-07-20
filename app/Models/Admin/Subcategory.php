@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategory extends Model
 {
     use HasFactory;
-    use Translatable;
-    public $translatedAttributes = ['title', 'descr'];
-    public function getTranslationModelName(): string
-    {
-        return \App\Models\Translation::class;
-    }
+//    use Translatable;
+//    public $translatedAttributes = ['title', 'descr'];
+//    public function getTranslationModelName(): string
+//    {
+//        return \App\Models\Translation::class;
+//    }
 
     protected $fillable = [
         'category_id',
@@ -25,5 +25,9 @@ class Subcategory extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

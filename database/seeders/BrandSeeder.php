@@ -12,30 +12,20 @@ class BrandSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
         Brand::factory(5)->create()->each(function ($brand) {
-            $this->createTranslations($brand, 'title', [
-                'ru' => fake()->sentence,
-                'uz' => fake()->sentence,
-            ]);
-            $this->createTranslations($brand, 'descr', [
-                'ru' => fake()->sentence,
-                'uz' => fake()->sentence,
-            ]);
-        });
-    }
+            $brand->translate('uz')->fill([
+                'title' => 'English Title',
+                'descr' => 'English Description',
+            ])->save();
 
-    protected function createTranslations($model, $column, $translations)
-    {
-        foreach ($translations as $locale => $value) {
-            Translation::create([
-                'table_name' => $model->getTable(),
-                'column_name' => $column,
-                'foreign_key' => $model->id,
-                'locale' => $locale,
-                'value' => $value,
-            ]);
-        }
+            $brand->translate('ru')->fill([
+                'title' => 'Название на русском',
+                'descr' => 'Описание на русском',
+            ])->save();
+
+            // Добавьте переводы для других языков, если требуется
+        });
     }
 }

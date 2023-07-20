@@ -9,10 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    use Translatable;
-    public $translatedAttributes = ['title', 'descr'];
-    public function getTranslationModelName(): string
+//    use Translatable;
+//    public $translatedAttributes = ['title', 'descr'];
+//    public function getTranslationModelName(): string
+//    {
+//        return \App\Models\Translation::class;
+//    }
+
+    public function subcategory()
     {
-        return \App\Models\Translation::class;
+        return $this->belongsTo(Subcategory::class);
     }
 }

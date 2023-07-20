@@ -127,7 +127,7 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
+                                        Categories
                                     </p>
                                     @foreach($catalogs as $catalog)
                                         <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $catalog->title }}</h3>
@@ -138,12 +138,12 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                    <th><input type="checkbox" id="check-all" ></th>
+                                                    <th>Select</th>
                                                     </th>
                                                     <th>Position</th>
                                                     <th>Title</th>
                                                     <th>Description</th>
-                                                    <th>Age</th>
+{{--                                                    <th>Age</th>--}}
                                                     <th>Created date</th>
                                                     {{--                                            <th>Действие</th>--}}
                                                 </tr>
@@ -157,7 +157,7 @@
                                                         <td>{{ $category->id }} / {{ $catalog->id }}</td>
                                                         <td>{{ $category->title }}</td>
                                                         <td>{{ Str::limit($category->descr, 50) }}</td>
-                                                        <td>61</td>
+{{--                                                        <td>61</td>--}}
                                                         <td>{{ $category->created_at }}</td>
                                                         {{--                                                <td>редактировать</td>--}}
                                                     </tr>

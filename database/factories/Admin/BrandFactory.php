@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Admin;
 
+use App\Models\Admin\Brand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BrandFactory extends Factory
 {
+    protected $model = Brand::class;
     /**
      * Define the model's default state.
      *
@@ -17,8 +19,8 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence,
-            'descr' => fake()->paragraph,
+            'title' => $this->faker->sentence,
+            'descr' => $this->faker->paragraph,
             'file_url' => $this->faker->imageUrl(123, 84)
         ];
     }

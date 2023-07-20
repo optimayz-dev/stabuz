@@ -16,9 +16,18 @@ class CatalogFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        $locales = ['ru', 'uz']; // Здесь перечислите доступные локали
+
+        $catalog = [
             'title' => fake()->sentence,
             'descr' => fake()->paragraph,
         ];
+
+        foreach ($locales as $locale) {
+            $catalog[$locale.':title'] = fake()->sentence;
+            $catalog[$locale.':descr'] = fake()->paragraph;
+        }
+
+        return $catalog;
     }
 }

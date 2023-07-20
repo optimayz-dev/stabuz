@@ -127,7 +127,7 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
+                                        Catalogs {{--<code>$().DataTable();</code>--}}
                                     </p>
                                     <form action="{{ route('admin.editSelected') }}" method="get">
                                         @csrf
@@ -135,12 +135,12 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                            <th><input type="checkbox" id="check-all" ></th>
+                                            <th>Select</th>
                                             </th>
                                             <th>Position</th>
                                             <th>Title</th>
                                             <th>Description</th>
-                                            <th>Age</th>
+{{--                                            <th>Age</th>--}}
                                             <th>Created date</th>
 {{--                                            <th>Действие</th>--}}
                                         </tr>
@@ -156,7 +156,7 @@
                                                 <td>{{ $catalog->id }}</td>
                                                 <td>{{ $catalog->title }}</td>
                                                 <td>{{ Str::limit($catalog->descr, 50) }}</td>
-                                                <td>61</td>
+{{--                                                <td>61</td>--}}
                                                 <td>{{ $catalog->created_at }}</td>
 {{--                                                <td>редактировать</td>--}}
                                             </tr>

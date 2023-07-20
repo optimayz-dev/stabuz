@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubcategoryRequest;
 use App\Http\Requests\UpdateSubcategoryRequest;
 use App\Imports\SubcategoryImport;
+use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,7 +18,8 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::with('subcategories')->get();
+        return view('admin.subcategories.index', ['categories' => $categories]);
     }
 
     /**

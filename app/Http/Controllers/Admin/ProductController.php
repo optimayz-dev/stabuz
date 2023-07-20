@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Admin\Product;
+use App\Models\Admin\Subcategory;
 
 class ProductController extends Controller
 {
@@ -14,8 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
-        return view('admin.products.index', ['products' => $products]);
+        $subcategories = Subcategory::with('products')->get();
+
+        return view('admin.products.index', ['subcategories' => $subcategories]);
     }
 
     /**
