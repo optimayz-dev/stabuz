@@ -1,5 +1,3 @@
-
-
 <form action="{{ route('admin.subcategories.import') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="file" class="form-control">

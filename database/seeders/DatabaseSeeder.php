@@ -22,15 +22,24 @@ class DatabaseSeeder extends Seeder
 
 
 
-         Brand::factory(30)->create();
-         Catalog::factory(30)->create();
-         Category::factory(270)->create();
-         Subcategory::factory(1000)->create();
-         Product::factory(100000)->create();
+         Brand::factory(5)->create();
+//        $this->call(BrandSeeder::class);
+         Catalog::factory(10)->create();
+//        $this->call(CatalogSeeder::class);
+         Category::factory(15)->create();
+//        $this->call(CategorySeeder::class);
+         Subcategory::factory(30)->create();
+//        $this->call(SubcategorySeeder::class);
+         Product::factory(100)->create();
+//        $this->call(ProductSeeder::class);
+
+
         Admin::factory()->create([
             'name' => 'Test Admin',
             'email' => 'test@example.com',
             'password' => bcrypt('1234567'),
         ]);
+
+
     }
 }
