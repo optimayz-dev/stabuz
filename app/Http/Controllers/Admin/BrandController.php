@@ -14,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+        return view('admin.brands.index', ['brands' => $brands]);
     }
 
     /**
@@ -22,7 +23,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
     /**
@@ -30,7 +31,15 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        $brand_data = [
+            app()->getLocale() => [
+                'title' => $request->input(app()->getLocale().'_title'),
+                'descr' => $request->input(app()->getLocale().'_descr')
+            ],
+        ];
+
+        Brand::create($brand_data);
+        return redirect()->back()->with('success', 'brand add success');
     }
 
     /**

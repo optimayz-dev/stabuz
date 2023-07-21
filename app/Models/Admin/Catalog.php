@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Catalog extends Model
 {
     use HasFactory;
-    use Translatable;
-    protected $fillable = [];
-
-    public $translatedAttributes = ['title', 'descr'];
+//    use Translatable;
+//    protected $fillable = [];
+//
+//    public $translatedAttributes = ['title', 'descr'];
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

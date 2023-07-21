@@ -12,20 +12,43 @@ class BrandSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        Brand::factory(5)->create()->each(function ($brand) {
-            $brand->translate('uz')->fill([
-                'title' => 'English Title',
-                'descr' => 'English Description',
-            ])->save();
+//    public function run(): void
+//    {
+//        $brands = Brand::factory(5)->create();
+//
+//        foreach ($brands as $brand) {
+//            $this->createTranslations($brand, 'title', [
+//                'uz' => 'Brend nomi',
+//            ]);
+//
+//            $this->createTranslations($brand, 'descr', [
+//                'uz' => 'Brend tavsifi',
+//            ]);
+//            $this->debugBrand($brand);
+//        }
+//    }
 
-            $brand->translate('ru')->fill([
-                'title' => 'Название на русском',
-                'descr' => 'Описание на русском',
-            ])->save();
+//    protected function createTranslations($model, $column, $translations)
+//    {
+//        foreach ($translations as $locale => $value) {
+//            Translation::create([
+//                'table_name' => $model->getTable(),
+//                'column_name' => $column,
+//                'foreign_key' => $model->id,
+//                'locale' => $locale,
+//                'value' => $value,
+//            ]);
+//        }
+//    }
 
-            // Добавьте переводы для других языков, если требуется
-        });
-    }
+//    private function debugBrand($brand)
+//    {
+//        echo "Brand: " . $brand->title . " - " . $brand->descr . PHP_EOL;
+//        echo "Translations:" . PHP_EOL;
+//        foreach ($brand->translations as $translation) {
+//            echo "Locale: " . $translation->locale . " - " . $translation->value . PHP_EOL;
+//        }
+//        echo PHP_EOL;
+//    }
+
 }
