@@ -19,3 +19,9 @@
     <input type="file" name="file_url" class="">
     <button type="submit">submit</button>
 </form>
+
+<form action="{{ route('admin.brand.import') }}" enctype="multipart/form-data" method="post">
+    @csrf
+    <input type="file" name="file">
+    <button type="submit">submit import</button>
+</form>

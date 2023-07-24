@@ -9,18 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategory extends Model
 {
     use HasFactory;
-//    use Translatable;
-//    public $translatedAttributes = ['title', 'descr'];
-//    public function getTranslationModelName(): string
-//    {
-//        return \App\Models\Translation::class;
-//    }
-
-    protected $fillable = [
-        'category_id',
-        'title',
-        'descr'
-    ];
+    use Translatable;
+    public $translatedAttributes = ['title', 'descr'];
+    protected $fillable = ['category_id'];
+    protected $table = 'subcategories';
+    public $timestamps = false;
 
     public function category()
     {

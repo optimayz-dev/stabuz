@@ -1,22 +1,18 @@
 FROM php:8.1-fpm
 
-RUN apt-get update && apt-get install -y \
-    apt-utils \
-    libpq-dev \
-    libpng-dev \
-    libzip-dev \
-    libcurl4-openssl-dev \
-    curl \
-    zip \
-    unzip \
-    git && \
-    docker-php-ext-install pdo_mysql \
-    bcmath \
-    gd \
-    zip \
-    && docker-php-ext-enable opcache && \
+RUN apt-get update && apt-get install -y  \
+    apt-utils libpq-dev  \
+    libpng-dev  \
+    libzip-dev  \
+    libcurl4-openssl-dev  \
+    curl  \
+    zip unzip git && \
+    pecl install redis && docker-php-ext-enable redis && \
+    docker-php-ext-install pdo_mysql bcmath gd zip && \
+    docker-php-ext-enable opcache && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 RUN docker-php-ext-install curl
 

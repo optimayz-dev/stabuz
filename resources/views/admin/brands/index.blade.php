@@ -140,7 +140,7 @@
                                                 <th>Position</th>
                                                 <th>Title</th>
                                                 <th>Description</th>
-                                                {{--                                            <th>Age</th>--}}
+                                                <th>logo</th>
                                                 <th>Created date</th>
                                                 <th>Действие</th>
                                             </tr>
@@ -156,7 +156,7 @@
                                                     <td>{{ $brand->id }}</td>
                                                     <td>{{ $brand->title }}</td>
                                                     <td>{{ Str::limit($brand->descr, 50) }}</td>
-                                                    {{--                                                <td>61</td>--}}
+                                                    <td><img src="{{ $brand->file_url }}" alt=""></td>
                                                     <td>{{ $brand->created_at }}</td>
                                                     <td><a href="{{ 'admin.brand.edit', $brand->id }}">редактировать</a></td>
                                                 </tr>
@@ -175,6 +175,4 @@
             </div>
         </div>
     </div>
-    </div>
-
 @endsection

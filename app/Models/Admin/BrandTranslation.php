@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class BrandTranslation extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
     protected $fillable = [
         'title',
         'descr',
-        'file_url'
     ];
 }

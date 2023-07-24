@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateCategories'])->name('updateCategories');
             Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
             Route::post('/admin/subcategories-import', [SubcategoryController::class, 'import'])->name('subcategories.import');
+            Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
     });
 
 
