@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SubcategoryExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubcategoryRequest;
 use App\Http\Requests\UpdateSubcategoryRequest;
+use App\Imports\SubcategoryImport;
+use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubcategoryController extends Controller
 {
@@ -14,7 +18,8 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::with('subcategories')->get();
+        return view('admin.subcategories.index', ['categories' => $categories]);
     }
 
     /**
@@ -22,7 +27,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $subcategories = Subcategory::orderBy('id', 'desc')->take(10)->get();
+        return view('admin.subcategories.create', ['subcategories' => $subcategories]);
     }
 
     /**
@@ -63,5 +69,16 @@ class SubcategoryController extends Controller
     public function destroy(Subcategory $subcategory)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new SubcategoryExport, 'subcategory.csv');
+    }
+
+    public function import()
+    {
+        Excel::import(new SubcategoryImport, request()->file('file'));
+        return back();
     }
 }

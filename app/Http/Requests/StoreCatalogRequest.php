@@ -11,7 +11,7 @@ class StoreCatalogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreCatalogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'addmore.*.title' => 'required',
+            'addmore.*.descr' => 'required',
         ];
     }
 }

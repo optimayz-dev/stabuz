@@ -11,7 +11,7 @@ class StoreBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            app()->getLocale().'_title' => 'required',
+            app()->getLocale().'_descr' => 'required',
+            'file_url' => ['required', 'mimes:jpg,png,svg,jpeg']
         ];
     }
 }
