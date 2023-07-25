@@ -22,8 +22,6 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('title');
-            $table->longText('descr');
             $table->string('file_url');
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model implements TranslatableContract
 {
-    use HasFactory;
+
     use HasFactory, Translatable;
     protected $fillable = ['file_url'];
     public $translatedAttributes = ['title', 'descr'];

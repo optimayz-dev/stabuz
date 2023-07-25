@@ -2,42 +2,37 @@
 
 namespace App\Imports;
 
-use App\Models\Admin\Brand;
+use App\Models\Admin\Product;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithUpsertColumns;
-use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class BrandImport implements ToModel, WithBatchInserts, WithHeadingRow, WithCustomCsvSettings
+class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, WithBatchInserts
 {
     /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
+    * @param Collection $collection
+    */
+
+
     public function model(array $row)
     {
-        // Находим существующий Brand или создаём новый по (id)
-        $brand = Brand::findOrNew($row['id']);
+        $product = Product::findOrNew($row['id']);
 
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
-        $brand->translateOrNew($locale)->title = $row['title'];
-        $brand->translateOrNew($locale)->descr = $row['descr'];
+        $product->translateOrNew($locale)->title = $row['title'];
+        $product->translateOrNew($locale)->descr = $row['descr'];
 
         // Опционально, если у вас есть другие поля, которые не зависят от языка
-        $brand->file_url = $row['file_url'];
+        $product->subcategory_id = $row['subcategory_id'];
+        $product->file_url = $row['file_url'];
 
-       // Сохраняем в базу
-        $brand->save();
-    }
-
-    public function batchSize(): int
-    {
-        return 500;
+        // Сохраняем в базу
+        $product->save();
     }
 
     public function getCsvSettings(): array
@@ -48,5 +43,10 @@ class BrandImport implements ToModel, WithBatchInserts, WithHeadingRow, WithCust
             'input_encoding' => 'UTF-8', // Указывает кодировку CSV-файла
             'output_encoding' => 'UTF-8', // Указывает желаемую кодировку для данных
         ];
+    }
+
+    public function batchSize(): int
+    {
+        return 500;
     }
 }

@@ -156,9 +156,9 @@
                                                     <td>{{ $brand->id }}</td>
                                                     <td>{{ $brand->title }}</td>
                                                     <td>{{ Str::limit($brand->descr, 50) }}</td>
-                                                    <td><img src="{{ $brand->file_url }}" alt=""></td>
+                                                    <td><div style="width: 480px"><img src="{{ $brand->file_url }}" alt="" style="width: 100%"></div</td>
                                                     <td>{{ $brand->created_at }}</td>
-                                                    <td><a href="{{ 'admin.brand.edit', $brand->id }}">редактировать</a></td>
+                                                    <td><a href="{{ route('admin.brand.edit', $brand->id) }}">редактировать</a></td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

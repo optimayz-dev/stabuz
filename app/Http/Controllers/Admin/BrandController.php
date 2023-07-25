@@ -27,7 +27,7 @@ class BrandController extends Controller
             foreach ($brands as $brand) {
                 foreach ($locales as $locale) {
                     $brand->translateOrNew($locale)->title;
-                    $brand->translateOrNew($locale)->description;
+                    $brand->translateOrNew($locale)->descr;
                     // Добавьте другие переводимые поля, если необходимо
                 }
             }

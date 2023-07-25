@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subcategory extends Model
 {
-    use HasFactory;
-    use Translatable;
+
+    use HasFactory, Translatable;
     public $translatedAttributes = ['title', 'descr'];
     protected $fillable = ['category_id'];
     protected $table = 'subcategories';
-    public $timestamps = false;
 
     public function category()
     {

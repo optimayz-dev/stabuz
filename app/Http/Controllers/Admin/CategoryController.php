@@ -17,10 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $catalogs = Cache::remember('catalogs', 24 * 60 * 60, function (){
-            return Catalog::orderBy('title')
-                ->with(['categories'])
-                ->get();
+        $catalogs = Cache::remember('catalogs', 24 * 60 * 60, function () {
+            $catalogs = Catalog::all();
+
+            $locales = config('app.available_locales');
+            foreach ($catalogs as $catalog) {
+                foreach ($locales as $locale) {
+                    $catalog->translateOrNew($locale)->title;
+                    $catalog->translateOrNew($locale)->descr;
+                }
+            }
+            return $catalogs;
         });
 
         return view('admin.categories.index', ['catalogs' => $catalogs]);

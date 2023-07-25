@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\Models\Admin\Subcategory;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class SubcategoryExport implements FromCollection
+class SubcategoryExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
