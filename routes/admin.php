@@ -32,6 +32,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
             Route::post('/admin/subcategories-import', [SubcategoryController::class, 'import'])->name('subcategories.import');
             Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
+            Route::post('/admin/category-import', [CategoryController::class, 'import'])->name('categories.import');
+            Route::get('/admin/category-export', [CategoryController::class, 'addByFile'])->name('categories.addByFile');
+            Route::get('/admin/category-get-export', [CategoryController::class, 'export'])->name('categories.export');
+            Route::get('/admin/product-export', [ProductController::class, 'viewTable'])->name('products.view');
+            Route::get('/admin/products-get-export', [ProductController::class, 'export'])->name('products.export');
+            Route::post('/admin/products-import', [ProductController::class, 'import'])->name('products.import');
     });
 
 

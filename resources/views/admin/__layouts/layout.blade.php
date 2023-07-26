@@ -78,6 +78,11 @@
                                     <li><a href="{{ route('admin.brand.index') }}">Бренды</a></li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-desktop"></i> Заказы <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ route('admin.brand.index') }}">Заказы</a></li>
+                                </ul>
+                            </li>
 {{--                            <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>--}}
 {{--                                <ul class="nav child_menu">--}}
 {{--                                    <li><a href="tables.html">Tables</a></li>--}}

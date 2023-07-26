@@ -50,5 +50,4 @@ class BrandSeeder extends Seeder
 //        }
 //        echo PHP_EOL;
 //    }
-
 }

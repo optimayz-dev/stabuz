@@ -30,7 +30,7 @@ class CategoryImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, 
 
         // Опционально, если у вас есть другие поля, которые не зависят от языка
         $category->catalog_id = $row['catalog_id'];
-        $category->file_url = $row['file_url'];
+
 
         // Сохраняем в базу
         $category->save();

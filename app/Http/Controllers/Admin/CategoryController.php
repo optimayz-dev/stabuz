@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CategoryExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Imports\CategoryImport;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class CategoryController extends Controller
 {
@@ -131,5 +135,21 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Каталог и категории успешно обновлены');
     }
 
+    public function addByFile()
+    {
+        $categories = Category::orderBy('id', 'asc')->get();
 
+        return view('admin.categories.export',['categories' => $categories]);
+    }
+
+    public function export()
+    {
+
+        return Excel::download(new CategoryExport(), 'categories.xlsx');
+    }
+    public function import()
+    {
+        Excel::import(new CategoryImport, request()->file('file'));
+        return redirect()->back()->with('success', 'categories was successfully imported');
+    }
 }

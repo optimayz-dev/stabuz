@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Imports\ProductImport;
 use App\Models\Admin\Product;
 use App\Models\Admin\Subcategory;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -15,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $subcategories = Subcategory::with('products')->get();
+        $subcategories = Subcategory::with('products')->take(1000)->get();
 
         return view('admin.products.index', ['subcategories' => $subcategories]);
     }
@@ -66,5 +69,22 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function import()
+    {
+        Excel::import(new ProductImport(), request()->file('file'));
+        return back();
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport(), 'product.xlsx');
+    }
+
+    public function viewTable()
+    {
+        $products = Product::orderBy('id')->get();
+        return view('admin.products.export-import', ['products' => $products]);
     }
 }

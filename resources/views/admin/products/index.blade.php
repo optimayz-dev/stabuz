@@ -116,6 +116,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('admin.subcategory.create') }}">Add catalog</a>
                                     <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit all</a>
+                                    <a class="dropdown-item" href="{{ route('admin.products.view') }}">Export/Import</a>
                                 </div>
                             </li>
 
