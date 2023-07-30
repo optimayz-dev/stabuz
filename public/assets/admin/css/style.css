@@ -20,3 +20,13 @@ body{
 .x_content .table-responsive{
     overflow-x: unset !important;
 }
+
+.links .shadow-sm
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*.links .leading-5{*/
+/*    display: none;*/
+/*}*/

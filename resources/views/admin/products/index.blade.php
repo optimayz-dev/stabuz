@@ -98,6 +98,15 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><small>Plus Table Design</small></h2>
+                        <form action="">
+                            <input type="text" name="search" id="search">
+                            <div id="result">
+                                <div id="list-container">
+                                    <!-- Здесь будут отображаться результаты поиска -->
+                                </div>
+                            </div>
+
+                        </form>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -114,8 +123,8 @@
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('admin.subcategory.create') }}">Add catalog</a>
-                                    <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit all</a>
+                                    <a class="dropdown-item" href="{{ route('admin.product.create') }}">Add products</a>
+                                    <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit</a>
                                     <a class="dropdown-item" href="{{ route('admin.products.view') }}">Export/Import</a>
                                 </div>
                             </li>
@@ -140,7 +149,7 @@
                                                 <tr>
                                                     <th>
                                                     <th>Select</th>
-                                                    </th>
+
                                                     <th>Position</th>
                                                     <th>Title</th>
                                                     <th>Description</th>
@@ -153,8 +162,11 @@
                                                 @foreach($subcategory->products as $product)
                                                     <tr>
                                                         <td>
-                                                        <th><input type="checkbox" name="selected_category[]" value="{{ $product->id }}"></th>
-                                                        </td>
+                                                        <th>
+                                                            <label>
+                                                                <input type="checkbox" name="selected_category[]" value="{{ $product->id }}">
+                                                            </label>
+                                                        </th>
                                                         <td>{{ $product->id }} / {{ $subcategory->id }}</td>
                                                         <td>{{ $product->title }}</td>
                                                         <td>{{ Str::limit($product->descr, 50) }}</td>
@@ -170,9 +182,10 @@
                                             </div>
                                         </form>
                                     @endforeach
-
+{{--                                    <div class="links">--}}
+{{--                                        {{ $subcategories->links() }}--}}
+{{--                                    </div>--}}
                                 </div>
-
                             </div>
                         </div>
                     </div>

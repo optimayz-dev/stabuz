@@ -9,12 +9,7 @@
     <link href="{{ asset('/assets/admin/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('/assets/admin/css/font-awesome.min.css') }}" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="{{ asset('/assets/admin/css/nprogress.css') }}" rel="stylesheet">
-    <!-- bootstrap-wysiwyg -->
-    <link href="{{ asset('/assets/admin/css/prettify.min.css') }}" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="{{ asset('/assets/admin/css/green.css') }}" rel="stylesheet">
+
     <!-- Datatables -->
     <link href="{{ asset('assets/admin/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 
@@ -185,21 +180,16 @@
 <script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('/assets/admin/js/bootstrap.bundle.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ asset('/assets/admin/js/fastclick.js') }}"></script>
-<!-- NProgress -->
-<script src="{{ asset('/assets/admin/js/nprogress.js') }}"></script>
-<!-- bootstrap-wysiwyg -->
-<script src="{{ asset('/assets/admin/js/bootstrap-wysiwyg.min.js') }}"></script>
-<script src="{{ asset('/assets/admin/js/jquery.hotkeys.js') }}"></script>
-<script src="{{ asset('/assets/admin/js/prettify.js') }}"></script>
-<!-- iCheck -->
-<script src="{{ asset('/assets/admin/js/icheck.min.js') }}"></script>
+
 <!-- Datatables -->
 <script src="{{ asset('assets/admin/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dataTables.bootstrap.min.js') }}"></script>
+
+<!-- Axios cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 @stack('scripts')
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('/assets/admin/js/custom.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/search.js') }}"></script>
 </body>
 </html>

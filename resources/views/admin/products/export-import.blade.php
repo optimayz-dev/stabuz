@@ -127,9 +127,9 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        Categories
+                                        Product export-import
                                     </p>
-                                    <h3 style="padding: 8px 0; border-top: 2px solid darkgray">Categories</h3>
+                                    <h3 style="padding: 8px 0; border-top: 2px solid darkgray">Products</h3>
                                     <table id="datatable-checkbox1" class="table table-striped table-bordered bulk_action" style="width:100%">
                                         <thead>
                                         <tr>

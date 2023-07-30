@@ -21,6 +21,9 @@ class ProductExport implements FromCollection, WithHeadings, WithCustomCsvSettin
             ->select('products.id', 'products.subcategory_id', 'product_translations.title', 'product_translations.descr', 'products.file_url')
             ->orderBy('id')
             ->get();
+//        return Product::with('translations', 'subcategory')
+//            ->orderBy('id')
+//            ->get();
     }
 
     public function headings(): array

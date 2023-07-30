@@ -36,6 +36,3 @@ services:
       image: redis:latest
       container_name: stab_redis
       restart: always
-
-
-
