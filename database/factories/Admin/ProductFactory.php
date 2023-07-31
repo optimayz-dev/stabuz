@@ -3,6 +3,7 @@
 namespace Database\Factories\Admin;
 
 use App\Models\Admin\Brand;
+use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,7 @@ class ProductFactory extends Factory
         return [
             'subcategory_id' => Subcategory::all()->random()->id,
             'brand_id' => Brand::all()->random()->id,
+            'category_id' => Category::all()->random()->id,
             'title' => fake()->sentence,
             'descr' => fake()->paragraph,
             'file_url' => $this->faker->imageUrl(340, 338),

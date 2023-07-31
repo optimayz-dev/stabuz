@@ -97,9 +97,9 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Plus Table Design</small></h2>
+                        <h2><small>Поиск продуктов</small></h2>
                         <form action="">
-                            <input type="text" name="search" id="search">
+                            <input type="text" name="search" id="search" class="search-input" placeholder="Введите название продукта">
                             <div id="result">
                                 <div id="list-container">
                                     <!-- Здесь будут отображаться результаты поиска -->
@@ -107,43 +107,43 @@
                             </div>
 
                         </form>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li class="dropdown" style="padding-right: 15px;">
-                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                            {{ $properties['native'] }}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </li>
 
-                            </li>
-                            <li class="dropdown" style="padding-right: 15px;">
-                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('admin.product.create') }}">Add products</a>
-                                    <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit</a>
-                                    <a class="dropdown-item" href="{{ route('admin.products.view') }}">Export/Import</a>
-                                </div>
-                            </li>
-
-                        </ul>
-                        <div class="clearfix"></div>
+{{--                        <div class="clearfix"></div>--}}
                     </div>
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <p class="text-muted font-13 m-b-30">
-                                        Products
-                                    </p>
+                                    <div class="nav-box">
+                                        <p class="text-muted font-13">
+                                            Products
+                                        </p>
+                                        <ul class="nav navbar-right">
+                                            <li class="dropdown" style="padding-right: 15px;">
+                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                            {{ $properties['native'] }}
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </li>
+
+                                            <li class="dropdown" style="padding-right: 15px;">
+                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="{{ route('admin.product.create') }}">Add products</a>
+                                                    <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.products.view') }}">Export/Import</a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                     @foreach($subcategories as $subcategory)
                                         <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $subcategory->title }}</h3>
-                                        <form action="{{ route('admin.editCategories') }}" method="get">
-                                            @csrf
-                                            <input type="hidden" value="{{ $subcategory->id }}" name="select_catalogs">
                                             <table id="datatable-checkbox{{ $subcategory->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
                                                 <thead>
                                                 <tr>
@@ -178,13 +178,13 @@
                                                 </tbody>
                                             </table>
                                             <div class="btn-wrapper">
-                                                <button type="submit" class="btn btn-primary">edit selected</button>
+                                                <a class="action-btn" href="{{ route('admin.edit.subcategory-products', $subcategory->id) }}"><i class="fa fa-edit"></i> edit</a>
+                                                <a class="action-btn" href=""><i class="fa fa-trash"></i> delete</a>
                                             </div>
-                                        </form>
                                     @endforeach
-{{--                                    <div class="links">--}}
-{{--                                        {{ $subcategories->links() }}--}}
-{{--                                    </div>--}}
+                                    <div class="links">
+                                        {{ $subcategories->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -60,7 +60,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a><i class="fa fa-edit"></i> Ресурсы <span class="fa fa-chevron-down"></span></a>
+                                <a><i class="fa fa-shopping-cart"></i> Ресурсы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.catalog.index') }}">Каталог</a></li>
                                     <li><a href="{{ route('admin.category.index') }}">Категории</a></li>
@@ -68,12 +68,12 @@
                                     <li><a href="{{ route('admin.product.index') }}">Товары</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-desktop"></i> Бренды <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-star"></i> Бренды <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.brand.index') }}">Бренды</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-desktop"></i> Заказы <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-file-text-o"></i> Заказы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.brand.index') }}">Заказы</a></li>
                                 </ul>

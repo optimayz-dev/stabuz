@@ -30,3 +30,45 @@ body{
 /*.links .leading-5{*/
 /*    display: none;*/
 /*}*/
+
+.action-btn{
+    padding-top: 15px;
+    margin-left: 15px;
+    font-size: 16px;
+    letter-spacing: .5px;
+    border-bottom: 1px solid ;
+}
+.input-wrapper label{
+    width: 100%;
+}
+.row-wrapper{
+    margin-bottom: 50px;
+    border-bottom: 2px solid;
+}
+.input-wrapper{
+    margin-bottom: 10px;
+}
+.form-title{
+
+}
+
+.search-input{
+    width: 80%;
+    border: unset;
+    border-bottom: 2px solid;
+    padding: 5px 0 5px 0;
+    margin-left: 20px;
+}
+.nav-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-box p{
+    margin-bottom: 0;
+}
+.product h2{
+    font-size: 15px;
+    padding-left: 20px;
+    margin-top: 15px;
+}

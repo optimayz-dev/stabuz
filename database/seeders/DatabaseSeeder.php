@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Admin\Admin;
+use App\Models\Admin\Attribute;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
@@ -22,16 +23,17 @@ class DatabaseSeeder extends Seeder
 
 
 
-         Brand::factory(5)->create();
-//        $this->call(BrandSeeder::class);
-         Catalog::factory(8)->create();
+         Brand::factory(20)->create();
 
-         Category::factory(12)->create();
+         Catalog::factory(30)->create();
 
-         Subcategory::factory(15)->create();
+         Category::factory(60)->create();
 
-         Product::factory(100)->create();
+         Subcategory::factory(100)->create();
 
+         Product::factory(10000)->create();
+
+         Attribute::factory(2000)->create();
 
 
         Admin::factory()->create([
