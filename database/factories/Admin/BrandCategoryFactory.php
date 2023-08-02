@@ -2,13 +2,13 @@
 
 namespace Database\Factories\Admin;
 
-use App\Models\Admin\Catalog;
+use App\Models\Admin\Brand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\BrandCategory>
  */
-class CategoryFactory extends Factory
+class BrandCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'catalog_id' => Catalog::all()->random()->id,
-            'title' => fake()->sentence,
-            'description' => fake()->paragraph,
+            'brand_id' => Brand::all()->random()->id,
+            'title' => fake()->title,
             'seo_title' => fake()->sentence,
             'seo_description' => fake()->paragraph,
             'meta_keywords' => fake()->sentence,

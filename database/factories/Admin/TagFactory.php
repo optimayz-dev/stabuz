@@ -2,13 +2,12 @@
 
 namespace Database\Factories\Admin;
 
-use App\Models\Admin\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Attribute>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Tag>
  */
-class AttributeFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +18,7 @@ class AttributeFactory extends Factory
     {
         return [
             'title' => fake()->sentence,
-            'value' => fake()->word,
+            'parent_id' => null
         ];
     }
 }

@@ -2,18 +2,15 @@
 
 namespace App\Models\Admin;
 
-
-use Astrotomic\Translatable\Traits\Relationship;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model implements TranslatableContract
+class BrandCategory extends Model implements TranslatableContract
 {
-
     use HasFactory, Translatable;
-    protected $fillable = ['brand_logo'];
+
     public $translatedAttributes = [
         'title',
         'description',
@@ -22,8 +19,8 @@ class Brand extends Model implements TranslatableContract
         'meta_keywords',
     ];
 
-    public function brandCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(BrandCategory::class);
+        return $this->belongsTo(Brand::class);
     }
 }

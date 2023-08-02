@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Attribute;
+use App\Models\Admin\Subcategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,19 +12,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attribute_translations', function (Blueprint $table) {
+        Schema::create('subcategory_translations', function (Blueprint $table) {
             // mandatory fields
             $table->id();
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->foreignIdFor(Attribute::class);
-            $table->unique(['attribute_id', 'locale']);
-            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreignIdFor(Subcategory::class);
+            $table->unique(['subcategory_id', 'locale']);
 
             // Actual fields you want to translate
             $table->string('title');
-            $table->longText('description');
+            $table->string('seo_title');
+            $table->text('seo_description');
+            $table->text('meta_keywords');
+            $table->text('description');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attribute_translations');
+        Schema::dropIfExists('subcategory_translations');
     }
 };

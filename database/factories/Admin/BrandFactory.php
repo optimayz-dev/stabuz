@@ -19,9 +19,12 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'descr' => $this->faker->paragraph,
-            'file_url' => $this->faker->imageUrl(123, 84)
+            'title' => fake()->sentence,
+            'description' => fake()->paragraph,
+            'seo_title' => fake()->sentence,
+            'seo_description' => fake()->paragraph,
+            'meta_keywords' => fake()->sentence,
+            'brand_logo' => $this->faker->imageUrl(123, 84)
         ];
     }
 }

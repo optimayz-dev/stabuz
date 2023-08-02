@@ -22,21 +22,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
-            return Subcategory::with('translations', 'products.translations')->get();
-        });
+//        $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
+//            return Subcategory::with('translations', 'products.translations')->get();
+//        });
+//
+//        $perPage = 10;
+//        $currentPage = request()->query('page', 1);
+//        $paginatedData = new LengthAwarePaginator(
+//            $subcategories->forPage($currentPage, $perPage),
+//            $subcategories->count(),
+//            $perPage,
+//            $currentPage,
+//            ['path' => Paginator::resolveCurrentPath()]
+//        );
 
-        $perPage = 10;
-        $currentPage = request()->query('page', 1);
-        $paginatedData = new LengthAwarePaginator(
-            $subcategories->forPage($currentPage, $perPage),
-            $subcategories->count(),
-            $perPage,
-            $currentPage,
-            ['path' => Paginator::resolveCurrentPath()]
-        );
-
-        return view('admin.products.index', ['subcategories' => $paginatedData]);
+        return view('admin.products.index');
     }
 
 
@@ -140,5 +140,16 @@ class ProductController extends Controller
             $product->update();
         }
         return redirect()->back()->with('success', 'Продукты успешно обновлены');
+    }
+
+    public function deleteBySubcategory(Request $request)
+    {
+        $subcategory_id = $request->input('subcategory_id', []);
+        foreach ($subcategory_id as $id)
+        {
+            $subcategory = Subcategory::findOrFail($id);
+            $subcategory->destroy();
+        }
+        return redirect()->back()->with('success', 'Subcategory products deleted successfully');
     }
 }

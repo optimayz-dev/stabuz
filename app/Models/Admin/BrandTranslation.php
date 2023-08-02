@@ -10,8 +10,12 @@ class BrandTranslation extends Model
     use HasFactory;
 
     public $timestamps = false;
+
     protected $fillable = [
         'title',
-        'descr',
+        'description',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
     ];
 }

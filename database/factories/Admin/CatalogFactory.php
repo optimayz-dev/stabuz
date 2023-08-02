@@ -16,15 +16,11 @@ class CatalogFactory extends Factory
      */
     public function definition(): array
     {
-
-
         return  [
             'title' => fake()->sentence,
-            'descr' => fake()->paragraph,
+            'seo_title' => fake()->sentence,
+            'seo_description' => fake()->paragraph,
+            'meta_keywords' => fake()->sentence,
         ];
-
-
-
-
     }
 }

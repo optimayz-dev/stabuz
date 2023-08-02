@@ -155,50 +155,7 @@
                                         </ul>
                                     </div>
 
-                                    @foreach($subcategories as $subcategory)
-                                        <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $subcategory->title }}</h3>
-                                            <table id="datatable-checkbox{{ $subcategory->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                    <th>Select</th>
 
-                                                    <th>Position</th>
-                                                    <th>Title</th>
-                                                    <th>Description</th>
-{{--                                                    <th>Age</th>--}}
-                                                    <th>Created date</th>
-                                                    {{--                                            <th>Действие</th>--}}
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($subcategory->products as $product)
-                                                    <tr>
-                                                        <td>
-                                                        <th>
-                                                            <label>
-                                                                <input type="checkbox" name="selected_category[]" value="{{ $product->id }}">
-                                                            </label>
-                                                        </th>
-                                                        <td>{{ $product->id }} / {{ $subcategory->id }}</td>
-                                                        <td>{{ $product->title }}</td>
-                                                        <td>{{ Str::limit($product->descr, 50) }}</td>
-{{--                                                        <td>61</td>--}}
-                                                        <td>{{ $product->created_at }}</td>
-                                                        {{--                                                <td>редактировать</td>--}}
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                            <div class="btn-wrapper">
-                                                <a class="action-btn" href="{{ route('admin.edit.subcategory-products', $subcategory->id) }}"><i class="fa fa-edit"></i> edit</a>
-                                                <a class="action-btn" href=""><i class="fa fa-trash"></i> delete</a>
-                                                <a class="action-btn" href="{{ route('admin.products.export', $subcategory->id) }}">export data</a>
-                                            </div>
-                                    @endforeach
-                                    <div class="links">
-                                        {{ $subcategories->links() }}
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -207,6 +164,6 @@
             </div>
         </div>
     </div>
-    </div>
+
 
 @endsection

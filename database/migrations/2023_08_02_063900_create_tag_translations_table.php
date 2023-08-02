@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Product;
+use App\Models\Admin\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,19 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_translations', function (Blueprint $table) {
-            // mandatory fields
+        Schema::create('tag_translations', function (Blueprint $table) {
             $table->id();
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->foreignIdFor(Product::class);
-            $table->unique(['product_id', 'locale']);
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignIdFor(Tag::class);
+            $table->unique(['tag_id', 'locale']);
 
             // Actual fields you want to translate
+
             $table->string('title');
-            $table->longText('descr');
+            $table->index('title');
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_translations');
+        Schema::dropIfExists('tag_translations');
     }
 };

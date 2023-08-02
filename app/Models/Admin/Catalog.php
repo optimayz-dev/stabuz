@@ -13,7 +13,12 @@ class Catalog extends Model implements TranslatableContract
     use Translatable;
     protected $fillable = [];
 //
-    public $translatedAttributes = ['title', 'descr'];
+    public $translatedAttributes = [
+        'title',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+    ];
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

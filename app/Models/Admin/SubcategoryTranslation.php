@@ -11,6 +11,9 @@ class SubcategoryTranslation extends Model
     public $timestamps = false;
     protected $fillable = [
         'title',
-        'descr',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+        'description',
     ];
 }

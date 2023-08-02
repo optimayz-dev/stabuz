@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Brand;
+use App\Models\Admin\Catalog;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,19 +12,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('brand_translations', function (Blueprint $table) {
+        Schema::create('catalog_translations', function (Blueprint $table) {
             // mandatory fields
             $table->id();
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->foreignIdFor(Brand::class);
-            $table->unique(['brand_id', 'locale']);
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-
+            $table->foreignIdFor(Catalog::class);
+            $table->unique(['catalog_id', 'locale']);
             // Actual fields you want to translate
             $table->string('title');
-            $table->longText('descr');
+            $table->index('title');
+            $table->string('seo_title');
+            $table->text('seo_description');
+            $table->string('meta_keywords');
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('brand_translations');
+        Schema::dropIfExists('catalog_translations');
     }
 };

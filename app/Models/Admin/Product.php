@@ -14,12 +14,30 @@ class Product extends Model implements TranslatableContract
     use HasFactory;
     use Translatable;
     use Searchable;
-    public $translatedAttributes = ['title', 'descr'];
+    public $translatedAttributes = [
+        'title',
+        'attribute_value',
+        'attribute_title',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+        'description',
+    ];
 
 
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
+    }
+
+    public function prices()
+    {
+        return $this->hasMany(Price::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tag');
     }
 
     public function toSearchableArray()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin\Brand;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('brand_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Admin\Product::class)
+            $table->foreignIdFor(Brand::class)
                 ->constrained()
                 ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->cascadeOnUpdate();;
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('brand_categories');
     }
 };

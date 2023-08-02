@@ -19,8 +19,12 @@ class SubcategoryFactory extends Factory
     {
         return [
             'category_id' => Category::all()->random()->id,
+            'parent_id' => null,
+            'seo_title' => fake()->sentence,
+            'seo_description' => fake()->paragraph,
+            'meta_keywords' => fake()->sentence,
             'title' => fake()->sentence,
-            'descr' => fake()->paragraph,
+            'description' => fake()->paragraph,
         ];
     }
 }

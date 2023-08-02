@@ -6,10 +6,13 @@ namespace Database\Seeders;
 use App\Models\Admin\Admin;
 use App\Models\Admin\Attribute;
 use App\Models\Admin\Brand;
+use App\Models\Admin\BrandCategory;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
+use App\Models\Admin\Price;
 use App\Models\Admin\Product;
 use App\Models\Admin\Subcategory;
+use App\Models\Admin\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,8 +25,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
 
+        Admin::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'test@example.com',
+            'password' => bcrypt('1234567'),
+        ]);
+         Brand::factory(10)->create();
 
-         Brand::factory(20)->create();
+         BrandCategory::factory(20)->create();
 
          Catalog::factory(30)->create();
 
@@ -35,12 +44,12 @@ class DatabaseSeeder extends Seeder
 
          Attribute::factory(2000)->create();
 
+         Tag::factory(100)->create();
 
-        Admin::factory()->create([
-            'name' => 'Test Admin',
-            'email' => 'test@example.com',
-            'password' => bcrypt('1234567'),
-        ]);
+         Price::factory(1000)->create();
+
+
+
 
 
     }

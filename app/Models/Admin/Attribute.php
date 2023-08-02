@@ -10,5 +10,5 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
-    public $translatedAttributes = ['title', 'descr'];
+    public $translatedAttributes = ['title', 'value'];
 }

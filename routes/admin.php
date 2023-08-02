@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/edit-subcategory-products/{id}', [ProductController::class, 'editBySubcategory'])->name('edit.subcategory-products');
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
             Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
+            Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
     });
 
 

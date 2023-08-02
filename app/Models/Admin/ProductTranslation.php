@@ -11,6 +11,11 @@ class ProductTranslation extends Model
     public $timestamps = false;
     protected $fillable = [
         'title',
-        'descr',
+        'attribute_value',
+        'attribute_title',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+        'description',
     ];
 }

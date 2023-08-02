@@ -24,7 +24,10 @@ class ProductFactory extends Factory
             'brand_id' => Brand::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'title' => fake()->sentence,
-            'descr' => fake()->paragraph,
+            'description' => fake()->paragraph,
+            'seo_title' => fake()->sentence,
+            'seo_description' => fake()->paragraph,
+            'meta_keywords' => fake()->sentence,
             'file_url' => $this->faker->imageUrl(340, 338),
         ];
     }

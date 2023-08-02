@@ -11,7 +11,13 @@ class Category extends Model implements TranslatableContract
 {
     use HasFactory;
     use Translatable;
-    public $translatedAttributes = ['title', 'descr'];
+    public $translatedAttributes = [
+        'title',
+        'description',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+    ];
 
 
     public function catalog(): \Illuminate\Database\Eloquent\Relations\BelongsTo

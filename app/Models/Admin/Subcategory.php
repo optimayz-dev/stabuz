@@ -10,7 +10,13 @@ class Subcategory extends Model
 {
 
     use HasFactory, Translatable;
-    public $translatedAttributes = ['title', 'descr'];
+    public $translatedAttributes = [
+        'title',
+        'seo_title',
+        'seo_description',
+        'meta_keywords',
+        'description',
+    ];
     protected $fillable = ['category_id'];
     protected $table = 'subcategories';
 
