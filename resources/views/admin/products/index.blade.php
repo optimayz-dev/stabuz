@@ -100,13 +100,12 @@
                         <h2><small>Поиск продуктов</small></h2>
                         <form action="">
                             <input type="text" name="search" id="search" class="search-input" placeholder="Введите название продукта">
-                            <div id="result">
-                                <div id="list-container">
-                                    <!-- Здесь будут отображаться результаты поиска -->
-                                </div>
-                            </div>
-
                         </form>
+                        <div id="result">
+                            <div id="list-container">
+                                <!-- Здесь будут отображаться результаты поиска -->
+                            </div>
+                        </div>
 
 {{--                        <div class="clearfix"></div>--}}
                     </div>
@@ -118,6 +117,20 @@
                                         <p class="text-muted font-13">
                                             Products
                                         </p>
+{{--                                        <form action="">--}}
+{{--                                            <select name="" id="">--}}
+{{--                                                <option value="">catalog</option>--}}
+{{--                                                <option value="">catalog2</option>--}}
+{{--                                            </select>--}}
+{{--                                            <select name="" id="">--}}
+{{--                                                <option value="">category</option>--}}
+{{--                                                <option value="">category2</option>--}}
+{{--                                            </select>--}}
+{{--                                            <select name="" id="">--}}
+{{--                                                <option value="">subcategory</option>--}}
+{{--                                                <option value="">subcategory2</option>--}}
+{{--                                            </select>--}}
+{{--                                        </form>--}}
                                         <ul class="nav navbar-right">
                                             <li class="dropdown" style="padding-right: 15px;">
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -180,6 +193,7 @@
                                             <div class="btn-wrapper">
                                                 <a class="action-btn" href="{{ route('admin.edit.subcategory-products', $subcategory->id) }}"><i class="fa fa-edit"></i> edit</a>
                                                 <a class="action-btn" href=""><i class="fa fa-trash"></i> delete</a>
+                                                <a class="action-btn" href="{{ route('admin.products.export', $subcategory->id) }}">export data</a>
                                             </div>
                                     @endforeach
                                     <div class="links">

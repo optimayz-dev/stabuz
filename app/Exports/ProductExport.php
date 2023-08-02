@@ -10,6 +10,13 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ProductExport implements FromCollection, WithHeadings, WithCustomCsvSettings
 {
+    protected $subcategoryId;
+
+    public function __construct($subcategoryId)
+    {
+        $this->subcategoryId = $subcategoryId;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -18,12 +25,10 @@ class ProductExport implements FromCollection, WithHeadings, WithCustomCsvSettin
         $locale = App::getLocale();
         return Product::join('product_translations', 'products.id', '=', 'product_translations.product_id')
             ->where('product_translations.locale', $locale)
+            ->where('products.subcategory_id', $this->subcategoryId) // Фильтруем по подкатегории
             ->select('products.id', 'products.subcategory_id', 'product_translations.title', 'product_translations.descr', 'products.file_url')
             ->orderBy('id')
             ->get();
-//        return Product::with('translations', 'subcategory')
-//            ->orderBy('id')
-//            ->get();
     }
 
     public function headings(): array

@@ -190,6 +190,7 @@
 @stack('scripts')
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('/assets/admin/js/custom.min.js') }}"></script>
-<script src="{{ asset('/assets/admin/js/search.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/axios/search.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/axios/add-product.js') }}"></script>
 </body>
 </html>

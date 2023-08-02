@@ -36,11 +36,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/category-export', [CategoryController::class, 'addByFile'])->name('categories.addByFile');
             Route::get('/admin/category-get-export', [CategoryController::class, 'export'])->name('categories.export');
             Route::get('/admin/product-export', [ProductController::class, 'viewTable'])->name('products.view');
-            Route::get('/admin/products-get-export', [ProductController::class, 'export'])->name('products.export');
+            Route::get('/admin/products-get-export/{id}', [ProductController::class, 'export'])->name('products.export');
             Route::post('/admin/products-import', [ProductController::class, 'import'])->name('products.import');
             Route::post('/admin/product/result', [ProductController::class, 'search'])->name('product.search');
             Route::get('/admin/edit-subcategory-products/{id}', [ProductController::class, 'editBySubcategory'])->name('edit.subcategory-products');
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
+            Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
     });
 
 

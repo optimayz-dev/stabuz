@@ -130,13 +130,22 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="input-wrapper">
                                                 <h4 class="form-title">Добавить продукт</h4>
+                                                <label>
+                                                    <input class="form-control" type="text" name="" placeholder="Введите название каталога">
+                                                </label>
+                                                <label>
+                                                    <input class="form-control" type="text" name="" placeholder="Введите название категории">
+                                                </label>
+                                                <label>
+                                                    <input class="form-control" type="text" name="" placeholder="Введите название подкатегории">
+                                                </label>
                                                 <label for="title">
                                                     <input class="form-control" name="name[]" placeholder="название продукта" required="required" value="">
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="title">
-                                                    <textarea class="resizable_textarea form-control" name="descr[]"></textarea>
+                                                    <textarea class="resizable_textarea form-control" name="descr[]" placeholder="Описание продукта"></textarea>
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">

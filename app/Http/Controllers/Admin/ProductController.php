@@ -20,35 +20,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-//    public function index()
-//    {
-////        $subcategoriesData = [];
-////
-////        Subcategory::with('translations', 'products.translations')->chunk(5000, function ($subcategoriesChunk) use (&$subcategoriesData) {
-////            $subcategoriesChunk->each(function ($subcategory) use (&$subcategoriesData) {
-////                // Загружаем отношение с продуктами
-////                $subcategory->load('products');
-////
-////                // Здесь обрабатываем каждую субкатегорию и связанные с ней продукты
-////                // Например, вы можете использовать $subcategory->title и $subcategory->descr
-////                // а также $subcategory->products для доступа к связанным продуктам
-////
-////                // Добавляем обработанные данные в массив $subcategoriesData
-////                $subcategoriesData[] = [
-////                    'id' => $subcategory->id,
-////                    'title' => $subcategory->title,
-////                    'descr' => $subcategory->descr,
-////                    'products' => $subcategory->products, // Здесь будут все продукты связанные с данной субкатегорией
-////                    // Добавьте другие данные, которые вы хотите передать во view
-////                ];
-////            });
-////        });
-////        $subcategoriesData = Subcategory::with('translations', 'products.translations')->lazy();      paginate(5)
-//        $subcategories = Subcategory::with('translations', 'products.translations')->get();
-//
-//        return view('admin.products.index', ['subcategories' => $subcategories]);
-//    }
-
     public function index()
     {
         $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
@@ -75,7 +46,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
@@ -124,14 +95,14 @@ class ProductController extends Controller
         return back();
     }
 
-    public function export()
+    public function export($subcategoryId)
     {
-        return Excel::download(new ProductExport(), 'product.xlsx');
+        return Excel::download(new ProductExport($subcategoryId), 'product.xlsx');
     }
 
     public function viewTable()
     {
-        $products = Product::with('translations')->orderBy('updated_at')->take(30)->get();
+        $products = Product::with('translations')->orderBy('updated_at')->get();
 
         return view('admin.products.export-import', ['products' => $products]);
     }

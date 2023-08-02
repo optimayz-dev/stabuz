@@ -162,7 +162,7 @@
                                             <input type="file" name="file">
                                             <button type="submit" class="btn btn-success">import data</button>
                                         </form>
-                                        <a class="btn btn-danger" href="{{ route('admin.products.export') }}">export data</a>
+                                        <a class="btn btn-danger" href="{{ route('admin.products.export', 1) }}">export data</a>
 
                                     </div>
                                 </div>
@@ -172,6 +172,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
