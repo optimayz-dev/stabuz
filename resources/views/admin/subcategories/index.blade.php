@@ -116,6 +116,17 @@
                                             Products
                                         </p>
                                         <ul class="nav navbar-right">
+                                            <li class="dropdown">
+                                                <!-- Например, для переключения между USD, EUR и RUB -->
+                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true">
+                                                    <i class="fa fa-usd"></i>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'usd']) }}">USD</a>--}}
+                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'eur']) }}">EUR</a>--}}
+                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'rub']) }}">RUB</a>--}}
+                                                </div>
+                                            </li>
                                             <li class="dropdown" style="padding-right: 15px;">
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true">
                                                     <i class="fa fa-language"></i>
@@ -126,17 +137,6 @@
                                                             {{ $properties['native'] }}
                                                         </a>
                                                     @endforeach
-                                                </div>
-                                            </li>
-                                            <li class="dropdown">
-                                                <!-- Например, для переключения между USD, EUR и RUB -->
-                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true">
-                                                    <i class="fa fa-language"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-{{--                                                    <a href="{{ route('set_currency', ['currency' => 'usd']) }}">USD</a>--}}
-{{--                                                    <a href="{{ route('set_currency', ['currency' => 'eur']) }}">EUR</a>--}}
-{{--                                                    <a href="{{ route('set_currency', ['currency' => 'rub']) }}">RUB</a>--}}
                                                 </div>
                                             </li>
                                             <li class="dropdown" style="padding-right: 15px;">

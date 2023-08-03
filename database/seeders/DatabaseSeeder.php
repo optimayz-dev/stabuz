@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
          Tag::factory(100)->create();
 
-         Price::factory(1000)->create();
+         Price::factory(20000)->create();
 
 
 
