@@ -15,7 +15,7 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $catalogs = Catalog::all();
+        $catalogs = Catalog::with('translations')->get();
 
         return view('admin.catalogs.index', compact('catalogs'));
     }
@@ -37,7 +37,9 @@ class CatalogController extends Controller
         {
             $catalog = new Catalog();
             $catalog->title = $value['title'];
-            $catalog->descr = $value['descr'];
+            $catalog->seo_title = $value['seo_title'];
+            $catalog->seo_description = $value['seo_description'];
+            $catalog->meta_keywords = $value['meta_keywords'];
             $catalog->save();
         }
         return redirect()->back()->with('success', 'Данные успешно добавлены.');
@@ -48,33 +50,14 @@ class CatalogController extends Controller
      */
     public function show(Catalog $catalog)
     {
-        //
+
+        return view('admin.catalogs.view', compact('catalog'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Catalog $catalog)
-    {
-        $catalogs = Catalog::all();
-        return view('admin.catalog.edit', compact('catalogs'));
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCatalogRequest $request, Catalog $catalog)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Catalog $catalog)
-    {
-        //
-    }
 
     public function editSelected(Request $request)
     {
@@ -88,7 +71,7 @@ class CatalogController extends Controller
         return view('admin.catalogs.update', compact('catalogs'));
     }
 
-    public function updateSelected(Request $request)
+    public function updateSelected(UpdateCatalogRequest $request)
     {
         $selectedCatalogs = $request->input('selected_catalogs', []);
 
@@ -96,19 +79,23 @@ class CatalogController extends Controller
             foreach ($selectedCatalogs as $catalogId) {
                 $catalog = Catalog::findOrFail($catalogId);
                 $catalog->title = $request->input('title_'.$catalogId);
-                $catalog->descr = $request->input('descr_'.$catalogId);
-                $catalog->save();
+                $catalog->seo_title = $request->input('seo_title_'.$catalogId);
+                $catalog->seo_description = $request->input('seo_description_'.$catalogId);
+                $catalog->meta_keywords = $request->input('meta_keywords_'.$catalogId);
+                $catalog->update();
             }
         } else {
             $catalogs = Catalog::all();
             foreach ($catalogs as $catalog) {
                 $catalog->title = $request->input('title_'.$catalog->id);
-                $catalog->descr = $request->input('descr_'.$catalog->id);
-                $catalog->save();
+                $catalog->seo_title = $request->input('seo_title_'.$catalog->id);
+                $catalog->seo_description = $request->input('seo_description_'.$catalog->id);
+                $catalog->meta_keywords = $request->input('meta_keywords_'.$catalog->id);
+                $catalog->update();
             }
         }
 
-        return redirect()->back()->with('success', 'Данные успешно обновлены.');
+        return redirect()->route('admin.editSelected')->with('success', 'Данные успешно обновлены.');
     }
 
 

@@ -24,6 +24,7 @@ return new class extends Migration
             // Actual fields you want to translate
 
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('attribute_title')->nullable();
             $table->string('attribute_value')->nullable();
             $table->string('seo_title');

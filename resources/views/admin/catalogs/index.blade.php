@@ -136,13 +136,14 @@
                                         <tr>
                                             <th>
                                             <th>Select</th>
-                                            </th>
+
                                             <th>Position</th>
                                             <th>Title</th>
-                                            <th>Description</th>
-{{--                                            <th>Age</th>--}}
+                                            <th>Seo Title</th>
+                                            <th>Seo Description</th>
+                                            <th>Meta keywords</th>
                                             <th>Created date</th>
-{{--                                            <th>Действие</th>--}}
+
                                         </tr>
                                         </thead>
 
@@ -151,22 +152,29 @@
                                         @foreach($catalogs as $catalog)
                                             <tr>
                                                 <td>
-                                                <th><input type="checkbox" name="selected_catalogs[]" value="{{ $catalog->id }}"></th>
-                                                </td>
+                                                <th>
+                                                    <label>
+                                                        <input type="checkbox" name="selected_catalogs[]" value="{{ $catalog->id }}">
+                                                    </label>
+                                                </th>
                                                 <td>{{ $catalog->id }}</td>
-                                                <td>{{ $catalog->title }}</td>
-                                                <td>{{ Str::limit($catalog->descr, 50) }}</td>
-{{--                                                <td>61</td>--}}
+                                                <td><a href="{{ route('admin.catalog.show', $catalog->id) }}">{{ $catalog->title }}</a></td>
+                                                <td>{{ $catalog->seo_title }}</td>
+                                                <td>{{ Str::limit($catalog->seo_description, 50) }}</td>
+                                                <td>{{ Str::limit($catalog->meta_keywords, 50) }}</td>
                                                 <td>{{ $catalog->created_at }}</td>
-{{--                                                <td>редактировать</td>--}}
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
                                         <div class="btn-wrapper">
-                                            <button type="submit" class="btn btn-primary">edit selected</button>
+                                            <button type="submit" class="action-btn"><i class="fa fa-edit"></i> edit selected</button>
                                         </div>
                                     </form>
+{{--                                    <form action="">--}}
+{{--                                        @csrf--}}
+{{--                                        <button type="submit" class="action-btn"><i class="fa fa-trash"></i> delete</button>--}}
+{{--                                    </form>--}}
                                 </div>
                             </div>
                         </div>

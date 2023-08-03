@@ -109,12 +109,13 @@
                                     @endforeach
                                 </div>
                             </li>
+
+                            </li>
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Add catalog</a>
+                                    <a class="dropdown-item" href="{{ route('admin.subcategory.create') }}">Add catalog</a>
                                     <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit all</a>
-                                    <a class="dropdown-item" href="{{  route('admin.categories.addByFile') }}">Export/Import</a>
                                 </div>
                             </li>
 
@@ -126,38 +127,41 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        Categories
+                                        Subcategories
                                     </p>
-                                    @foreach($catalogs as $catalog)
-                                        <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $catalog->title }}</h3>
+                                    @foreach($categories as $category)
+                                        <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $category->title }}</h3>
                                         <form action="{{ route('admin.editCategories') }}" method="get">
                                             @csrf
-                                            <input type="hidden" value="{{ $catalog->id }}" name="select_catalogs">
-                                            <table id="datatable-checkbox{{ $catalog->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
+                                            <input type="hidden" value="{{ $category->id }}" name="select_catalogs">
+                                            <table id="datatable-checkbox{{ $category->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
                                                 <thead>
                                                 <tr>
                                                     <th>
                                                     <th>Select</th>
-                                                    </th>
+
                                                     <th>Position</th>
                                                     <th>Title</th>
                                                     <th>Description</th>
-{{--                                                    <th>Age</th>--}}
+                                                    {{--                                                    <th>Age</th>--}}
                                                     <th>Created date</th>
                                                     {{--                                            <th>Действие</th>--}}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($catalog->categories as $category)
+                                                @foreach($category->subcategories as $subcategory)
                                                     <tr>
                                                         <td>
-                                                        <th><input type="checkbox" name="selected_category[]" value="{{ $category->id }}"></th>
-                                                        </td>
-                                                        <td>{{ $category->id }} / {{ $catalog->id }}</td>
-                                                        <td>{{ $category->title }}</td>
-                                                        <td>{{ Str::limit($category->descr, 50) }}</td>
-{{--                                                        <td>61</td>--}}
-                                                        <td>{{ $category->created_at }}</td>
+                                                        <th>
+                                                            <label>
+                                                                <input type="checkbox" name="selected_category[]" value="{{ $subcategory->id }}">
+                                                            </label>
+                                                        </th>
+                                                        <td>{{ $subcategory->id }} / {{ $category->id }}</td>
+                                                        <td>{{ $subcategory->title }}</td>
+                                                        <td>{{ Str::limit($subcategory->descr, 50) }}</td>
+                                                        {{--                                                        <td>61</td>--}}
+                                                        <td>{{ $subcategory->created_at }}</td>
                                                         {{--                                                <td>редактировать</td>--}}
                                                     </tr>
                                                 @endforeach
@@ -177,6 +181,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

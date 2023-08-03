@@ -2,14 +2,17 @@
 
 namespace App\Models\Admin;
 
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
-class Subcategory extends Model
+class Subcategory extends Model implements TranslatableContract
 {
 
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, Searchable;
     public $translatedAttributes = [
         'title',
         'seo_title',
@@ -28,4 +31,15 @@ class Subcategory extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true,
+            ]
+        ];
+    }
+
 }

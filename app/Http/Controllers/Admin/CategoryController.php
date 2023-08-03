@@ -21,12 +21,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $catalogs = Cache::remember('catalogs', 24 * 60 * 60, function () {
-            $catalogs = Catalog::with('translations','categories.translations')->get();
-            return $catalogs;
+        $categories = Cache::remember('categories', 24 * 60 * 60, function (){
+            $categories = Category::with('translations', 'subcategories.translations')->get();
+            return $categories;
         });
 
-        return view('admin.categories.index', ['catalogs' => $catalogs]);
+        return view('admin.categories.index', ['categories' => $categories]);
+
+//        $catalogs = Cache::remember('catalogs', 24 * 60 * 60, function () {
+//            $catalogs = Catalog::with('translations','categories.translations')->get();
+//            return $catalogs;
+//        });
+//        return view('admin.categories.index', ['catalogs' => $catalogs]);
     }
 
     /**

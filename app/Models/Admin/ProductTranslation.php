@@ -2,15 +2,17 @@
 
 namespace App\Models\Admin;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductTranslation extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     public $timestamps = false;
     protected $fillable = [
         'title',
+        'slug',
         'attribute_value',
         'attribute_title',
         'seo_title',
@@ -18,4 +20,14 @@ class ProductTranslation extends Model
         'meta_keywords',
         'description',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true,
+            ]
+        ];
+    }
 }

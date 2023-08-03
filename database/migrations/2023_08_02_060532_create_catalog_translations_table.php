@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Catalog::class);
             $table->unique(['catalog_id', 'locale']);
             // Actual fields you want to translate
+            $table->string('slug')->unique();
             $table->string('title');
             $table->index('title');
             $table->string('seo_title');

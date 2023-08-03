@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCatalogRequest extends FormRequest
@@ -17,13 +18,15 @@ class StoreCatalogRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'addmore.*.title' => 'required',
-            'addmore.*.descr' => 'required',
+            'addmore.*.seo_title' => 'required',
+            'addmore.*.seo_description' => 'required',
+            'addmore.*.meta_keywords' => 'required',
         ];
     }
 }

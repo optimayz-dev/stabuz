@@ -143,19 +143,47 @@
                                             <tr>
                                                 <th>Position</th>
                                                 <th>Title</th>
-                                                <th>Description</th>
-                                                <th>Age</th>
-                                                <th>Created date</th>
+                                                <th>Slug</th>
+                                                <th>Soe title</th>
+                                                <th>Seo Description</th>
+                                                <th>Meta keywords</th>
+                                                <th>Crated at / Updated at</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($catalogs as $catalog)
                                                 <tr>
-                                                    <td><input readonly value="{{ $catalog->id }}" name="selected_catalogs[]" class="updateSelected" style="background: none; border: none"></td>
-                                                    <td><input type="text" value="{{ $catalog->title }}" name="title_{{ $catalog->id }}" class="updateSelected"></td>
-                                                    <td><textarea name="descr_{{ $catalog->id }}" class="updateSelected">{{ $catalog->descr }}</textarea></td>
-                                                    <td>61</td>
-                                                    <td>{{ $catalog->created_at }}</td>
+                                                    <td>
+                                                        <label>
+                                                            <input readonly value="{{ $catalog->id }}" name="selected_catalogs[]" class="updateSelected" style="background: none; border: none">
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <input type="text" value="{{ $catalog->title }}" name="title_{{ $catalog->id }}" class="updateSelected">
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <input readonly value="{{ $catalog->slug }}" name="selected_catalogs[]" class="updateSelected" style="background: none; border: none">
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <input type="text" value="{{ $catalog->seo_title }}" name="seo_title_{{ $catalog->id }}" class="updateSelected">
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <textarea name="seo_description_{{ $catalog->id }}" class="updateSelected">{{ $catalog->seo_description }}</textarea>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <textarea name="meta_keywords_{{ $catalog->id }}" class="updateSelected">{{ $catalog->meta_keywords }}</textarea>
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ $catalog->created_at }} /<br> {{ $catalog->updated_at }}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

@@ -4,17 +4,19 @@ namespace App\Models\Admin;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Catalog extends Model implements TranslatableContract
 {
-    use HasFactory;
-    use Translatable;
+    use HasFactory, Translatable;
+
     protected $fillable = [];
 //
     public $translatedAttributes = [
         'title',
+        'slug',
         'seo_title',
         'seo_description',
         'meta_keywords',
@@ -29,4 +31,5 @@ class Catalog extends Model implements TranslatableContract
     {
         return $this->hasManyThrough(Subcategory::class, Category::class);
     }
+
 }

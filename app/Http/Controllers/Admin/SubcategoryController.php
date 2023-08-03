@@ -9,6 +9,9 @@ use App\Http\Requests\UpdateSubcategoryRequest;
 use App\Imports\SubcategoryImport;
 use App\Models\Admin\Category;
 use App\Models\Admin\Subcategory;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SubcategoryController extends Controller
@@ -18,8 +21,21 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('translations','subcategories.translations')->get();
-        return view('admin.subcategories.index', ['categories' => $categories]);
+        $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
+            return Subcategory::with('translations', 'products.translations', 'products.price')->get();
+        });
+
+        $perPage = 10;
+        $currentPage = request()->query('page', 1);
+        $paginatedData = new LengthAwarePaginator(
+            $subcategories->forPage($currentPage, $perPage),
+            $subcategories->count(),
+            $perPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+
+        return view('admin.subcategories.index', ['subcategories' => $paginatedData]);
     }
 
     /**

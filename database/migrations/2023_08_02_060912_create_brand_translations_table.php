@@ -23,6 +23,7 @@ return new class extends Migration
 
             // Actual fields you want to translate
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('seo_title');
             $table->text('seo_description');
             $table->text('meta_keywords');

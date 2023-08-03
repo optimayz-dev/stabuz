@@ -142,13 +142,12 @@
                                             <tr>
 
                                                 <th>Title</th>
-                                                <th>Description</th>
-{{--                                                <th>Age</th>--}}
-                                                <th>Действие</th>
+                                                <th>Soe title</th>
+                                                <th>Seo Description</th>
+                                                <th>Meta keywords</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                                 <tr>
                                                     <td>
                                                         <label>
@@ -157,15 +156,23 @@
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            <textarea name="addmore[0][descr]" class="updateSelected" placeholder="Описание"></textarea>
+                                                            <input type="text" value="" name="addmore[0][seo_title]" class="updateSelected" placeholder="Название">
                                                         </label>
                                                     </td>
-{{--                                                    <td>61</td>--}}
+                                                    <td>
+                                                        <label>
+                                                            <textarea name="addmore[0][seo_description]" class="updateSelected" placeholder="Seo Описание"></textarea>
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <textarea type="text" name="addmore[0][meta_keywords]" placeholder="Мета ключи" class="updateSelected"></textarea>
+                                                        </label>
+                                                    </td>
                                                     <td>
                                                         <button type="button" name="add" id="add" class="btn btn-success">Добавить</button>
                                                     </td>
                                                 </tr>
-
                                             </tbody>
                                         </table>
                                         <div class="btn-wrapper">
@@ -190,7 +197,24 @@
 
                 ++i;
 
-                $("#datatable-checkbox").append('<tr><td><input type="text" name="addmore['+i+'][title]" placeholder="Назавние" class="updateSelected" /></td><td><textarea type="text" name="addmore['+i+'][descr]" placeholder="Описание" class="updateSelected"></textarea></td><td><button type="button" class="btn btn-danger remove-tr">Убрать</button></td></tr>');
+                $("#datatable-checkbox").append('' +
+                    '<tr>' +
+                        '<td>' +
+                            '<input type="text" name="addmore['+i+'][title]" placeholder="Назавние" class="updateSelected" />' +
+                        '</td>' +
+                        '<td>' +
+                            '<input type="text" name="addmore['+i+'][seo_title]" placeholder="Seo назавние" class="updateSelected" />' +
+                        '</td>' +
+                        '<td>' +
+                            '<textarea type="text" name="addmore['+i+'][seo_description]" placeholder="Seo Описание" class="updateSelected"></textarea>' +
+                        '</td>' +
+                        '<td>' +
+                            '<textarea type="text" name="addmore['+i+'][meta_keywords]" placeholder="Мета ключи" class="updateSelected"></textarea>' +
+                        '</td>' +
+                        '<td>' +
+                            '<button type="button" class="btn btn-danger remove-tr">Убрать</button>' +
+                        '</td>' +
+                    '</tr>');
             });
 
             $(document).on('click', '.remove-tr', function(){

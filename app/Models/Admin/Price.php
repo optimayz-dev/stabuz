@@ -18,4 +18,9 @@ class Price extends Model
     {
         return $this->attributes['old_price'];
     }
+
+    public function getNewPriceAttribute()
+    {
+        return $this->attributes['price'];
+    }
 }

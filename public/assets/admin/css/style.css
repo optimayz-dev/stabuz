@@ -37,6 +37,9 @@ body{
     font-size: 16px;
     letter-spacing: .5px;
     border-bottom: 1px solid ;
+    background: unset;
+    border: none;
+    color: #5A738E;
 }
 .input-wrapper label{
     width: 100%;
@@ -76,4 +79,22 @@ body{
 #list-container{
     margin-left: 142px;
     padding-top: 20px;
+}
+.table-wrapper{
+    border: 1px solid;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 0.25rem;
+}
+.accordion-toggle{
+    /* border: 1px solid; */
+    padding: 2px !important;
+    /* border-radius: 0.25rem; */
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    outline: none !important;
+}
+
+.links nav .flex{
+    display: none !important;
 }

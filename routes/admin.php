@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
             Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
+
             Route::get('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
             Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateCategories'])->name('updateCategories');
             Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
             Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
             Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
+
     });
 
 

@@ -30,6 +30,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->string('file_url');
+
             $table->timestamps();
         });
     }
