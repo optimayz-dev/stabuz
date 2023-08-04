@@ -19,16 +19,13 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Category::class)
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnUpdate();
             $table->foreignIdFor(Subcategory::class)
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnUpdate();
             $table->foreignIdFor(Brand::class)
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnUpdate();
             $table->string('file_url');
 
             $table->timestamps();

@@ -29,6 +29,6 @@ class Tag extends Model implements TranslatableContract
     // Добавляем отношение к продуктам
     public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_tag');
+        return $this->belongsToMany(Product::class, 'product_tags');
     }
 }

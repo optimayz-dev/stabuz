@@ -58,6 +58,14 @@ class CatalogController extends Controller
      * Show the form for editing the specified resource.
      */
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Catalog $catalog)
+    {
+        $catalog->delete();
+        return redirect()->back();
+    }
 
     public function editSelected(Request $request)
     {

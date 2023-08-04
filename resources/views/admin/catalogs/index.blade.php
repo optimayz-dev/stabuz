@@ -129,52 +129,50 @@
                                     <p class="text-muted font-13 m-b-30">
                                         Catalogs {{--<code>$().DataTable();</code>--}}
                                     </p>
-                                    <form action="{{ route('admin.editSelected') }}" method="get">
-                                        @csrf
-                                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
+                                    <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                                         <thead>
                                         <tr>
-                                            <th>
-                                            <th>Select</th>
 
+                                            <th>Select</th>
                                             <th>Position</th>
                                             <th>Title</th>
                                             <th>Seo Title</th>
                                             <th>Seo Description</th>
                                             <th>Meta keywords</th>
                                             <th>Created date</th>
-
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
-
-
                                         <tbody>
                                         @foreach($catalogs as $catalog)
                                             <tr>
                                                 <td>
-                                                <th>
                                                     <label>
                                                         <input type="checkbox" name="selected_catalogs[]" value="{{ $catalog->id }}">
                                                     </label>
-                                                </th>
+                                                </td>
                                                 <td>{{ $catalog->id }}</td>
                                                 <td><a href="{{ route('admin.catalog.show', $catalog->id) }}">{{ $catalog->title }}</a></td>
                                                 <td>{{ $catalog->seo_title }}</td>
                                                 <td>{{ Str::limit($catalog->seo_description, 50) }}</td>
                                                 <td>{{ Str::limit($catalog->meta_keywords, 50) }}</td>
                                                 <td>{{ $catalog->created_at }}</td>
+                                                <td>
+                                                    <form action="{{ route('admin.catalog.destroy', $catalog->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this catalog?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
-                                        <div class="btn-wrapper">
-                                            <button type="submit" class="action-btn"><i class="fa fa-edit"></i> edit selected</button>
-                                        </div>
-                                    </form>
-{{--                                    <form action="">--}}
-{{--                                        @csrf--}}
-{{--                                        <button type="submit" class="action-btn"><i class="fa fa-trash"></i> delete</button>--}}
-{{--                                    </form>--}}
+                                    <div class="btn-wrapper">
+                                        <button type="button" class="btn btn-primary" onclick="editSelected()"><i class="fa fa-edit"></i> Edit Selected</button>
+                                        <button type="button" class="btn btn-danger" onclick="deleteSelected()"><i class="fa fa-trash"></i> Delete Selected</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

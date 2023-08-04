@@ -11,4 +11,9 @@ class Attribute extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
     public $translatedAttributes = ['title', 'value'];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'attribute_products');
+    }
 }

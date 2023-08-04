@@ -168,7 +168,7 @@
                                                 </tbody>
                                             </table>
                                             <div class="btn-wrapper">
-                                                <button type="submit" class="btn btn-primary">edit selected</button>
+                                                <button type="submit" class="action-btn"><i class="fa fa-edit"></i> edit selected</button>
                                             </div>
                                         </form>
 

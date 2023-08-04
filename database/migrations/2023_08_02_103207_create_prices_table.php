@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('value', 10, 2);
             $table->decimal('old_price', 10, 2)->nullable();
             $table->string('currency_code');
+            $table->unique(['product_id', 'currency_code']);
             $table->timestamps();
         });
     }

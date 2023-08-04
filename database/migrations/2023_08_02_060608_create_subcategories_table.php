@@ -16,8 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Category::class)
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnUpdate();
             $table->timestamps();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('subcategories')->onDelete('cascade');

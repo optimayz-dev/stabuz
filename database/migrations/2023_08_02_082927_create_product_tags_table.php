@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
-
-            $table->foreignIdFor(Tag::class);
-
+            $table->foreignId('product_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('tag_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }

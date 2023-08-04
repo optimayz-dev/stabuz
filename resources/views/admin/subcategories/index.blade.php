@@ -163,7 +163,8 @@
                                                 <th>Position</th>
                                                 <th>Title</th>
                                                 <th>Price</th>
-                                                <th>Description</th>
+                                                <th>Attributes</th>
+                                                <th>Tags</th>
                                                 <th>Created date</th>
                                             </tr>
                                             </thead>
@@ -173,11 +174,21 @@
                                                     <td>{{ $product->id }} / {{ $subcategory->id }}</td>
                                                     <td>{{ $product->title }}</td>
                                                     @if ($product->price)
-                                                        <td>{{ $product->price->price }} {{ $product->price->currency_code }}</td>
+                                                        <td>{{ $product->price->value }} {{ $product->price->currency_code }}</td>
                                                     @else
                                                         <td>No prices available for this product.</td>
                                                     @endif
-                                                    <td>{{ Str::limit($product->description, 50) }}</td>
+                                                    <td>
+                                                        @foreach($product->attributes as $attribute)
+                                                            {{ $attribute->title }} - <span style="font-weight: bold">{{ $attribute->value }}</span> <br>
+                                                        @endforeach
+                                                    </td>
+{{--                                                    <td>{{ Str::limit($product->description, 50) }}</td>--}}
+                                                    <td>
+                                                        @foreach($product->tags as $tag)
+                                                            {{ $tag->title }}
+                                                        @endforeach
+                                                    </td>
                                                     <td>{{ $product->created_at }}</td>
                                                 </tr>
                                             @endforeach

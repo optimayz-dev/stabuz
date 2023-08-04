@@ -37,7 +37,12 @@ class Product extends Model implements TranslatableContract
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'product_tag');
+        return $this->belongsToMany(Tag::class, 'product_tags');
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_products');
     }
 
 //    public function toSearchableArray()
