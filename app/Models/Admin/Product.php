@@ -41,6 +41,10 @@ class Product extends Model implements TranslatableContract
             return $this->hasOne(Price::class);
     }
 
+    public function brand(){
+            return $this->belongsTo(Brand::class);
+    }
+
 //    public function toSearchableArray()
 //    {
 //        return [

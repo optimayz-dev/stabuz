@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories= Cache::remember('categories', 60, function () {
-            return Category::where('lvl', null)
+            return Category::whereNull('lvl')
                 ->with('translations', 'children.translations')
                 ->get();
         });

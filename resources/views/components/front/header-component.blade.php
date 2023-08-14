@@ -97,130 +97,36 @@
         <div class="header-nav container p-0 d-flex justify-content-between align-items-center gap-2">
             <button class="catalog-btn d-md-block d-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Каталог</button>
             <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+
                 <div class="catalog container d-flex">
                     <aside class="tab-links">
                         <ul class="parent-categories">
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab1">Аккумуляторы <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab2">Бытовая техника и интерьер <span class="icon-arrR"></span></a></li>
-                            <li class="parent-category-item"><a href="#!" data-tab="tab3">Дом и сад <span class="icon-arrR"></span></a></li>
+                            @foreach($catalogs as $catalog)
+                                <li class="parent-category-item"><a href="#!" data-tab="tab{{ $catalog->id }}">{{ $catalog->title }} <span class="icon-arrR"></span></a></li>
+                            @endforeach
                         </ul>
                     </aside>
                     <div class="sidebar-tab-content catalog w-100">
-                        <div class="sidebar-tab category-item main-categories" id="tab1">
+                        @foreach($catalogs as $catalog)
+                        @foreach($catalog->children as $category)
+                        <div class="sidebar-tab category-item main-categories" id="tab{{ $catalog->id }}">
                             <div class="main-category-item">
-                                <a href="#!" class="category-title">Электроинструменты</a>
-                                <div class="children-categories">
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                </div>
-                            </div>
-                            @foreach($catalogs as $catalog)
-                                <div class="main-category-item">
-                                    <a href="#!" class="category-title">Электроинструменты</a>
+                                <a href="#!" class="category-title">{{ $category->title }}</a>
+                                @foreach($category->children as $subcategory)
                                     <div class="children-categories">
-                                        <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                        <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                        <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                        <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                        <div class="children-category-item"><a href="#!">Зарядные устройства для аккумулятора</a></div>
-                                        <div class="children-category-item"><a href="#!">Фен технический аккумуляторный</a></div>
-
+                                        <div class="children-category-item"><a href="#!">{{ $subcategory->title }}</a></div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+                            <button type="button" class="icon-xmark catalog-btn_close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+                        </div>
+                        @endforeach
+                        @endforeach
 
-                            <button type="button" class="icon-xmark catalog-btn_close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-                        </div>
-                        <div class="sidebar-tab category-item main-categories" id="tab2">
-                            <div class="main-category-item">
-                                <a href="#!" class="category-title">Электроинструменты</a>
-                                <div class="children-categories">
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Зарядные устройства для аккумулятора</a></div>
-                                    <div class="children-category-item"><a href="#!">Фен технический аккумуляторный</a></div>
-                                    <div class="children-category-item"><a href="#!">Шуруповёрты аккумуляторные</a></div>
-                                </div>
-                            </div>
-                            <button type="button" class="icon-xmark catalog-btn_close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-                        </div>
-                        <div class="sidebar-tab category-item main-categories" id="tab3">
-                            <div class="main-category-item">
-                                <a href="#!" class="category-title">Электроинструменты</a>
-                                <div class="children-categories">
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Зарядные устройства для аккумулятора</a></div>
-                                    <div class="children-category-item"><a href="#!">Фен технический аккумуляторный</a></div>
-                                    <div class="children-category-item"><a href="#!">Шуруповёрты аккумуляторные</a></div>
-                                </div>
-                            </div>
-                            <div class="main-category-item">
-                                <a href="#!" class="category-title">Электроинструменты</a>
-                                <div class="children-categories">
-                                    <div class="children-category-item"><a href="#!">Аккумуляторные инструменты</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторный ударный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Аккумуляторы для инструмента</a></div>
-                                    <div class="children-category-item"><a href="#!">Бесщеточный аккумуляторный шуруповерт</a></div>
-                                    <div class="children-category-item"><a href="#!">Зарядные устройства для аккумулятора</a></div>
-                                    <div class="children-category-item"><a href="#!">Фен технический аккумуляторный</a></div>
-                                    <div class="children-category-item"><a href="#!">Шуруповёрты аккумуляторные</a></div>
-                                </div>
-                            </div>
-                            <button type="button" class="icon-xmark catalog-btn_close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-                        </div>
+
                     </div>
                 </div>
+
             </div>
             <a href="index.html" class="d-xl-block d-none"><img src="image/mainLogo.png" alt=""></a>
             <form action="index.html" method="get" class="header-search">

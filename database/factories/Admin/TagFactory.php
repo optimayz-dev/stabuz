@@ -17,7 +17,7 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence,
+            'title' => $this->faker->unique()->randomElement(['new', 'sale', 'featured', 'discounted', 'popular']),
             'parent_id' => null
         ];
     }

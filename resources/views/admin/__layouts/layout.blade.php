@@ -175,7 +175,6 @@
         <!-- /footer content -->
     </div>
 </div>
-
 <!-- jQuery -->
 <script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
