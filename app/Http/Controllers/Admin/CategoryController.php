@@ -9,6 +9,9 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Imports\CategoryImport;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,18 +24,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Cache::remember('categories', 24 * 60 * 60, function (){
-            $categories = Category::with('translations', 'subcategories.translations')->get();
-            return $categories;
+        $categories= Cache::remember('categories', 60, function () {
+            return Category::where('lvl', null)
+                ->with('translations', 'children.translations')
+                ->get();
         });
 
         return view('admin.categories.index', ['categories' => $categories]);
-
-//        $catalogs = Cache::remember('catalogs', 24 * 60 * 60, function () {
-//            $catalogs = Catalog::with('translations','categories.translations')->get();
-//            return $catalogs;
-//        });
-//        return view('admin.categories.index', ['catalogs' => $catalogs]);
     }
 
     /**
@@ -83,11 +81,11 @@ class CategoryController extends Controller
         //
     }
 
-    public function editCategories(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function editCategories(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         $catalogId = $request->input('select_catalogs');
-            $catalog = Catalog::findOrFail($catalogId);
+
+            $catalog = Category::findOrFail($catalogId);
             if ($request->input('selected_category', [])){
                 $categoryId = $request->input('selected_category', []);
                 $categories = Category::whereIn('id', $categoryId)->orderBy('id')->get();
@@ -101,36 +99,31 @@ class CategoryController extends Controller
 
     public function updateCategories(Request $request)
     {
-        $catalogId = $request->input('selected_catalogs');
+        $selectedCategoryIds = $request->input('selected_category', []);
+        $locale = $request->getlocale;
+        app()->setLocale($locale);
 
-        $catalog = Catalog::findOrFail($catalogId);
+        foreach ($selectedCategoryIds as $categoryId) {
+            $category = Category::findOrFail($categoryId);
 
-        $catalog->title = $request->input('title_'.$catalogId);
-        $catalog->update();
+            // Обновление переводов для каждой категории
+            $category->title = $request->input("category_title_{$categoryId}");
+            $category->description = $request->input("description_{$categoryId}");
+            // Добавьте остальные поля для обновления
 
-                // Получите выбранные категории для данного каталога
-                $selectedCategories = $request->input('selected_category', []);
+            // Сохранение изменений
+            $category->save();
+        }
 
-                // Если есть выбранные категории, обновите их
-                if ($selectedCategories) {
-                    $categories = Category::whereIn('id', $selectedCategories)->get();
+        // Очистите кеш для обновленных категорий
+        foreach ($selectedCategoryIds as $categoryId) {
+            Cache::forget("category_{$categoryId}");
+        }
 
-                    foreach ($categories as $category) {
-                        // Внесите изменения в категорию
-                        $category->title = $request->input('category_title_'.$category->id);
-                        $category->descr = $request->input('descr_'.$category->id);
-                        // Сохраните изменения
-                        $category->update();
-                    }
-                }
+        // Очистите кеш для списка категорий
+        Cache::forget('categories');
 
-
-            // Очистите кеш и сохраните обновленные данные в кеше
-            Cache::forget('catalogs');
-            $updatedCatalogs = Catalog::orderBy('title')->with(['categories'])->get();
-            Cache::put('catalogs', $updatedCatalogs, 24 * 60 * 60);
-
-        return redirect()->back()->with('success', 'Каталог и категории успешно обновлены');
+        return redirect()->route('admin.category.index')->with('success', 'Каталог и категории успешно обновлены');
     }
 
     public function addByFile()

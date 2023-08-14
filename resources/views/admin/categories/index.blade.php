@@ -127,11 +127,17 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        Subcategories
+                                        Categories
                                     </p>
+                                    @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
                                     @foreach($categories as $category)
-                                        <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $category->title }}</h3>
-                                        <form action="{{ route('admin.editCategories') }}" method="get">
+                                        <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $category->title }} / {{ $category->id }}</h3>
+                                        <form action="{{ route('admin.editCategories') }}" method="post">
+                                            @method('patch')
                                             @csrf
                                             <input type="hidden" value="{{ $category->id }}" name="select_catalogs">
                                             <table id="datatable-checkbox{{ $category->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
@@ -149,7 +155,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($category->subcategories as $subcategory)
+                                                @foreach($category->children as $subcategory)
                                                     <tr>
                                                         <td>
                                                         <th>
@@ -159,7 +165,7 @@
                                                         </th>
                                                         <td>{{ $subcategory->id }} / {{ $category->id }}</td>
                                                         <td>{{ $subcategory->title }}</td>
-                                                        <td>{{ Str::limit($subcategory->descr, 50) }}</td>
+                                                        <td>{{ Str::limit($subcategory->description, 50) }}</td>
                                                         {{--                                                        <td>61</td>--}}
                                                         <td>{{ $subcategory->created_at }}</td>
                                                         {{--                                                <td>редактировать</td>--}}
@@ -168,7 +174,7 @@
                                                 </tbody>
                                             </table>
                                             <div class="btn-wrapper">
-                                                <button type="submit" class="btn btn-primary">edit selected</button>
+                                                <button type="submit" class="action-btn">edit selected</button>
                                             </div>
                                         </form>
                                     @endforeach

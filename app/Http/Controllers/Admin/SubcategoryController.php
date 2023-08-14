@@ -22,7 +22,7 @@ class SubcategoryController extends Controller
     public function index()
     {
         $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
-            return Subcategory::with('translations', 'products.translations', 'products.price', 'products.attributes.translations', 'products.tags.translations')->get();
+            return Category::with('translations', 'products.translations', 'products.price', 'products.attributes.translations', 'products.tags.translations')->get();
         });
 
         $perPage = 10;

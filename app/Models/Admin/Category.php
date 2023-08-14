@@ -7,10 +7,12 @@ use Astrotomic\Translatable\Translatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, HasRecursiveRelationships;
+
     public $translatedAttributes = [
         'title',
         'description',
@@ -19,15 +21,9 @@ class Category extends Model implements TranslatableContract
         'meta_keywords',
     ];
 
-
-    public function catalog(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function products()
     {
-        return $this->belongsTo(Catalog::class);
+        return $this->belongsToMany(Product::class);
     }
-    public function subcategories(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Subcategory::class);
-    }
-
 
 }

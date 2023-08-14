@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCatalogRequest;
 use App\Http\Requests\UpdateCatalogRequest;
 use App\Models\Admin\Catalog;
+use App\Models\Admin\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CatalogController extends Controller
 {
@@ -15,7 +17,11 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $catalogs = Catalog::with('translations')->get();
+        $catalogs = Cache::remember('catalogs', 60, function () {
+            return Category::with('translations')
+                ->whereNull('lvl')
+                ->get();
+        });
 
         return view('admin.catalogs.index', compact('catalogs'));
     }
@@ -35,8 +41,9 @@ class CatalogController extends Controller
     {
         foreach ($request->addmore as $key => $value)
         {
-            $catalog = new Catalog();
+            $catalog = new Category();
             $catalog->title = $value['title'];
+            $catalog->description = $value['description'];
             $catalog->seo_title = $value['seo_title'];
             $catalog->seo_description = $value['seo_description'];
             $catalog->meta_keywords = $value['meta_keywords'];
@@ -48,72 +55,87 @@ class CatalogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Catalog $catalog)
+    public function show(Category $catalog)
     {
+        // Загружаем дочерние категории с переводами
+        $catalog->load(['children.translations', 'translations']);
 
         return view('admin.catalogs.view', compact('catalog'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Catalog $catalog)
+    public function destroy(Category $catalog)
     {
         $catalog->delete();
         return redirect()->back();
     }
 
-    public function editSelected(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    protected function editSelected(Request $request)
     {
         if ($request->input('selected_catalogs', [])){
             $selectedCatalogs = $request->input('selected_catalogs', []);
-            $catalogs = Catalog::whereIn('id', $selectedCatalogs)->orderBy('id','asc')->get();
+            $catalogs = Category::whereIn('id', $selectedCatalogs)->with('translations')->orderBy('id','asc')->get();
         } else {
-            $catalogs = Catalog::all();
+            $catalogs = Category::all();
         }
-
         return view('admin.catalogs.update', compact('catalogs'));
     }
 
     public function updateSelected(UpdateCatalogRequest $request)
     {
+        $locale = $request->getlocale;
+        app()->setLocale($locale);
+
         $selectedCatalogs = $request->input('selected_catalogs', []);
+        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
 
-        if ($selectedCatalogs) {
-            foreach ($selectedCatalogs as $catalogId) {
-                $catalog = Catalog::findOrFail($catalogId);
-                $catalog->title = $request->input('title_'.$catalogId);
-                $catalog->seo_title = $request->input('seo_title_'.$catalogId);
-                $catalog->seo_description = $request->input('seo_description_'.$catalogId);
-                $catalog->meta_keywords = $request->input('meta_keywords_'.$catalogId);
-                $catalog->update();
-            }
-        } else {
-            $catalogs = Catalog::all();
-            foreach ($catalogs as $catalog) {
-                $catalog->title = $request->input('title_'.$catalog->id);
-                $catalog->seo_title = $request->input('seo_title_'.$catalog->id);
-                $catalog->seo_description = $request->input('seo_description_'.$catalog->id);
-                $catalog->meta_keywords = $request->input('meta_keywords_'.$catalog->id);
-                $catalog->update();
-            }
+        $catalogsToUpdate = $selectedCatalogs ? Category::whereIn('id', $selectedCatalogs)->get() : Category::all();
+
+        foreach ($catalogsToUpdate as $catalog) {
+            $this->updateCatalogFields($request, $catalog, $fields, $catalog->id);
+
+            //Обновляем кэш для каждого каталога
+            Cache::forget("catalog_{$catalog->id}");
         }
+        Cache::forget('catalogs');
 
-        return redirect()->route('admin.editSelected')->with('success', 'Данные успешно обновлены.');
+        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
+    }
+
+    private function updateCatalogFields($request, $catalog, $fields, $id)
+    {
+        foreach ($fields as $field) {
+            $catalog->$field = $request->input("{$field}_{$id}");
+        }
+        $catalog->update();
+
+        Cache::forget('category_{$category->id}');
     }
 
 
-    public function destroySelected(Request $request)
+
+    protected function destroySelected($selectedCatalogs)
     {
-        $selectedCatalogs = $request->input('selected_catalogs', []);
         foreach ($selectedCatalogs as $catalogId) {
-            $catalog = Catalog::findOrFail($catalogId);
+            $catalog = Category::findOrFail($catalogId);
             $catalog->delete();
         }
         return redirect()->back();
+    }
+
+    public function handleBulkActions(Request $request)
+    {
+        $selectedCatalogs = $request->input('selected_catalogs', []);
+        $action = $request->input('action');
+        if ($action === 'edit') {
+            return $this->editSelected($request);
+        } elseif ($action === 'delete') {
+            return $this->destroySelected($selectedCatalogs);
+        }
     }
 }

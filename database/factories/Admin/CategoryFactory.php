@@ -3,10 +3,11 @@
 namespace Database\Factories\Admin;
 
 use App\Models\Admin\Catalog;
+use App\Models\Admin\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Category>
+ * @extends Factory<Category>
  */
 class CategoryFactory extends Factory
 {
@@ -18,7 +19,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'catalog_id' => Catalog::all()->random()->id,
+            'parent_id' => null,
+            'lvl' => null,
             'title' => fake()->sentence,
             'description' => fake()->paragraph,
             'seo_title' => fake()->sentence,

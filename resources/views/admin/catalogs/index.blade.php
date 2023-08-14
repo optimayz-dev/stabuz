@@ -110,7 +110,7 @@
                                     </div>
                                 </li>
 
-                            </li>
+
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -129,10 +129,17 @@
                                     <p class="text-muted font-13 m-b-30">
                                         Catalogs {{--<code>$().DataTable();</code>--}}
                                     </p>
+                                    <form action="{{ route('admin.catalog.handleBulkActions') }}" method="post">
+                                        @method('patch')
+                                        @csrf
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
                                     <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                                         <thead>
                                         <tr>
-
                                             <th>Select</th>
                                             <th>Position</th>
                                             <th>Title</th>
@@ -144,6 +151,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         @foreach($catalogs as $catalog)
                                             <tr>
                                                 <td>
@@ -158,21 +166,17 @@
                                                 <td>{{ Str::limit($catalog->meta_keywords, 50) }}</td>
                                                 <td>{{ $catalog->created_at }}</td>
                                                 <td>
-                                                    <form action="{{ route('admin.catalog.destroy', $catalog->id) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this catalog?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="btn-wrapper">
-                                        <button type="button" class="btn btn-primary" onclick="editSelected()"><i class="fa fa-edit"></i> Edit Selected</button>
-                                        <button type="button" class="btn btn-danger" onclick="deleteSelected()"><i class="fa fa-trash"></i> Delete Selected</button>
-                                    </div>
-
+                                        <div class="btn-wrapper">
+                                            <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
+                                            <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -181,6 +185,6 @@
             </div>
             </div>
         </div>
-    </div>
+
 
 @endsection

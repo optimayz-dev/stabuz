@@ -32,9 +32,8 @@ body{
 /*}*/
 
 .action-btn{
-    padding-top: 15px;
     margin-left: 15px;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: .5px;
     border-bottom: 1px solid ;
     background: unset;
@@ -98,3 +97,13 @@ body{
 .links nav .flex{
     display: none !important;
 }
+
+.change-locale{
+    border: none;
+    background: white;
+    border-bottom: 1px solid;
+    color: #5A738E;
+    width: 37px;
+    font-size: 14px;
+}
+

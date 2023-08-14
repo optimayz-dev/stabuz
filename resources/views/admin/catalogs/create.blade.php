@@ -142,6 +142,7 @@
                                             <tr>
 
                                                 <th>Title</th>
+                                                <th>Description</th>
                                                 <th>Soe title</th>
                                                 <th>Seo Description</th>
                                                 <th>Meta keywords</th>
@@ -152,6 +153,11 @@
                                                     <td>
                                                         <label>
                                                             <input type="text" value="" name="addmore[0][title]" class="updateSelected" placeholder="Название">
+                                                        </label>
+                                                    </td>
+                                                    <td>
+                                                        <label>
+                                                            <textarea name="addmore[0][description]" class="updateSelected" placeholder="Описание"></textarea>
                                                         </label>
                                                     </td>
                                                     <td>
@@ -204,6 +210,9 @@
                         '</td>' +
                         '<td>' +
                             '<input type="text" name="addmore['+i+'][seo_title]" placeholder="Seo назавние" class="updateSelected" />' +
+                        '</td>' +
+                        '<td>' +
+                            '<textarea type="text" name="addmore['+i+'][description]" placeholder="Описание" class="updateSelected"></textarea>' +
                         '</td>' +
                         '<td>' +
                             '<textarea type="text" name="addmore['+i+'][seo_description]" placeholder="Seo Описание" class="updateSelected"></textarea>' +

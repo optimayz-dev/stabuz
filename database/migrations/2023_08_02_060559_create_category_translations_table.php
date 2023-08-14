@@ -20,7 +20,6 @@ return new class extends Migration
             // Foreign key to the main model
             $table->foreignIdFor(Category::class);
             $table->unique(['category_id', 'locale']);
-
             // Actual fields you want to translate
             $table->string('title');
             $table->string('slug')->unique();

@@ -20,9 +20,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'subcategory_id' => Subcategory::all()->random()->id,
             'brand_id' => Brand::all()->random()->id,
-            'category_id' => Category::all()->random()->id,
             'title' => fake()->sentence,
             'description' => fake()->paragraph,
             'seo_title' => fake()->sentence,

@@ -136,7 +136,7 @@
                                             <table id="datatable-checkbox{{ $catalog->id }}" class="table table-striped table-bordered bulk_action" style="width:100%">
                                                 <thead>
                                                 <tr>
-                                                    <th>
+
                                                     <th>Select</th>
 
                                                     <th>Position</th>
@@ -148,7 +148,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($catalog->categories as $category)
+                                                @foreach($catalog->children as $category)
                                                     <tr>
 
                                                         <th>
@@ -171,10 +171,7 @@
                                                 <button type="submit" class="action-btn"><i class="fa fa-edit"></i> edit selected</button>
                                             </div>
                                         </form>
-
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

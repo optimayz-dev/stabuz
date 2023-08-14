@@ -23,19 +23,7 @@ class Product extends Model implements TranslatableContract
         'meta_keywords',
         'description',
     ];
-
-
-    public function subcategory()
-    {
-        return $this->belongsTo(Subcategory::class);
-    }
-
-    public function price()
-    {
-        return $this->hasOne(Price::class);
-    }
-
-    public function tags()
+        public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
@@ -43,6 +31,14 @@ class Product extends Model implements TranslatableContract
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class, 'attribute_products');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+    public function price(){
+            return $this->hasOne(Price::class);
     }
 
 //    public function toSearchableArray()

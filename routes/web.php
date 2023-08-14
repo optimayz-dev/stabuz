@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -20,9 +21,8 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function (){
-    Route::get('/', function () {
-        return view('welcome');
-    });
+
+    Route::get('/', [HomeController::class, 'homepage']);
 });
 
 //Route::get('login', [AuthController::class, 'showLogin'])->name('login');

@@ -17,14 +17,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class)
-                ->constrained()
-                ->cascadeOnUpdate();
-            $table->foreignIdFor(Subcategory::class)
-                ->constrained()
-                ->cascadeOnUpdate();
             $table->foreignIdFor(Brand::class)
                 ->constrained()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('file_url');
 

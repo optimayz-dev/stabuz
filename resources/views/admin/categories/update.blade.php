@@ -97,20 +97,20 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Plus Table Design</small></h2>
+                        <h2><small>Редактирование категорий {{ $catalog->title }}</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li class="dropdown" style="padding-right: 15px;">
-                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                            {{ $properties['native'] }}
-                                        </a>
-                                    @endforeach
-                                </div>
-                            </li>
+{{--                            <li class="dropdown" style="padding-right: 15px;">--}}
+{{--                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>--}}
+{{--                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
+{{--                                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
+{{--                                            {{ $properties['native'] }}--}}
+{{--                                        </a>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
 
-                            </li>
+
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -126,46 +126,50 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <p class="text-muted font-13 m-b-30">
-                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                                    </p>
                                     @if (session('success'))
                                         <div class="alert alert-success">
                                             {{ session('success') }}
                                         </div>
                                     @endif
-
                                     <form action="{{ route('admin.updateCategories') }}" method="POST">
                                         @csrf
                                         @method('PATCH')
+                                        <p class="text-danger font-13 m-b-30">
+                                            При обновление данных, следует выбрать нужную языковую версию:
+                                            <select name="getlocale" class="change-locale">@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                    <option value="{{ $properties['native'] }}">{{ $properties['native'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </p>
                                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                                             <thead>
                                             <tr>
-                                                <th>Catalog title</th>
-                                                <th>Category title</th>
-                                                <th>Category escription</th>
-                                                <th>Age</th>
-                                                <th>Created date</th>
+                                                <th>id категории</th>
+                                                <th>Название категории </th>
+                                                <th>Описание категории</th>
+                                                <th>Дата добавления</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input readonly value="{{ $catalog->id }}" name="selected_catalogs" class="updateSelected" style="background: none; border: none"></td>
-                                                    <td><input type="text" value="{{ $catalog->title }}" name="title_{{ $catalog->id }}" class="updateSelected"></td>
                                                     @foreach($categories as $category)
                                                         <tr>
-                                                            <td><input readonly value="{{ $category->id }}" name="selected_category[]" class="updateSelected" style="background: none; border: none"></td>
-                                                            <td><input type="text" value="{{ $category->title }}" name="category_title_{{ $category->id }}"></td>
-                                                            <td><textarea name="descr_{{ $category->id }}" id="" cols="30" rows="10">
-                                                                {{ $category->descr }}
-                                                            </textarea></td>
+                                                            <td>
+                                                                <label>
+                                                                    <input readonly value="{{ $category->id }}" name="selected_category[]" class="updateSelected" style="background: none; border: none">
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <label>
+                                                                    <input type="text" value="{{ $category->title }}" name="category_title_{{ $category->id }}" class="updateSelected">
+                                                                </label>
+                                                            </td>
+                                                            <td>
+                                                                <textarea name="description_{{ $category->id }}" id="" cols="30" rows="10" class="updateSelected">{{ $category->description }}</textarea>
+                                                            </td>
+                                                            <td>{{ $category->created_at }}</td>
                                                         </tr>
-
-
                                                     @endforeach
-                                                    <td>61</td>
-                                                    <td>{{ $catalog->created_at }}</td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                         <div>
