@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('locale')->index();
 
             // Foreign key to the main model
-            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(Category::class)
+            ->constrained()->onDelete('cascade');
             $table->unique(['category_id', 'locale']);
             // Actual fields you want to translate
             $table->string('title');

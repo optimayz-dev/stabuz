@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories= Cache::remember('categories', 60, function () {
-            return Category::whereNull('lvl')
+            return Category::where('lvl', 1)
                 ->with('translations', 'children.translations')
                 ->get();
         });
@@ -38,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return \view('admin.categories.create');
     }
 
     /**
@@ -46,7 +46,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = new Category($request->validated());
+        if ($request->hasfile('category_img')){
+            $path = $request->file_url->store('uploads', 'public');
+            $category->file_url = '/storage/'.$path;
+        }
+        $category->save();
+        return redirect()->back()->with('success', 'Категория успешно добавлена');
     }
 
     /**
@@ -143,4 +149,40 @@ class CategoryController extends Controller
         Excel::import(new CategoryImport, request()->file('file'));
         return redirect()->back()->with('success', 'categories was successfully imported');
     }
+
+    public function search(Request $request)
+    {
+        $searchText = $request->query('search');
+
+        $categories = Category::whereHas('translations', function ($query) use ($searchText) {
+            $query->whereNull('parent_id')->where('title', 'like', $searchText . '%');
+        })
+            ->limit(10)
+            ->get(); // Select only id and title fields
+
+        return response()->json($categories);
+    }
+
+    public function categoryBulkActions(Request $request)
+    {
+
+        $selectedCategories = $request->input('selected_category', []);
+        $action = $request->input('action');
+        if ($action === 'edit') {
+            return $this->editCategories($request);
+        } elseif ($action === 'delete') {
+            return $this->destroySelected($selectedCategories);
+        }
+    }
+
+    protected function destroySelected($selectedCategories)
+    {
+        foreach ($selectedCategories as $categoryId) {
+            $category = Category::findOrFail($categoryId);
+            Cache::forget('categories');
+            $category->delete();
+        }
+        return redirect()->back()->with('success', 'Подкатегория удалена');
+    }
+
 }

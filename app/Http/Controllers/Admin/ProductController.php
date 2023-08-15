@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Imports\ProductImport;
+use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Subcategory;
 use Illuminate\Http\Request;
@@ -118,9 +119,9 @@ class ProductController extends Controller
         return response()->json(['products' => $products]);
     }
 
-    public function editBySubcategory(Subcategory $id)
+    public function editBySubcategory(Category $id)
     {
-        $subcategory = Subcategory::with('translations','products.translations')->find($id->id);
+        $subcategory = Category::with('translations','products.translations')->find($id->id);
 
         return view('admin.products.update', compact('subcategory'));
     }

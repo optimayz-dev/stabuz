@@ -106,4 +106,7 @@ body{
     width: 37px;
     font-size: 14px;
 }
+.categories .form-control{
+    width: 90% !important;
+}
 

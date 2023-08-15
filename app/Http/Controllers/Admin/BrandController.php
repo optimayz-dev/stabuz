@@ -21,16 +21,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Cache::remember('brands', 24 * 60 * 60, function () {
-            $brands = Brand::all();
-
-            $locales = config('app.available_locales'); // Предполагается, что у вас есть массив доступных локалей
-            foreach ($brands as $brand) {
-                foreach ($locales as $locale) {
-                    $brand->translateOrNew($locale)->title;
-                    $brand->translateOrNew($locale)->descr;
-                    // Добавьте другие переводимые поля, если необходимо
-                }
-            }
+            $brands = Brand::with('translations')->get();
             return $brands;
         });
         return view('admin.brands.index', ['brands' => $brands]);

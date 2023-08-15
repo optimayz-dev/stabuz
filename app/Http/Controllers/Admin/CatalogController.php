@@ -64,6 +64,14 @@ class CatalogController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateCatalogRequest $request, Category $category)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Category $catalog)
@@ -77,6 +85,7 @@ class CatalogController extends Controller
      */
     protected function editSelected(Request $request)
     {
+
         if ($request->input('selected_catalogs', [])){
             $selectedCatalogs = $request->input('selected_catalogs', []);
             $catalogs = Category::whereIn('id', $selectedCatalogs)->with('translations')->orderBy('id','asc')->get();
@@ -122,13 +131,14 @@ class CatalogController extends Controller
     protected function destroySelected($selectedCatalogs)
     {
         foreach ($selectedCatalogs as $catalogId) {
+            Cache::forget('catalogs');
             $catalog = Category::findOrFail($catalogId);
             $catalog->delete();
         }
         return redirect()->back();
     }
 
-    public function handleBulkActions(Request $request)
+    public function catalogBulkActions(Request $request)
     {
         $selectedCatalogs = $request->input('selected_catalogs', []);
         $action = $request->input('action');
