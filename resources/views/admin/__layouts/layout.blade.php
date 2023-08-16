@@ -26,7 +26,7 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
+                <div class="navbar nav_title">
                     <a href="index.html" class="site_title"><img src="https://stab.uz/thumb/2/9mFw-kR9rAwCQaW95NHAvA/250c90/d/stabuz-logoendgreen.svg" alt="" style="width: 70%;"><!--<i class="fa fa-paw"></i> <span>Stab.uz</span>--></a>
                 </div>
 
