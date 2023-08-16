@@ -1,40 +1,83 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var parentInput = document.getElementById('parent_id');
-    var suggestionsDiv = document.getElementById('suggestions');
+$(document).ready(function () {
+    var parentInput = $('#parent_id');
+    var suggestionsDiv = $('#suggestions');
 
-    parentInput.addEventListener('keyup', function () {
-        var parent_id = parentInput.value;
+    parentInput.keyup(function () {
+        var parent_id = parentInput.val();
 
-        if (parent_id.length >= 3) {
-            axios.get(`/search/categories?search=${parent_id}`)
-                .then(function (response) {
-                    var suggestions = response.data;
+        if (parent_id.length >= 5) {
+            $.get(`/search/categories?search=${parent_id}`)
+                .done(function (response) {
+                    var suggestions = response;
 
                     // Очищаем контейнер с подсказками
-                    suggestionsDiv.innerHTML = '';
+                    suggestionsDiv.empty();
 
                     // Создаем элементы для подсказок и добавляем их в контейнер
-                    suggestions.forEach(function (suggestion) {
-                        var suggestionItem = document.createElement('div');
-                        suggestionItem.classList.add('suggestion');
-                        suggestionItem.textContent = suggestion.title;
+                    $.each(suggestions, function (index, suggestion) {
+                        var suggestionItem = $('<div>')
+                            .addClass('suggestion')
+                            .text(suggestion.title);
 
-
-                        suggestionItem.addEventListener('click', function () {
+                        suggestionItem.click(function () {
                             // Установим выбранный каталог в поле ввода
-                            parentInput.value = suggestion.title;
+                            parentInput.val(suggestion.title);
                             // Установим ID каталога в скрытое поле
-                            document.getElementById('parent_id_hidden').value = suggestion.id;
+                            $('#parent_id_hidden').val(suggestion.id);
                             // Очистим контейнер с подсказками
-                            suggestionsDiv.innerHTML = '';
+                            suggestionsDiv.empty();
                         });
 
-                        suggestionsDiv.appendChild(suggestionItem);
+                        suggestionsDiv.append(suggestionItem);
                     });
                 })
-                .catch(function (error) {
+                .fail(function (error) {
                     console.error(error);
                 });
         }
     });
+    parentInput.on('input', function () {
+        // Очистка контейнера с подсказками
+        suggestionsDiv.empty();
+    });
 });
+
+
+$(document).ready(function () {
+    $('#search_category').keyup(function () {
+        var category_id = $(this).val();
+
+        if (category_id.length >= 5) {
+            $.get(`/search/categories?search=${category_id}`, function (response) {
+                var suggestions = response;
+
+                // Очищаем контейнер с результатами
+                $('#search_results').empty();
+
+                // Создаем и добавляем ссылки с результатами в контейнер
+                $.each(suggestions, function (index, suggestion) {
+                    var suggestionLink = $('<a>')
+                        .attr('href', `/admin/category/${suggestion.id}`) // Замените на правильный путь к роуту
+                        .text(suggestion.title);
+
+                    var suggestionItem = $('<div>')
+                        .addClass('suggestion')
+                        .append(suggestionLink);
+
+                    $('#search_results').append(suggestionItem);
+                });
+            });
+        } else {
+            // Если в поле меньше 5 символов, очищаем контейнер с результатами
+            $('#search_results').empty();
+        }
+    });
+
+    $('#search_category').on('input', function () {
+        // Очищаем контейнер с результатами при изменении значения поля
+        $('#search_results').empty();
+    });
+});
+
+
+

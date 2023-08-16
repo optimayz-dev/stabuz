@@ -49,7 +49,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return \view('admin.categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -57,13 +57,30 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = new Category($request->validated());
-        if ($request->hasfile('category_img')){
-            $path = $request->file_url->store('uploads', 'public');
-            $category->file_url = '/storage/'.$path;
+        $parentId = $request->parent_id_hidden;
+        $parent = Category::find($parentId);
+
+        if (!$parent) {
+            return redirect()->back()->withErrors('Родительская категория не найдена.');
         }
-        $category->save();
+
+        $category = new Category($request->validated());
+
+        $this->setCategoryLevelAndSave($category, $parent, $request);
+
+
         return redirect()->back()->with('success', 'Категория успешно добавлена');
+    }
+
+    protected function setCategoryLevelAndSave($category, $parent, $request)
+    {
+        $category->lvl = $parent->lvl + 1;
+        if ($request->hasfile('category_img')) {
+            $path = $request->category_img->store('uploads', 'public');
+            $category->category_img = '/storage/'.$path;
+        }
+
+        $category->save();
     }
 
     /**
@@ -71,7 +88,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $category->load(['translations', 'products.translations', 'products.price', 'products.attributes.translations', 'products.tags.translations']);
+        return view('admin.categories.view', compact('category'));
     }
 
     /**
@@ -98,51 +116,6 @@ class CategoryController extends Controller
         //
     }
 
-    public function editCategories(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
-    {
-        $catalogId = $request->input('select_catalogs');
-
-            $catalog = Category::findOrFail($catalogId);
-            if ($request->input('selected_category', [])){
-                $categoryId = $request->input('selected_category', []);
-                $categories = Category::whereIn('id', $categoryId)->orderBy('id')->get();
-
-            } else {
-                $categories = Category::all();
-            }
-
-        return view('admin.categories.update', ['catalog' => $catalog,'categories' => $categories]);
-    }
-
-    public function updateCategories(Request $request)
-    {
-        $selectedCategoryIds = $request->input('selected_category', []);
-        $locale = $request->getlocale;
-        app()->setLocale($locale);
-
-        foreach ($selectedCategoryIds as $categoryId) {
-            $category = Category::findOrFail($categoryId);
-
-            // Обновление переводов для каждой категории
-            $category->title = $request->input("category_title_{$categoryId}");
-            $category->description = $request->input("description_{$categoryId}");
-            // Добавьте остальные поля для обновления
-
-            // Сохранение изменений
-            $category->save();
-        }
-
-        // Очистите кеш для обновленных категорий
-        foreach ($selectedCategoryIds as $categoryId) {
-            Cache::forget("category_{$categoryId}");
-        }
-
-        // Очистите кеш для списка категорий
-        Cache::forget('categories');
-
-        return redirect()->route('admin.category.index')->with('success', 'Каталог и категории успешно обновлены');
-    }
-
     public function addByFile()
     {
         $categories = Category::orderBy('id', 'asc')->get();
@@ -166,7 +139,7 @@ class CategoryController extends Controller
         $searchText = $request->query('search');
 
         $categories = Category::whereHas('translations', function ($query) use ($searchText) {
-            $query->whereNull('parent_id')->where('title', 'like', $searchText . '%');
+            $query->where('title', 'like', $searchText . '%');
         })
             ->limit(10)
             ->get(); // Select only id and title fields
@@ -174,27 +147,51 @@ class CategoryController extends Controller
         return response()->json($categories);
     }
 
-    public function categoryBulkActions(Request $request)
+    public function editCategories(Request $request)
     {
-
-        $selectedCategories = $request->input('selected_category', []);
-        $action = $request->input('action');
-        if ($action === 'edit') {
-            return $this->editCategories($request);
-        } elseif ($action === 'delete') {
-            return $this->destroySelected($selectedCategories);
+        $categoriesId = $request->input('selected_category', []);
+        if ($categoriesId){
+            $categories = Category::whereIn('id', $categoriesId)->orderBy('id')->with('translations')->get();
+            return view('admin.categories.update', ['categories' => $categories]);
+        } else {
+            return redirect()->back()->with('error', 'Выберите категории или категрию');
         }
+
     }
 
-    protected function destroySelected($selectedCategories)
+    public function categoryBulkActions(Request $request)
     {
-        foreach ($selectedCategories as $categoryId) {
-            Cache::forget('categories');
-            $category = Category::findOrFail($categoryId);
+        $selectedCategories = $request->input('selected_category', []);
+        $action = $request->input('action');
+        $message = '';
 
-            $category->delete();
+        if ($action === 'edit') {
+           return $this->editCategories($request);
+        } elseif ($action === 'delete') {
+            $message = Category::deleteBulkCategories($selectedCategories);
         }
-        return redirect()->back()->with('success', 'Категория удалена');
+
+        return redirect()->route('admin.category.index')->with('success', $message);
+    }
+
+    public function updateSelected(UpdateCategoryRequest $request)
+    {
+        $locale = $request->getlocale;
+        app()->setLocale($locale);
+
+        $selectedCategories = $request->input('selected_category', []);
+        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
+
+        $categoriesToUpdate = $selectedCategories ? Category::whereIn('id', $selectedCategories)->get() : Category::all();
+
+        foreach ($categoriesToUpdate as $category) {
+            Category::updateCatalogFields($request, $category, $fields, $category->id);
+
+            //Обновляем кэш для каждого каталога
+            Cache::forget("category_{$category->id}");
+        }
+
+        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
     }
 
 }

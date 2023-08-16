@@ -22,7 +22,7 @@ return new class extends Migration
 
             // Actual fields you want to translate
 
-            $table->string('title');
+            $table->string('title')->unique();
             $table->index('title');
             $table->string('slug')->unique();
         });

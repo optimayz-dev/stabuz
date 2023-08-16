@@ -28,7 +28,7 @@ class StoreCategoryRequest extends FormRequest
             'seo_description' => 'required',
             'meta_keywords' => 'required',
             'category_img' => 'mimes:jpg,png,jpeg,webp,svg',
-            'parent_id' => 'required',
+            'parent_id_hidden' => 'required',
         ];
     }
 }

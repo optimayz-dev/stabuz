@@ -25,11 +25,11 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/product', ProductController::class);
             Route::resource('/admin/subcategory', SubcategoryController::class);
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
-            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
+//            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
             Route::get('/search/categories', [CategoryController::class, 'search'])->name('search.categories');
             Route::patch('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
-            Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateCategories'])->name('updateCategories');
+            Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateSelected'])->name('updateCategories');
             Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
             Route::post('/admin/subcategories-import', [SubcategoryController::class, 'import'])->name('subcategories.import');
             Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
@@ -44,9 +44,6 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
             Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
             Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
-            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
+//            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
             Route::patch('/admin/category-bulk-action', [CategoryController::class, 'categoryBulkActions'])->name('category.handleBulkActions');
     });
-
-
-

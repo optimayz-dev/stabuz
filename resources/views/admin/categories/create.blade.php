@@ -50,6 +50,9 @@
                                                    <div class="mb-3">
                                                        <label for="title" class="form-label">
                                                            Введите название
+                                                           @error('title')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                        </label>
                                                        <input type="text" name="title" class="form-control" placeholder="Введите название">
                                                    </div>
@@ -58,6 +61,9 @@
                                                    <div class="mb-3">
                                                        <label for="seo_title" class="form-label">
                                                            Введите seo название
+                                                           @error('title')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                        </label>
                                                        <input type="text" name="seo_title" class="form-control" placeholder="Введите seo название">
                                                    </div>
@@ -66,6 +72,9 @@
                                                    <div class="mb-3">
                                                        <label for="description" class="form-label">
                                                            Введите описание
+                                                           @error('description')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                        </label>
                                                        <textarea class="form-control" name="description" placeholder="Введите описание"></textarea>
                                                    </div>
@@ -74,25 +83,34 @@
                                                     <div class="mb-3">
                                                         <label for="seo_description" class="form-label">
                                                             Введите seo описание
+                                                            @error('title')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                         </label>
-                                                        <textarea class="form-control" name="description" placeholder="Введите seo описание"></textarea>
+                                                        <textarea class="form-control" name="seo_description" placeholder="Введите seo описание"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="meta_keywords" class="form-label">
                                                             Введите мета ключи
+                                                            @error('meta_keywords')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                         </label>
-                                                        <textarea class="form-control" name="description" placeholder="Введите мета ключи"></textarea>
+                                                        <textarea class="form-control" name="meta_keywords" placeholder="Введите мета ключи"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="parent_id">
                                                             Выберите родительский каталог
+                                                            @error('title')
+                                                           <div class=title>{{ $message }}</div>
+                                                           @enderror
                                                         </label>
                                                         <input type="text" name="parent_id" class="form-control" placeholder="Ведите название каталога" id="parent_id">
-                                                        <input type="hidden" name="parent_id" id="parent_id_hidden">
+                                                        <input type="hidden" name="parent_id_hidden" id="parent_id_hidden">
                                                     </div>
                                                     <div id="suggestions"></div>
                                                 </div>

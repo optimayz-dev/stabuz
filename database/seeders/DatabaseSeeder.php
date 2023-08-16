@@ -74,13 +74,13 @@ class DatabaseSeeder extends Seeder
         });
 
 
-         Attribute::factory(1000)->create();
+         Attribute::factory(100)->create();
 
          Tag::factory(5)->create();
 
          Price::factory(500)->create();
 
-         AttributeProduct::factory(1000)->create();
+
 
          ProductTag::factory(50)->create();
 

@@ -5,41 +5,29 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Поиск под-категории</small></h2>
-                        <form action="">
-                            <input type="text" name="search" id="search" class="search-input" placeholder="Введите название под-категории">
+                        <h2><small>Поиск категорий</small></h2>
+                        <form action="" class="search-form">
+                            <input type="text" name="search_category" id="search_category" class="search-input" placeholder="Введите название категории">
                         </form>
-                        <div id="result">
-                            <div id="list-container">
-{{--                                 Здесь будут отображаться результаты поиска --}}
-                            </div>
-                        </div>
-
+                        <div id="search_results"></div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <div class="nav-box">
-                                        <p class="text-muted font-13">
-                                            Под-категории и продукты
-                                        </p>
-                                        <ul class="nav navbar-right">
-                                            <li class="dropdown">
-                                                <!-- Например, для переключения между USD, EUR и RUB -->
-                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true">
-                                                    <i class="fa fa-usd"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'usd']) }}">USD</a>--}}
-                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'eur']) }}">EUR</a>--}}
-                                                    {{--                                                    <a href="{{ route('set_currency', ['currency' => 'rub']) }}">RUB</a>--}}
-                                                </div>
-                                            </li>
+                                        <p class="text-muted font-13 m-b-30">
+                                            Subcategories {{--<code>$().DataTable();</code>--}}
+                                        @if(session('error'))
+                                            <div class="alert alert-error">
+                                                {{ session('error') }}
+                                            </div>
+                                            @endif
+                                            </p>
+                                        <ul class="nav navbar-right panel_toolbox">
                                             <li class="dropdown" style="padding-right: 15px;">
-                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true">
-                                                    <i class="fa fa-language"></i>
-                                                </a>
+                                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                                         <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
@@ -48,79 +36,74 @@
                                                     @endforeach
                                                 </div>
                                             </li>
+
+
                                             <li class="dropdown" style="padding-right: 15px;">
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{ route('admin.product.create') }}">Add products</a>
-                                                    <a class="dropdown-item" href="{{  route('admin.editCategories') }}">Edit</a>
-                                                    <a class="dropdown-item" href="{{ route('admin.products.view') }}">Export/Import</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Add subcategory</a>
                                                 </div>
                                             </li>
+
                                         </ul>
                                     </div>
-
-                                    @foreach($subcategories as $subcategory)
-                                        <div class="table-wrapper">
-
-
-                                        <button class="accordion-toggle action-btn" data-target="{{ $subcategory->id }}" style="">{{ $subcategory->title }}</button>
-                                        <table id="datatable-checkbox{{ $subcategory->id }}" class="table table-striped table-bordered bulk_action table-container" style="width:100%;">
+                                    <form action="{{ route('admin.category.handleBulkActions') }}" method="post">
+                                        @method('patch')
+                                        @csrf
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+                                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                                             <thead>
                                             <tr>
-
-
+                                                <th>Select</th>
                                                 <th>Position</th>
                                                 <th>Title</th>
-                                                <th>Price</th>
-                                                <th>Attributes</th>
-                                                <th>Tags</th>
+                                                <th>Seo Title</th>
+                                                <th>Seo Description</th>
+                                                <th>Meta keywords</th>
                                                 <th>Created date</th>
+                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($subcategory->products as $product)
+
+                                            @foreach($subcategories as $subcategory)
                                                 <tr>
-                                                    <td>{{ $product->id }} / {{ $subcategory->id }}</td>
-                                                    <td>{{ $product->title }}</td>
-                                                    @if ($product->price)
-                                                        <td>{{ $product->price->value }} {{ $product->price->currency_code }}</td>
-                                                    @else
-                                                        <td>No prices available for this product.</td>
-                                                    @endif
                                                     <td>
-                                                        @foreach($product->attributes as $attribute)
-                                                            {{ $attribute->title }} - <span style="font-weight: bold">{{ $attribute->value }}</span> <br>
-                                                        @endforeach
+                                                        <label>
+                                                            <input type="checkbox" name="selected_category[]" value="{{ $subcategory->id }}">
+                                                        </label>
                                                     </td>
-{{--                                                    <td>{{ Str::limit($product->description, 50) }}</td>--}}
+                                                    <td>{{ $subcategory->id }}</td>
+                                                    <td><a href="{{ route('admin.category.show', $subcategory->id) }}">{{ $subcategory->title }}</a></td>
+                                                    <td>{{ $subcategory->seo_title }}</td>
+                                                    <td>{{ Str::limit($subcategory->seo_description, 50) }}</td>
+                                                    <td>{{ Str::limit($subcategory->meta_keywords, 50) }}</td>
+                                                    <td>{{ $subcategory->created_at }}</td>
                                                     <td>
-                                                        @foreach($product->tags as $tag)
-                                                            {{ $tag->title }}
-                                                        @endforeach
+
                                                     </td>
-                                                    <td>{{ $product->created_at }}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
                                         <div class="btn-wrapper">
-                                            <a class="action-btn" href="{{ route('admin.edit.subcategory-products', $subcategory->id) }}"><i class="fa fa-edit"></i> edit</a>
-                                            <a class="action-btn" href=""><i class="fa fa-trash"></i> delete</a>
-                                            <a class="action-btn" href="{{ route('admin.products.export', $subcategory->id) }}">export data</a>
+                                            <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
+                                            <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
                                         </div>
-                                        </div>
-                                    @endforeach
+                                    </form>
                                     <div class="links">
                                         {{ $subcategories->links() }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-
+    </div>
 @endsection

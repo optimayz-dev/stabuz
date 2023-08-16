@@ -24,7 +24,7 @@ body{
 .links .shadow-sm
 {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 /*.links .leading-5{*/
@@ -65,6 +65,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 15px;
 }
 .nav-box p{
     margin-bottom: 0;
@@ -108,5 +109,17 @@ body{
 }
 .categories .form-control{
     width: 90% !important;
+}
+.form-control{
+    font-size: 14px;
+}
+.search-form{
+    margin-bottom: 20px;
+}
+.suggestion{
+    padding-left: 140px;
+}
+.suggestion a{
+    font-size: 14px;
 }
 

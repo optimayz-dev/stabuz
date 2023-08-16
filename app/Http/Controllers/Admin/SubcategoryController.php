@@ -21,7 +21,9 @@ class SubcategoryController extends Controller
     public function index()
     {
         $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
-            return Category::with('translations', 'products.translations', 'products.price', 'products.attributes.translations', 'products.tags.translations')->get();
+            return Category::where('lvl', 2)
+                ->with('translations')
+                ->get();
         });
 
         $perPage = 10;
@@ -37,60 +39,10 @@ class SubcategoryController extends Controller
         return view('admin.subcategories.index', ['subcategories' => $paginatedData]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $subcategories = Subcategory::orderBy('id', 'desc')->take(10)->get();
-        return view('admin.subcategories.create', ['subcategories' => $subcategories]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSubcategoryRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSubcategoryRequest $request, Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Subcategory $subcategory)
-    {
-        //
-    }
-
     public function export()
     {
         return Excel::download(new SubcategoryExport, 'subcategory.csv');
     }
-
     public function import()
     {
         Excel::import(new SubcategoryImport, request()->file('file'));
