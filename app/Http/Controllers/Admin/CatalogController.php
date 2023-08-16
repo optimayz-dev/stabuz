@@ -135,7 +135,7 @@ class CatalogController extends Controller
             $catalog = Category::findOrFail($catalogId);
             $catalog->delete();
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Данные удалены');
     }
 
     public function catalogBulkActions(Request $request)

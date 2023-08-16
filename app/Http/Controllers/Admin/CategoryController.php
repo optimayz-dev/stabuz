@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Imports\CategoryImport;
-use App\Models\Admin\Catalog;
+use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -26,11 +27,21 @@ class CategoryController extends Controller
     {
         $categories= Cache::remember('categories', 60, function () {
             return Category::where('lvl', 1)
-                ->with('translations', 'children.translations')
+                ->with('translations')
                 ->get();
         });
 
-        return view('admin.categories.index', ['categories' => $categories]);
+        $perPage = 10;
+        $currentPage = request()->query('page', 1);
+        $paginatedData = new LengthAwarePaginator(
+            $categories->forPage($currentPage, $perPage),
+            $categories->count(),
+            $perPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+
+        return view('admin.categories.index', ['categories' => $paginatedData]);
     }
 
     /**
@@ -178,11 +189,12 @@ class CategoryController extends Controller
     protected function destroySelected($selectedCategories)
     {
         foreach ($selectedCategories as $categoryId) {
-            $category = Category::findOrFail($categoryId);
             Cache::forget('categories');
+            $category = Category::findOrFail($categoryId);
+
             $category->delete();
         }
-        return redirect()->back()->with('success', 'Подкатегория удалена');
+        return redirect()->back()->with('success', 'Категория удалена');
     }
 
 }

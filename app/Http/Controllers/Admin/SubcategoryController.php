@@ -8,7 +8,6 @@ use App\Http\Requests\StoreSubcategoryRequest;
 use App\Http\Requests\UpdateSubcategoryRequest;
 use App\Imports\SubcategoryImport;
 use App\Models\Admin\Category;
-use App\Models\Admin\Subcategory;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
