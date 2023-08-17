@@ -66,15 +66,18 @@ class DatabaseSeeder extends Seeder
             }
         });
 
+        Attribute::factory(100)->create();
 
         // Создаем продукты и связываем их с категориями
         Product::factory(500)->create()->each(function ($product) {
             $categories = Category::inRandomOrder()->limit(rand(2, 3))->get();
             $product->categories()->attach($categories);
+            $attributes = Attribute::inRandomOrder()->get();
+            $product->atttibutes()->attach($attributes);
         });
 
 
-         Attribute::factory(100)->create();
+
 
          Tag::factory(5)->create();
 

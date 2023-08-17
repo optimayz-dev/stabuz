@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Admin\Category;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
@@ -26,12 +27,16 @@ class CategoryImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, 
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
         $category->translateOrNew($locale)->title = $row['title'];
-        $category->translateOrNew($locale)->descr = $row['descr'];
+        $category->translateOrNew($locale)->seo_title = $row['seo_title'];
+        $category->translateOrNew($locale)->description = $row['description'];
+        $category->translateOrNew($locale)->seo_description = $row['seo_description'];
+        $category->translateOrNew($locale)->meta_keywords = $row['seo_description'];
 
         // Опционально, если у вас есть другие поля, которые не зависят от языка
-        $category->catalog_id = $row['catalog_id'];
+        $category->parent_id = $row['parent_id'];
+        $category->lvl = $row['lvl'];
 
-
+        Cache::forget('categories');
         // Сохраняем в базу
         $category->save();
     }

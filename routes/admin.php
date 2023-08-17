@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImportCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use Illuminate\Support\Facades\Route;
@@ -27,14 +29,16 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
 //            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
+
             Route::get('/search/categories', [CategoryController::class, 'search'])->name('search.categories');
+            Route::get('/search/attribute', [AttributeController::class, 'getAttributes'])->name('search.attribute');
+
             Route::patch('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
             Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateSelected'])->name('updateCategories');
-            Route::get('/admin/subcategories-export', [SubcategoryController::class, 'export'])->name('subcategories.export');
-            Route::post('/admin/subcategories-import', [SubcategoryController::class, 'import'])->name('subcategories.import');
+
             Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
             Route::post('/admin/category-import', [CategoryController::class, 'import'])->name('categories.import');
-            Route::get('/admin/category-export', [CategoryController::class, 'addByFile'])->name('categories.addByFile');
+
             Route::get('/admin/category-get-export', [CategoryController::class, 'export'])->name('categories.export');
             Route::get('/admin/product-export', [ProductController::class, 'viewTable'])->name('products.view');
             Route::get('/admin/products-get-export/{id}', [ProductController::class, 'export'])->name('products.export');
@@ -46,4 +50,8 @@ use Illuminate\Support\Facades\Route;
             Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
 //            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
             Route::patch('/admin/category-bulk-action', [CategoryController::class, 'categoryBulkActions'])->name('category.handleBulkActions');
+
+            Route::get('/admin/category-import', [ImportCategoryController::class, 'viewImport'])->name('category.viewImport');
+            Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');
+            Route::post('/admin/category-import', [ImportCategoryController::class, 'import'])->name('category.import');
     });

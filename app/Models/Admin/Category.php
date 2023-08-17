@@ -35,6 +35,11 @@ class Category extends Model implements TranslatableContract
         return $this->belongsToMany(Product::class);
     }
 
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class);
+    }
+
     public static function deleteBulkCategories($selectedCategories)
     {
         foreach ($selectedCategories as $categoryId) {

@@ -10,11 +10,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ProductExport implements FromCollection, WithHeadings, WithCustomCsvSettings
 {
-    protected $subcategoryId;
+    protected $categoryId;
 
-    public function __construct($subcategoryId)
+    public function __construct($categoryId)
     {
-        $this->subcategoryId = $subcategoryId;
+        $this->categoryId = $categoryId;
     }
 
     /**
@@ -24,16 +24,18 @@ class ProductExport implements FromCollection, WithHeadings, WithCustomCsvSettin
     {
         $locale = App::getLocale();
         return Product::join('product_translations', 'products.id', '=', 'product_translations.product_id')
+            ->join('category_product', 'products.id', '=', 'category_product.product_id')
+            ->join('categories', 'category_product.category_id', '=', 'categories.id')
             ->where('product_translations.locale', $locale)
-            ->where('products.subcategory_id', $this->subcategoryId) // Фильтруем по подкатегории
-            ->select('products.id', 'products.subcategory_id', 'product_translations.title', 'product_translations.descr', 'products.file_url')
-            ->orderBy('id')
+            ->where('categories.id', $this->categoryId)
+            ->select('products.id', 'categories.id as category_id', 'product_translations.title', 'product_translations.seo_title', 'product_translations.description', 'product_translations.seo_description', 'product_translations.meta_keywords', 'product_translations.attribute_title', 'product_translations.attribute_value', 'products.file_url')
+            ->orderBy('products.id')
             ->get();
     }
 
     public function headings(): array
     {
-        return ["id", "subcategory_id", "title", "descr", "file_url"];
+        return ["id", "category_id", "title", "seo_title", "description", "seo_description", "meta_keywords", "attribute_title", "attribute_value", "file_url"];
     }
 
     public function getCsvSettings(): array

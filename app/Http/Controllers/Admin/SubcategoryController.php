@@ -38,14 +38,4 @@ class SubcategoryController extends Controller
 
         return view('admin.subcategories.index', ['subcategories' => $paginatedData]);
     }
-
-    public function export()
-    {
-        return Excel::download(new SubcategoryExport, 'subcategory.csv');
-    }
-    public function import()
-    {
-        Excel::import(new SubcategoryImport, request()->file('file'));
-        return back();
-    }
 }

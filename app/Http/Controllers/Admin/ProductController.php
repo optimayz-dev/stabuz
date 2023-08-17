@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Imports\ProductImport;
+use App\Models\Admin\Attribute;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Subcategory;
+use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -47,7 +49,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $tags = Tag::with('translations')->get();
+        return view('admin.products.create', [
+            'tags' => $tags
+        ]);
     }
 
     /**
@@ -55,7 +60,9 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $selectedAttributes = $request->input('attributes', []);
+        $product = new Product($request->validated());
+        $product->attributes()->attach($selectedAttributes);
     }
 
     /**
@@ -96,9 +103,9 @@ class ProductController extends Controller
         return back();
     }
 
-    public function export($subcategoryId)
+    public function export($categoryId)
     {
-        return Excel::download(new ProductExport($subcategoryId), 'product.xlsx');
+        return Excel::download(new ProductExport($categoryId), 'product.xlsx');
     }
 
     public function viewTable()

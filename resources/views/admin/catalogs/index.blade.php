@@ -36,15 +36,13 @@
                                                         @endforeach
                                                     </div>
                                                 </li>
-
-
                                                 <li class="dropdown" style="padding-right: 15px;">
                                                     <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                         <a class="dropdown-item" href="{{ route('admin.catalog.create') }}">Add catalog</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.category.viewImport') }}">Export/Import</a>
                                                     </div>
                                                 </li>
-
                                             </ul>
                                     </div>
                                     <form action="{{ route('admin.category.handleBulkActions') }}" method="post">
@@ -65,11 +63,9 @@
                                             <th>Seo Description</th>
                                             <th>Meta keywords</th>
                                             <th>Created date</th>
-                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-
                                         @foreach($catalogs as $catalog)
                                             <tr>
                                                 <td>
@@ -83,9 +79,6 @@
                                                 <td>{{ Str::limit($catalog->seo_description, 50) }}</td>
                                                 <td>{{ Str::limit($catalog->meta_keywords, 50) }}</td>
                                                 <td>{{ $catalog->created_at }}</td>
-                                                <td>
-
-                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -93,6 +86,7 @@
                                         <div class="btn-wrapper">
                                             <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
                                             <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
+                                            <a class="action-btn" href="{{ route('admin.products.export', $catalog->id) }}"><i class="fa fa-cloud-download"></i> export data</a>
                                         </div>
                                     </form>
                                 </div>

@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\CategoryExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Imports\CategoryImport;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
-use Maatwebsite\Excel\Facades\Excel;
 
 
 class CategoryController extends Controller
@@ -66,13 +60,12 @@ class CategoryController extends Controller
 
         $category = new Category($request->validated());
 
-        $this->setCategoryLevelAndSave($category, $parent, $request);
-
+        $this->saveCategoryWithLevel($category, $parent, $request);
 
         return redirect()->back()->with('success', 'Категория успешно добавлена');
     }
 
-    protected function setCategoryLevelAndSave($category, $parent, $request)
+    protected function saveCategoryWithLevel($category, $parent, $request)
     {
         $category->lvl = $parent->lvl + 1;
         if ($request->hasfile('category_img')) {
@@ -88,51 +81,28 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $category->load(['translations', 'products.translations', 'products.price', 'products.attributes.translations', 'products.tags.translations']);
-        return view('admin.categories.view', compact('category'));
+        $cacheKey = 'category_' . $category->id;
+
+        $cachedData = Cache::remember($cacheKey, 24 * 60 * 60, function () use ($category) {
+            $category->load([
+                'translations',
+                'children.translations',
+                'products' => function ($query) {
+                    $query->with([
+                        'translations',
+                        'price',
+                        'attributes.translations',
+                        'tags.translations',
+                    ]);
+                },
+            ]);
+
+            return $category;
+        });
+
+        return view('admin.categories.view', compact('cachedData'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
-
-    public function addByFile()
-    {
-        $categories = Category::orderBy('id', 'asc')->get();
-
-        return view('admin.categories.export',['categories' => $categories]);
-    }
-
-    public function export()
-    {
-
-        return Excel::download(new CategoryExport(), 'categories.xlsx');
-    }
-    public function import()
-    {
-        Excel::import(new CategoryImport, request()->file('file'));
-        return redirect()->back()->with('success', 'categories was successfully imported');
-    }
 
     public function search(Request $request)
     {
@@ -190,7 +160,6 @@ class CategoryController extends Controller
             //Обновляем кэш для каждого каталога
             Cache::forget("category_{$category->id}");
         }
-
         return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
     }
 

@@ -147,6 +147,7 @@
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="{{ route('admin.category.create') }}">Add category</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.category.viewImport') }}">Export/Import</a>
                                                 </div>
                                             </li>
 
@@ -198,6 +199,7 @@
                                     <div class="btn-wrapper">
                                         <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
                                         <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
+                                        <a class="action-btn" href="{{ route('admin.products.export', $category->id) }}"><i class="fa fa-cloud-download"></i> export data</a>
                                     </div>
                                 </form>
                                 <div class="links">

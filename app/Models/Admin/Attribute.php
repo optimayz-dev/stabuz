@@ -16,4 +16,9 @@ class Attribute extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Product::class, 'attribute_products');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
