@@ -10,7 +10,7 @@ class AttributeController extends Controller
 {
     public function getAttributes(Request $request)
     {
-        $category_id = $request->query('category_id');
+        $category_id = $request->query('search');
 
         $category = Category::findOrFail($category_id);
         $attributes = $category->attributes; // Предполагается, что у вас есть метод attributes() в модели Category

@@ -44,13 +44,12 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('#search_attribute').keyup(function () {
+    $('#search_category').keyup(function () {
 
-        var category_id = $('#parent_id_hidden').val();
-        var attributeVal = $('#search_attribute').val()
+        var categoryVal = $('#search_category').val()
 
-        if (attributeVal.length >= 5) {
-            $.get(`/search/categories?search=${category_id}`, function (response) {
+        if (categoryVal.length >= 5) {
+            $.get(`/search/categories?search=${categoryVal}`, function (response) {
                 var suggestions = response;
 
                 // Очищаем контейнер с результатами
@@ -81,50 +80,6 @@ $(document).ready(function () {
     });
 });
 
-
-$(document).ready(function () {
-
-    var suggestionsDiv = $('#attribute');
-
-    parentInput.keyup(function () {
-        var parent_id = parentInput.val();
-
-        if (parent_id.length >= 5) {
-            $.get(`/search/attribute?search=${parent_id}`)
-                .done(function (response) {
-                    var suggestions = response;
-
-                    // Очищаем контейнер с подсказками
-                    suggestionsDiv.empty();
-
-                    // Создаем элементы для подсказок и добавляем их в контейнер
-                    $.each(suggestions, function (index, suggestion) {
-                        var suggestionItem = $('<div>')
-                            .addClass('suggestion')
-                            .text(suggestion.title);
-
-                        suggestionItem.click(function () {
-                            // Установим выбранный каталог в поле ввода
-                            parentInput.val(suggestion.title);
-                            // Установим ID каталога в скрытое поле
-                            $('#parent_id_hidden').val(suggestion.id);
-                            // Очистим контейнер с подсказками
-                            suggestionsDiv.empty();
-                        });
-
-                        suggestionsDiv.append(suggestionItem);
-                    });
-                })
-                .fail(function (error) {
-                    console.error(error);
-                });
-        }
-    });
-    parentInput.on('input', function () {
-        // Очистка контейнера с подсказками
-        suggestionsDiv.empty();
-    });
-});
 
 
 

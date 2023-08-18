@@ -24,7 +24,6 @@ return new class extends Migration
 
             $table->string('title')->unique();
             $table->index('title');
-            $table->string('slug')->unique();
         });
     }
 

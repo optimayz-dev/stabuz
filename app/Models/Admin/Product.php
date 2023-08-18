@@ -13,7 +13,9 @@ class Product extends Model implements TranslatableContract
 {
     use HasFactory, Searchable, Translatable;
 
-
+    protected $fillable = [
+        'file_url'
+    ];
     public $translatedAttributes = [
         'title',
         'attribute_value',
@@ -26,11 +28,6 @@ class Product extends Model implements TranslatableContract
         public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
-    }
-
-    public function attributes()
-    {
-        return $this->belongsToMany(Attribute::class, 'attribute_products');
     }
 
     public function categories()

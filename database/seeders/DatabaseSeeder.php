@@ -40,8 +40,17 @@ class DatabaseSeeder extends Seeder
         // Создаем корневые категории
         $rootCategories = Category::factory()->count(5)->create();
 
+// Создаем атрибуты
+        $attributes = Attribute::factory(100)->create();
+
+// Связываем атрибуты с категориями
+        foreach ($rootCategories as $rootCategory) {
+            $attributesForCategory = $attributes->random(rand(2, 3));
+            $rootCategory->attributes()->attach($attributesForCategory);
+        }
+
 // Создаем дочерние категории для каждой корневой категории
-        $rootCategories->each(function ($rootCategory) {
+        $rootCategories->each(function ($rootCategory) use ($attributes) {
             $rootCategory->lvl = null; // Уровень 0 для корневых категорий
             $rootCategory->save();
 
@@ -66,20 +75,17 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        Attribute::factory(100)->create();
-
-        // Создаем продукты и связываем их с категориями
-        Product::factory(500)->create()->each(function ($product) {
+// Создаем продукты и связываем их с категориями
+        Product::factory(500)->create()->each(function ($product) use ($attributes) {
             $categories = Category::inRandomOrder()->limit(rand(2, 3))->get();
             $product->categories()->attach($categories);
-            $attributes = Attribute::inRandomOrder()->get();
-            $product->atttibutes()->attach($attributes);
         });
 
 
 
 
-         Tag::factory(5)->create();
+
+        Tag::factory(5)->create();
 
          Price::factory(500)->create();
 

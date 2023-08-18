@@ -34,71 +34,92 @@
                         <p class="text-muted font-13 m-b-30">
                             При добавлении данных обратите внимание и выберите нужную локаль. <span class="text-danger">Данные будут добавляться на текущем языке</span>
                         </p>
-                        <form action="" method="post" novalidate enctype="multipart/form-data" class="categories">
+                        <form action="{{ route('admin.product.store') }}" method="post" novalidate enctype="multipart/form-data" class="categories">
+                            @csrf
                                 <div class="row-wrapper">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="input-wrapper">
                                                 <label for="seo_title">
+                                                    @error('seo_title')
+                                                    <div class=seo_title>{{ $message }}</div>
+                                                    @enderror
                                                     <input type="text" name="seo_title" class="form-control" placeholder="Введите Seo название">
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="seo_description">
+                                                    @error('seo_description')
+                                                    <div class=seo_description>{{ $message }}</div>
+                                                    @enderror
                                                     <textarea class="resizable_textarea form-control" name="seo_description" placeholder="Seo описание продукта"></textarea>
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="meta_keywords">
+                                                    @error('meta_keywords')
+                                                    <div class=meta_keywords>{{ $message }}</div>
+                                                    @enderror
                                                     <textarea class="resizable_textarea form-control" name="meta_keywords" placeholder="Мета ключи продукта"></textarea>
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="attribute_title">
+                                                    @error('attribute_title')
+                                                    <div class=attribute_title>{{ $message }}</div>
+                                                    @enderror
                                                     <input type="text" name="attribute_title" class="form-control" placeholder="Название аттрибута">
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="file_url">
-                                                    <input type="file" name="file_url[]" >
+                                                    @error('file_url')
+                                                    <div class=file_url>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="file" name="file_url" >
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="input-wrapper">
                                                 <label>
-                                                    <input type="text" name="parent_id" class="form-control" placeholder="Ведите название каталога" id="parent_id">
+                                                    @error('parent_id_hidden')
+                                                    <div class=parent_id_hidden>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="parent_id" class="form-control" placeholder="Ведите название категории" id="parent_id">
                                                     <input type="hidden" name="parent_id_hidden" id="parent_id_hidden">
                                                 </label>
                                                 <div id="suggestions"></div>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="title">
+                                                    @error('title')
+                                                    <div class=title>{{ $message }}</div>
+                                                    @enderror
                                                     <input class="form-control" name="title" placeholder="Название продукта" required="required">
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="description">
+                                                    @error('description')
+                                                    <div class=description>{{ $message }}</div>
+                                                    @enderror
                                                     <textarea class="resizable_textarea form-control" name="description" placeholder="Описание продукта"></textarea>
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
                                                 <label for="attribute_title">
+                                                    @error('attribute_value')
+                                                    <div class=attribute_value>{{ $message }}</div>
+                                                    @enderror
                                                     <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута">
                                                 </label>
-                                            </div>
-                                            <div class="input-wrapper">
-                                                <label for="search_attribute">
-                                                    <input type="text" id="search_attribute" name="search_attribute">
-                                                </label>
-                                                <div id="attribute"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <button type="submit" class="btn btn-success btn-sm">сохранить</button>
                         </form>
-
                     </div>
                 </div>
             </div>

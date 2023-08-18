@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Imports\ProductImport;
 use App\Models\Admin\Attribute;
+use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Subcategory;
@@ -50,6 +51,7 @@ class ProductController extends Controller
     public function create()
     {
         $tags = Tag::with('translations')->get();
+        $brands = Brand::with('translations')->get();
         return view('admin.products.create', [
             'tags' => $tags
         ]);
@@ -60,10 +62,29 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $selectedAttributes = $request->input('attributes', []);
+        // Создаем новый продукт на основе валидированных данных
         $product = new Product($request->validated());
-        $product->attributes()->attach($selectedAttributes);
+
+        if ($request->hasFile('file_url')) {
+            $path = $request->file_url->store('uploads', 'public');
+            $product->file_url = '/storage/' . $path;
+        }
+
+        $product->brand_id = 1;
+
+        // Сохраняем продукт
+        $product->save();
+
+        // Получаем ID выбранной категории из формы (замените 'parent_id_hidden' на ваше поле ввода)
+        $categoryId = $request->input('parent_id_hidden');
+
+        // Связываем продукт с выбранной категорией через pivot таблицу
+        $product->categories()->attach($categoryId);
+
+        return redirect()->back();
     }
+
+
 
     /**
      * Display the specified resource.
