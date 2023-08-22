@@ -8,38 +8,40 @@ use Illuminate\Support\Facades\Session;
 
 class AttributeService
 {
-    public function createOrUpdateAttributes($data, $action)
+    public function createOrUpdateAttributes($attributesData)
     {
         $createdAttributes = [];
-        $existingAttributeTitles = [];
 
-        foreach ($data as $item) {
-            $title = $item['title'];
-            $value = $item['value'];
+        foreach ($attributesData as $data) {
+            $locale = app()->getLocale();
+            $title = $data['title'];
 
-            $existingAttribute = AttributeTranslation::where('title', $title)->first();
+            $existingAttribute = Attribute::whereHas('translations', function ($query) use ($locale, $title) {
+                $query->where('locale', $locale)->where('title', $title);
+            })->first();
 
             if ($existingAttribute) {
-                $existingAttributeTitles[] = $title;
-            } else {
-                $attribute = new Attribute();
-                $attribute->title = $title;
-                $attribute->value = $value;
-                $attribute->save();
-
-                $createdAttributes[] = $attribute;
+                $errorMessage = 'Атрибут с названием "' . $data['title'] . '" уже существует.';
+                Session::flash('attribute_error', $errorMessage);
+                return false;
             }
+
+            $attribute = new Attribute();
+            $attribute->save();
+
+            $attributeTranslation = new AttributeTranslation();
+            $attributeTranslation->attribute_id = $attribute->id;
+            $attributeTranslation->locale = $locale;
+            $attributeTranslation->title = $data['title'];
+            $attributeTranslation->value = $data['value'];
+            $attributeTranslation->save();
+
+            $createdAttributes[] = $attribute;
         }
 
-        if (!empty($existingAttributeTitles)) {
-            $errorMessage = 'Атрибуты с названиями "' . implode('", "', $existingAttributeTitles) . '" уже существуют.';
-            Session::flash('attribute_error', $errorMessage);
-            return false;
-        }
-
+        // Сбросить кэш для группы атрибутов
         Cache::forget('attributes');
 
-        $successMessage = ($action === 'create') ? 'Атрибуты успешно созданы.' : 'Атрибуты успешно обновлены.';
         return $createdAttributes;
     }
 }

@@ -34,7 +34,7 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
+                                        При обновление данных, следует выбрать нужную языковую версию.
                                     </p>
                                     @if (session('success'))
                                         <div class="alert alert-success">

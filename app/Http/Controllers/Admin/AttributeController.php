@@ -64,7 +64,7 @@ class AttributeController extends Controller
 
     public function store(AttributeStoreRequest $request, AttributeService $attributeService)
     {
-        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'), 'create');
+        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'));
 
         if ($createdAttributes === false) {
             return back();
@@ -77,7 +77,8 @@ class AttributeController extends Controller
 
     public function bulkUpdate(AttributeStoreRequest $request, AttributeService $attributeService)
     {
-        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'), 'update');
+        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'));
+
 
         if ($createdAttributes === false) {
             return back();
