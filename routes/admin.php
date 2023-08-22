@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/subcategory', SubcategoryController::class);
             Route::resource('/admin/tags', TagController::class);
             Route::resource('/admin/attribute', AttributeController::class);
+            Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');
+            Route::patch('/admin/attributes/bulk-update', [AttributeController::class, 'bulkUpdate'])->name('attribute.bulkUpdate');
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
 //            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');

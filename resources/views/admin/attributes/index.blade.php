@@ -49,7 +49,7 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('admin.category.handleBulkActions') }}" method="post">
+                                    <form action="{{ route('admin.attribute.bulkActions') }}" method="post">
                                         @method('patch')
                                         @csrf
                                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">

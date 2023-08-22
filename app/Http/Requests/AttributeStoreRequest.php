@@ -21,22 +21,17 @@ class AttributeStoreRequest extends FormRequest
      */
     public function rules()
     {
-        // Массив правил для каждого поля в зависимости от индекса (названия) добавляемого атрибута
-        $rules = [];
-
-        foreach ($this->input('addmore') as $index => $data) {
-            $rules["addmore.{$index}.title"] = 'required|unique:attributes,title';
-            $rules["addmore.{$index}.value"] = 'required';
-        }
-
-        return $rules;
+        return [
+            'addmore.*.title' => 'required|unique:attribute_translations,title',
+            'addmore.*.value' => 'required',
+        ];
     }
     public function messages()
     {
         return [
-            'addmore.*.title.required' => 'Поле title обязательно для заполнения.',
-            'addmore.*.title.unique' => 'Выберите другое название атрибута, такой атрибут уже существует.',
-            'addmore.*.value.required' => 'Поле value обязательно для заполнения.',
+            'addmore.*.title.required' => 'Поле "Название" обязательно для заполнения.',
+            'addmore.*.title.unique' => 'Атрибут с таким названием уже существует.',
+            'addmore.*.value.required' => 'Поле "Значение" обязательно для заполнения.',
         ];
     }
 }

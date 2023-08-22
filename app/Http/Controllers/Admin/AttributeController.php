@@ -7,7 +7,9 @@ use App\Http\Requests\AttributeStoreRequest;
 use App\Models\Admin\Attribute;
 use App\Models\Admin\AttributeTranslation;
 use App\Models\Admin\Category;
+use App\Services\AttributeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class AttributeController extends Controller
@@ -24,7 +26,9 @@ class AttributeController extends Controller
 
     public function index()
     {
-        $attributes = Attribute::with('translations')->get();
+        $attributes = Cache::remember('attributes', 60 * 60 * 24, function (){
+           return Attribute::with('translations')->get();
+        });
 
         return view('admin.attributes.index', ['attributes' => $attributes]);
     }
@@ -33,36 +37,55 @@ class AttributeController extends Controller
     {
         return view('admin.attributes.create');
     }
-
-    public function store(Request $request)
+    public function editAttributes(Request $request)
     {
-        foreach ($request->addmore as $key => $value) {
-            // Проверяем, существует ли атрибут с таким названием
-            $existingAttribute = AttributeTranslation::where('title', $value['title'])->first();
+        $attributeId = $request->input('selected_attribute', []);
+        if ($attributeId){
+            $attributes = Attribute::whereIn('id', $attributeId)->orderBy('id')->with('translations')->get();
+            return view('admin.attributes.update', ['attributes' => $attributes]);
+        } else {
+            return redirect()->back()->with('error', 'Выберите атрибут');
+        }
+    }
+    public function bulkActions(Request $request)
+    {
+        $selectedAttributes = $request->input('selected_attribute', []);
+        $message = '';
+        $action = $request->input('action');
+        if ($action == 'edit'){
+            return $this->editAttributes($request);
+        } elseif($action == 'delete') {
+            $message = Attribute::deleteBulkAttributes($selectedAttributes);
+        }
+        return redirect()->back()->with('success', $message);
+    }
 
-            if ($existingAttribute) {
-                // Если атрибут с таким названием уже существует, вернуть ошибку
-                $errorMessage = 'Атрибут с названием "' . $value['title'] . '" уже существует.';
-                Session::flash('attribute_error', $errorMessage);
-                return back();
-            }
 
-            $attribute = new Attribute();
-            $attribute->title = $value['title'];
-            $attribute->value = $value['value'];
-            $attribute->save();
+
+    public function store(AttributeStoreRequest $request, AttributeService $attributeService)
+    {
+        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'), 'create');
+
+        if ($createdAttributes === false) {
+            return back();
         }
 
-        // Возвращаем ответ пользователю с информацией о созданных атрибутах
-        return redirect()->back()->with([
+        return redirect()->route('admin.attribute.index')->with([
             'success' => 'Атрибуты успешно созданы.',
         ]);
     }
 
-
-    public function update()
+    public function bulkUpdate(AttributeStoreRequest $request, AttributeService $attributeService)
     {
+        $createdAttributes = $attributeService->createOrUpdateAttributes($request->input('addmore'), 'update');
 
+        if ($createdAttributes === false) {
+            return back();
+        }
+
+        return redirect()->route('admin.attribute.index')->with([
+            'success' => 'Атрибуты успешно обновлены.',
+        ]);
     }
 
 }
