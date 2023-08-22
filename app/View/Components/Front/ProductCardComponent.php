@@ -18,8 +18,8 @@ class ProductCardComponent extends Component
      */
     public function __construct()
     {
-        $this->products = Cache::remember('actual_products', 60, function (){
-            return Product::with('translations', 'price', 'brand.translations', 'tags.translations')->limit(5)->get();
+        $this->products = Cache::remember('main_products', 60, function (){
+            return Product::with('translations', 'brand.translations', 'tags.translations')->orderBy('created_at', 'desc')->limit(10)->get();
         });
     }
 

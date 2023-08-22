@@ -10,7 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
-    public $translatedAttributes = ['title', 'value'];
+    public $translatedAttributes = [
+        'title',
+        'value'
+    ];
 
     public function products()
     {

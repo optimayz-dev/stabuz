@@ -86,7 +86,7 @@
                                         <div class="btn-wrapper">
                                             <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
                                             <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
-                                            <a class="action-btn" href="{{ route('admin.products.export', $catalog->id) }}"><i class="fa fa-cloud-download"></i> export data</a>
+                                            <a class="action-btn" href="{{ route('admin.category.export') }}"><i class="fa fa-cloud-download"></i> export data</a>
                                         </div>
                                     </form>
                                 </div>

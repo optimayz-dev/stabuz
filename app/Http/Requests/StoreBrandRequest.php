@@ -22,9 +22,12 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            app()->getLocale().'_title' => 'required',
-            app()->getLocale().'_descr' => 'required',
-            'file_url' => ['required', 'mimes:jpg,png,svg,jpeg']
+            'title' => 'required',
+            'seo_title' => 'required',
+            'seo_description' => 'required',
+            'description' => 'required',
+            'meta_keywords' => 'required',
+            'brand_logo' => ['required', 'mimes:jpg,png,svg,jpeg'],
         ];
     }
 }

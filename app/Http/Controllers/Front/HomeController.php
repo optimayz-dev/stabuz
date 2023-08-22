@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Brand;
+use App\Models\Admin\Tag;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
@@ -13,32 +14,29 @@ class HomeController extends Controller
 {
     public function homepage()
     {
-        $catalogs = Cache::remember('categories', 60, function () {
-            return Category::whereNull('lvl')
-                ->with('translations', 'children.translations')
+
+        $brands = Cache::remember('brands', 24 * 60 * 60, function () {
+            $brands = Brand::with('translations')->get();
+            return $brands;
+        });
+
+        $catalogs = Cache::remember('catalogs', 60, function () {
+            return Category::with('translations')
+                ->whereNull('lvl')
                 ->get();
         });
-        $brands = Cache::remember('brands', 60, function (){
-            return Brand::with('translations')->get();
+
+        $tags = Cache::remember('tags_with_products', now()->addHours(1), function () {
+            return Tag::with(['translations','products.translations' => function ($query) {
+                    $query->take(5); // Ограничиваем количество продуктов до 5
+                }])
+                ->get();
         });
 
-        $tagsToSelect = ['featured', 'popular', 'new', 'discounted'];
-
-        $productsByTag = [];
-
-        foreach ($tagsToSelect as $tagName) {
-            $taggedProducts = Product::with(['tags.translations' => function ($query) use ($tagName) {
-                $query->where('title', $tagName);
-            }])->limit(5)->get();
-
-
-            $productsByTag[$tagName] = $taggedProducts;
-        }
-
         return view('front.home', [
-            "catalogs" => $catalogs,
             "brands" => $brands,
-            "productsByTag" => $productsByTag
+            "catalogs" => $catalogs,
+            "tags" => $tags
         ]);
     }
 

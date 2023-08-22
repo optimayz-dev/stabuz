@@ -53,6 +53,6 @@ class CategoryImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, 
 
     public function batchSize(): int
     {
-        return 500;
+        return 1000;
     }
 }

@@ -12,13 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('product_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Product::class);
-            $table->decimal('value', 10, 2);
-            $table->decimal('old_price', 10, 2)->nullable();
-            $table->string('currency_code');
-            $table->unique(['product_id', 'currency_code']);
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('product_galleries');
     }
 };

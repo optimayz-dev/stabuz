@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Admin\Subcategory;
+use App\Models\Admin\Category;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,7 +13,7 @@ class SubcategoryExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Subcategory::select('category_id', 'title', 'descr')->get();
+        return Category::select('category_id', 'title', 'description')->get();
     }
 
     /**
@@ -23,6 +23,6 @@ class SubcategoryExport implements FromCollection, WithHeadings
      */
     public function headings(): array
     {
-        return ["category_id", "title", "descr"];
+        return ["category_id", "title", "description"];
     }
 }

@@ -10,6 +10,7 @@ use App\Models\Admin\Brand;
 use App\Models\Admin\BrandCategory;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
+use App\Models\Admin\CurrencyCode;
 use App\Models\Admin\Price;
 use App\Models\Admin\Product;
 use App\Models\Admin\ProductTag;
@@ -35,7 +36,7 @@ class DatabaseSeeder extends Seeder
         ]);
          Brand::factory(10)->create();
 
-         BrandCategory::factory(20)->create();
+
 
         // Создаем корневые категории
         $rootCategories = Category::factory()->count(5)->create();
@@ -81,17 +82,9 @@ class DatabaseSeeder extends Seeder
             $product->categories()->attach($categories);
         });
 
-
-
-
-
         Tag::factory(5)->create();
-
-         Price::factory(500)->create();
-
-
-
-         ProductTag::factory(50)->create();
+        CurrencyCode::factory(3)->create();
+        Price::factory(500)->create();
 
     }
 }

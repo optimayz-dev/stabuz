@@ -18,7 +18,6 @@
                                 </div>
                             </li>
 
-                            </li>
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -42,7 +41,6 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-
                                     <form action="{{ route('admin.catalog.store') }}" method="POST">
                                         @csrf
                                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">

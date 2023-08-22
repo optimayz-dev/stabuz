@@ -22,8 +22,15 @@ class CatalogController extends Controller
                 ->whereNull('lvl')
                 ->get();
         });
-
         return view('admin.catalogs.index', compact('catalogs'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('admin.catalogs.create');
     }
 
     /**

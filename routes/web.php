@@ -23,6 +23,7 @@ Route::group([
 ], function (){
 
     Route::get('/', [HomeController::class, 'homepage']);
+    Route::get('/product/{slug}', []);
 });
 
 //Route::get('login', [AuthController::class, 'showLogin'])->name('login');

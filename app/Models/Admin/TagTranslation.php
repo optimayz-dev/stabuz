@@ -8,22 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TagTranslation extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory;
 
     public $timestamps = false;
 
     protected $fillable = [
         'title',
-        'slug',
     ];
-
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'title',
-                'onUpdate' => true,
-            ]
-        ];
-    }
 }

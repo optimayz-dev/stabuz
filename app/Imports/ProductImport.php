@@ -25,14 +25,17 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
         $product->translateOrNew($locale)->title = $row['title'];
-        $product->translateOrNew($locale)->descr = $row['descr'];
-
+        $product->translateOrNew($locale)->seo_title = $row['seo_title'];
+        $product->translateOrNew($locale)->description = $row['description'];
+        $product->translateOrNew($locale)->seo_description = $row['seo_description'];
+        $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'];
         // Опционально, если у вас есть другие поля, которые не зависят от языка
-        $product->subcategory_id = $row['subcategory_id'];
+        $categoryId = $row['category_id'];
         $product->file_url = $row['file_url'];
-
-        // Сохраняем в базу
         $product->save();
+        $product->categories()->attach($categoryId);
+        // Сохраняем в базу
+
     }
 
     public function getCsvSettings(): array

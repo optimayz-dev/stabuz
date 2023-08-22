@@ -10,13 +10,17 @@ use App\Imports\ProductImport;
 use App\Models\Admin\Attribute;
 use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
+use App\Models\Admin\CurrencyCode;
+use App\Models\Admin\Price;
 use App\Models\Admin\Product;
+use App\Models\Admin\ProductGallery;
 use App\Models\Admin\Subcategory;
 use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -40,6 +44,7 @@ class ProductController extends Controller
 //            ['path' => Paginator::resolveCurrentPath()]
 //        );
 
+
         return view('admin.products.index');
     }
 
@@ -51,9 +56,10 @@ class ProductController extends Controller
     public function create()
     {
         $tags = Tag::with('translations')->get();
-        $brands = Brand::with('translations')->get();
+        $currencies = CurrencyCode::all();
         return view('admin.products.create', [
-            'tags' => $tags
+            'tags' => $tags,
+            'currencies' => $currencies
         ]);
     }
 
@@ -64,24 +70,40 @@ class ProductController extends Controller
     {
         // Создаем новый продукт на основе валидированных данных
         $product = new Product($request->validated());
-
         if ($request->hasFile('file_url')) {
             $path = $request->file_url->store('uploads', 'public');
             $product->file_url = '/storage/' . $path;
         }
-
         $product->brand_id = 1;
 
         // Сохраняем продукт
         $product->save();
+        $images = $request->input('images', []);
+        foreach ($images as $image){
+            $product_gallery = new ProductGallery();
+            $path = $image->store('/uploads/products', 'public');
+            $product_gallery->image = '/storage/' .$path;
+            $product_gallery->save();
+        }
 
-        // Получаем ID выбранной категории из формы (замените 'parent_id_hidden' на ваше поле ввода)
+        // Получаем ID выбранной категории из формы
         $categoryId = $request->input('parent_id_hidden');
+        // Получаем ID выбранных тегов из формы
+        $tagsId = $request->input('tag_id', []);
+        $price = new Price();
+        $price->value = $request->input('price');
+        $price->product_id = $product->id;
+        $price->currency_code_id = $request->input('currency_code');
+        $price->save();
 
         // Связываем продукт с выбранной категорией через pivot таблицу
         $product->categories()->attach($categoryId);
+        // Связываем продукт с выбранными тегами через pivot таблицу
+        foreach ($tagsId as $tagId){
+            $product->tags()->attach($tagId);
+        }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Продукт успешно добавлен');
     }
 
 
@@ -131,7 +153,7 @@ class ProductController extends Controller
 
     public function viewTable()
     {
-        $products = Product::with('translations')->orderBy('updated_at')->get();
+        $products = Product::with('translations')->orderBy('updated_at', 'desc')->limit(30)->get();
 
         return view('admin.products.export-import', ['products' => $products]);
     }
@@ -163,6 +185,7 @@ class ProductController extends Controller
             $product->title = $request->input('title_'.$id);
             $product->descr = $request->input('descr_'.$id);
             if ($request->hasFile('file_url_'.$id)) {
+                File::delete($product->image);
                 $path = $request->file('file_url_'.$id)->store('uploads', 'public');
                 $product->file_url = '/storage/'.$path;
             }
@@ -176,7 +199,7 @@ class ProductController extends Controller
         $subcategory_id = $request->input('subcategory_id', []);
         foreach ($subcategory_id as $id)
         {
-            $subcategory = Subcategory::findOrFail($id);
+            $subcategory = Category::findOrFail($id);
             $subcategory->destroy();
         }
         return redirect()->back()->with('success', 'Subcategory products deleted successfully');

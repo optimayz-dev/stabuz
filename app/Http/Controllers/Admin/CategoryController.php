@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Admin\Price;
+use App\Models\Admin\Product;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
 use Illuminate\Http\Request;
@@ -90,13 +92,11 @@ class CategoryController extends Controller
                 'products' => function ($query) {
                     $query->with([
                         'translations',
-                        'price',
-                        'attributes.translations',
+                        'prices.currency',
                         'tags.translations',
                     ]);
                 },
             ]);
-
             return $category;
         });
 
@@ -139,9 +139,10 @@ class CategoryController extends Controller
            return $this->editCategories($request);
         } elseif ($action === 'delete') {
             $message = Category::deleteBulkCategories($selectedCategories);
+            Cache::forget('catalogs');
         }
 
-        return redirect()->route('admin.category.index')->with('success', $message);
+        return redirect()->back()->with('success', $message);
     }
 
     public function updateSelected(UpdateCategoryRequest $request)

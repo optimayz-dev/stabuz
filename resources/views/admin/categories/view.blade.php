@@ -95,17 +95,18 @@
                                     <tr>
                                         <td>{{ $product->id }} / {{ $cachedData->id }}</td>
                                         <td>{{ $product->title }}</td>
-                                        @if ($product->price)
-                                            <td>{{ $product->price->value }} {{ $product->price->currency_code }}</td>
-                                        @else
-                                            <td>No prices available for this product.</td>
-                                        @endif
                                         <td>
-                                            @foreach($product->attributes as $attribute)
-                                                {{ $attribute->title }} - <span style="font-weight: bold">{{ $attribute->value }}</span> <br>
+                                            @foreach($product->prices as $price)
+                                            @if ($price)
+                                                    {{ $price->value }} {{ $price->currency->currency_code }}<br>
+                                            @else
+                                                No prices available for this product.
+                                            @endif
+
                                             @endforeach
                                         </td>
-                                        {{--                                                    <td>{{ Str::limit($product->description, 50) }}</td>--}}
+                                        <td>
+                                        </td>
                                         <td>
                                             @foreach($product->tags as $tag)
                                                 {{ $tag->title }}

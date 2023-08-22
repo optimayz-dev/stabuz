@@ -14,6 +14,11 @@ class Price extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function currency()
+    {
+        return $this->belongsTo(CurrencyCode::class, 'currency_code_id');
+    }
+
     public function getOldPriceAttribute()
     {
         return $this->attributes['old_price'];

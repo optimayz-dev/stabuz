@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImportCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\TagController;
 use Illuminate\Support\Facades\Route;
 
     Route::middleware('guest:admin')->group(function (){
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/category', CategoryController::class);
             Route::resource('/admin/product', ProductController::class);
             Route::resource('/admin/subcategory', SubcategoryController::class);
+            Route::resource('/admin/tags', TagController::class);
+            Route::resource('/admin/attribute', AttributeController::class);
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
 //            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
@@ -40,6 +43,7 @@ use Illuminate\Support\Facades\Route;
             Route::post('/admin/category-import', [CategoryController::class, 'import'])->name('categories.import');
 
             Route::get('/admin/category-get-export', [CategoryController::class, 'export'])->name('categories.export');
+
             Route::get('/admin/product-export', [ProductController::class, 'viewTable'])->name('products.view');
             Route::get('/admin/products-get-export/{id}', [ProductController::class, 'export'])->name('products.export');
             Route::post('/admin/products-import', [ProductController::class, 'import'])->name('products.import');
@@ -54,4 +58,5 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/category-import', [ImportCategoryController::class, 'viewImport'])->name('category.viewImport');
             Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');
             Route::post('/admin/category-import', [ImportCategoryController::class, 'import'])->name('category.import');
+           // Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
     });

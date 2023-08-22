@@ -34,6 +34,11 @@
                         <p class="text-muted font-13 m-b-30">
                             При добавлении данных обратите внимание и выберите нужную локаль. <span class="text-danger">Данные будут добавляться на текущем языке</span>
                         </p>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <form action="{{ route('admin.product.store') }}" method="post" novalidate enctype="multipart/form-data" class="categories">
                             @csrf
                                 <div class="row-wrapper">
@@ -115,7 +120,40 @@
                                                     <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута">
                                                 </label>
                                             </div>
+                                            <div class="input-wrapper">
+                                                <label style="display: flex; width: 90%;">
+                                                    @error('price')
+                                                    <div class=price>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="price" class="form-control" placeholder="Цена">
+                                                    @error('currency_code')
+                                                    <div class=currency_code>{{ $message }}</div>
+                                                    @enderror
+                                                    <select name="currency_code" class="form-control">
+                                                        @foreach($currencies as $currency)
+                                                            <option value="{{ $currency->id }}">{{ $currency->currency_code }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </label>
+                                            </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <h2>
+                                                <small>Теги</small>
+                                            </h2>
+                                        </div>
+                                        @foreach($tags as $tag)
+                                        <div class="col-md-2">
+                                            <div class="input-wrapper">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label" for="">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
+                                                            {{ $tag->title }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             <button type="submit" class="btn btn-success btn-sm">сохранить</button>

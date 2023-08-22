@@ -122,14 +122,14 @@
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
                                 <div class="nav-box">
-                                    <p class="text-muted font-13 m-b-30">
-                                        Categories {{--<code>$().DataTable();</code>--}}
-                                        @if(session('error'))
-                                            <div class="alert alert-error">
+                                    <div >
+                                        <p class="text-muted font-13 m-b-30">Categories {{--<code>$().DataTable();</code>--}}</p>
+                                            @if(session('error'))
+                                                <div class="alert alert-error">
                                                 {{ session('error') }}
                                             </div>
                                         @endif
-                                        </p>
+                                    </div>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li class="dropdown" style="padding-right: 15px;">
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -171,7 +171,6 @@
                                             <th>Seo Description</th>
                                             <th>Meta keywords</th>
                                             <th>Created date</th>
-                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -189,9 +188,6 @@
                                                 <td>{{ Str::limit($category->seo_description, 50) }}</td>
                                                 <td>{{ Str::limit($category->meta_keywords, 50) }}</td>
                                                 <td>{{ $category->created_at }}</td>
-                                                <td>
-
-                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -199,7 +195,7 @@
                                     <div class="btn-wrapper">
                                         <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
                                         <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
-                                        <a class="action-btn" href="{{ route('admin.products.export', $category->id) }}"><i class="fa fa-cloud-download"></i> export data</a>
+                                        <a class="action-btn" href="{{ route('admin.category.export') }}"><i class="fa fa-cloud-download"></i> export data</a>
                                     </div>
                                 </form>
                                 <div class="links">

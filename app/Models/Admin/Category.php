@@ -4,13 +4,8 @@ namespace App\Models\Admin;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
@@ -43,10 +38,9 @@ class Category extends Model implements TranslatableContract
     public static function deleteBulkCategories($selectedCategories)
     {
         foreach ($selectedCategories as $categoryId) {
-            Cache::forget('categories');
             $category = Category::findOrFail($categoryId);
-
             $category->delete();
+            Cache::forget('categories');
         }
         return 'Категории успешно удалены';
     }

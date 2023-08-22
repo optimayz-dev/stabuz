@@ -24,10 +24,14 @@ class Brand extends Model implements TranslatableContract
         'meta_keywords',
     ];
 
-    public function brandCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function products()
     {
-        return $this->hasMany(BrandCategory::class);
+        return $this->hasMany(Product::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_brand');
+    }
 
 }

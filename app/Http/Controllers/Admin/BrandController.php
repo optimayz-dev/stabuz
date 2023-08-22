@@ -40,18 +40,14 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        $brand_data = [
-            $path = $request->file_url->store('uploads', 'public'),
-            'file_url' => '/storage/' . $path,
-            app()->getLocale() => [
-                'title' => $request->input(app()->getLocale().'_title'),
-                'descr' => $request->input(app()->getLocale().'_descr'),
-            ],
-        ];
-
-
-        Brand::create($brand_data);
-        return redirect()->back()->with('success', 'brand add success');
+        $brand = new Brand($request->validated());
+        if ($request->hasFile('brand_logo')){
+            $path = $request->brand_logo->store('uploads', 'public');
+            $brand->brand_logo = '/storage/' . $path;
+        }
+        Cache::forget('brands');
+        $brand->save();
+        return redirect()->back()->with('success', 'Бренд успешно добавлен');
     }
 
     /**
@@ -59,7 +55,8 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        $brand->load(['translations','products.translations']);
+        return view('admin.brands.view', compact('brand'));
     }
 
     /**
@@ -89,5 +86,11 @@ class BrandController extends Controller
     public function import(Request $request){
         Excel::import(new BrandImport(), request()->file('file'));
         return redirect()->back()->with('success', 'data was successful imported');
+    }
+
+    public function brandCategories(Brand $brand)
+    {
+        $brand->load(['translations', 'categories.translations']);
+        return view('admin.brands.categories');
     }
 }

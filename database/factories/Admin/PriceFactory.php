@@ -2,11 +2,13 @@
 
 namespace Database\Factories\Admin;
 
+use App\Models\Admin\CurrencyCode;
+use App\Models\Admin\Price;
 use App\Models\Admin\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin\Price>
+ * @extends Factory<Price>
  */
 class PriceFactory extends Factory
 {
@@ -15,20 +17,16 @@ class PriceFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Price::class;
+
     public function definition(): array
     {
         return [
-            'product_id' => $this->getNextProductId(),
             'value' => $this->faker->randomFloat(2, 10, 1000),
-            'old_price' => $this->faker->randomFloat(2, 5, 1000),
-            'currency_code' => $this->faker->randomElement(['UZS']),
+            'old_price' => $this->faker->optional()->randomFloat(2, 5, 20),
+            'product_id' => Product::inRandomOrder()->first()->id, // Используем существующий продукт из сида
+            'currency_code_id' => CurrencyCode::inRandomOrder()->first()->id, // Используем существующую валюту из сида
         ];
-    }
 
-    public function getNextProductId()
-    {
-        static $productId = 1;
-
-        return $productId++;
     }
 }
