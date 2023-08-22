@@ -6,7 +6,7 @@ services:
       - ./:/var/www
       - ./_docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - "81:80"
     container_name: stab_nginx
     depends_on:
       - app
