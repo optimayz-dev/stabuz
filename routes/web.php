@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Front\CategoryController;
 use App\Http\Controllers\Front\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -24,6 +25,7 @@ Route::group([
 
     Route::get('/', [HomeController::class, 'homepage']);
     Route::get('/product/{slug}', []);
+    Route::get('/catalog/{slug}', [CategoryController::class, 'catalogView'])->name('catalog.view');
 });
 
 //Route::get('login', [AuthController::class, 'showLogin'])->name('login');

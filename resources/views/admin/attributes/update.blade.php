@@ -25,8 +25,6 @@
                                 <form action="{{ route('admin.attribute.bulkUpdate') }}" method="POST">
                                     @method('PATCH')
                                     @csrf
-                                    <input type="hidden" name="action" value="update">
-
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
                                         При обновление данных, следует выбрать нужную языковую версию:
@@ -57,7 +55,7 @@
                                             <tr>
                                                 <td>
                                                     <label>
-                                                        <input type="hidden" name="addmore[0][id]" value="{{ $attribute->id }}">
+                                                        <input type="hidden" name="addmore[{{ $attribute->id }}][id]" value="{{ $attribute->id }}">
                                                         <input type="text" value="{{ $attribute->title }}" name="addmore[{{ $attribute->id }}][title]" class="updateSelected" placeholder="Название">
                                                     </label>
                                                 </td>

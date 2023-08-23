@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Admin\Price;
-use App\Models\Admin\Product;
 use Illuminate\Pagination\Paginator;
 use App\Models\Admin\Category;
 use Illuminate\Http\Request;

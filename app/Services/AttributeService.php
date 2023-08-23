@@ -1,44 +1,41 @@
 <?php
 
 namespace App\Services;
+use App\Http\Requests\AttributeStoreRequest;
 use App\Models\Admin\Attribute;
-use App\Models\Admin\AttributeTranslation;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class AttributeService
 {
-    public function createOrUpdateAttributes($attributesData)
+    public function createOrUpdateAttributes($attributesData, AttributeStoreRequest $request)
     {
         $createdAttributes = [];
-
         foreach ($attributesData as $data) {
-            $locale = app()->getLocale();
-            $title = $data['title'];
+            if (!(isset($data['id']))) {
+                // Создание нового атрибута
+                $attribute = new Attribute([
+                    'title' => $data['title'],
+                    'value' => $data['value']
+                ]);
+                $attribute->save();
+                $createdAttributes[] = $attribute;
+            } else {
+                $locale = $request->input('getlocale');
+                app()->setLocale($locale);
+                // Поиск атрибута по ID
+                $id = $data['id'];
+                $existingAttribute = Attribute::find($id);
 
-            $existingAttribute = Attribute::whereHas('translations', function ($query) use ($locale, $title) {
-                $query->where('locale', $locale)->where('title', $title);
-            })->first();
-
-            if ($existingAttribute) {
-                $errorMessage = 'Атрибут с названием "' . $data['title'] . '" уже существует.';
-                Session::flash('attribute_error', $errorMessage);
-                return false;
+                if ($existingAttribute) {
+                    // Если атрибут существует, обновляем его
+                    $existingAttribute->update([
+                        'title' => $data['title'],
+                        'value' => $data['value']
+                    ]);
+                    $createdAttributes[] = $existingAttribute;
+                }
             }
-
-            $attribute = new Attribute();
-            $attribute->save();
-
-            $attributeTranslation = new AttributeTranslation();
-            $attributeTranslation->attribute_id = $attribute->id;
-            $attributeTranslation->locale = $locale;
-            $attributeTranslation->title = $data['title'];
-            $attributeTranslation->value = $data['value'];
-            $attributeTranslation->save();
-
-            $createdAttributes[] = $attribute;
         }
-
         // Сбросить кэш для группы атрибутов
         Cache::forget('attributes');
 

@@ -14,29 +14,25 @@ class HomeController extends Controller
 {
     public function homepage()
     {
-
-        $brands = Cache::remember('brands', 24 * 60 * 60, function () {
-            $brands = Brand::with('translations')->get();
-            return $brands;
+        $cacheDuration = 24 * 60 * 60;
+        $brands = Cache::remember('brands', $cacheDuration, function () {
+            return Brand::select('id', 'brand_logo')->limit(10)->get();
         });
 
-        $catalogs = Cache::remember('catalogs', 60, function () {
-            return Category::with('translations')
-                ->whereNull('lvl')
+
+        $catalogs = Cache::remember('catalogs', $cacheDuration, function () {
+            return Category::whereNull('lvl')
+                ->with('translations')
                 ->get();
         });
-
-        $tags = Cache::remember('tags_with_products', now()->addHours(1), function () {
-            return Tag::with(['translations','products.translations' => function ($query) {
-                    $query->take(5); // Ограничиваем количество продуктов до 5
-                }])
-                ->get();
+        $tags = Cache::remember('main_products', $cacheDuration, function () {
+            return Tag::with('translations', 'products.brand.translations', 'products.prices.currency', 'products.translations')->orderBy('created_at', 'desc')->limit(10)->get();
         });
 
         return view('front.home', [
             "brands" => $brands,
             "catalogs" => $catalogs,
-            "tags" => $tags
+            'tags' => $tags
         ]);
     }
 

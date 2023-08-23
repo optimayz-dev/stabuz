@@ -102,7 +102,7 @@
                     <aside class="tab-links">
                         <ul class="parent-categories">
                             @foreach($catalogs as $catalog)
-                                <li class="parent-category-item"><a href="#!" data-tab="tab{{ $catalog->id }}">{{ $catalog->title }} <span class="icon-arrR"></span></a></li>
+                                <li class="parent-category-item"><a href="{{ route('catalog.view', $catalog->slug) }}" data-tab="tab{{ $catalog->id }}">{{ $catalog->title }} <span class="icon-arrR"></span></a></li>
                             @endforeach
                         </ul>
                     </aside>
@@ -111,10 +111,10 @@
                             @foreach($catalog->children as $category)
                                 <div class="sidebar-tab category-item main-categories" id="tab{{ $catalog->id }}">
                                     <div class="main-category-item">
-                                        <a href="#!" class="category-title">{{ $category->title }}</a>
+                                        <a href="{{  $category->slug }}" class="category-title">{{ $category->title }}</a>
                                         @foreach($category->children as $subcategory)
                                             <div class="children-categories">
-                                                <div class="children-category-item"><a href="#!">{{ $subcategory->title }}</a></div>
+                                                <div class="children-category-item"><a href="{{ $subcategory->slug }}">{{ $subcategory->title }}</a></div>
                                             </div>
                                         @endforeach
                                     </div>

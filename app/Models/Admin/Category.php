@@ -19,6 +19,7 @@ class Category extends Model implements TranslatableContract
 
     public $translatedAttributes = [
         'title',
+        'slug',
         'description',
         'seo_title',
         'seo_description',

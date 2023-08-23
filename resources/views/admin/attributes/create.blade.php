@@ -48,7 +48,6 @@
                                     @endif
                                     <form action="{{ route('admin.attribute.store') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="action" value="create">
                                         <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
                                             <thead>
                                             <tr>
