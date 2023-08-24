@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Plus Table Design</small></h2>
+{{--                        <h2><small>Plus Table Design</small></h2>--}}
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -35,43 +35,37 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        Product export-import
+                                        Импорт продуктов
                                     </p>
-                                    <h3 style="padding: 8px 0; border-top: 2px solid darkgray">Products</h3>
-                                    <table id="datatable-checkbox1" class="table table-striped table-bordered bulk_action" style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Position</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            {{--                                                    <th>Age</th>--}}
-                                            <th>Created date</th>
-                                            {{--                                            <th>Действие</th>--}}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($products as $product)
-                                            <tr>
-                                                <td></td>
-                                                <td>{{ $product->id }}</td>
-                                                <td>{{ $product->title }}</td>
-                                                <td>{{ Str::limit($product->descr, 50) }}</td>
-                                                {{--                                                        <td>61</td>--}}
-                                                <td>{{ $product->created_at }}</td>
-                                                {{--                                                <td>редактировать</td>--}}
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+{{--                                    <h4 style="padding: 8px 0; border-top: 2px solid darkgray">Продукты</h4>--}}
+                                    <div class="alert alert-secondary" role="alert">
+                                        <p style="font-size: 15px;">
+                                            При импорте продуктов важно учесть целосность колонок, которые были изначально при экспорте!<br>
+                                            Если колонка не будет найдена, система вернет ошибку о недостающей колонки.
+                                            Так же данные будут импортированы на текущем языке <span class="text-danger" style="font-size: 17px;">{{ app()->getLocale() }}</span>
+                                        </p>
+                                    </div>
+                                    @if(session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    @if(isset($errors) && count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="btn-wrapper" style="display: flex">
                                         <form action="{{ route('admin.products.import') }}" method="post" enctype="multipart/form-data" style="margin-right: 20px">
                                             @csrf
                                             <input type="file" name="file">
                                             <button type="submit" class="btn btn-success">import data</button>
                                         </form>
-                                        <a class="btn btn-danger" href="{{ route('admin.products.export', 1) }}">export data</a>
-
+{{--                                        <a class="btn btn-danger" href="{{ route('admin.products.export', 1) }}">export data</a>--}}
                                     </div>
                                 </div>
                             </div>

@@ -30,21 +30,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-//        $subcategories = Cache::remember('subcategories', 24 * 60 * 60, function () {
-//            return Subcategory::with('translations', 'products.translations')->get();
-//        });
-//
-//        $perPage = 10;
-//        $currentPage = request()->query('page', 1);
-//        $paginatedData = new LengthAwarePaginator(
-//            $subcategories->forPage($currentPage, $perPage),
-//            $subcategories->count(),
-//            $perPage,
-//            $currentPage,
-//            ['path' => Paginator::resolveCurrentPath()]
-//        );
-
-
         return view('admin.products.index');
     }
 
@@ -142,8 +127,14 @@ class ProductController extends Controller
 
     public function import()
     {
-        Excel::import(new ProductImport(), request()->file('file'));
-        return back();
+        $errors = [];
+        Excel::import(new ProductImport($errors), request()->file('file'));
+
+        if (!empty($errors)) {
+            return back()->with('errors', $errors);
+        }
+
+        return back()->with('success', 'Продукты успешно импортированы');
     }
 
     public function export($categoryId)
