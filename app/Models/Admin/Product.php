@@ -59,12 +59,10 @@ class Product extends Model implements TranslatableContract
             $product->translateOrNew($locale)->description = $row['description'];
             $product->translateOrNew($locale)->seo_description = $row['seo_description'];
             $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'];
-            // Опционально, если у вас есть другие поля, которые не зависят от языка
             $categoryId = $row['category_id'];
             $product->file_url = $row['file_url'];
             $product->save();
             $product->categories()->attach($categoryId);
-            // Сохраняем в базу
        }
     }
 

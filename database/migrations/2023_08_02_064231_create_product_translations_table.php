@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unique(['product_id', 'locale']);
 
             // Actual fields you want to translate
-
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('attribute_title')->nullable();

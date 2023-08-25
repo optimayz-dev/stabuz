@@ -48,7 +48,7 @@
                                             <tr>
 
                                                 <th>Title</th>
-                                                <th>Soe title</th>
+                                                <th>Seo title</th>
                                                 <th>Description</th>
                                                 <th>Seo Description</th>
                                                 <th>Meta keywords</th>
