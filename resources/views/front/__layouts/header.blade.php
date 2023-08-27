@@ -102,7 +102,7 @@
                     <aside class="tab-links">
                         <ul class="parent-categories">
                             @foreach($catalogs as $catalog)
-                                <li class="parent-category-item"><a href="{{ route('catalog.view', $catalog->slug) }}" data-tab="tab{{ $catalog->id }}">{{ $catalog->title }} <span class="icon-arrR"></span></a></li>
+                                <li class="parent-category-item"><a href="{{ route('category.view', $catalog->slug) }}" data-tab="tab{{ $catalog->id }}">{{ $catalog->title }} <span class="icon-arrR"></span></a></li>
                             @endforeach
                         </ul>
                     </aside>

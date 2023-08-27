@@ -26,6 +26,6 @@ class Price extends Model
 
     public function getNewPriceAttribute()
     {
-        return $this->attributes['price'];
+        return $this->attributes['value'];
     }
 }

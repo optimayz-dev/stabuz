@@ -56,4 +56,9 @@ class Category extends Model implements TranslatableContract
         Cache::forget('category_{$category->id}');
     }
 
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'category_brand');
+    }
+
 }
