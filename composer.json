@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.1",
         "ext-pdo": "*",
-        "algolia/algoliasearch-client-php": "^1.27",
         "astrotomic/laravel-translatable": "^11.12",
         "cviebrock/eloquent-sluggable": "^10.0",
         "guzzlehttp/guzzle": "^7.2",
