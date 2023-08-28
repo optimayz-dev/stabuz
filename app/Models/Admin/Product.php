@@ -8,11 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-use Laravel\Scout\Searchable;
+//use Laravel\Scout\Searchable;
 
 class Product extends Model implements TranslatableContract
 {
-    use HasFactory, Searchable, Translatable;
+    use HasFactory, Translatable;
 
     protected $fillable = [
         'file_url'
