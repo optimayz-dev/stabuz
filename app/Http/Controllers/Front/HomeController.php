@@ -20,11 +20,11 @@ class HomeController extends Controller
         });
 
 
-        $catalogs = Cache::remember('catalogs', $cacheDuration, function () {
-            return Category::whereNull('lvl')
+//        $catalogs = Cache::remember('catalogs', $cacheDuration, function () {
+            $catalogs = Category::whereNull('lvl')
                 ->with('translations')
                 ->get();
-        });
+//        });
         $tags = Cache::remember('main_products', $cacheDuration, function () {
             return Tag::with('translations', 'products.brand.translations', 'products.prices.currency', 'products.translations')->orderBy('created_at', 'desc')->limit(10)->get();
         });
