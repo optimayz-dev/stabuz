@@ -11,11 +11,11 @@ class CategoryController extends Controller
 {
     public function categoriesView()
     {
-        $catalogs = Cache::remember('catalogs', 60, function () {
-            return Category::with('translations')
+//        $catalogs = Cache::remember('catalogs', 60, function () {
+            $catalogs = Category::with('translations')
                 ->whereNull('lvl')
                 ->get();
-        });
+//        });
         return view('front.categories', compact('catalogs'));
     }
     public function categoryView($slug)
