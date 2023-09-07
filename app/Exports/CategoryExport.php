@@ -12,13 +12,16 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class CategoryExport implements FromCollection, WithHeadings, WithCustomCsvSettings
 {
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
         $locale = App::getLocale();
 
-        $category = Category::query()->with('translations')->get();
+        $category = Category::query()->with('translations')
+            ->whereHas('translations', function ($query) use ($locale) {
+                $query->where('locale', $locale);
+            })->orderBy('id')->get();
 
         $selectRows = $category->map(function ($user) {
             return collect($user->toArray())
