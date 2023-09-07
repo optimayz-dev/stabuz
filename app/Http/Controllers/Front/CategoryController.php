@@ -20,14 +20,14 @@ class CategoryController extends Controller
     }
     public function categoryView($slug)
     {
-        $cacheKey = 'category' . $slug;
+//        $cacheKey = 'category' . $slug;
 
-        $category = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
-            return Category::join('category_translations', 'categories.id', '=', 'category_translations.category_id')
+//        $category = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
+            $category = Category::join('category_translations', 'categories.id', '=', 'category_translations.category_id')
                 ->where('category_translations.slug', $slug)
                 ->with('children.translations', 'translations', 'products.translations', 'products.prices.currency', 'products.brand.translations', 'brands.translations')
                 ->first();
-        });
+//        });
 
         return view('front.category', compact('category'));
     }

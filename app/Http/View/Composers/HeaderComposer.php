@@ -10,12 +10,12 @@ class HeaderComposer
 {
     public function compose(View $view)
     {
-        $catalogs = Cache::remember('all_categories', 60 * 60 * 24, function (){
-            return Category::with('translations', 'children.translations')
+//        $catalogs = Cache::remember('all_categories', 60 * 60 * 24, function (){
+            $catalogs = Category::with('translations', 'children.translations')
                 ->tree()
                 ->get()
                 ->toTree();
-        });
+//        });
         $view->with('catalogs', $catalogs);
     }
 }
