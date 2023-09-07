@@ -26,9 +26,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('attribute_title')->nullable();
             $table->string('attribute_value')->nullable();
-            $table->string('seo_title');
-            $table->text('seo_description');
-            $table->text('meta_keywords');
+            $table->string('seo_title')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->text('description');
         });
     }

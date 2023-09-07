@@ -22,7 +22,7 @@ class CategoryImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, 
     public function model(array $row)
     {
         // Находим существующий Brand или создаём новый по (id)
-        $category = Category::findOrNew($row['id']);
+        $category = Category::with('translations')->findOrNew($row['id']);
 
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();

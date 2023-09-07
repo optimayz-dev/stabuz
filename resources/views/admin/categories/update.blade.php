@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <td>
                                                         <label>
-                                                            <input readonly value="{{ $category->id }}" name="selected_category[]" class="updateSelected" style="background: none; border: none">
+                                                            <input readonly value="{{ $category->id }}" name="id[]" class="updateSelected" style="background: none; border: none">
                                                         </label>
                                                     </td>
                                                     <td>

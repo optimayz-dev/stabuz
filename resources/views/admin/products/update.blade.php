@@ -20,7 +20,7 @@
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Create catalog</a>
+                                    <a class="dropdown-item" href="{{ route('admin.product.create') }}">Create catalog</a>
                                     <a class="dropdown-item" href="{{ route('admin.editCategories') }}">Edit all</a>
                                 </div>
                             </li>
@@ -33,39 +33,81 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                            <form action="{{ route('admin.update.subcategory-products') }}" method="post" novalidate enctype="multipart/form-data">
+                            <form action="{{ route('admin.updateProducts') }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                @foreach($subcategory->products as $product)
-                                    <input type="hidden" name="product_id[]" value="{{ $product->id }}">
-                                    <div class="row-wrapper">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="input-wrapper">
-                                                    <h4 class="form-title">Продукт: {{ $product->title }}</h4>
-                                                    <label for="title">
-                                                        <input class="form-control" name="title_{{ $product->id }}" placeholder="название продукта" required="required" value="{{ $product->title }}">
-                                                    </label>
-                                                </div>
-                                                <div class="input-wrapper">
-                                                    <label for="title">
-                                                        <textarea class="resizable_textarea form-control" name="descr_{{ $product->id }}">{{ $product->descr }}</textarea>
-                                                    </label>
-                                                </div>
-                                                <div class="input-wrapper">
-                                                    <label for="file_url">
-                                                        <input type="file" name="file_url_{{ $product->id }}">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-
-                                            </div>
+                                <div class="card-box table-responsive">
+                                    <p class="text-danger font-13 m-b-30">
+                                        При обновление данных, следует выбрать нужную языковую версию:
+                                        <select name="getlocale" class="change-locale">
+                                                <option value="{{ \Illuminate\Support\Facades\App::currentLocale() }}" selected>{{ \Illuminate\Support\Facades\App::currentLocale() }}</option>
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                <option value="{{ $properties['native'] }}">{{ $properties['native'] }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
                                         </div>
-                                        <p>Конец<code> "{{ $product->title }}"</code> продукта</p>
+                                    @endif
+
+
+                                    <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Position</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Soe title</th>
+                                            <th>Seo Description</th>
+                                            <th>Meta keywords</th>
+                                            <th>Crated at / Updated at</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($products as $product)
+                                            <tr>
+                                                <td>
+                                                    <label>
+                                                        <input readonly value="{{ $product->id }}" name="id[]" class="updateSelected" style="background: none; border: none">
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <input type="text" value="{{ $product->title }}" name="title_{{ $product->id }}" class="updateSelected">
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <textarea name="description_{{ $product->id }}" class="updateSelected">{{ $product->description }}</textarea>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <input type="text" value="{{ $product->seo_title }}" name="seo_title_{{ $product->id }}" class="updateSelected">
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <textarea name="seo_description_{{ $product->id }}" class="updateSelected">{{ $product->seo_description }}</textarea>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <label>
+                                                        <textarea name="meta_keywords_{{ $product->id }}" class="updateSelected">{{ $product->meta_keywords }}</textarea>
+                                                    </label>
+                                                </td>
+                                                <td>{{ $product->created_at }} /<br> {{ $product->updated_at }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <button type="submit" class="btn btn-success">update</button>
                                     </div>
-                                @endforeach
-                                    <button type="submit" class="btn btn-success btn-sm">сохранить</button>
+
+                                </div>
                             </form>
                     </div>
                 </div>

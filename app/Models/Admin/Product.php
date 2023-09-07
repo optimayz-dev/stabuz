@@ -14,8 +14,8 @@ class Product extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;
 
-    protected $fillable = [
-        'file_url'
+    protected $guarded = [
+        'id'
     ];
     public $translatedAttributes = [
         'title',

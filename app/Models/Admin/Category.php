@@ -26,6 +26,8 @@ class Category extends Model implements TranslatableContract
         'meta_keywords',
     ];
 
+    public $preventsLazyLoading = true;
+
     public function products()
     {
         return $this->belongsToMany(Product::class);
@@ -48,12 +50,14 @@ class Category extends Model implements TranslatableContract
 
     public static function updateCatalogFields($request, $catalog, $fields, $id)
     {
+//        dd($fields);
+
         foreach ($fields as $field) {
             $catalog->$field = $request->input("{$field}_{$id}");
         }
         $catalog->update();
 
-        Cache::forget('category_{$category->id}');
+//        Cache::forget('category_{$category->id}');
     }
 
     public function brands()

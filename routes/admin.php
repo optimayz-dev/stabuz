@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
     Route::middleware(['auth:admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])->group(function (){
             Route::get('/admin/', [DashboardController::class, 'show'])->name('dashboard');
             Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+            Route::patch('/admin/product/update-products', [ProductController::class, 'updateSelected'])->name('updateProducts');
+            Route::patch('/admin/product/delete-products', [ProductController::class, 'deleteSelected'])->name('deleteProducts');
+
             Route::resource('/admin/create', AdminController::class);
             Route::resource('/admin/brand', BrandController::class);
             Route::resource('/admin/catalog', CatalogController::class);
@@ -41,6 +44,7 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
             Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateSelected'])->name('updateCategories');
 
+
             Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
             Route::post('/admin/category-import', [CategoryController::class, 'import'])->name('categories.import');
 
@@ -50,6 +54,8 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/products-get-export/{id}', [ProductController::class, 'export'])->name('products.export');
             Route::post('/admin/products-import', [ProductController::class, 'import'])->name('products.import');
             Route::post('/admin/product/result', [ProductController::class, 'search'])->name('product.search');
+            Route::patch('/admin/product-bulk-action', [ProductController::class, 'handleBulkActions'])->name('product.handleBulkActions');
+
             Route::get('/admin/edit-subcategory-products/{id}', [ProductController::class, 'editBySubcategory'])->name('edit.subcategory-products');
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
             Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
@@ -61,4 +67,5 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');
             Route::post('/admin/category-import', [ImportCategoryController::class, 'import'])->name('category.import');
            // Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
+
     });

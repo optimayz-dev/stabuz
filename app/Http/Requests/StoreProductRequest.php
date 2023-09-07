@@ -23,13 +23,14 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'seo_title' => 'required',
+            'seo_title' => 'nullable',
             'description' => 'required',
-            'seo_description' => 'required',
-            'meta_keywords' => 'required',
-            'attribute_title' => 'required',
-            'attribute_value' => 'required',
-            'file_url' => 'required'
+            'seo_description' => 'nullable',
+            'meta_keywords' => 'nullable',
+            'attribute_title' => 'nullable',
+            'attribute_value' => 'nullable',
+            'file_url' => 'required',
+            'brand_id' => 'integer'
         ];
     }
 }

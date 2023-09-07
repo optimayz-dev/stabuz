@@ -20,10 +20,10 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Cache::remember('brands', 24 * 60 * 60, function () {
+//        $brands = Cache::remember('brands', 24 * 60 * 60, function () {
             $brands = Brand::with('translations')->get();
-            return $brands;
-        });
+//            return $brands;
+//        });
         return view('admin.brands.index', ['brands' => $brands]);
     }
 

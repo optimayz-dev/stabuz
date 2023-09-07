@@ -17,11 +17,11 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $catalogs = Cache::remember('catalogs', 60, function () {
-            return Category::with('translations')
+//        $catalogs = Cache::remember('catalogs', 60, function () {
+            $catalogs = Category::with('translations')
                 ->whereNull('lvl')
                 ->get();
-        });
+//        });
         return view('admin.catalogs.index', compact('catalogs'));
     }
 

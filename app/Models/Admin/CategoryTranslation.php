@@ -31,4 +31,8 @@ class CategoryTranslation extends Model
             ]
         ];
     }
+
+//    public $primaryKey = ['category_id', 'locale'];
+
+//    public $preventsLazyLoading = true;
 }

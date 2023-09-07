@@ -30,7 +30,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        $products = Product::query()->with('translations')->get();
+
+        return view('admin.products.index', ['products' => $products]);
     }
 
 
@@ -41,7 +43,7 @@ class ProductController extends Controller
     public function create()
     {
         $tags = Tag::with('translations')->get();
-        $currencies = CurrencyCode::all();
+        $currencies = CurrencyCode::query()->get();
         return view('admin.products.create', [
             'tags' => $tags,
             'currencies' => $currencies
@@ -54,20 +56,45 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         // Создаем новый продукт на основе валидированных данных
-        $product = new Product($request->validated());
+//        $product = new Product($request->validated());
+
         if ($request->hasFile('file_url')) {
-            $path = $request->file_url->store('uploads', 'public');
-            $product->file_url = '/storage/' . $path;
+            $path = $request->file('file_url')->store('images');
         }
-        $product->brand_id = 1;
+
+        $product = Product::query()->create([
+           'title' => $request->input('title'),
+            'seo_title' => $request->input('seo_title'),
+            'description' => $request->input('description'),
+            'seo_description' => $request->input('seo_description'),
+            'meta_keywords' => $request->input('meta_keywords'),
+            'attribute_title' => $request->input('attribute_title'),
+            'attribute_value' => $request->input('attribute_value'),
+            'file_url' => $path,
+            'brand_id' => $request->input('brand_id',1)
+        ]);
+
+//        $product->brand_id = 1;
+
+
+//        'title' => 'required',
+//            'seo_title' => 'nullable',
+//            'description' => 'required',
+//            'seo_description' => 'nullable',
+//            'meta_keywords' => 'nullable',
+//            'attribute_title' => 'nullable',
+//            'attribute_value' => 'nullable',
+//            'file_url' => 'required'
+
+
 
         // Сохраняем продукт
-        $product->save();
+//        $product->save();
         $images = $request->input('images', []);
         foreach ($images as $image){
             $product_gallery = new ProductGallery();
-            $path = $image->store('/uploads/products', 'public');
-            $product_gallery->image = '/storage/' .$path;
+            $path = $request->file($image)->store('images');;
+            $product_gallery->image = $path;
             $product_gallery->save();
         }
 
@@ -98,7 +125,16 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
+        $product = Product::query()->with('categories')->findOrFail($product->id);
+        $tags = Tag::with('translations')->get();
+        $currencies = CurrencyCode::query()->get();
+
+        return view('admin.products.update-once', [
+            'product' => $product,
+            'tags' => $tags,
+            'currencies' => $currencies
+        ]);
     }
 
     /**
@@ -112,9 +148,20 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->title = $request->input('title');
+        $product->description = $request->input('description');
+        $product->attribute_title = $request->input('attribute_title');
+        $product->attribute_value = $request->input('attribute_value');
+        $product->seo_title = $request->input('seo_title');
+        $product->seo_description = $request->input('seo_description');
+        $product->meta_keywords = $request->input('meta_keywords');
+
+        $product->update();
+
+
+        return redirect()->back()->with('success','Продукт успешно изменен.');
     }
 
     /**
@@ -194,5 +241,67 @@ class ProductController extends Controller
             $subcategory->destroy();
         }
         return redirect()->back()->with('success', 'Subcategory products deleted successfully');
+    }
+
+    public function handleBulkActions(Request $request)
+    {
+        $selectedCategories = $request->input('selected_category', []);
+        $action = $request->input('action');
+        $message = '';
+
+        if ($action === 'edit') {
+            return $this->showSelected($request);
+        } elseif ($action === 'delete') {
+            $this->deleteSelected($request);
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function updateSelected(Request $request)
+    {
+        $locale = $request->getlocale;
+        app()->setLocale($locale);
+
+        foreach ($request->input('id') as $id){
+            $category = Product::query()->with('translations')->where('id' , $id)->first();
+
+            $category->update([
+                'title' => $request->input('title_'.$id),
+                'description' => $request->input('description_'.$id),
+                'seo_title' => $request->input('seo_title_'.$id),
+                'seo_description' => $request->input('seo_description_'.$id),
+                'meta_keywords' => $request->input('meta_keywords_'.$id)
+            ]);
+        }
+
+        return redirect()->route('admin.product.index')->with('success', 'Данные успешно обновлены.');
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        foreach ($request->input('id') as $id){
+            Product::query()->where('id', $id)->delete();
+
+        }
+        return redirect()->back()->with(['success', 'Данные успешно удалены.']);
+    }
+
+    public function showSelected(Request $request)
+    {
+        $products = $request->input('id', []);
+
+        if ($products){
+            $products = Product::whereIn('id', $products)->orderBy('id')->with('translations')->get();
+            return view('admin.products.update', ['products' => $products]);
+        } else {
+            return redirect()->back()->with('error', 'Выберите продукты или продукт');
+        }
+    }
+
+
+    public function viewImport()
+    {
+
     }
 }

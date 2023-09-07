@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var parentInput = $('#parent_id');
-    var suggestionsDiv = $('#suggestions');
+    var parentInput = $('.parent_id');
+    var suggestionsDiv = $('.suggestions');
 
     parentInput.keyup(function () {
         var parent_id = parentInput.val();
@@ -9,7 +9,7 @@ $(document).ready(function () {
             $.get(`/search/categories?search=${parent_id}`)
                 .done(function (response) {
                     var suggestions = response;
-
+                    console.log(suggestionsDiv);
                     // Очищаем контейнер с подсказками
                     suggestionsDiv.empty();
 

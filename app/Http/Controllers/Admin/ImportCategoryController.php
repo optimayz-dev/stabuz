@@ -19,6 +19,7 @@ class ImportCategoryController extends Controller
     {
         return Excel::download(new CategoryExport(), 'categories.xlsx');
     }
+
     public function import()
     {
         Excel::import(new CategoryImport, request()->file('file'));

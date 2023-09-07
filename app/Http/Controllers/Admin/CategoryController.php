@@ -19,11 +19,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories= Cache::remember('categories', 60, function () {
-            return Category::where('lvl', 1)
+//        $categories= Cache::remember('categories', 60, function () {
+            $categories = Category::where('lvl', 1)
                 ->with('translations')
                 ->get();
-        });
+//        });
 
         $perPage = 10;
         $currentPage = request()->query('page', 1);
@@ -106,7 +106,7 @@ class CategoryController extends Controller
     {
         $searchText = $request->query('search');
 
-        $categories = Category::whereHas('translations', function ($query) use ($searchText) {
+        $categories = Category::query()->with('translations')->whereHas('translations', function ($query) use ($searchText) {
             $query->where('title', 'like', $searchText . '%');
         })
             ->limit(10)
@@ -148,8 +148,23 @@ class CategoryController extends Controller
         $locale = $request->getlocale;
         app()->setLocale($locale);
 
+
+        foreach ($request->input('id') as $id){
+            $category = Category::query()->with('translations')->where('id' , $id)->first();
+
+            $category->update([
+                'title' => $request->input('title_'.$id),
+                'description' => $request->input('description_'.$id),
+                'seo_title' => $request->input('seo_title_'.$id),
+                'seo_description' => $request->input('seo_description_'.$id),
+                'meta_keywords' => $request->input('meta_keywords_'.$id)
+            ]);
+        }
+
+        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
+
         $selectedCategories = $request->input('selected_category', []);
-        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
+//        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
 
         $categoriesToUpdate = $selectedCategories ? Category::whereIn('id', $selectedCategories)->get() : Category::all();
 
@@ -157,7 +172,7 @@ class CategoryController extends Controller
             Category::updateCatalogFields($request, $category, $fields, $category->id);
 
             //Обновляем кэш для каждого каталога
-            Cache::forget("category_{$category->id}");
+//            Cache::forget("category_{$category->id}");
         }
         return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
     }

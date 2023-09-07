@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->index('title');
             $table->text('description');
-            $table->string('seo_title');
+            $table->text('seo_title');
             $table->text('seo_description');
             $table->text('meta_keywords');
             $table->timestamps();
