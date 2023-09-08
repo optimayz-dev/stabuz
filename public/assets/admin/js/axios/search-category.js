@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var parentInput = $('#parent_id');
-    var suggestionsDiv = $('#suggestions');
+    var parentInput = $('#parent_id_category');
+    var suggestionsDiv = $('#suggestions_category');
 
     parentInput.keyup(function () {
         var parent_id = parentInput.val();
 
         if (parent_id.length >= 5) {
-            $.get(`/search/catalog?search=${parent_id}`)
+            $.get(`/search/category?search=${parent_id}`)
                 .done(function (response) {
                     var suggestions = response;
                     console.log(suggestionsDiv);
@@ -49,7 +49,7 @@ $(document).ready(function () {
         var categoryVal = $('#search_category').val()
 
         if (categoryVal.length >= 5) {
-            $.get(`/search/catalog?search=${categoryVal}`, function (response) {
+            $.get(`/search/category?search=${categoryVal}`, function (response) {
                 var suggestions = response;
 
                 // Очищаем контейнер с результатами

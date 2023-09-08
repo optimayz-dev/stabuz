@@ -16,6 +16,7 @@ class HeaderComposer
                 ->get()
                 ->toTree();
 //        });
+
         $view->with('catalogs', $catalogs);
     }
 }

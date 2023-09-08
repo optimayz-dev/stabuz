@@ -27,10 +27,10 @@ class UpdateCategoryRequest extends FormRequest
         foreach ($this->request->all() as $key => $value) {
             if (str_starts_with($key, 'title_')) {
                 $categoryId = substr($key, strlen('title_'));
-                $rules[$key] = 'required';
-                $rules['seo_title_' . $categoryId] = 'required';
-                $rules['seo_description_' . $categoryId] = 'required';
-                $rules['meta_keywords_' . $categoryId] = 'required';
+                $rules[$key] = 'nullable';
+                $rules['seo_title_' . $categoryId] = 'nullable';
+                $rules['seo_description_' . $categoryId] = 'nullable';
+                $rules['meta_keywords_' . $categoryId] = 'nullable';
             }
         }
         return $rules;

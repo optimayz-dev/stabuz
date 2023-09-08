@@ -51,16 +51,31 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+
         $parentId = $request->parent_id_hidden;
+
         $parent = Category::find($parentId);
+        $lvl = $parent->lvl + 1;
 
         if (!$parent) {
             return redirect()->back()->withErrors('Родительская категория не найдена.');
         }
 
-        $category = new Category($request->validated());
+        if ($request->hasfile('category_img')) {
+            $image = $request->file('category_img')->store('images');
+        }
 
-        $this->saveCategoryWithLevel($category, $parent, $request);
+        $category =  new Category();
+        $category->title = $request->input('title');
+        $category->seo_title = $request->input('seo_title');
+        $category->description = $request->input('description');
+        $category->seo_description = $request->input('seo_description');
+        $category->meta_keywords = $request->input('meta_keywords');
+        $category->parent_id = $request->input('parent_id_hidden');
+        $category->category_img = $image ?? null;
+        $category->lvl = $lvl;
+
+        $category->save();
 
         return redirect()->back()->with('success', 'Категория успешно добавлена');
     }
@@ -68,10 +83,7 @@ class CategoryController extends Controller
     protected function saveCategoryWithLevel($category, $parent, $request)
     {
         $category->lvl = $parent->lvl + 1;
-        if ($request->hasfile('category_img')) {
-            $path = $request->category_img->store('uploads', 'public');
-            $category->category_img = '/storage/'.$path;
-        }
+
 
         $category->save();
     }
@@ -106,7 +118,7 @@ class CategoryController extends Controller
     {
         $searchText = $request->query('search');
 
-        $categories = Category::query()->with('translations')->whereHas('translations', function ($query) use ($searchText) {
+        $categories = Category::query()->where('lvl', 1)->with('translations')->whereHas('translations', function ($query) use ($searchText) {
             $query->where('title', 'like', $searchText . '%');
         })
             ->limit(10)
@@ -163,18 +175,18 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
 
-        $selectedCategories = $request->input('selected_category', []);
-//        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
-
-        $categoriesToUpdate = $selectedCategories ? Category::whereIn('id', $selectedCategories)->get() : Category::all();
-
-        foreach ($categoriesToUpdate as $category) {
-            Category::updateCatalogFields($request, $category, $fields, $category->id);
-
-            //Обновляем кэш для каждого каталога
-//            Cache::forget("category_{$category->id}");
-        }
-        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
+//        $selectedCategories = $request->input('selected_category', []);
+////        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
+//
+//        $categoriesToUpdate = $selectedCategories ? Category::whereIn('id', $selectedCategories)->get() : Category::all();
+//
+//        foreach ($categoriesToUpdate as $category) {
+//            Category::updateCatalogFields($request, $category, $fields, $category->id);
+//
+//            //Обновляем кэш для каждого каталога
+////            Cache::forget("category_{$category->id}");
+//        }
+//        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
     }
 
 }

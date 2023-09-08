@@ -19,7 +19,7 @@ class CatalogController extends Controller
     {
 //        $catalogs = Cache::remember('catalogs', 60, function () {
             $catalogs = Category::with('translations')
-                ->whereNull('lvl')
+                ->where('lvl')
                 ->get();
 //        });
         return view('admin.catalogs.index', compact('catalogs'));
@@ -50,6 +50,20 @@ class CatalogController extends Controller
         }
         return redirect()->back()->with('success', 'Данные успешно добавлены.');
     }
+
+    public function search(Request $request)
+    {
+        $searchText = $request->query('search');
+
+        $categories = Category::query()->whereNull('lvl')->with('translations')->whereHas('translations', function ($query) use ($searchText) {
+            $query->where('title', 'like', $searchText . '%');
+        })
+            ->limit(10)
+            ->get(); // Select only id and title fields
+
+        return response()->json($categories);
+    }
+
 
     /**
      * Remove the specified resource from storage.

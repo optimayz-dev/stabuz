@@ -24,10 +24,10 @@ class StoreCatalogRequest extends FormRequest
     {
         return [
             'addmore.*.title' => 'required',
-            'addmore.*.seo_title' => 'required',
-            'addmore.*.seo_description' => 'required',
-            'addmore.*.description' => 'required',
-            'addmore.*.meta_keywords' => 'required',
+            'addmore.*.seo_title' => 'nullable',
+            'addmore.*.seo_description' => 'nullable',
+            'addmore.*.description' => 'nullable',
+            'addmore.*.meta_keywords' => 'nullable',
         ];
     }
 }

@@ -23,10 +23,10 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'description' => 'required',
-            'seo_title' => 'required',
-            'seo_description' => 'required',
-            'meta_keywords' => 'required',
+            'description' => 'nullable',
+            'seo_title' => 'nullable',
+            'seo_description' => 'nullable',
+            'meta_keywords' => 'nullable',
             'category_img' => 'mimes:jpg,png,jpeg,webp,svg',
             'parent_id_hidden' => 'required',
         ];

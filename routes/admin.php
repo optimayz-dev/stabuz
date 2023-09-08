@@ -38,7 +38,8 @@ use Illuminate\Support\Facades\Route;
 //            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
 
-            Route::get('/search/categories', [CategoryController::class, 'search'])->name('search.categories');
+            Route::get('/search/catalog', [CatalogController::class, 'search'])->name('search.catalogs');
+            Route::get('/search/category', [CategoryController::class, 'search'])->name('search.categories');
             Route::get('/search/attribute', [AttributeController::class, 'getAttributes'])->name('search.attribute');
 
             Route::patch('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');

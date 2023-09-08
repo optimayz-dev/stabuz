@@ -294,6 +294,7 @@
 <script src="{{ asset('/assets/admin/js/index.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/search.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/search-catalog.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/axios/search-category.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/add-product.js') }}"></script>
 </body>
 </html>

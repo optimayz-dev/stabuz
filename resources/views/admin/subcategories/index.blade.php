@@ -41,7 +41,7 @@
                                             <li class="dropdown" style="padding-right: 15px;">
                                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Add subcategory</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.subcategory.create') }}">Add subcategory</a>
                                                     <a class="dropdown-item" href="{{ route('admin.category.viewImport') }}">Export/Import</a>
                                                 </div>
                                             </li>
