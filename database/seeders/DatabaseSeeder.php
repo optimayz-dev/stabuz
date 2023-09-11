@@ -34,57 +34,57 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('1234567'),
         ]);
-         Brand::factory(10)->create();
+//         Brand::factory(10)->create();
 
 
 
         // Создаем корневые категории
-        $rootCategories = Category::factory()->count(5)->create();
-
-// Создаем атрибуты
-        $attributes = Attribute::factory(100)->create();
-
-// Связываем атрибуты с категориями
-        foreach ($rootCategories as $rootCategory) {
-            $attributesForCategory = $attributes->random(rand(2, 3));
-            $rootCategory->attributes()->attach($attributesForCategory);
-        }
-
-// Создаем дочерние категории для каждой корневой категории
-        $rootCategories->each(function ($rootCategory) use ($attributes) {
-            $rootCategory->lvl = null; // Уровень 0 для корневых категорий
-            $rootCategory->save();
-
-            $childCategoriesLevel1 = Category::factory()->count(3)->make([
-                'lvl' => 1, // Уровень 1
-            ]);
-            $rootCategory->children()->saveMany($childCategoriesLevel1);
-
-            // Создаем дочерние категории для каждой категории уровня 1
-            foreach ($childCategoriesLevel1 as $childCategoryLevel1) {
-                $childCategoriesLevel2 = Category::factory()->count(2)->make([
-                    'lvl' => 2, // Уровень 2
-                ]);
-                $childCategoryLevel1->children()->saveMany($childCategoriesLevel2);
-
-                foreach ($childCategoriesLevel2 as $childCategoryLevel2) {
-                    $childCategoriesLevel3 = Category::factory()->count(2)->make([
-                        'lvl' => 3, // Уровень 3
-                    ]);
-                    $childCategoryLevel2->children()->saveMany($childCategoriesLevel3);
-                }
-            }
-        });
-
-// Создаем продукты и связываем их с категориями
-        Product::factory(500)->create()->each(function ($product) use ($attributes) {
-            $categories = Category::inRandomOrder()->limit(rand(2, 3))->get();
-            $product->categories()->attach($categories);
-        });
-
-        Tag::factory(5)->create();
-        CurrencyCode::factory(3)->create();
-        Price::factory(500)->create();
-
+//        $rootCategories = Category::factory()->count(5)->create();
+//
+//// Создаем атрибуты
+//        $attributes = Attribute::factory(100)->create();
+//
+//// Связываем атрибуты с категориями
+//        foreach ($rootCategories as $rootCategory) {
+//            $attributesForCategory = $attributes->random(rand(2, 3));
+//            $rootCategory->attributes()->attach($attributesForCategory);
+//        }
+//
+//// Создаем дочерние категории для каждой корневой категории
+//        $rootCategories->each(function ($rootCategory) use ($attributes) {
+//            $rootCategory->lvl = null; // Уровень 0 для корневых категорий
+//            $rootCategory->save();
+//
+//            $childCategoriesLevel1 = Category::factory()->count(3)->make([
+//                'lvl' => 1, // Уровень 1
+//            ]);
+//            $rootCategory->children()->saveMany($childCategoriesLevel1);
+//
+//            // Создаем дочерние категории для каждой категории уровня 1
+//            foreach ($childCategoriesLevel1 as $childCategoryLevel1) {
+//                $childCategoriesLevel2 = Category::factory()->count(2)->make([
+//                    'lvl' => 2, // Уровень 2
+//                ]);
+//                $childCategoryLevel1->children()->saveMany($childCategoriesLevel2);
+//
+//                foreach ($childCategoriesLevel2 as $childCategoryLevel2) {
+//                    $childCategoriesLevel3 = Category::factory()->count(2)->make([
+//                        'lvl' => 3, // Уровень 3
+//                    ]);
+//                    $childCategoryLevel2->children()->saveMany($childCategoriesLevel3);
+//                }
+//            }
+//        });
+//
+//// Создаем продукты и связываем их с категориями
+//        Product::factory(500)->create()->each(function ($product) use ($attributes) {
+//            $categories = Category::inRandomOrder()->limit(rand(2, 3))->get();
+//            $product->categories()->attach($categories);
+//        });
+//
+//        Tag::factory(5)->create();
+//        CurrencyCode::factory(3)->create();
+//        Price::factory(500)->create();
+//
     }
 }

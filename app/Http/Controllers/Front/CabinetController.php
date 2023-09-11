@@ -11,4 +11,7 @@ class CabinetController extends Controller
     {
         return view('front.cabinet');
     }
+
+
+
 }

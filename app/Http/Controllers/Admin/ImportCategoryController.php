@@ -6,6 +6,7 @@ use App\Exports\CategoryExport;
 use App\Http\Controllers\Controller;
 use App\Imports\CategoryImport;
 use App\Models\Admin\Category;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportCategoryController extends Controller
