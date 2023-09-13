@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-
-        Admin::factory()->create([
-            'name' => 'Test Admin',
-            'email' => 'test@example.com',
-            'password' => bcrypt('1234567'),
-        ]);
+        CurrencyCode::factory(3)->create();
+//        Admin::factory()->create([
+//            'name' => 'Test Admin',
+//            'email' => 'test@example.com',
+//            'password' => bcrypt('1234567'),
+//        ]);
 //         Brand::factory(10)->create();
 
 
