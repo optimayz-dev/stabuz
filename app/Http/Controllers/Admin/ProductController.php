@@ -63,7 +63,7 @@ class ProductController extends Controller
         }
 
         $product = Product::query()->create([
-           'title' => $request->input('title'),
+            'title' => $request->input('title'),
             'seo_title' => $request->input('seo_title'),
             'description' => $request->input('description'),
             'seo_description' => $request->input('seo_description'),
@@ -90,13 +90,13 @@ class ProductController extends Controller
 
         // Сохраняем продукт
 //        $product->save();
-        $images = $request->input('images', []);
-        foreach ($images as $image){
-            $product_gallery = new ProductGallery();
-            $path = $request->file($image)->store('images');;
-            $product_gallery->image = $path;
-            $product_gallery->save();
-        }
+//        $images = $request->input('images', []);
+//        foreach ($images as $image){
+//            $product_gallery = new ProductGallery();
+//            $path = $request->file($image)->store('images');;
+//            $product_gallery->image = $path;
+//            $product_gallery->save();
+//        }
 
         // Получаем ID выбранной категории из формы
         $categoryId = $request->input('parent_id_hidden');
@@ -111,9 +111,9 @@ class ProductController extends Controller
         // Связываем продукт с выбранной категорией через pivot таблицу
         $product->categories()->attach($categoryId);
         // Связываем продукт с выбранными тегами через pivot таблицу
-        foreach ($tagsId as $tagId){
-            $product->tags()->attach($tagId);
-        }
+//        foreach ($tagsId as $tagId){
+//            $product->tags()->attach($tagId);
+//        }
 
         return redirect()->back()->with('success', 'Продукт успешно добавлен');
     }
@@ -150,6 +150,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        if ($request->file('file_url'))
+            $file_url = $request->file('file_url')->store('images');
+
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->attribute_title = $request->input('attribute_title');
@@ -157,6 +160,7 @@ class ProductController extends Controller
         $product->seo_title = $request->input('seo_title');
         $product->seo_description = $request->input('seo_description');
         $product->meta_keywords = $request->input('meta_keywords');
+        $product->file_url = $file_url ?? $product->file_url;
 
         $product->update();
 

@@ -21,7 +21,10 @@ use App\Http\Controllers\Front\CabinetController;
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    'middleware' => [
+        'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',
+//        'auth:web'
+        ],
 ], function (){
 
     Route::get('/', [HomeController::class, 'homepage']);
@@ -30,9 +33,21 @@ Route::group([
     Route::get('/category/{slug}', [CategoryController::class, 'categoryView'])->name('category.view');
     Route::get('/new-products', [ProductController::class, 'newProducts'])->name('new.products');
 
-    Route::get('cabinet', [CabinetController::class, 'index'])->name('cabinet.index');
+    Route::group(['middleware' => 'auth:web'], function (){
+        Route::get('cabinet', [CabinetController::class, 'index'])->name('cabinet.index');
+    });
 
+
+
+    // User login
+
+    Route::get('register', [AuthController::class, 'registerPage'])->name('register.page');
+    Route::post('register', [AuthController::class, 'register'])->name('register.user');
+
+    Route::get('login', [AuthController::class, 'loginPage'])->name('login.page');
+    Route::post('login', [AuthController::class, 'login'])->name('login.user');
 });
+
 
 //Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 

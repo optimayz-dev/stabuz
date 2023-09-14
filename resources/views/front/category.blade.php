@@ -58,12 +58,14 @@
                     <button class="category-filter_reset--btn">Сбросить</button>
                 </div>
                 <ul class="category-filter_list" name="categoryBrandsList">
+
                     @foreach($category->brands as $brand)
                         <li>
                             <input type="checkbox" name="brand" id="brand1" value="brand1">
                             <label for="brand1">{{ $brand->title }}</label>
                         </li>
                     @endforeach
+
                 </ul>
                 <button class="category-filter_showall--btn">Все бренды<img src="/image/icons/chevroneBottom.svg" alt=""></button>
             </div>
@@ -141,7 +143,7 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-                            <img src="{{ $product->file_url }}" alt="">
+                            <img src=" {{ asset($product->file_url)  }}" alt="">
                             <img src="image/cards/Rectangle 604 (1).png" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 <span class="goods_proccent" name="actualGoodsProccent">-25%</span>

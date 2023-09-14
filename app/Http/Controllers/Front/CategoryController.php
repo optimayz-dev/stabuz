@@ -23,11 +23,27 @@ class CategoryController extends Controller
 //        $cacheKey = 'category' . $slug;
 
 //        $category = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
-            $category = Category::join('category_translations', 'categories.id', '=', 'category_translations.category_id')
-                ->where('category_translations.slug', $slug)
-                ->with('children.translations', 'translations', 'products.translations', 'products.prices.currency', 'products.brand.translations', 'brands.translations')
-                ->first();
+//            $category = Category::join('category_translations', 'categories.id', '=', 'category_translations.category_id')
+//                ->where('category_translations.slug', $slug)
+//                ->with('children.translations', 'translations', 'products.translations', 'products.prices.currency', 'products.brand.translations', 'brands.translations')
+//                ->first();
 //        });
+
+        $category = Category::query()
+            ->whereHas('translations', function ($query) use ($slug){
+                $query->where('slug', $slug);
+            })
+            ->with([
+                'products',
+                'translations',
+                'products.prices',
+                'children.translations',
+                'products.prices.currency',
+                'products.brand.translations',
+                'brands.translations'])
+            ->first();
+
+//        dd($category);
 
         return view('front.category', compact('category'));
     }
