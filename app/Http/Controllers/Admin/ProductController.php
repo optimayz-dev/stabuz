@@ -57,22 +57,33 @@ class ProductController extends Controller
     {
         // Создаем новый продукт на основе валидированных данных
 //        $product = new Product($request->validated());
-
+        $product = new Product();
         if ($request->hasFile('file_url')) {
             $path = $request->file('file_url')->store('images');
         }
 
-        $product = Product::query()->create([
-            'title' => $request->input('title'),
-            'seo_title' => $request->input('seo_title'),
-            'description' => $request->input('description'),
-            'seo_description' => $request->input('seo_description'),
-            'meta_keywords' => $request->input('meta_keywords'),
-            'attribute_title' => $request->input('attribute_title'),
-            'attribute_value' => $request->input('attribute_value'),
-            'file_url' => $path,
-            'brand_id' => $request->input('brand_id',1)
-        ]);
+//        $product = Product::query()->create([
+//            'title' => $request->input('title'),
+//            'seo_title' => $request->input('seo_title'),
+//            'description' => $request->input('description'),
+//            'seo_description' => $request->input('seo_description'),
+//            'meta_keywords' => $request->input('meta_keywords'),
+//            'attribute_title' => $request->input('attribute_title'),
+//            'attribute_value' => $request->input('attribute_value'),
+//            'file_url' => $path,
+//            'brand_id' => $request->input('brand_id',1)
+//        ]);
+
+
+        $product->title = $request->input('title');
+        $product->description = $request->input('description');
+        $product->attribute_title = $request->input('attribute_title');
+        $product->attribute_value = $request->input('attribute_value');
+        $product->seo_title = $request->input('seo_title');
+        $product->seo_description = $request->input('seo_description');
+        $product->meta_keywords = $request->input('meta_keywords');
+        $product->file_url = $path ?? null;
+        $product->brand_id = $request->input('brand_id',1);
 
 //        $product->brand_id = 1;
 
