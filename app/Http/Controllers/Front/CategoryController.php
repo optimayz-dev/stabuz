@@ -35,6 +35,7 @@ class CategoryController extends Controller
             })
             ->with([
                 'products',
+                'products.translations',
                 'translations',
                 'products.prices',
                 'children.translations',
