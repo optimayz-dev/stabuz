@@ -19,7 +19,7 @@ class CatalogController extends Controller
     {
 //        $catalogs = Cache::remember('catalogs', 60, function () {
             $catalogs = Category::with('translations')
-                ->where('lvl')
+                ->whereNull('lvl')
                 ->get();
 //        });
         return view('admin.catalogs.index', compact('catalogs'));
@@ -55,7 +55,7 @@ class CatalogController extends Controller
     {
         $searchText = $request->query('search');
 
-        $categories = Category::query()->whereNull('lvl')->with('translations')->whereHas('translations', function ($query) use ($searchText) {
+        $categories = Category::query()->with('translations')->whereHas('translations', function ($query) use ($searchText) {
             $query->where('title', 'like', $searchText . '%');
         })
             ->limit(10)
