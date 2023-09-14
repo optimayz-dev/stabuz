@@ -85,6 +85,7 @@ class ProductController extends Controller
         $product->file_url = $path ?? null;
         $product->brand_id = $request->input('brand_id',1);
 
+        $product->save();
 //        $product->brand_id = 1;
 
 
