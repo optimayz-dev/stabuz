@@ -172,7 +172,7 @@
                                     <p class="goods_viewsCount" name="actualGoodsViewsCount">123</p>
                                 </div>
                             </div>
-                            <a href="/" class="goods_name" name="actualGoodsName">{{ $product->title }}</a>
+                            <a href="{{ route('product.detail', $product->slug) }}" class="goods_name" name="actualGoodsName">{{ $product->title }}</a>
                             <a href="/" class="goods_companyName" name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
                             <div class="goods-addProduct ">
                                 <div class="goods-addProduct_btns">

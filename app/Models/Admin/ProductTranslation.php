@@ -21,6 +21,17 @@ class ProductTranslation extends Model
         'description',
     ];
 
+//    protected $casts = [
+//        'title' => 'string',
+//        'slug' => 'string',
+//        'attribute_value' => 'string',
+//        'attribute_title' => 'string',
+//        'seo_title' => 'string',
+//        'seo_description' => 'string',
+//        'meta_keywords' => 'string',
+//        'description' => 'string',
+//    ];
+
     public function sluggable(): array
     {
         return [

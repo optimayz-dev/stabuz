@@ -42,9 +42,9 @@ class CategoryController extends Controller
                 'products.prices.currency',
                 'products.brand.translations',
                 'brands.translations'])
+
             ->first();
 
-//        dd($category);
 
         return view('front.category', compact('category'));
     }

@@ -19,6 +19,7 @@ class Product extends Model implements TranslatableContract
     ];
     public $translatedAttributes = [
         'title',
+        'slug',
         'attribute_value',
         'attribute_title',
         'seo_title',
@@ -26,6 +27,7 @@ class Product extends Model implements TranslatableContract
         'meta_keywords',
         'description',
     ];
+
         public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
