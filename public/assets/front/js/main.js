@@ -360,21 +360,22 @@ $(document).ready(function() {
         $(currentTab).show();
     });
 });
-// catalog more btn
-$(document).ready(function() {
-    $('.main-category-item').each(function() {
-        let childCount = $(this).find('.children-category-item').length;
-        if (childCount > 8) {
-            $(this).find('.children-category-item').slice(8).hide();
-            $(this).find('.children-categories').append('<div class="children-category-item_more"><a href="#!">Еще<span class="children-category-item_count">12</span><span class="icon-chevroneDown"></span></a></div>');
-        }
-    });
-    $('.children-categories').on('click', '.children-category-item_more', function(e) {
-        e.preventDefault();
-        $(this).siblings('.children-category-item').show();
-        $(this).remove();
-    });
-});
+//
+// // catalog more btn
+// $(document).ready(function() {
+//     $('.main-category-item').each(function() {
+//         let childCount = $(this).find('.children-category-item').length;
+//         if (childCount > 8) {
+//             $(this).find('.children-category-item').slice(8).hide();
+//             $(this).find('.children-categories').append('<div class="children-category-item_more"><a href="#!">Еще<span class="children-category-item_count">12</span><span class="icon-chevroneDown"></span></a></div>');
+//         }
+//     });
+//     $('.children-categories').on('click', '.children-category-item_more', function(e) {
+//         e.preventDefault();
+//         $(this).siblings('.children-category-item').show();
+//         $(this).remove();
+//     });
+// });
 // column count catalog
 function setColumnCount() {
     $('.main-categories').each(function () {
