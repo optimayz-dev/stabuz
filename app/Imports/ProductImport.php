@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, WithBatchInserts
 {
@@ -23,7 +24,46 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 
     public function model(array $row)
     {
-        Product::importFromArray($row);
+
+
+            $product = Product::with('translations')->findOrNew($row['id']);
+            // Создаём или обновляем перевод для текущего языка
+            $locale = App::getLocale();
+            $product->translateOrNew($locale)->title = $row['title'] ?? 'test' ;
+            $product->translateOrNew($locale)->seo_title = $row['seo_title'];
+            $product->translateOrNew($locale)->description = $row['description'] ?? 'desc';
+            $product->translateOrNew($locale)->seo_description = $row['seo_description'];
+            $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'] ;
+            $product->brand_id = $row['brand_id'] ?? 1;
+            $categoryId = explode(';', $row['category']);
+
+//            dd($categoryId);
+
+            $url = $row['image'];
+            $contents = false;
+            if (isset($url))
+                $contents = file_get_contents($url);
+
+            $name = substr($url, strrpos($url, '/') + 1);
+            Storage::put('images/'. $name, $contents);
+
+
+            $product->file_url = 'images/'. $name;
+
+            $product->save();
+//            $product->categories()->attach($categoryId);
+
+//            $categoryId[] = $row['category'];
+
+            foreach ($categoryId as $category)
+            {
+                $product->categories()->sync($category,false);
+            }
+
+//            foreach ($categoryId as $category){
+//                $product->categories()->detach((integer)$category);
+//            }
+
     }
 
 
@@ -39,6 +79,6 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 
     public function batchSize(): int
     {
-        return 500;
+        return 1000;
     }
 }

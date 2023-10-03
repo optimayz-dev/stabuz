@@ -11,7 +11,16 @@ use App\Http\Controllers\Admin\ImportCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\PickUpPointController;
+use App\Http\Controllers\Admin\VideoReviewController;
+use App\Http\Controllers\Admin\MainBannerController;
+use App\Http\Controllers\Admin\PromotionBannerController;
+use App\Http\Controllers\Admin\FaqController;
 use Illuminate\Support\Facades\Route;
+
+
 
     Route::middleware('guest:admin')->group(function (){
         Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('login');
@@ -32,6 +41,13 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/subcategory', SubcategoryController::class);
             Route::resource('/admin/tags', TagController::class);
             Route::resource('/admin/attribute', AttributeController::class);
+            Route::resource('/admin/news', NewsController::class);
+            Route::resource('/admin/promotion', PromotionController::class);
+            Route::resource('/admin/video-review', VideoReviewController::class);
+            Route::resource('/admin/pick-up-point', PickUpPointController::class);
+            Route::resource('/admin/faq', FaqController::class);
+            Route::resource('/admin/main-banner', MainBannerController::class);
+            Route::resource('/admin/promotion-banner', PromotionBannerController::class);
             Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');
             Route::patch('/admin/attributes/bulk-update', [AttributeController::class, 'bulkUpdate'])->name('attribute.bulkUpdate');
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
@@ -63,6 +79,8 @@ use Illuminate\Support\Facades\Route;
             Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
 //            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
             Route::patch('/admin/category-bulk-action', [CategoryController::class, 'categoryBulkActions'])->name('category.handleBulkActions');
+
+            Route::get('/admin/product-import', [ProductController::class, 'importView'])->name('product.viewImport');
 
             Route::get('/admin/category-import', [ImportCategoryController::class, 'viewImport'])->name('category.viewImport');
             Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');

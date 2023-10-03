@@ -7,6 +7,11 @@ use App\Http\Controllers\Front\ProductController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Front\CabinetController;
+use App\Http\Controllers\Front\BrandController;
+use App\Http\Controllers\Front\NewsController;
+use App\Http\Controllers\Front\PromotionController;
+use App\Http\Controllers\Front\VideoReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +43,24 @@ Route::group([
     });
 
 
+    //Brands
+
+    Route::get('brands', [BrandController::class, 'index'])->name('brands');
+    Route::get('brand/{slug}', [BrandController::class, 'detail'])->name('brand.detail');
+
+    // News
+
+    Route::get('news/',[NewsController::class, 'newsList'])->name('news.list');
+    Route::get('news/{slug}',[NewsController::class, 'detail'])->name('news.detail');
+
+    //Promotions
+
+    Route::get('promotions', [PromotionController::class, 'promotionList'])->name('promotions');
+    Route::get('promotion/{slug}', [PromotionController::class, 'detail'])->name('promotion.detail');
+
+    //Video Review
+
+    Route::get('video-reviews', [VideoReviewController::class, 'index'])->name('video-reviews');
 
     // User login
 

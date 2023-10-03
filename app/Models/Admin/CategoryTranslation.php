@@ -22,6 +22,7 @@ class CategoryTranslation extends Model
         'meta_keywords',
     ];
 
+
     public function sluggable(): array
     {
         return [

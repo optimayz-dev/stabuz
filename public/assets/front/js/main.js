@@ -1610,4 +1610,25 @@ $(window).on('resize', function() {
         tabElement.removeClass('offcanvas offcanvas-end');
     }
 });
-
+// news
+$(document).ready(function() {
+    $('.add-review_news').each(function() {
+        var $form = $(this);
+        var $inputs = $form.find('input');
+        var $button = $form.find('button');
+        var debounceTimer;
+        $inputs.on('input', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function() {
+                var $input1 = $form.find('input[name="news-review_inpt--name"]');
+                var $input2 = $form.find('input[name="news-review_inpt--phone"]');
+                var $input3 = $form.find('textarea[class="news-review_text-area"]');
+                if ($input3.val() && $input2.val() && $input1.val()) {
+                    $button.addClass('active');
+                } else {
+                    $button.removeClass('active');
+                }
+            }, 400);
+        });
+    });
+});

@@ -106,8 +106,20 @@
                                                     </label>
                                                 </td>
                                             </tr>
+                                            <div id="output"></div>
+
                                             </tbody>
                                         </table>
+                                        <div>
+                                            <label for="">Выберите категории брендов <br>
+                                                <select id="e1" style="width: 300px;" multiple name="categories_id[]">
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+
+                                        </div>
                                         <div class="btn-wrapper">
                                             <button type="submit" class="btn btn-success">create</button>
                                         </div>

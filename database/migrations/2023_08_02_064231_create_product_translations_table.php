@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->text('meta_keywords')->nullable();
+            $table->string('country')->nullable();
+            $table->text('characteristics')->nullable();
             $table->text('description');
         });
     }

@@ -151,12 +151,12 @@
                             </div>
                         </div>
                         <div style="padding: 10px;">
-                            @foreach($product->prices as $price)
-                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
-                                    {{ $price->getNewPriceAttribute() }} {{ $price->currency->currency_code }}</p>
-                                <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $price->getOldPriceAttribute() }} {{ $price->currency->currency_code }}
-                                </p>
-                            @endforeach
+{{--                            @foreach($product->prices as $price)--}}
+{{--                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">--}}
+{{--                                    {{ $price->getNewPriceAttribute() }} {{ $price->currency->currency_code }}</p>--}}
+{{--                                <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $price->getOldPriceAttribute() }} {{ $price->currency->currency_code }}--}}
+{{--                                </p>--}}
+{{--                            @endforeach--}}
 
                             <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                 <div class="goods_rewies d-flex align-items-center gap-1">

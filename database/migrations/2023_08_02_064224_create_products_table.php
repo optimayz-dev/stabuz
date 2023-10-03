@@ -21,8 +21,12 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('file_url');
+            $table->string('file_url')->nullable();
             $table->integer('position')->nullable();
+            $table->string('model')->nullable();
+            $table->string('article')->nullable();
+            $table->string('supplier')->nullable();
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
         });

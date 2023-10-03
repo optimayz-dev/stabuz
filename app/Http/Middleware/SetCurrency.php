@@ -21,7 +21,7 @@ class SetCurrency
             $currency = Session::get('currency');
         } else {
             // Если выбранная валюта отсутствует, устанавливаем значение по умолчанию ('usd' в данном случае)
-            $currency = 'usd';
+            $currency = 'uzs';
             Session::put('currency', $currency);
         }
 

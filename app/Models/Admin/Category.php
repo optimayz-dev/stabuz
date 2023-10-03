@@ -65,4 +65,5 @@ class Category extends Model implements TranslatableContract
         return $this->belongsToMany(Brand::class, 'category_brand');
     }
 
+
 }

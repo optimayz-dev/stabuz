@@ -21,6 +21,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -188,10 +189,16 @@ class ProductController extends Controller
         //
     }
 
+
+    public function importView()
+    {
+        return view('admin.products.export-import');
+    }
+
     public function import()
     {
         $errors = [];
-        Excel::import(new ProductImport($errors), request()->file('file'));
+        Excel::import(new ProductImport(), request()->file('file'));
 
         if (!empty($errors)) {
             return back()->with('errors', $errors);

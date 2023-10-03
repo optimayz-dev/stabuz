@@ -18,6 +18,7 @@
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('/assets/admin/css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/admin/css/select2.min.css') }}" rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -30,10 +31,14 @@
                     <a href="index.html" class="site_title"><img src="https://stab.uz/thumb/2/9mFw-kR9rAwCQaW95NHAvA/250c90/d/stabuz-logoendgreen.svg" alt="" style="width: 70%;"><!--<i class="fa fa-paw"></i> <span>Stab.uz</span>--></a>
                 </div>
 
-                <div class="clearfix"></div>
+                <div class="clearfix">
+
+
+                </div>
 
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
+
                     <div class="profile_pic">
                         <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                     </div>
@@ -82,6 +87,27 @@
                                     <li><a href="{{ route('admin.tags.index') }}">Теги</a></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <a><i class="fa fa-file-text" aria-hidden="true"></i> Информации <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ route('admin.news.index') }}">Новости</a></li>
+                                    <li><a href="{{ route('admin.promotion.index') }}">Акции</a></li>
+                                    <li><a href="{{ route('admin.video-review.index') }}">Видеообзоры</a></li>
+                                    <li><a href="{{ route('admin.faq.index') }}">FAQ</a></li>
+                                    <li><a href="{{ route('admin.pick-up-point.index') }}">Пункты самовывоза</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a><i class="fa fa-picture-o" aria-hidden="true"></i> Баннеры <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ route('admin.main-banner.index') }}">Главный баннер</a></li>
+                                    <li><a href="{{ route('admin.promotion-banner.index') }}">Баннер акций</a></li>
+                                    <li><a href="{{ route('admin.news.index') }}">Видеообзоры</a></li>
+                                </ul>
+                            </li>
+
                             <li>
                                 <a><i class="fa fa-file-text-o"></i> Заказы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
@@ -186,7 +212,9 @@
                     <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                 </div>
                 <nav class="nav navbar-nav">
+
                     <ul class=" navbar-right">
+
                         <li class="nav-item dropdown open" style="padding-left: 15px;">
                             <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                 <img src="images/img.jpg" alt="">John Doe
@@ -202,70 +230,10 @@
                             </div>
                         </li>
 
-                        <li role="presentation" class="nav-item dropdown open">
-                            <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">6</span>
-                            </a>
-                            <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                                <li class="nav-item">
-                                    <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                        <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                                        <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                        <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                                        <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                        <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                                        <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item">
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                        <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                                        <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="text-center">
-                                        <a class="dropdown-item">
-                                            <strong>See All Alerts</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li role="presentation" class="nav-item " style="float: left; font-size: 17px; color: gray;">
+                            <span style="color: red"> Важно !</span>  При изменении/редактировании данные будут сохраняться на текущем языке : <span class="text-danger" style="font-size: 17px; text-transform: uppercase"> {{ app()->getLocale() }} </span>
                         </li>
+
                     </ul>
                 </nav>
             </div>
@@ -296,5 +264,6 @@
 <script src="{{ asset('/assets/admin/js/axios/search-catalog.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/search-category.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/add-product.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/select2.full.min.js') }}"></script>
 </body>
 </html>

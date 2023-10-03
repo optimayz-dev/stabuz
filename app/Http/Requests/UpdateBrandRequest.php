@@ -11,7 +11,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,11 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'seo_title' => 'string',
+            'seo_description' => 'string',
+            'description' => 'string',
+            'meta_keywords' => 'string',
+            'brand_logo' => ['nullable', 'mimes:jpg,png,svg,jpeg']
         ];
     }
 }

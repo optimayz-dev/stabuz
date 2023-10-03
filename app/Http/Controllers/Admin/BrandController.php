@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateBrandRequest;
 use App\Imports\BrandImport;
 use App\Models\Admin\Brand;
 
+use App\Models\Admin\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,7 +22,7 @@ class BrandController extends Controller
     public function index()
     {
 //        $brands = Cache::remember('brands', 24 * 60 * 60, function () {
-            $brands = Brand::with('translations')->get();
+        $brands = Brand::with('translations')->get();
 //            return $brands;
 //        });
         return view('admin.brands.index', ['brands' => $brands]);
@@ -32,7 +33,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brands.create');
+        $categories = Category::query()->with('translations')->get();
+
+        return view('admin.brands.create', ['categories' => $categories]);
     }
 
     /**
@@ -40,13 +43,19 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
+
         $brand = new Brand($request->validated());
-        if ($request->hasFile('brand_logo')){
-            $path = $request->brand_logo->store('uploads', 'public');
-            $brand->brand_logo = '/storage/' . $path;
+        if ($request->hasFile('brand_logo')) {
+            $path = $request->file('brand_logo')->store('images');
+            $brand->brand_logo = $path;
         }
-        Cache::forget('brands');
+
         $brand->save();
+
+        foreach ($request->categories_id as $category) {
+
+            $brand->categories()->attach((integer)$category);
+        }
         return redirect()->back()->with('success', 'Бренд успешно добавлен');
     }
 
@@ -55,7 +64,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        $brand->load(['translations','products.translations']);
+        $brand->load(['translations', 'products.translations']);
         return view('admin.brands.view', compact('brand'));
     }
 
@@ -64,7 +73,9 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $categories = Category::query()->with('translations')->get();
+
+        return view('admin.brands.update', ['brand' => $brand->load('categories.translations') , 'categories' => $categories]);
     }
 
     /**
@@ -72,7 +83,28 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+//        $brand = new Brand($request->validated());
+
+        $brand->title = $request->input('title');
+        $brand->seo_title = $request->input('seo_title');
+        $brand->seo_description = $request->input('seo_description');
+        $brand->description = $request->input('description');
+        $brand->meta_keywords = $request->input('meta_keywords');
+
+        if ($request->hasFile('brand_logo')) {
+            $path = $request->file('brand_logo')->store('images');
+        } else
+            $path = $brand->brand_logo;
+
+        $brand->brand_logo = $path;
+
+//        foreach ($request->categories_id as $category) {
+
+            $brand->categories()->sync($request->categories_id);
+//        }
+
+        $brand->update();
+        return redirect()->back()->with('success', 'Бренд успешно добавлен');
     }
 
     /**
@@ -80,10 +112,13 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        return redirect()->back()->with('success', 'Успешно удален !');
     }
 
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         Excel::import(new BrandImport(), request()->file('file'));
         return redirect()->back()->with('success', 'data was successful imported');
     }

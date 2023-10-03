@@ -282,6 +282,9 @@
     .favorites-goods{
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+    .videos{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 @media (max-width:768px){
     .cabinet-main-accordion-arrow{
@@ -485,6 +488,10 @@
     }
     .favorites-goods{
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .add-review_news-left,
+    .add-review_news-text{
+        width: 100%;
     }
 }
 @media (max-width:576px){
@@ -982,6 +989,24 @@
     .goods-in-order_product .basket-product{
         flex-direction: row;
     }
+    .useful-tab img{
+        max-width: 125px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .pagination{
+        gap: 20px;
+    }
+    .add-review_news-footer{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .add-review_news{
+        padding: 5px;
+    }
+    .videos{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
 }
 @media (max-width:480px){
     .header-info_settings .dropdown:first-of-type{
@@ -1008,5 +1033,8 @@
         -webkit-line-clamp: 2;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .news-text p{
+        display: block;
     }
 }
