@@ -114,10 +114,26 @@
                                             </div>
                                             <div class="input-wrapper">
                                                 <label style="display: flex; width: 90%;">
+                                                    @error('modification')
+                                                    <div class=modification>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="modification" class="form-control" placeholder="Модификация">
+                                                    @error('article')
+                                                    <div class=article>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="article" class="form-control" placeholder="Артикул">
+                                                </label>
+                                            </div>
+                                            <div class="input-wrapper">
+                                                <label style="display: flex; width: 90%;">
                                                     @error('price')
                                                     <div class=price>{{ $message }}</div>
                                                     @enderror
                                                     <input type="text" name="price" class="form-control" placeholder="Цена">
+                                                    @error('old_price')
+                                                    <div class=old_price>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="old_price" class="form-control" placeholder="Старая цена">
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">

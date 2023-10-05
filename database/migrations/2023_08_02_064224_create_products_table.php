@@ -22,11 +22,15 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('file_url')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('old_price')->nullable();
             $table->integer('position')->nullable();
-            $table->string('model')->nullable();
+            $table->integer('amount')->nullable();
+            $table->string('modification')->nullable();
             $table->string('article')->nullable();
             $table->string('supplier')->nullable();
             $table->boolean('active')->default(true);
+            $table->boolean('credit')->default(false);
 
             $table->timestamps();
         });

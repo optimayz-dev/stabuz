@@ -33,8 +33,13 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         $product->translateOrNew($locale)->description = $row['description'];
         $product->translateOrNew($locale)->seo_description = $row['seo_description'];
         $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'];
+        $product->translateOrNew($locale)->characteristics = $row['characteristics'];
+        $product->article = $row['article'];
+        $product->modification = $row['modification'];
         $product->brand_id = $row['brand_id'];
         $product->price = $row['price'];
+        $product->old_price = $row['old_price'];
+        $product->credit = $row['credit'];
         $categoryId = explode(';', $row['category']);
         $tagId = explode(';', $row['tag_id']);
 

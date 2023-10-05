@@ -75,8 +75,11 @@ class ProductController extends Controller
         $product->seo_description = $request->input('seo_description');
         $product->meta_keywords = $request->input('meta_keywords');
         $product->file_url = $path ?? null;
+        $product->modification = $request->input('modification');
+        $product->article = $request->input('article');
         $product->brand_id = $request->input('brand_id');
         $product->price = $request->input('price');
+        $product->old_price = $request->input('old_price');
 
         $product->save();
 
@@ -142,8 +145,11 @@ class ProductController extends Controller
         $product->seo_description = $request->input('seo_description');
         $product->meta_keywords = $request->input('meta_keywords');
         $product->file_url = $file_url ?? $product->file_url;
+        $product->modification = $request->input('modification');
+        $product->article = $request->input('article');
         $product->brand_id = $request->input('brand_id');
         $product->price = $request->input('price');
+        $product->old_price = $request->input('old_price');
 
         $product->update();
 

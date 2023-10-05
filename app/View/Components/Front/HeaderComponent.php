@@ -20,12 +20,11 @@ class HeaderComponent extends Component
 
     public function __construct()
     {
-        $this->catalogs = Cache::remember('catalog', 60, function (){
-            return Category::with('translations', 'children.translations')
+        return $this->catalogs = Category::with('translations', 'children.translations')
                 ->tree()
                 ->get()
                 ->toTree();
-        });
+
     }
 
 

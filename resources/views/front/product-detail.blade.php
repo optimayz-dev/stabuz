@@ -69,8 +69,10 @@
                 <div class="d-flex">
                     <span class="goods_proccent" style="margin-right: 20px;" name="productProccent">-25%</span>
                     <div class="d-flex flex-column">
-                        <p class="goods_currentPrice" name="productCurrentPrice">{{ $product->prices[0]['value'] }} {{ $product->prices[0]['currency']->currency_code }}</p>
-                        <p class="goods_oldPrice" name="productOldPrice">17 020 000 сум</p>
+                        <p class="goods_currentPrice" name="productCurrentPrice">{{ $product->price }} usd</p>
+                    @if($product->old_price)
+                        <p class="goods_oldPrice" name="productOldPrice">{{ $price->old_price }} usd</p>
+                    @endif
                     </div>
                 </div>
                 <p class="product-photo_plan" name="productPlan">Рассрочка</p>
@@ -146,15 +148,15 @@
                     <tbody>
                     <tr>
                         <td>Артикул</td>
-                        <td id="product-vendorcode" name="productVendorCode">061124A000 <button class="product-copy_vendorcodeBtn"><img src="image/icons/copy.svg" alt=""></button></td>
+                        <td id="product-vendorcode" name="productVendorCode">{{ $product->article }} <button class="product-copy_vendorcodeBtn"><img src="image/icons/copy.svg" alt=""></button></td>
                     </tr>
                     <tr>
                         <td>Модель</td>
-                        <td name="productModel">GBH 3-28 DFR</td>
+                        <td name="productModel">{{ $product->modification }}</td>
                     </tr>
                     <tr>
                         <td>Бренд</td>
-                        <td><a href="/" name="productCompany">BOSCH</a></td>
+                        <td><a href="/" name="productCompany">{{ $product->brand->title }}</a></td>
                     </tr>
                     <tr>
                         <td>Страна</td>
@@ -189,56 +191,56 @@
                             О товаре
                         </p>
                         <h6>Характеристики</h6>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>Номинальная входная мощность</td>
-                                <td>800</td>
-                            </tr>
-                            <tr>
-                                <td>Энергия удара, J</td>
-                                <td>3.1</td>
-                            </tr>
-                            <tr>
-                                <td>Размер инструмента (длина х высота), мм</td>
-                                <td>326х233</td>
-                            </tr>
-                            <tr>
-                                <td>Номинальное число оборотов, об/мин</td>
-                                <td>0 – 900</td>
-                            </tr>
-                            <tr>
-                                <td>Число ударов при номинальном числе оборотов, уд/мин</td>
-                                <td>0 – 4.000</td>
-                            </tr>
-                            <tr>
-                                <td>Вес, кг</td>
-                                <td>3.6</td>
-                            </tr>
-                            <tr>
-                                <td>Зажим</td>
-                                <td>SDS plus</td>
-                            </tr>
-                            <tr>
-                                <td>Зажим</td>
-                                <td>SDS plus</td>
-                            </tr>
-                            <tr>
-                                <td>Зажим</td>
-                                <td>SDS plus</td>
-                            </tr>
-                            <tr>
-                                <td>Зажим</td>
-                                <td>SDS plus</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        {!! $product->characteristics !!}
+{{--                        <table>--}}
+{{--                            <tbody>--}}
+{{--                            <tr>--}}
+{{--                                <td>Номинальная входная мощность</td>--}}
+{{--                                <td>800</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Энергия удара, J</td>--}}
+{{--                                <td>3.1</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Размер инструмента (длина х высота), мм</td>--}}
+{{--                                <td>326х233</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Номинальное число оборотов, об/мин</td>--}}
+{{--                                <td>0 – 900</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Число ударов при номинальном числе оборотов, уд/мин</td>--}}
+{{--                                <td>0 – 4.000</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Вес, кг</td>--}}
+{{--                                <td>3.6</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Зажим</td>--}}
+{{--                                <td>SDS plus</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Зажим</td>--}}
+{{--                                <td>SDS plus</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Зажим</td>--}}
+{{--                                <td>SDS plus</td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td>Зажим</td>--}}
+{{--                                <td>SDS plus</td>--}}
+{{--                            </tr>--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
                         <button class="product-more-btn" id="product-characteristics_moreBtn">Все характеристики<img class="icon" src="image/icons/greenArrRight.png" alt="arrow down"></button>
                     </div>
                     <div class="product-description">
                         <h6>Описание товара</h6>
-                        <p class="product-description_text pb-0">Высокая производительность при снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого класса повышает удобство работы благодаря системе Bosch Vibration Control.<br><br>
-                            Высокая производительность сверления и увеличение производительности долбления на 20% по сравнению с другими перфораторами этого класса.Высокая производительность при снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого класса повышает удобство работы благодаря системе Bosch Vibration Control</p>
+                        {!! $product->description !!}
                         <button class="product-more-btn" id="product-description_moreBtn">Развернуть описание<img class="icon" src="image/icons/greenArrRight.png" alt="arrow down"></button>
                     </div>
                 </div>

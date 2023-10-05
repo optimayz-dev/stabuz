@@ -114,10 +114,10 @@
                             @foreach($catalog->children as $category)
                                 <div class="sidebar-tab category-item main-categories" id="tab{{ $catalog->id }}">
                                     <div class="main-category-item">
-                                        <a href="{{  $category->slug }}" class="category-title">{{ $category->title }}</a>
+                                        <a href="{{ route('category.view', $category->slug) }}" class="category-title">{{ $category->title }}</a>
                                         @foreach($category->children as $subcategory)
                                             <div class="children-categories">
-                                                <div class="children-category-item"><a href="{{ $subcategory->slug }}">{{ $subcategory->title }}</a></div>
+                                                <div class="children-category-item"><a href="{{ route('category.view', $subcategory->slug) }}">{{ $subcategory->title }}</a></div>
                                             </div>
                                         @endforeach
                                     </div>
