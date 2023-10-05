@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/category', CategoryController::class);
             Route::resource('/admin/product', ProductController::class);
             Route::resource('/admin/subcategory', SubcategoryController::class);
-            Route::resource('/admin/tags', TagController::class);
+            Route::resource('/admin/tag', TagController::class);
             Route::resource('/admin/attribute', AttributeController::class);
             Route::resource('/admin/news', NewsController::class);
             Route::resource('/admin/promotion', PromotionController::class);
