@@ -79,12 +79,14 @@
                     </ul>
                 </div>
                 <div class="dropdown d-md-block d-none">
-                    <a href="#!">Ру</a>
+                    <a href="#!">{{ \Illuminate\Support\Facades\App::getLocale() }}</a>
                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">O‘z</a></li>
+                        <li><a class="dropdown-item" href="{{ route('locale', 'uz') }}">O‘z</a></li>
+                        <li><a class="dropdown-item" href="{{ route('locale', 'ru') }}">Ru</a></li>
                     </ul>
+
                 </div>
             </div>
             <div class="burger d-md-none d-block" data-bs-toggle="offcanvas" data-bs-target="#burger-mobile" aria-controls="burger-mobile">

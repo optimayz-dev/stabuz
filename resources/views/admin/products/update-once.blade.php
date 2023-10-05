@@ -75,32 +75,20 @@
                                             </label>
                                         </div>
                                         <div class="input-wrapper">
-                                            <label for="file_url">
-                                                @error('file_url')
-                                                <div class=file_url>{{ $message }}</div>
-                                                @enderror
-                                                <input type="file" name="file_url" >
+                                            <label for="">Выберите категории брендов <br>
+                                                <select id="e1" style="width: 300px;" multiple name="categories_id[]" class="select">
+                                                    @foreach($product->categories as $item)
+                                                        <option value="{{ $item->id }}" selected> {{ $item->title }}</option>
+                                                    @endforeach
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
                                             </label>
                                         </div>
+
                                     </div>
                                     <div class="col-md-6 col-sm-6" >
-
-                                        <div id="more-input">
-                                            <div class="input-wrapper">
-                                                <label>
-                                                    @error('parent_id_hidden')
-                                                    <div class=parent_id_hidden>{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="text" name="parent_id" class="form-control parent_id" placeholder="Ведите название категории" id="parent_id" value="">
-                                                    <input type="hidden" name="parent_id_hidden" id="parent_id_hidden">
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <span id="addEmail" class="btn ">+</span>--}}
-{{--                                                        <span id="removeEmail" class="btn">-</span>--}}
-{{--                                                    </div>--}}
-                                                </label>
-                                                <div class="suggestions"></div>
-                                            </div>
-                                        </div>
 
                                         <div class="input-wrapper">
                                             <label for="title">
@@ -131,15 +119,27 @@
                                                 @error('price')
                                                 <div class=price>{{ $message }}</div>
                                                 @enderror
-                                                <input type="text" name="price" class="form-control" placeholder="Цена">
-                                                @error('currency_code')
-                                                <div class=currency_code>{{ $message }}</div>
-                                                @enderror
-                                                <select name="currency_code" class="form-control">
-                                                    @foreach($currencies as $currency)
-                                                        <option value="{{ $currency->id }}">{{ $currency->currency_code }}</option>
+                                                <input type="text" value="{{ $product->price ?? '' }}" name="price" class="form-control" placeholder="Цена">
+                                            </label>
+                                        </div>
+                                        <div class="input-wrapper">
+                                            <label for="">Выберите Бренд <br>
+                                                <select id="e2" style="width: 300px;" name="brand_id" class="select">
+                                                    @if($product->brand->id != null)
+                                                        <option value="{{ $product->brand->id }}" selected>{{ $product->brand->title }}</option>
+                                                    @endif
+                                                    @foreach($brands as $brand)
+                                                        <option value="{{ $brand->id }}">{{ $brand->title }}</option>
                                                     @endforeach
                                                 </select>
+                                            </label>
+                                        </div>
+                                        <div class="input-wrapper">
+                                            <label for="file_url">
+                                                @error('file_url')
+                                                <div class=file_url>{{ $message }}</div>
+                                                @enderror
+                                                <input type="file" name="file_url" >
                                             </label>
                                         </div>
                                     </div>
@@ -148,12 +148,15 @@
                                             <small>Теги</small>
                                         </h2>
                                     </div>
+
                                     @foreach($tags as $tag)
                                         <div class="col-md-2">
                                             <div class="input-wrapper">
                                                 <div class="form-check">
                                                     <label class="form-check-label" for="">
-                                                        <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
+                                                        @foreach($product->tags as $item)
+                                                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tag_id[]" @if($tag->id == $item->id ) checked @endif>
+                                                        @endforeach
                                                         {{ $tag->title }}
                                                     </label>
                                                 </div>

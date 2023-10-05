@@ -30,7 +30,8 @@ class StoreProductRequest extends FormRequest
             'attribute_title' => 'nullable',
             'attribute_value' => 'nullable',
             'file_url' => 'required',
-            'brand_id' => 'integer'
+            'brand_id' => 'integer',
+            'price' => 'integer'
         ];
     }
 }

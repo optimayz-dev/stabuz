@@ -15,7 +15,12 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\VideoReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class HomeController extends Controller
 {
@@ -63,6 +68,18 @@ class HomeController extends Controller
             'faqs' => $faqs
 
         ]);
+    }
+
+    public function changeLocale($locale)
+    {
+
+        App::setLocale($locale);
+        Session::put('locale', $locale);
+        LaravelLocalization::setLocale($locale);
+        $url =  LaravelLocalization::getLocalizedURL(App::getLocale(), URL::previous());
+
+        return Redirect::to($url);
+
     }
 
 }

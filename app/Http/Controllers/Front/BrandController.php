@@ -20,6 +20,17 @@ class BrandController extends Controller
     {
         $locale = App::getLocale();
 
+//        $id = Brand::query()->whereHas('translations', function ($query) use ($slug){
+//            $query->where('slug', $slug);
+//        })->first();
+//
+//
+//        $item = Brand::query()->whereHas('categories.children', function ($query) use ($id){
+//            $query->where('id', $id->id);
+//        })->first();
+
+//        return $item;
+
         $brand = Brand::query()
             ->with([
                 'translations',
@@ -32,7 +43,11 @@ class BrandController extends Controller
             ])
             ->whereHas('translations', function ($query) use ($slug){
                $query->where('slug', $slug);
-            })->first();
+            })
+//            ->whereHas('categories.children', function ($query) use ($id){
+//                $query->where('id', $id->id);
+//            })
+            ->first();
 
         return view('front.brand-detail', ['brand' => $brand]);
     }

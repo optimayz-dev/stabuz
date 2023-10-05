@@ -77,25 +77,17 @@
                                                 </label>
                                             </div>
                                             <div class="input-wrapper">
-                                                <label for="file_url">
-                                                    @error('file_url')
-                                                    <div class=file_url>{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="file" name="file_url" >
+                                                <label for="">Выберите категории <br>
+                                                    <select id="e1" style="width: 300px;" multiple name="categories_id[]">
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            <div class="input-wrapper">
-                                                <label>
-                                                    @error('parent_id_hidden')
-                                                    <div class=parent_id_hidden>{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="text" name="parent_id" class="form-control" placeholder="Ведите название категории" id="parent_id">
-                                                    <input type="hidden" name="parent_id_hidden" id="parent_id_hidden">
-                                                </label>
-                                                <div id="suggestions"></div>
-                                            </div>
+
                                             <div class="input-wrapper">
                                                 <label for="title">
                                                     @error('title')
@@ -126,14 +118,23 @@
                                                     <div class=price>{{ $message }}</div>
                                                     @enderror
                                                     <input type="text" name="price" class="form-control" placeholder="Цена">
-                                                    @error('currency_code')
-                                                    <div class=currency_code>{{ $message }}</div>
-                                                    @enderror
-                                                    <select name="currency_code" class="form-control">
-                                                        @foreach($currencies as $currency)
-                                                            <option value="{{ $currency->id }}">{{ $currency->currency_code }}</option>
+                                                </label>
+                                            </div>
+                                            <div class="input-wrapper">
+                                                <label for="">Выберите Бренд <br>
+                                                    <select id="e2" style="width: 300px;" name="brand_id" class="select">
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->title }}</option>
                                                         @endforeach
                                                     </select>
+                                                </label>
+                                            </div>
+                                            <div class="input-wrapper">
+                                                <label for="file_url">
+                                                    @error('file_url')
+                                                    <div class=file_url>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="file" name="file_url" >
                                                 </label>
                                             </div>
                                         </div>

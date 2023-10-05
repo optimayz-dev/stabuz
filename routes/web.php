@@ -33,6 +33,8 @@ Route::group([
 ], function (){
 
     Route::get('/', [HomeController::class, 'homepage']);
+    Route::get('/locale/{locale}', [HomeController::class, 'changeLocale'])->name('locale');
+
     Route::get('/product/{slug}', [ProductController::class, 'detailProduct'])->name('product.detail');
     Route::get('/categories', [CategoryController::class, 'categoriesView'])->name('categories.view');
     Route::get('/category/{slug}', [CategoryController::class, 'categoryView'])->name('category.view');

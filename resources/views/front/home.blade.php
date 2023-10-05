@@ -63,9 +63,9 @@
                             </div>
                         </div>
                         <div style="padding: 15px;">
-                            @foreach($product->prices as $price)
-                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $price->value }} {{ $price->currency->currency_code }}</p>
-                            @endforeach
+{{--                            @foreach($product->prices as $price)--}}
+                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price }} usd</p>
+{{--                            @endforeach--}}
                             <!-- <p class="goods_oldPrice" name="actualGoodsOldPrice">17 020 000 сум</p> -->
                             <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                 <div class="goods_rewies d-flex align-items-center gap-1">
@@ -181,9 +181,9 @@
                                 </div>
                             </div>
                             <div style="padding: 15px;">
-                                @foreach($product->prices as $price)
-                                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $price->value }} {{ $price->currency->currency_code }}</p>
-                                @endforeach
+{{--                                @foreach($product->prices as $price)--}}
+                                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price }} usd</p>
+{{--                                @endforeach--}}
                                 <!-- <p class="goods_oldPrice" name="actualGoodsOldPrice">17 020 000 сум</p> -->
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                     <div class="goods_rewies d-flex align-items-center gap-1">
@@ -274,9 +274,9 @@
                                 </div>
                             </div>
                             <div style="padding: 15px;">
-                                @foreach($product->prices as $price)
-                                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $price->value }} {{ $price->currency->currency_code }}</p>
-                                @endforeach
+{{--                                @foreach($product->prices as $price)--}}
+                                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price ?? ''}}  usd</p>
+{{--                                @endforeach--}}
                                 <!-- <p class="goods_oldPrice" name="actualGoodsOldPrice">17 020 000 сум</p> -->
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                     <div class="goods_rewies d-flex align-items-center gap-1">

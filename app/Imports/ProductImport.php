@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Storage;
 class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, WithBatchInserts
 {
     /**
-    * @param Collection $collection
-    */
+     * @param Collection $collection
+     */
 //    public function __construct(&$errors)
 //    {
 //        $this->errors = &$errors;
@@ -25,44 +25,39 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
     public function model(array $row)
     {
 
+        $product = Product::with('translations')->findOrNew($row['id']);
+        // Создаём или обновляем перевод для текущего языка
+        $locale = App::getLocale();
+        $product->translateOrNew($locale)->title = $row['title'];
+        $product->translateOrNew($locale)->seo_title = $row['seo_title'];
+        $product->translateOrNew($locale)->description = $row['description'];
+        $product->translateOrNew($locale)->seo_description = $row['seo_description'];
+        $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'];
+        $product->brand_id = $row['brand_id'];
+        $product->price = $row['price'];
+        $categoryId = explode(';', $row['category']);
+        $tagId = explode(';', $row['tag_id']);
 
-            $product = Product::with('translations')->findOrNew($row['id']);
-            // Создаём или обновляем перевод для текущего языка
-            $locale = App::getLocale();
-            $product->translateOrNew($locale)->title = $row['title'] ?? 'test' ;
-            $product->translateOrNew($locale)->seo_title = $row['seo_title'];
-            $product->translateOrNew($locale)->description = $row['description'] ?? 'desc';
-            $product->translateOrNew($locale)->seo_description = $row['seo_description'];
-            $product->translateOrNew($locale)->meta_keywords = $row['meta_keywords'] ;
-            $product->brand_id = $row['brand_id'] ?? 1;
-            $categoryId = explode(';', $row['category']);
+        $url = $row['image'];
+        $contents = false;
+        if (isset($url))
+            $contents = file_get_contents($url);
 
-//            dd($categoryId);
+        $name = substr($url, strrpos($url, '/') + 1);
+        Storage::put('images/' . $name, $contents);
 
-            $url = $row['image'];
-            $contents = false;
-            if (isset($url))
-                $contents = file_get_contents($url);
+        $product->file_url = 'images/' . $name;
 
-            $name = substr($url, strrpos($url, '/') + 1);
-            Storage::put('images/'. $name, $contents);
+        $product->save();
+
+        // Связываем с категориями
+        $product->categories()->sync($categoryId);
+
+        // Связываем с тегами
+        $product->tags()->sync($tagId);
 
 
-            $product->file_url = 'images/'. $name;
 
-            $product->save();
-//            $product->categories()->attach($categoryId);
-
-//            $categoryId[] = $row['category'];
-
-            foreach ($categoryId as $category)
-            {
-                $product->categories()->sync($category,false);
-            }
-
-//            foreach ($categoryId as $category){
-//                $product->categories()->detach((integer)$category);
-//            }
 
     }
 

@@ -37,7 +37,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Show the form for creating a new resource.
      */
@@ -45,9 +44,14 @@ class ProductController extends Controller
     {
         $tags = Tag::with('translations')->get();
         $currencies = CurrencyCode::query()->get();
+        $categories = Category::query()->with('translations')->get();
+        $brands = Brand::query()->with('translations')->get();
+
         return view('admin.products.create', [
             'tags' => $tags,
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'categories' => $categories,
+            'brands' => $brands
         ]);
     }
 
@@ -63,19 +67,6 @@ class ProductController extends Controller
             $path = $request->file('file_url')->store('images');
         }
 
-//        $product = Product::query()->create([
-//            'title' => $request->input('title'),
-//            'seo_title' => $request->input('seo_title'),
-//            'description' => $request->input('description'),
-//            'seo_description' => $request->input('seo_description'),
-//            'meta_keywords' => $request->input('meta_keywords'),
-//            'attribute_title' => $request->input('attribute_title'),
-//            'attribute_value' => $request->input('attribute_value'),
-//            'file_url' => $path,
-//            'brand_id' => $request->input('brand_id',1)
-//        ]);
-
-
         $product->title = $request->input('title');
         $product->description = $request->input('description');
         $product->attribute_title = $request->input('attribute_title');
@@ -84,46 +75,20 @@ class ProductController extends Controller
         $product->seo_description = $request->input('seo_description');
         $product->meta_keywords = $request->input('meta_keywords');
         $product->file_url = $path ?? null;
-        $product->brand_id = $request->input('brand_id',1);
+        $product->brand_id = $request->input('brand_id');
+        $product->price = $request->input('price');
 
         $product->save();
-//        $product->brand_id = 1;
-
-
-//        'title' => 'required',
-//            'seo_title' => 'nullable',
-//            'description' => 'required',
-//            'seo_description' => 'nullable',
-//            'meta_keywords' => 'nullable',
-//            'attribute_title' => 'nullable',
-//            'attribute_value' => 'nullable',
-//            'file_url' => 'required'
-
-
-
-        // Сохраняем продукт
-//        $product->save();
-//        $images = $request->input('images', []);
-//        foreach ($images as $image){
-//            $product_gallery = new ProductGallery();
-//            $path = $request->file($image)->store('images');;
-//            $product_gallery->image = $path;
-//            $product_gallery->save();
-//        }
 
         // Получаем ID выбранной категории из формы
-        $categoryId = $request->input('parent_id_hidden');
+        $categoryId = $request->input('categories_id');
         // Получаем ID выбранных тегов из формы
-        $tagsId = $request->input('tag_id', []);
-        $price = new Price();
-        $price->value = $request->input('price');
-        $price->product_id = $product->id;
-        $price->currency_code_id = $request->input('currency_code');
-        $price->save();
+        $tagId = $request->input('tag_id');
 
         // Связываем продукт с выбранной категорией через pivot таблицу
         $product->categories()->attach($categoryId);
         // Связываем продукт с выбранными тегами через pivot таблицу
+        $product->tags()->attach($tagId);
 //        foreach ($tagsId as $tagId){
 //            $product->tags()->attach($tagId);
 //        }
@@ -132,21 +97,24 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Display the specified resource.
      */
     public function show(Product $product)
     {
 
-        $product = Product::query()->with('categories')->findOrFail($product->id);
+        $product = Product::query()->with('categories', 'categories.translations', 'tags')->findOrFail($product->id);
         $tags = Tag::with('translations')->get();
         $currencies = CurrencyCode::query()->get();
+        $categories = Category::query()->with('translations')->get();
+        $brands = Brand::query()->with('translations')->get();
 
         return view('admin.products.update-once', [
             'product' => $product,
             'tags' => $tags,
-            'currencies' => $currencies
+            'currencies' => $currencies,
+            'categories' => $categories,
+            'brands' => $brands
         ]);
     }
 
@@ -161,7 +129,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         if ($request->file('file_url'))
             $file_url = $request->file('file_url')->store('images');
@@ -174,11 +142,18 @@ class ProductController extends Controller
         $product->seo_description = $request->input('seo_description');
         $product->meta_keywords = $request->input('meta_keywords');
         $product->file_url = $file_url ?? $product->file_url;
+        $product->brand_id = $request->input('brand_id');
+        $product->price = $request->input('price');
 
         $product->update();
 
+        $categoryId = $request->input('categories_id');
+        $tagId = $request->input('tag_id');
+        $product->categories()->sync($categoryId);
+        $product->tags()->sync($tagId);
 
-        return redirect()->back()->with('success','Продукт успешно изменен.');
+
+        return redirect()->back()->with('success', 'Продукт успешно изменен.');
     }
 
     /**
@@ -232,7 +207,7 @@ class ProductController extends Controller
 
     public function editBySubcategory(Category $id)
     {
-        $subcategory = Category::with('translations','products.translations')->find($id->id);
+        $subcategory = Category::with('translations', 'products.translations')->find($id->id);
 
         return view('admin.products.update', compact('subcategory'));
     }
@@ -240,15 +215,14 @@ class ProductController extends Controller
     public function updateBySubcategory(Request $request)
     {
         $product_id = $request->input('product_id', []);
-        foreach ($product_id as $id)
-        {
+        foreach ($product_id as $id) {
             $product = Product::findOrFail($id);
-            $product->title = $request->input('title_'.$id);
-            $product->descr = $request->input('descr_'.$id);
-            if ($request->hasFile('file_url_'.$id)) {
+            $product->title = $request->input('title_' . $id);
+            $product->descr = $request->input('descr_' . $id);
+            if ($request->hasFile('file_url_' . $id)) {
                 File::delete($product->image);
-                $path = $request->file('file_url_'.$id)->store('uploads', 'public');
-                $product->file_url = '/storage/'.$path;
+                $path = $request->file('file_url_' . $id)->store('uploads', 'public');
+                $product->file_url = '/storage/' . $path;
             }
             $product->update();
         }
@@ -258,8 +232,7 @@ class ProductController extends Controller
     public function deleteBySubcategory(Request $request)
     {
         $subcategory_id = $request->input('subcategory_id', []);
-        foreach ($subcategory_id as $id)
-        {
+        foreach ($subcategory_id as $id) {
             $subcategory = Category::findOrFail($id);
             $subcategory->destroy();
         }
@@ -286,15 +259,15 @@ class ProductController extends Controller
         $locale = $request->getlocale;
         app()->setLocale($locale);
 
-        foreach ($request->input('id') as $id){
-            $category = Product::query()->with('translations')->where('id' , $id)->first();
+        foreach ($request->input('id') as $id) {
+            $category = Product::query()->with('translations')->where('id', $id)->first();
 
             $category->update([
-                'title' => $request->input('title_'.$id),
-                'description' => $request->input('description_'.$id),
-                'seo_title' => $request->input('seo_title_'.$id),
-                'seo_description' => $request->input('seo_description_'.$id),
-                'meta_keywords' => $request->input('meta_keywords_'.$id)
+                'title' => $request->input('title_' . $id),
+                'description' => $request->input('description_' . $id),
+                'seo_title' => $request->input('seo_title_' . $id),
+                'seo_description' => $request->input('seo_description_' . $id),
+                'meta_keywords' => $request->input('meta_keywords_' . $id)
             ]);
         }
 
@@ -303,7 +276,7 @@ class ProductController extends Controller
 
     public function deleteSelected(Request $request)
     {
-        foreach ($request->input('id') as $id){
+        foreach ($request->input('id') as $id) {
             Product::query()->where('id', $id)->delete();
 
         }
@@ -314,7 +287,7 @@ class ProductController extends Controller
     {
         $products = $request->input('id', []);
 
-        if ($products){
+        if ($products) {
             $products = Product::whereIn('id', $products)->orderBy('id')->with('translations')->get();
             return view('admin.products.update', ['products' => $products]);
         } else {
