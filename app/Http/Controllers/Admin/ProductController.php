@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\ProductExport;
+use App\Exports\ProductsViewExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -188,9 +189,11 @@ class ProductController extends Controller
         return back()->with('success', 'Продукты успешно импортированы');
     }
 
-    public function export($categoryId)
+    public function export()
     {
-        return Excel::download(new ProductExport($categoryId), 'product.xlsx');
+//        return Excel::download(new InvoicesExport, 'invoices.xlsx');
+        return Excel::download(new ProductsViewExport(), 'product.xlsx');
+//        return Excel::download(new ProductExport(), 'product.xlsx');
     }
 
     public function viewTable()

@@ -85,6 +85,8 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/category-import', [ImportCategoryController::class, 'viewImport'])->name('category.viewImport');
             Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');
             Route::post('/admin/category-import', [ImportCategoryController::class, 'import'])->name('category.import');
+            Route::get('/admin/product-export', [ProductController::class, 'export'])->name('product.export');
+            Route::get('/admin/product-excell', [\App\Http\Controllers\Controller::class, 'excel']);
            // Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
 
     });
