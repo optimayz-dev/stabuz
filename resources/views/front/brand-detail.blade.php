@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div style="padding: 10px;">
-                        <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->prices->value ?? '' }}сум</p>
+                        <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price ?? '' }}usd</p>
                         <p class="goods_oldPrice" name="actualGoodsOldPrice">17 020 000 сум</p>
                         <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                             <div class="goods_rewies d-flex align-items-center gap-1">
