@@ -23,11 +23,12 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'title' => 'string',
-            'seo_title' => 'string',
-            'seo_description' => 'string',
-            'description' => 'string',
-            'meta_keywords' => 'string',
+            'seo_title' => 'nullable|string',
+            'seo_description' => 'nullable|string',
+            'description' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
             'categories_id' => 'nullable|array',
+            'country_id' => 'nullable|integer',
             'brand_logo' => ['required', 'mimes:jpg,png,svg,jpeg'],
         ];
     }
