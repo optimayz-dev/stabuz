@@ -29,7 +29,9 @@ class ProductController extends Controller
                 'prices',
                 'prices.currency',
                 'brand',
-                'brand.translations'
+                'brand.translations',
+                'brand.country',
+                'brand.country.translations',
             ])
             ->first();
 

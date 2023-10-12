@@ -33,9 +33,6 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <p class="text-muted font-13 m-b-30">
-                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                                    </p>
                                     @if(session('success'))
                                         <div class="alert alert-success">
                                             {{ session('success') }}
@@ -110,8 +107,9 @@
 
                                             </tbody>
                                         </table>
-                                        <div>
-                                            <label for="">Выберите категории брендов <br>
+                                        <div class="d-flex">
+
+                                            <label class="mr-3" for="">Выберите категории брендов <br>
                                                 <select id="e1" style="width: 300px;" multiple name="categories_id[]">
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -119,7 +117,15 @@
                                                 </select>
                                             </label>
 
+                                            <label for="">Выберите страну бренда <br>
+                                                <select id="e3" style="width: 300px;" name="country_id">
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
                                         </div>
+
                                         <div class="btn-wrapper">
                                             <button type="submit" class="btn btn-success">create</button>
                                         </div>

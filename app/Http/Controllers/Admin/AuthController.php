@@ -10,9 +10,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
-        if (Auth::check()){
-            return redirect()->intended('admin.dashboard');
-        }
+//        if (\auth('web')){
+//            return redirect()->intended('admin/login');
+//        }
         return view('auth.admin.login');
 
     }

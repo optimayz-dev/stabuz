@@ -42,16 +42,17 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         $product->credit = $row['credit'];
         $categoryId = explode(';', trim($row['category_id']));
         $tagId = explode(';', trim($row['tag_id']));
+        $url = $row['image'] ?? '';
 
-        $url = $row['image'];
-        $contents = false;
-        if (isset($url))
+        if (!empty($row['image'])){
+//            $contents = false;
             $contents = file_get_contents($url);
 
-        $name = substr($url, strrpos($url, '/') + 1);
-        Storage::put('images/' . $name, $contents);
+            $name = substr($url, strrpos($url, '/') + 1);
+            Storage::put('images/' . $name, $contents);
 
-        $product->file_url = 'images/' . $name;
+            $product->file_url = 'images/' . $name;
+        }
 
         $product->save();
 
@@ -63,7 +64,6 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         // Связываем с тегами
         if  (!empty($row['tag_id']))
             $product->tags()->sync($tagId);
-
 
 
     }

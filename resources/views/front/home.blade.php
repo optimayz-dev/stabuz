@@ -13,24 +13,14 @@
 <!-- healthy info -->
 <!-- healthy info -->
 <div class="healthy-info container d-md-flex d-none justify-content-between gap-3">
-    <div class="healthy-info_card">
-        <div class="healthy-info_card--img">
-            <img src="image/healthy-info/Group 534812679.png" alt="">
+    @foreach($promotion_banners as $banner)
+        <div class="healthy-info_card">
+            <div class="healthy-info_card--img">
+                <img src="{{ asset($banner->image)  }}" alt="">
+            </div>
+            <p>{{ $banner->title }}</p>
         </div>
-        <p>Бесплатная курьерская доставка</p>
-    </div>
-    <div class="healthy-info_card">
-        <div class="healthy-info_card--img">
-            <img src="image/healthy-info/Group 534812680.png" alt="">
-        </div>
-        <p>Акции и скидки </p>
-    </div>
-    <div class="healthy-info_card">
-        <div class="healthy-info_card--img">
-            <img src="image/healthy-info/Group 534812681.png" alt="">
-        </div>
-        <p>Широкий ассортимент</p>
-    </div>
+    @endforeach
 </div>
 <!-- actual goods -->
 <!-- ШАБЛОН КАРТОЧКИ БРАТЬ ТОЛЬКО ИЗ ЭТОГО СЛАЙДЕРА! -->
@@ -131,7 +121,7 @@
         <a href="{{ route('category.view', $catalog->slug) }}" class="popular-categories_item">
             <div class="popular-categories_item--img">
                 <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="" name="popularCategoriesImg">
-                <img src="{{ asset('/assets/front/images/category_img.png') }}" alt="">
+                <img src="{{ asset( $catalog->file_url) }}" alt="">
             </div>
             <p name="popularCategoriesName">{{ $catalog->title }}</p>
         </a>

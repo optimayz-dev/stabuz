@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\VideoReviewController;
 use App\Http\Controllers\Admin\MainBannerController;
 use App\Http\Controllers\Admin\PromotionBannerController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\CountryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,6 +47,7 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/video-review', VideoReviewController::class);
             Route::resource('/admin/pick-up-point', PickUpPointController::class);
             Route::resource('/admin/faq', FaqController::class);
+            Route::resource('/admin/country', CountryController::class);
             Route::resource('/admin/main-banner', MainBannerController::class);
             Route::resource('/admin/promotion-banner', PromotionBannerController::class);
             Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');

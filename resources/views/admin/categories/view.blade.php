@@ -75,55 +75,55 @@
                             </div>
                         </div>
                     </div>
-                    <div class="x_content">
-                        <div class="table-wrapper">
-                            <button class="accordion-toggle action-btn" data-target="{{ $cachedData->id }}" style="">{{ $cachedData->title }}</button>
-                            <table class="table table-striped table-bordered bulk_action table-container" style="width:100%;">
-                                <thead>
-                                <tr>
-                                    <th>Position</th>
-                                    <th>Title</th>
-                                    <th>Price</th>
-                                    <th>Attributes</th>
-                                    <th>Tags</th>
-                                    <th>Created date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+{{--                    <div class="x_content">--}}
+{{--                        <div class="table-wrapper">--}}
+{{--                            <button class="accordion-toggle action-btn" data-target="{{ $cachedData->id }}" style="">{{ $cachedData->title }}</button>--}}
+{{--                            <table class="table table-striped table-bordered bulk_action table-container" style="width:100%;">--}}
+{{--                                <thead>--}}
+{{--                                <tr>--}}
+{{--                                    <th>Position</th>--}}
+{{--                                    <th>Title</th>--}}
+{{--                                    <th>Price</th>--}}
+{{--                                    <th>Attributes</th>--}}
+{{--                                    <th>Tags</th>--}}
+{{--                                    <th>Created date</th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
 
-                                @foreach($cachedData->products as $product)
-                                    <tr>
-                                        <td>{{ $product->id }} / {{ $cachedData->id }}</td>
-                                        <td>{{ $product->title }}</td>
-                                        <td>
-                                            @foreach($product->prices as $price)
-                                            @if ($price)
-                                                    {{ $price->value }} {{ $price->currency->currency_code }}<br>
-                                            @else
-                                                No prices available for this product.
-                                            @endif
+{{--                                @foreach($cachedData->products as $product)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>{{ $product->id }} / {{ $cachedData->id }}</td>--}}
+{{--                                        <td>{{ $product->title }}</td>--}}
+{{--                                        <td>--}}
+{{--                                            @foreach($product->prices as $price)--}}
+{{--                                            @if ($price)--}}
+{{--                                                    {{ $price->value }} {{ $price->currency->currency_code }}<br>--}}
+{{--                                            @else--}}
+{{--                                                No prices available for this product.--}}
+{{--                                            @endif--}}
 
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            @foreach($product->tags as $tag)
-                                                {{ $tag->title }}
-                                            @endforeach
-                                        </td>
-                                        <td>{{ $product->created_at }}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="btn-wrapper">
-                                <a class="btn btn-primary" href="{{ route('admin.edit.subcategory-products', $cachedData->id) }}"><i class="fa fa-edit"></i> edit</a>
-                                <a class="btn btn-danger" href=""><i class="fa fa-trash"></i> delete</a>
-                                <a class="btn btn-success" href="{{ route('admin.products.export', $cachedData->id) }}"><i class="fa fa-cloud-download"></i> export data</a>
-                            </div>
-                        </div>
-                    </div>
+{{--                                            @endforeach--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            @foreach($product->tags as $tag)--}}
+{{--                                                {{ $tag->title }}--}}
+{{--                                            @endforeach--}}
+{{--                                        </td>--}}
+{{--                                        <td>{{ $product->created_at }}</td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                            <div class="btn-wrapper">--}}
+{{--                                <a class="btn btn-primary" href="{{ route('admin.edit.subcategory-products', $cachedData->id) }}"><i class="fa fa-edit"></i> edit</a>--}}
+{{--                                <a class="btn btn-danger" href=""><i class="fa fa-trash"></i> delete</a>--}}
+{{--                                <a class="btn btn-success" href="{{ route('admin.products.export', $cachedData->id) }}"><i class="fa fa-cloud-download"></i> export data</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>

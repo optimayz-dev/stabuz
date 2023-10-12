@@ -64,7 +64,6 @@
                     <button class="category-filter_reset--btn">Сбросить</button>
                 </div>
                 <ul class="category-filter_list" name="categoryBrandsList">
-
                     @foreach($category->brands as $brand)
                         <li>
                             <input type="checkbox" name="brand" id="brand1" value="brand1">
@@ -82,56 +81,15 @@
                     <button class="category-filter_reset--btn">Сбросить</button>
                 </div>
                 <ul class="category-filter_list" name="categoryCountryList">
-                    <li><input type="checkbox" name="country" id="country1" value="country1"> <label for="country1">Страна
-                            1</label></li>
-                    <li><input type="checkbox" name="country" id="country2" value="country2"> <label for="country2">Страна
-                            2</label></li>
-                    <li><input type="checkbox" name="country" id="country3" value="country3"> <label for="country3">Страна
-                            3</label></li>
-                    <li><input type="checkbox" name="country" id="country4" value="country4"> <label for="country4">Страна
-                            4</label></li>
-                    <li><input type="checkbox" name="country" id="country5" value="country5"> <label for="country5">Страна
-                            5</label></li>
-                    <li><input type="checkbox" name="country" id="country6" value="country6"> <label for="country6">Страна
-                            6</label></li>
-                    <li><input type="checkbox" name="country" id="country7" value="country7"> <label for="country7">Страна
-                            7</label></li>
-                    <li><input type="checkbox" name="country" id="country8" value="country8"> <label for="country8">Страна
-                            8</label></li>
-                    <li><input type="checkbox" name="country" id="country9" value="country9"> <label for="country9">Страна
-                            9</label></li>
-                    <li><input type="checkbox" name="country" id="country10" value="country10"> <label for="country10">Страна
-                            10</label></li>
-                    <li><input type="checkbox" name="country" id="country11" value="country11"> <label for="country11">Страна
-                            11</label></li>
-                    <li><input type="checkbox" name="country" id="country12" value="country12"> <label for="country12">Страна
-                            12</label></li>
-                    <li><input type="checkbox" name="country" id="country13" value="country13"> <label for="country13">Страна
-                            13</label></li>
-                    <li><input type="checkbox" name="country" id="country14" value="country14"> <label for="country14">Страна
-                            14</label></li>
-                    <li><input type="checkbox" name="country" id="country15" value="country15"> <label for="country15">Страна
-                            15</label></li>
-                    <li><input type="checkbox" name="country" id="country16" value="country16"> <label for="country16">Страна
-                            16</label></li>
-                    <li><input type="checkbox" name="country" id="country17" value="country17"> <label for="country17">Страна
-                            17</label></li>
-                    <li><input type="checkbox" name="country" id="country18" value="country18"> <label for="country18">Страна
-                            18</label></li>
-                    <li><input type="checkbox" name="country" id="country19" value="country19"> <label for="country19">Страна
-                            19</label></li>
-                    <li><input type="checkbox" name="country" id="country20" value="country20"> <label for="country20">Страна
-                            20</label></li>
-                    <li><input type="checkbox" name="country" id="country21" value="country21"> <label for="country21">Страна
-                            21</label></li>
-                    <li><input type="checkbox" name="country" id="country22" value="country22"> <label for="country22">Страна
-                            22</label></li>
-                    <li><input type="checkbox" name="country" id="country23" value="country23"> <label for="country23">Страна
-                            23</label></li>
-                    <li><input type="checkbox" name="country" id="country24" value="country24"> <label for="country24">Страна
-                            24</label></li>
-                    <li><input type="checkbox" name="country" id="country25" value="country25"> <label for="country25">Страна
-                            25</label></li>
+
+                    @foreach($category->brands as $brand)
+
+                        @if(!(empty($brand->country)))
+                        <li>
+                            <input type="checkbox" name="country" id="country1" value="country1"> <label for="country1">{{ $brand->country->title }}</label>
+                        </li>
+                        @endif
+                    @endforeach
                 </ul>
                 <button class="category-filter_showall--btn">Все страны<img src="/image/icons/chevroneBottom.svg"
                                                                             alt=""></button>
@@ -211,8 +169,8 @@
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
                                     @php
-                                    $old_price = $product->old_price;
-                                    $price = $product->price;
+                                        $old_price = $product->old_price;
+                                        $price = $product->price;
                                     @endphp
                                     <span class="goods_proccent" name="actualGoodsProccent">-{{ ($old_price - $price) / $price * 100  }}%</span>
                                 @endif
@@ -226,9 +184,9 @@
                                 {{ $product->price }} usd
                             </p>
                             @if($product->old_price)
-                            <p class="goods_oldPrice"
-                               name="actualGoodsOldPrice">{{ $product->old_price }} usd
-                            </p>
+                                <p class="goods_oldPrice"
+                                   name="actualGoodsOldPrice">{{ $product->old_price }} usd
+                                </p>
                             @endif
                             <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                 <div class="goods_rewies d-flex align-items-center gap-1">

@@ -37,6 +37,7 @@ Route::group([
 
     Route::get('/product/{slug}', [ProductController::class, 'detailProduct'])->name('product.detail');
     Route::get('/categories', [CategoryController::class, 'categoriesView'])->name('categories.view');
+
     Route::get('/category/{slug}', [CategoryController::class, 'categoryView'])->name('category.view');
     Route::get('/new-products', [ProductController::class, 'newProducts'])->name('new.products');
 

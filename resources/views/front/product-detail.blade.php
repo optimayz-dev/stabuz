@@ -25,7 +25,7 @@
     <!-- product -->
     <section style="box-shadow: none !important;" class="product goods_item container d-flex flex-lg-row flex-column justify-content-between">
         <div class="product-photo d-flex align-items-center gap-4">
-            <a href="/" class="product-photo_slider-backbtn d-sm-none d-flex"><img src="image/icons/mobileArrLeft.png" alt=""></a>
+            <a href="/" class="product-photo_slider-backbtn d-sm-none d-flex"><img src="" alt=""></a>
             <div class="product-photo_slider" name="productPhotoSlider">
                 <!-- ВЫВОД КАРТИНКОК ТОВАРА ИЗ БД -->
                 <div class="product-photo_small goods-img">
@@ -55,7 +55,7 @@
             </div>
 
             <div class="product-photo_brand">
-                <img src="image/brands/Ellipse 179.png" alt="" name="productCompanyImg">
+                <img src="{{ asset($product->brand->brand_logo) }}" alt="" name="productCompanyImg">
             </div>
             <div class="product-photo_large d-sm-flex d-none">
                 <img src="image/cards/Group 511.svg" alt="">
@@ -71,7 +71,7 @@
                     <div class="d-flex flex-column">
                         <p class="goods_currentPrice" name="productCurrentPrice">{{ $product->price }} usd</p>
                     @if($product->old_price)
-                        <p class="goods_oldPrice" name="productOldPrice">{{ $price->old_price }} usd</p>
+                        <p class="goods_oldPrice" name="productOldPrice">{{ $product->old_price }} usd</p>
                     @endif
                     </div>
                 </div>
@@ -159,8 +159,10 @@
                         <td><a href="/" name="productCompany">{{ $product->brand->title }}</a></td>
                     </tr>
                     <tr>
+                        @if($product->brand->country)
                         <td>Страна</td>
-                        <td name="productCountry">Германия</td>
+                        <td name="productCountry">{{ $product->brand->country->title}}</td>
+                        @endif
                     </tr>
                     </tbody>
                 </table>

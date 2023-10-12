@@ -29,6 +29,11 @@ class Brand extends Model implements TranslatableContract
         return $this->hasMany(Product::class);
     }
 
+    public function country()
+    {
+        return $this->hasOne(Country::class, 'id', 'country_id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_brand');

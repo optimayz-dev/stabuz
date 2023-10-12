@@ -2,15 +2,16 @@
 @section('content')
     @include('front.__layouts.header')
     <section class="container d-flex justify-content-center">
-        <form action="{{ route('login.user') }}" class="login">
+        <form action="{{ route('login.user') }}" method="post" class="login">
+            @csrf
             <h6>Авторизация</h6>
             <div class="login_inpts">
                 <p>E-mail *</p>
-                <input type="text" required name="login-name">
+                <input type="text" required name="email">
             </div>
             <div class="login_inpts">
                 <p>Пароль *</p>
-                <input type="password" class="password-input mb-2" required id="password-input" name="login-password">
+                <input type="password" class="password-input mb-2" required id="password-input" name="password">
                 <img src="image/icons/eye-close.png" alt="" class="password-eye">
             </div>
             <a href="/">Забыли пароль?</a>

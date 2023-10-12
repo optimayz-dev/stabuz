@@ -9,6 +9,7 @@ use App\Imports\BrandImport;
 use App\Models\Admin\Brand;
 
 use App\Models\Admin\Category;
+use App\Models\Admin\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -34,8 +35,9 @@ class BrandController extends Controller
     public function create()
     {
         $categories = Category::query()->with('translations')->get();
+        $countries = Country::query()->with('translations')->get();
 
-        return view('admin.brands.create', ['categories' => $categories]);
+        return view('admin.brands.create', ['categories' => $categories, 'countries' => $countries]);
     }
 
     /**
@@ -74,8 +76,12 @@ class BrandController extends Controller
     public function edit(Brand $brand)
     {
         $categories = Category::query()->with('translations')->get();
+        $countries = Country::query()->with('translations')->get();
 
-        return view('admin.brands.update', ['brand' => $brand->load('categories.translations') , 'categories' => $categories]);
+        return view('admin.brands.update', [
+            'brand' => $brand->load('categories.translations', 'country.translations'),
+            'categories' => $categories,
+            'countries' => $countries]);
     }
 
     /**
@@ -90,6 +96,7 @@ class BrandController extends Controller
         $brand->seo_description = $request->input('seo_description');
         $brand->description = $request->input('description');
         $brand->meta_keywords = $request->input('meta_keywords');
+        $brand->country_id = $request->input('country_id');
 
         if ($request->hasFile('brand_logo')) {
             $path = $request->file('brand_logo')->store('images');
@@ -100,7 +107,7 @@ class BrandController extends Controller
 
 //        foreach ($request->categories_id as $category) {
 
-            $brand->categories()->sync($request->categories_id);
+        $brand->categories()->sync($request->categories_id);
 //        }
 
         $brand->update();

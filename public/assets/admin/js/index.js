@@ -9,6 +9,7 @@ $(document).ready(function() {
 
 $(document).ready(function() { $("#e1").select2(); });
 $(document).ready(function() { $("#e2").select2(); });
+$(document).ready(function() { $("#e3").select2(); });
 
 $(".select option").each(function() {
     $(this).siblings('[value="'+ this.value +'"]').remove();

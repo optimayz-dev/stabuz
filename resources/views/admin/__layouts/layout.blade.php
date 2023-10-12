@@ -85,6 +85,7 @@
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.attribute.index') }}">Атрибуты</a></li>
                                     <li><a href="{{ route('admin.tag.index') }}">Теги</a></li>
+                                    <li><a href="{{ route('admin.country.index') }}">Страны</a></li>
                                 </ul>
                             </li>
 

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('/assets/front/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/front/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/front/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/front/css/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/front/css/slick/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/front/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/front/css/media.css') }}">
 </head>

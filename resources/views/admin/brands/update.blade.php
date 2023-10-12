@@ -17,15 +17,6 @@
                                     @endforeach
                                 </div>
                             </li>
-
-{{--                            <li class="dropdown" style="padding-right: 15px;">--}}
-{{--                                <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>--}}
-{{--                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-{{--                                    <a class="dropdown-item" href="{{ route('admin.catalog.index') }}">All catalogs</a>--}}
-{{--                                    <a class="dropdown-item" href="{{ route('admin.catalog.create') }}">Create catalog</a>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -34,7 +25,6 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-{{--                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>--}}
                                     </p>
                                     @if(session('success'))
                                         <div class="alert alert-success">
@@ -57,7 +47,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-{{--                                            @dd($brand)--}}
                                             <tr>
                                                 <td>
                                                     <label>
@@ -111,14 +100,22 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <div>
-                                            <label for="">Выберите категории брендов <br>
+                                        <div class="d-flex">
+                                            <label class="mr-3" for="">Выберите категории брендов <br>
                                                 <select id="e1" style="width: 300px;" multiple name="categories_id[]" class="select">
                                                     @foreach($brand->categories as $item)
                                                         <option value="{{ $item->id }}" selected> {{ $item->title }}</option>
                                                     @endforeach
                                                     @foreach($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+                                            <label for="">Выберите страну бренда <br>
+                                                <select id="e3" style="width: 300px;" name="country_id" class="select">
+                                                    <option value="{{ $brand->country->id ?? ''}}" selected>{{ $brand->country->title ?? 'Выберите страну' }}</option>
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </label>

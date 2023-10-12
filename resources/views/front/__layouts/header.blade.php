@@ -95,8 +95,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="header-nav-fixed">
         <div class="header-nav container p-0 d-flex justify-content-between align-items-center gap-2">
             <button class="catalog-btn d-md-block d-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Каталог</button>
@@ -130,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <a href="index.html" class="d-xl-block d-none"><img src="{{ asset('assets/front/images/mainLogo.png') }}" alt=""></a>
+            <a href="/" class="d-xl-block d-none"><img src="{{ asset('assets/front/images/mainLogo.png') }}" alt=""></a>
             <form action="index.html" method="get" class="header-search">
                 <input type="search" placeholder="Поиск" class="icon-search">
                 <button type="submit" class="icon-search"></button>

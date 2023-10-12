@@ -41,7 +41,10 @@ class CategoryController extends Controller
                 'children.translations',
                 'products.prices.currency',
                 'products.brand.translations',
-                'brands.translations'])
+                'brands.translations',
+                'brands.country',
+                'brands.country.translations',
+            ])
 
             ->first();
 
