@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Product;
+use App\Models\Admin\StaticText;
 use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class ProductController extends Controller
 
     public function detailProduct($slug)
     {
-//            $item = Product::query()->findOrFail($product);
+            $seo = StaticText::query()->with('translations')
+                ->where('type', 'product_seo')->first();
 
             $product = Product::query()->whereHas('translations', function ($query) use ($slug){
                 $query->where('slug', $slug);
@@ -35,6 +37,6 @@ class ProductController extends Controller
             ])
             ->first();
 
-            return view('front.product-detail', compact('product'));
+            return view('front.product-detail', compact('product', 'seo'));
     }
 }

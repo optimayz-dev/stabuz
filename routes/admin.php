@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\MainBannerController;
 use App\Http\Controllers\Admin\PromotionBannerController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\StaticSeoTexts\ProductSeoTextController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,6 +51,7 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/country', CountryController::class);
             Route::resource('/admin/main-banner', MainBannerController::class);
             Route::resource('/admin/promotion-banner', PromotionBannerController::class);
+            Route::resource('/admin/static-text-product', ProductSeoTextController::class);
             Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');
             Route::patch('/admin/attributes/bulk-update', [AttributeController::class, 'bulkUpdate'])->name('attribute.bulkUpdate');
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
