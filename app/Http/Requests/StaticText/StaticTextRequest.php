@@ -22,7 +22,7 @@ class StaticTextRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string',
+            'title' => 'required|string',
             'seo_title_h1' => 'nullable|string',
             'seo_title' => 'nullable|string',
             'seo_text' => 'nullable|string',

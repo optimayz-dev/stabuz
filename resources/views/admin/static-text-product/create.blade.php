@@ -32,29 +32,29 @@
                                     @endif
                                     <form action="{{ route('admin.static-text-product.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">
-                                            <thead>
-                                            <tr>
+{{--                                        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action" style="width:100%">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
 
-                                                <th>Заголовок</th>
+{{--                                                <th>Заголовок</th>--}}
 {{--                                                <th>Тип</th>--}}
-                                                <th>Seo title</th>
-                                                <th>Seo title h1</th>
-                                                <th>Seo текст</th>
-                                                <th>Meta keywords</th>
-                                                <th>Meta description</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        @error('title')
-                                                            <code>{{ $message }}</code>
-                                                        @enderror
-                                                        <label>
-                                                            <input type="text" value="" name="title" class="updateSelected">
-                                                        </label>
-                                                    </td>
+{{--                                                <th>Seo title</th>--}}
+{{--                                                <th>Seo title h1</th>--}}
+{{--                                                <th>Seo текст</th>--}}
+{{--                                                <th>Meta keywords</th>--}}
+{{--                                                <th>Meta description</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                                <tr>--}}
+{{--                                                    <td>--}}
+{{--                                                        @error('title')--}}
+{{--                                                            <code>{{ $message }}</code>--}}
+{{--                                                        @enderror--}}
+{{--                                                        <label>--}}
+{{--                                                            <input type="text" value="" name="title" class="updateSelected">--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
 {{--                                                    <td>--}}
 {{--                                                        <label>--}}
 {{--                                                            <select name="type" id="">--}}
@@ -62,34 +62,62 @@
 {{--                                                            </select>--}}
 {{--                                                        </label>--}}
 {{--                                                    </td>--}}
-                                                    <td>
-                                                        <label>
-                                                            <input type="text" value="" name="seo_title" class="updateSelected" >
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            <input type="text" value="" name="seo_title_h1" class="updateSelected" >
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            <textarea name="seo_text" class="updateSelected" ></textarea>
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            <textarea type="text" name="meta_keywords"  class="updateSelected"></textarea>
-                                                        </label>
-                                                    </td>
-                                                    <td>
-                                                        <label>
-                                                            <textarea type="text" name="meta_description"  class="updateSelected"></textarea>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+{{--                                                    <td>--}}
+{{--                                                        <label>--}}
+{{--                                                            <input type="text" value="" name="seo_title" class="updateSelected" >--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <label>--}}
+{{--                                                            <input type="text" value="" name="seo_title_h1" class="updateSelected" >--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <label>--}}
+{{--                                                            <textarea name="seo_text" class="updateSelected" ></textarea>--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <label>--}}
+{{--                                                            <textarea type="text" name="meta_keywords"  class="updateSelected"></textarea>--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <label>--}}
+{{--                                                            <textarea type="text" name="meta_description"  class="updateSelected"></textarea>--}}
+{{--                                                        </label>--}}
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
+{{--                                            </tbody>--}}
+{{--                                        </table>--}}
+{{--                                        <div class="form-outline mb-4">--}}
+{{--                                            <textarea class="form-control" id="textAreaExample6" rows="3"></textarea>--}}
+{{--                                            <label class="form-label" for="textAreaExample6">100% width of the parent</label>--}}
+{{--                                        </div>--}}
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Заголовок</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" name="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Seo title</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" name="seo_title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Seo title h1</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1" name="seo_title_h1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Seo text</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="seo_text"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Meta keywords</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="meta_keywords"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Meta description</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="meta_description"></textarea>
+                                        </div>
                                         <div class="btn-wrapper">
                                             <button type="submit" class="btn btn-success">Создать</button>
                                         </div>

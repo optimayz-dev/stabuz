@@ -1258,15 +1258,22 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 /* popular brands */
 .popular-brand_item{
-    border-radius: 130px;
+    border: 2px solid var(--white);
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     display: block;
 }
 .popular-brand_item:hover{
-    border: 2px solid var(--yellow);
     filter: none;
     background: var(--white);
+}
+.popular-brand_item img:hover{
+    border: 2px solid var(--yellow);
+}
+.popular-brand_item img{
+    border-radius: 50%;
+    height: 24vh;
+    object-fit: contain;
 }
 /* pickup-points */
 .pickup-points_point{

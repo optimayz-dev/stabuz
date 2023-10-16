@@ -1007,6 +1007,9 @@
     .videos{
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
+    .popular-brand_item img{
+        height: 19vh;
+    }
 }
 @media (max-width:480px){
     .header-info_settings .dropdown:first-of-type{
