@@ -1,6 +1,6 @@
 @extends('front.__layouts.layout')
 @section('seo_texts')
-    <title>{{ $product->seo_title ? $seo->seo_title : '' }}</title>
+    <title>{{ $product->seo_title ? str_replace('{name}', $product->title, $seo->title) : '' }}</title>
     <meta name="description" content="{{ $product->meta_description ? str_replace('{name}', $product->title, $seo->meta_description) : '' }}">
 @endsection
 @section('content')
