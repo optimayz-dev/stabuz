@@ -22,12 +22,14 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'seo_title' => 'string',
-            'seo_description' => 'string',
-            'description' => 'string',
-            'meta_keywords' => 'string',
-            'brand_logo' => ['nullable', 'mimes:jpg,png,svg,jpeg']
+            'title' => 'string',
+            'seo_title' => 'nullable|string',
+            'seo_description' => 'nullable|string',
+            'description' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
+            'categories_id' => 'nullable|array',
+            'country_id' => 'nullable|integer',
+            'brand_logo' => ['nullable', 'mimes:jpg,png,svg,jpeg'],
         ];
     }
 }

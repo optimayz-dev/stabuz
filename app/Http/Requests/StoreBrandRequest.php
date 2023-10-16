@@ -29,7 +29,7 @@ class StoreBrandRequest extends FormRequest
             'meta_keywords' => 'nullable|string',
             'categories_id' => 'nullable|array',
             'country_id' => 'nullable|integer',
-            'brand_logo' => ['required', 'mimes:jpg,png,svg,jpeg'],
+            'brand_logo' => ['nullable', 'mimes:jpg,png,svg,jpeg'],
         ];
     }
 }

@@ -54,11 +54,14 @@ class BrandController extends Controller
 
         $brand->save();
 
-        foreach ($request->categories_id as $category) {
-
-            $brand->categories()->attach((integer)$category);
+        if ($request->input('categories_id')) {
+            foreach ($request->categories_id as $category) {
+                $brand->categories()->attach((integer)$category);
+            }
         }
-        return redirect()->back()->with('success', 'Бренд успешно добавлен');
+
+
+        return redirect()->route('admin.brand.index')->with('success', 'Бренд успешно добавлен');
     }
 
     /**
@@ -106,12 +109,13 @@ class BrandController extends Controller
         $brand->brand_logo = $path;
 
 //        foreach ($request->categories_id as $category) {
-
-        $brand->categories()->sync($request->categories_id);
+        if ($request->input('categories_id')) {
+             $brand->categories()->sync($request->categories_id);
+        }
 //        }
 
         $brand->update();
-        return redirect()->back()->with('success', 'Бренд успешно добавлен');
+        return redirect()->route('admin.brand.index')->with('success', 'Бренд успешно изменен');
     }
 
     /**

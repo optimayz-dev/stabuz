@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('brands', function (Blueprint $table) {
-
-            $table->bigInteger('country_id')->nullable();
+        Schema::table('brands', function (Blueprint $table){
+            $table->string('brand_logo')->nullable()->change();
         });
     }
 
@@ -22,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('brand', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };
