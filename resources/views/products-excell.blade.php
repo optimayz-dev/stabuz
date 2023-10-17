@@ -4,7 +4,6 @@
         <th>id</th>
         <th>title</th>
         <th>category_id</th>
-        <th>tag_id</th>
         <th>brand_id</th>
         <th>image</th>
         <th>supplier</th>
@@ -12,6 +11,10 @@
         <th>active</th>
         <th>price</th>
         <th>old_price</th>
+        <th>popular</th>
+        <th>new</th>
+        <th>actual</th>
+        <th>recommend</th>
         <th>credit</th>
         <th>modification</th>
         <th>description</th>
@@ -36,14 +39,6 @@
                 @endforeach
 
             </td>
-            <td>
-                @foreach($item->tags as $key => $tag)
-                    @if($key != 0)
-                        {{';'}}
-                    @endif
-                    {{$tag->id}}
-                @endforeach
-            </td>
             <td>{{ $item['brand_id'] }}</td>
             <td>{{ $item['file_url'] }}</td>
             <td>{{ $item['supplier'] }}</td>
@@ -51,6 +46,10 @@
             <td>{{ $item['active'] }}</td>
             <td>{{ $item['price'] }}</td>
             <td>{{ $item['old_price'] }}</td>
+            <td>{{ $item['popular'] }}</td>
+            <td>{{ $item['new'] }}</td>
+            <td>{{ $item['actual'] }}</td>
+            <td>{{ $item['recommend'] }}</td>
             <td>{{ $item['credit'] }}</td>
             <td>{{ $item['modification'] }}</td>
             <td>{{ $item['description'] }}</td>

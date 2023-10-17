@@ -39,6 +39,10 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         $product->brand_id = $row['brand_id'];
         $product->price = $row['price'];
         $product->old_price = $row['old_price'];
+        $product->popular = $row['popular'];
+        $product->new = $row['new'];
+        $product->actual = $row['actual'];
+        $product->recommend = $row['recommend'];
         $product->credit = $row['credit'];
         $categoryId = explode(';', trim($row['category_id']));
         $tagId = explode(';', trim($row['tag_id']));

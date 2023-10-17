@@ -76,6 +76,15 @@
                                                     <input type="text" name="attribute_title" class="form-control" placeholder="Название аттрибута">
                                                 </label>
                                             </div>
+
+                                            <div class="input-wrapper">
+                                                <label for="attribute_title">
+                                                    @error('attribute_value')
+                                                    <div class=attribute_value>{{ $message }}</div>
+                                                    @enderror
+                                                    <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута">
+                                                </label>
+                                            </div>
                                             <div class="input-wrapper">
                                                 <label for="">Выберите категории <br>
                                                     <select id="e1" style="width: 300px;" multiple name="categories_id[]">
@@ -104,14 +113,16 @@
                                                     <textarea class="resizable_textarea form-control" name="description" placeholder="Описание продукта"></textarea>
                                                 </label>
                                             </div>
+
                                             <div class="input-wrapper">
-                                                <label for="attribute_title">
-                                                    @error('attribute_value')
-                                                    <div class=attribute_value>{{ $message }}</div>
+                                                <label for="description">
+                                                    @error('characteristics')
+                                                    <div class=characteristics>{{ $message }}</div>
                                                     @enderror
-                                                    <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута">
+                                                    <textarea class="resizable_textarea form-control" name="characteristics" placeholder="Характеристики продукта"></textarea>
                                                 </label>
                                             </div>
+
                                             <div class="input-wrapper">
                                                 <label style="display: flex; width: 90%;">
                                                     @error('modification')
@@ -159,18 +170,9 @@
                                                 <small>Теги</small>
                                             </h2>
                                         </div>
-                                        @foreach($tags as $tag)
-                                        <div class="col-md-2">
-                                            <div class="input-wrapper">
-                                                    <div class="form-check">
-                                                        <label class="form-check-label" for="">
-                                                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tag_id[]">
-                                                            {{ $tag->title }}
-                                                        </label>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
+
+                                        @include('admin.products.tags')
+
                                     </div>
                                 </div>
                             <button type="submit" class="btn btn-success btn-sm">сохранить</button>

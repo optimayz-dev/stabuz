@@ -75,6 +75,14 @@
                                             </label>
                                         </div>
                                         <div class="input-wrapper">
+                                            <label for="attribute_title">
+                                                @error('attribute_value')
+                                                <div class=attribute_value>{{ $message }}</div>
+                                                @enderror
+                                                <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута" value="{{ $product->attribute_value ?? '' }}">
+                                            </label>
+                                        </div>
+                                        <div class="input-wrapper">
                                             <label for="">Выберите категории брендов <br>
                                                 <select id="e1" style="width: 300px;" multiple name="categories_id[]" class="select">
                                                     @foreach($product->categories as $item)
@@ -107,13 +115,14 @@
                                             </label>
                                         </div>
                                         <div class="input-wrapper">
-                                            <label for="attribute_title">
-                                                @error('attribute_value')
-                                                <div class=attribute_value>{{ $message }}</div>
+                                            <label for="description">
+                                                @error('characteristics')
+                                                <div class=characteristics>{{ $message }}</div>
                                                 @enderror
-                                                <input type="text" name="attribute_value" class="form-control" placeholder="Значение аттрибута" value="{{ $product->attribute_value ?? '' }}">
+                                                <textarea class="resizable_textarea form-control" name="characteristics" placeholder="Характеристики продукта">{{ $product->characteristics ?? '' }}</textarea>
                                             </label>
                                         </div>
+
                                         <div class="input-wrapper">
                                             <label style="display: flex; width: 90%;">
                                                 @error('modification')
@@ -166,21 +175,7 @@
                                             <small>Теги</small>
                                         </h2>
                                     </div>
-
-                                    @foreach($tags as $tag)
-                                        <div class="col-md-2">
-                                            <div class="input-wrapper">
-                                                <div class="form-check">
-                                                    <label class="form-check-label" for="">
-                                                        @foreach($product->tags as $item)
-                                                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" name="tag_id[]" @if($tag->id == $item->id ) checked @endif>
-                                                        @endforeach
-                                                        {{ $tag->title }}
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                    @include('admin.products.tags')
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success btn-sm">сохранить</button>

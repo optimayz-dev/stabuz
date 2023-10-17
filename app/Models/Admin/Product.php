@@ -26,6 +26,7 @@ class Product extends Model implements TranslatableContract
         'seo_description',
         'meta_keywords',
         'description',
+        'characteristics',
     ];
 
         public function tags()

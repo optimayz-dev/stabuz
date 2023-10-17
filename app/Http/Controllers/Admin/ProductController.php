@@ -61,6 +61,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+
         // Создаем новый продукт на основе валидированных данных
 //        $product = new Product($request->validated());
         $product = new Product();
@@ -70,6 +71,7 @@ class ProductController extends Controller
 
         $product->title = $request->input('title');
         $product->description = $request->input('description');
+        $product->characteristics = $request->input('characteristics');
         $product->attribute_title = $request->input('attribute_title');
         $product->attribute_value = $request->input('attribute_value');
         $product->seo_title = $request->input('seo_title');
@@ -81,18 +83,25 @@ class ProductController extends Controller
         $product->brand_id = $request->input('brand_id');
         $product->price = $request->input('price');
         $product->old_price = $request->input('old_price');
+//        $product->active = $request->input('active');
+        $product->popular = $request->input('popular',0);
+        $product->new = $request->input('new', 0);
+        $product->actual = $request->input('actual', 0);
+        $product->recommend = $request->input('recommend', 0);
+        $product->credit = $request->input('credit' , 0);
 
         $product->save();
 
         // Получаем ID выбранной категории из формы
-        $categoryId = $request->input('categories_id');
+        $categoryId = $request->input('categories_id') ?? null;
         // Получаем ID выбранных тегов из формы
-        $tagId = $request->input('tag_id');
+//        $tagId = $request->input('tag_id');
 
         // Связываем продукт с выбранной категорией через pivot таблицу
-        $product->categories()->attach($categoryId);
+        if ($request->input('categories_id'))
+            $product->categories()->attach($categoryId);
         // Связываем продукт с выбранными тегами через pivot таблицу
-        $product->tags()->attach($tagId);
+//        $product->tags()->attach($tagId);
 //        foreach ($tagsId as $tagId){
 //            $product->tags()->attach($tagId);
 //        }
@@ -151,13 +160,20 @@ class ProductController extends Controller
         $product->brand_id = $request->input('brand_id');
         $product->price = $request->input('price');
         $product->old_price = $request->input('old_price');
+        //        $product->active = $request->input('active');
+        $product->popular = $request->input('popular',0);
+        $product->new = $request->input('new', 0);
+        $product->actual = $request->input('actual', 0);
+        $product->recommend = $request->input('recommend', 0);
+        $product->credit = $request->input('credit' , 0);
 
         $product->update();
 
-        $categoryId = $request->input('categories_id');
-        $tagId = $request->input('tag_id');
-        $product->categories()->sync($categoryId);
-        $product->tags()->sync($tagId);
+        $categoryId = $request->input('categories_id') ?? null;
+//        $tagId = $request->input('tag_id');
+        if ($request->input('categories_id'))
+            $product->categories()->sync($categoryId);
+//        $product->tags()->sync($tagId);
 
 
         return redirect()->back()->with('success', 'Продукт успешно изменен.');

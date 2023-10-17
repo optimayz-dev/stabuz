@@ -25,14 +25,21 @@ class StoreProductRequest extends FormRequest
             'title' => 'required',
             'seo_title' => 'nullable',
             'description' => 'required',
+            'characteristics' => 'nullable',
             'seo_description' => 'nullable',
             'meta_keywords' => 'nullable',
             'attribute_title' => 'nullable',
             'attribute_value' => 'nullable',
-            'file_url' => 'required',
+            'file_url' => 'nullable|mimes:jpg,png,jpeg,webp,svg',
             'brand_id' => 'integer',
             'price' => 'integer',
             'modification' => 'nullable|string',
+            'active' => 'nullable',
+            'popular' => 'nullable',
+            'new' => 'nullable',
+            'actual' => 'nullable',
+            'recommend' => 'nullable',
+            'credit' => 'nullable',
         ];
     }
 }

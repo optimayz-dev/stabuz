@@ -29,8 +29,12 @@ return new class extends Migration
             $table->string('modification')->nullable();
             $table->string('article')->nullable();
             $table->string('supplier')->nullable();
-            $table->boolean('active')->default(true);
-            $table->boolean('credit')->default(false);
+            $table->boolean('active')->nullable()->default(true);
+            $table->boolean('credit')->nullable()->default(false);
+            $table->boolean('popular')->nullable()->default(false);
+            $table->boolean('new')->nullable()->default(false);
+            $table->boolean('actual')->nullable()->default(false);
+            $table->boolean('recommend')->nullable()->default(false);
 
             $table->timestamps();
         });
