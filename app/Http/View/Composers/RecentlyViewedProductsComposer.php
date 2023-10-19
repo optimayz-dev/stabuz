@@ -10,10 +10,14 @@ class RecentlyViewedProductsComposer
 {
     public function compose(View $view)
     {
-        $recent_products = array_unique(session('products_recently_viewed'));
+        if (!empty(session('products_recently_viewed'))){
+            $recent_products = array_unique(session('products_recently_viewed'));
 
-        $products = Product::query()->with('translations', 'brand', 'brand.translations')->whereIn('id', $recent_products)->get();
+            $products = Product::query()->with('translations', 'brand', 'brand.translations')->whereIn('id', $recent_products)->get();
 
-        $view->with('recently_products', $products);
+        }
+            $view->with('recently_products', $products ?? null);
+
+
     }
 }
