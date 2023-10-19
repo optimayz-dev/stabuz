@@ -79,7 +79,7 @@ $(document).ready(function(){
     });
     $('.actual-goods_slider').owlCarousel({
         center: true,
-        loop:true,
+        loop:false,
         dots: false,
         nav: false,
         autoplay: false,

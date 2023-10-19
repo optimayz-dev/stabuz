@@ -7,6 +7,8 @@ use App\Models\Admin\Product;
 use App\Models\Admin\StaticText;
 use App\Models\Admin\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -20,12 +22,12 @@ class ProductController extends Controller
 
     public function detailProduct($slug)
     {
-            $seo = StaticText::query()->with('translations')
-                ->where('type', 'product_seo')->first();
+        $seo = StaticText::query()->with('translations')
+            ->where('type', 'product_seo')->first();
 
-            $product = Product::query()->whereHas('translations', function ($query) use ($slug){
-                $query->where('slug', $slug);
-            })
+        $product = Product::query()->whereHas('translations', function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })
             ->with([
                 'translations',
                 'prices',
@@ -37,6 +39,8 @@ class ProductController extends Controller
             ])
             ->first();
 
-            return view('front.product-detail', compact('product', 'seo'));
+            session()->push('products_recently_viewed', $product->getKey());
+
+        return view('front.product-detail', compact('product', 'seo'));
     }
 }

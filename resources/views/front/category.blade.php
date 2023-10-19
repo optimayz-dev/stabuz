@@ -85,9 +85,10 @@
                     @foreach($category->brands as $brand)
 
                         @if(!(empty($brand->country)))
-                        <li>
-                            <input type="checkbox" name="country" id="country1" value="country1"> <label for="country1">{{ $brand->country->title }}</label>
-                        </li>
+                            <li>
+                                <input type="checkbox" name="country" id="country1" value="country1"> <label
+                                    for="country1">{{ $brand->country->title }}</label>
+                            </li>
                         @endif
                     @endforeach
                 </ul>

@@ -1,14 +1,11 @@
-@if($recently_products)
 <section class="actual-goods container">
     <h6 class="title mb-sm-5 bm-3">Недавно просмотренные товары</h6>
     <div class="actual-goods_slider owl-carousel" name="recentlyViewedSlider">
-        @foreach($recently_products as $product)
+        @foreach($products as $product)
             <div class="goods_item">
                 <div class="goods_header">
                     <div class="goods_header--menu d-flex align-items-center">
-                        @if($product->new == 1)
-                            <span class="goods-itemNew" name="goodsItemNew">New</span>
-                        @endif
+                        <span class="goods-itemNew" name="goodsItemNew">New</span>
                         <button type="button">
                             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -19,26 +16,16 @@
                         <button type="button" class="icon-heart">
                         </button>
                     </div>
-                    <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
-                    <img src="{{ asset($product->file_url) }}" alt="">
+                    <img src="image/cards/Group 511.svg" alt="">
+                    <img src="image/cards/Rectangle 604 (1).png" alt="">
                     <div class="goods_header--installment d-flex align-items-center">
-                        @if($product->old_price)
-                            @php
-                                $old_price = $product->old_price;
-                                $price = $product->price;
-                            @endphp
-                            <span class="goods_proccent" name="actualGoodsProccent">-{{ number_format(($old_price - $price) / $price * 100)   }}%</span>
-                        @endif
-                        @if($product->credit == 1)
-                            <p>Рассрочка</p>
-                        @endif
+                        <span class="goods_proccent" name="actualGoodsProccent">-25%</span>
+                        <p>Рассрочка</p>
                     </div>
                 </div>
                 <div style="padding: 15px;">
-                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price }} usd</p>
-                    @if($product->old_price)
-                        <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->old_price }} usd</p>
-                    @endif
+                    <p class="goods_currentPrice" name="actualGoodsCurrentPrice">12 477 500 сум</p>
+                    <p class="goods_oldPrice" name="actualGoodsOldPrice">17 020 000 сум</p>
                     <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                         <div class="goods_rewies d-flex align-items-center gap-1">
                             <span class="icon-star active"></span>
@@ -53,10 +40,8 @@
                             <p class="goods_viewsCount" name="actualGoodsViewsCount">123</p>
                         </div>
                     </div>
-                    <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
-                       name="actualGoodsName">{{ $product->title }}</a>
-                    <a href="{{ route('brand.detail', $product->brand->slug) }}" class="goods_companyName"
-                       name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
+                    <a href="/" class="goods_name" name="actualGoodsName">{{ $product->title }}</a>
+                    <a href="/" class="goods_companyName" name="actualGoodsCompanyName">CHAYKA</a>
                     <div class="goods-addProduct ">
                         <div class="goods-addProduct_btns">
                             <button class="goods-addProduct-minus disabled" type="button">
@@ -106,4 +91,3 @@
 
     </div>
 </section>
-@endif

@@ -36,26 +36,26 @@
                     <img src="image/cards/Group 511.svg" alt="">
                     <img src="{{ asset($product->file_url) }}" alt="" >
                 </div>
-                <div class="product-photo_small">
-                    <img src="image/cards/Group 511.svg" alt="">
-                    <img src="image/product/Rectangle 1161.png" alt="" >
-                </div>
-                <div class="product-photo_small">
-                    <img src="image/cards/Group 511.svg" alt="">
-                    <img src="image/product/Rectangle 607.png" alt="" >
-                </div>
-                <div class="product-photo_small">
-                    <img src="image/cards/Group 511.svg" alt="">
-                    <img src="image/product/7933750x0.jpg" alt="" >
-                </div>
-                <div class="product-photo_small">
-                    <img src="image/cards/Group 511.svg" alt="">
-                    <img src="image/product/cashBack.png" alt="" >
-                </div>
-                <div class="product-photo_small">
-                    <img src="image/cards/Group 511.svg" alt="">
-                    <img src="image/product/Rectangle 1161.png" alt="" >
-                </div>
+{{--                <div class="product-photo_small">--}}
+{{--                    <img src="image/cards/Group 511.svg" alt="">--}}
+{{--                    <img src="image/product/Rectangle 1161.png" alt="" >--}}
+{{--                </div>--}}
+{{--                <div class="product-photo_small">--}}
+{{--                    <img src="image/cards/Group 511.svg" alt="">--}}
+{{--                    <img src="image/product/Rectangle 607.png" alt="" >--}}
+{{--                </div>--}}
+{{--                <div class="product-photo_small">--}}
+{{--                    <img src="image/cards/Group 511.svg" alt="">--}}
+{{--                    <img src="image/product/7933750x0.jpg" alt="" >--}}
+{{--                </div>--}}
+{{--                <div class="product-photo_small">--}}
+{{--                    <img src="image/cards/Group 511.svg" alt="">--}}
+{{--                    <img src="image/product/cashBack.png" alt="" >--}}
+{{--                </div>--}}
+{{--                <div class="product-photo_small">--}}
+{{--                    <img src="image/cards/Group 511.svg" alt="">--}}
+{{--                    <img src="image/product/Rectangle 1161.png" alt="" >--}}
+{{--                </div>--}}
             </div>
 
             <div class="product-photo_brand">

@@ -26,7 +26,7 @@ class Category extends Model implements TranslatableContract
         'meta_keywords',
     ];
 
-    public $preventsLazyLoading = true;
+//    public $preventsLazyLoading = true;
 
     public function products()
     {

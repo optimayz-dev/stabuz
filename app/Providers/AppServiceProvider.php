@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\HeaderComposer;
+use App\Http\View\Composers\RecentlyViewedProductsComposer;
+use App\Http\View\Composers\RecommendProductsComposer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -32,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('front.__layouts.header',HeaderComposer::class);
+        View::composer('front.includes.recently-viewed-products', RecentlyViewedProductsComposer::class);
+        View::composer('front.includes.recommend-products', RecommendProductsComposer::class);
     }
 }

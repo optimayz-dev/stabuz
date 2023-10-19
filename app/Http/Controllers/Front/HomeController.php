@@ -14,6 +14,7 @@ use App\Models\Admin\Tag;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\VideoReview;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +33,39 @@ class HomeController extends Controller
         $catalogs = Category::whereNull('lvl')
             ->with('translations')
             ->get();
+
+        $new_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->where('new', 1)->limit(10)->get();
+//            ->where([
+//                'new' => 1,
+//                'popular' => 1,
+//                'recommend' => 1,
+//                'credit' => 1,
+//                'actual' => 1
+//            ])->limit(10)->get();
+
+
+        $popular_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->where('popular', 1)->limit(10)->get();
+
+        $actual_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->where('actual', 1)->limit(10)->get();
+
+        $recommend_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->where('recommend', 1)->limit(10)->get();
+
+        $credit_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->where('credit', 1)->limit(10)->get();
+
+        $discount_products = Product::query()->with('translations', 'brand', 'brand.translations')
+            ->orderBy('created_at', 'DESC')
+            ->whereNotNull('old_price')->limit(10)->get();
+
 
         $tags = Tag::with('translations', 'products.brand.translations', 'products.prices.currency', 'products.translations')
             ->orderBy('created_at', 'desc')
@@ -65,7 +99,13 @@ class HomeController extends Controller
             'video_reviews' => $video_reviews,
             'promotions' => $promotions,
             'pick_up_points' => $pick_up_points,
-            'faqs' => $faqs
+            'faqs' => $faqs,
+            'new_products' => $new_products,
+            'popular_products' => $popular_products,
+            'actual_products' => $actual_products,
+            'recommend_products' => $recommend_products,
+            'credit_products' => $credit_products,
+            'discount_products' => $discount_products,
 
         ]);
     }
@@ -76,7 +116,7 @@ class HomeController extends Controller
         App::setLocale($locale);
         Session::put('locale', $locale);
         LaravelLocalization::setLocale($locale);
-        $url =  LaravelLocalization::getLocalizedURL(App::getLocale(), URL::previous());
+        $url = LaravelLocalization::getLocalizedURL(App::getLocale(), URL::previous());
 
         return Redirect::to($url);
 

@@ -43,7 +43,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $catalogs =  Category::query()->with('translations')->whereNull('lvl')->get();
+
+        return view('admin.categories.create', ['catalogs' => $catalogs]);
     }
 
     /**
@@ -83,7 +85,6 @@ class CategoryController extends Controller
     protected function saveCategoryWithLevel($category, $parent, $request)
     {
         $category->lvl = $parent->lvl + 1;
-
 
         $category->save();
     }
@@ -187,6 +188,54 @@ class CategoryController extends Controller
 ////            Cache::forget("category_{$category->id}");
 //        }
 //        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
+    }
+
+    public function edit(Category $category)
+    {
+        $catalogs =  Category::query()->with('translations')->whereNull('lvl')->get();
+
+        return view('admin.categories.update-once', [
+                'category' => $category->load('translations'),
+                'catalogs' => $catalogs
+            ]);
+    }
+
+    public function update(Category $category, UpdateCategoryRequest $request)
+    {
+
+        $parentId = $request->parent_id_hidden;
+
+        $parent = Category::find($parentId);
+        $lvl = $parent->lvl + 1;
+
+        if (!$parent) {
+            return redirect()->back()->withErrors('Родительская категория не найдена.');
+        }
+
+        if ($request->hasfile('category_img')) {
+            $image = $request->file('category_img')->store('images');
+        }
+
+        $category->title = $request->input('title');
+        $category->seo_title = $request->input('seo_title');
+        $category->description = $request->input('description');
+        $category->seo_description = $request->input('seo_description');
+        $category->meta_keywords = $request->input('meta_keywords');
+        $category->parent_id = $request->input('parent_id_hidden');
+        $category->category_img = $image ?? $category->category_img;
+        $category->lvl = $lvl;
+
+        $category->update();
+
+        return redirect()->route('admin.category.index')->with('success', 'Успешно обновлен');
+
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Успешно удален');
     }
 
 }

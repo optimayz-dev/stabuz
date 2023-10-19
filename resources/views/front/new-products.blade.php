@@ -197,15 +197,19 @@
                                 </div>
                                 <img src="image/cards/Group 511.svg" alt="">
                                 <img src="{{ $product->file_url }}" alt="">
-                                <div class="goods_header--installment d-flex align-items-center">
-                                    <p>Рассрочка</p>
-                                </div>
+                                @if($product->credit)
+                                    <div class="goods_header--installment d-flex align-items-center">
+                                        <p>Рассрочка</p>
+                                    </div>
+                                @endif
                             </div>
                             <div style="padding: 10px;">
-                                @foreach($product->prices as $price)
+                                @if($product->old_price)
                                     <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
-                                        {{ $price->getNewPriceAttribute() }} {{ $price->currency->currency_code }}</p>
-                                    <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $price->getOldPriceAttribute() }} {{ $price->currency->currency_code }}
+                                        {{ $product->old_price ?? '' }}
+                                    </p>
+                                @endif
+                                    <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->price }} usd
                                     </p>
                                 @endforeach
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
@@ -222,8 +226,8 @@
                                         <p class="goods_viewsCount" name="actualGoodsViewsCount">13</p>
                                     </div>
                                 </div>
-                                <a href="/" class="goods_name" name="actualGoodsName">Швейная машина Comfortstitch 11 машина Швейная Швейная</a>
-                                <a href="/" class="goods_companyName" name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
+                                <a href="{{ route('product.detail', $product->slug) }}" class="goods_name" name="actualGoodsName">{{ $product->title }}</a>
+                                <a href="{{ route('brand.detail', $product->brand->slug) }}" class="goods_companyName" name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
                                 <div class="goods-addProduct ">
                                     <div class="goods-addProduct_btns">
                                         <button class="goods-addProduct-minus disabled" type="button"><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">

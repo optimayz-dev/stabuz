@@ -18,8 +18,8 @@
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
             <div class="category-categories d-flex flex-column">
-                <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>
-                <a href="brands.html" class="category-name_link" name="parentCategoryName"><img src="/image/icons/greenArrLeft.png" alt="">Все бренды</a>
+                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>
+                <a href="{{ route('brands') }}" class="category-name_link" name="parentCategoryName"><img src="/image/icons/greenArrLeft.png" alt="">Все бренды</a>
                 <span name="brandName" class="category-name">категории бренда {{ $brand->title }}</span>
                 <div class="accordion accordion-brand-category" id="accordionExample">
 

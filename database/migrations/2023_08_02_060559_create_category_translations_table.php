@@ -22,13 +22,13 @@ return new class extends Migration
             ->constrained()->onDelete('cascade');
             $table->unique(['category_id', 'locale']);
             // Actual fields you want to translate
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('slug')->unique();
             $table->index('title');
-            $table->text('description');
-            $table->text('seo_title');
-            $table->text('seo_description');
-            $table->text('meta_keywords');
+            $table->text('description')->nullable();
+            $table->text('seo_title')->nullable();
+            $table->text('seo_description')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->timestamps();
         });
     }
