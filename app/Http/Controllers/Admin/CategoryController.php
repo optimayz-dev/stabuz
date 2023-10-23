@@ -82,6 +82,68 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Категория успешно добавлена');
     }
 
+    public function createFromParent(Category $category)
+    {
+        return view('admin.categories.create-from-parent', ['category' => $category]);
+    }
+
+
+    public function editFromParent(Category $category)
+    {
+        return view('admin.categories.update-from-parent', ['category' => $category]);
+    }
+
+    public function storeFromParent(Category $category, StoreCategoryRequest $request)
+    {
+
+        $lvl = $category->lvl + 1;
+
+        if ($request->hasfile('category_img')) {
+            $image = $request->file('category_img')->store('images');
+        }
+
+        $categories =  new Category();
+        $categories->title = $request->input('title');
+        $categories->seo_title = $request->input('seo_title');
+        $categories->description = $request->input('description');
+        $categories->seo_description = $request->input('seo_description');
+        $categories->meta_keywords = $request->input('meta_keywords');
+        $categories->parent_id = $category->id;
+        $categories->category_img = $image ?? null;
+        $categories->lvl = $lvl;
+
+
+        $categories->save();
+
+        return redirect()->back()->with('success', 'Категория успешно добавлена');
+
+    }
+
+    public function updateFromParent(Category $category, StoreCategoryRequest $request)
+    {
+
+
+        if ($request->hasfile('category_img')) {
+            $image = $request->file('category_img')->store('images');
+        }
+
+        $categories =  Category::findOrFail($category->id);
+
+        $categories->title = $request->input('title');
+        $categories->seo_title = $request->input('seo_title');
+        $categories->description = $request->input('description');
+        $categories->seo_description = $request->input('seo_description');
+        $categories->meta_keywords = $request->input('meta_keywords');
+//        $categories->parent_id = $category->id;
+        $categories->category_img = $image ?? null;
+
+
+        $categories->update();
+
+        return redirect()->back()->with('success', 'Категория успешно обновлена');
+
+    }
+
     protected function saveCategoryWithLevel($category, $parent, $request)
     {
         $category->lvl = $parent->lvl + 1;
@@ -94,9 +156,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $cacheKey = 'category_' . $category->id;
+//        $cacheKey = 'category_' . $category->id;
 
-        $cachedData = Cache::remember($cacheKey, 24 * 60 * 60, function () use ($category) {
+//        $cachedData = Cache::remember($cacheKey, 24 * 60 * 60, function () use ($category) {
             $category->load([
                 'translations',
                 'children.translations',
@@ -108,10 +170,10 @@ class CategoryController extends Controller
                     ]);
                 },
             ]);
-            return $category;
-        });
+//            return $category;
+//        });
 
-        return view('admin.categories.view', compact('cachedData'));
+        return view('admin.categories.view', ['category' => $category]);
     }
 
 
@@ -130,7 +192,9 @@ class CategoryController extends Controller
 
     public function editCategories(Request $request)
     {
+
         $categoriesId = $request->input('selected_category', []);
+
         if ($categoriesId){
             $categories = Category::whereIn('id', $categoriesId)->orderBy('id')->with('translations')->get();
             return view('admin.categories.update', ['categories' => $categories]);
@@ -159,8 +223,8 @@ class CategoryController extends Controller
     public function updateSelected(UpdateCategoryRequest $request)
     {
         $locale = $request->getlocale;
-        app()->setLocale($locale);
 
+        app()->setLocale($locale);
 
         foreach ($request->input('id') as $id){
             $category = Category::query()->with('translations')->where('id' , $id)->first();
@@ -174,20 +238,8 @@ class CategoryController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
+        return redirect()->route('admin.category.index')->with('success', 'Данные успешно обновлены.');
 
-//        $selectedCategories = $request->input('selected_category', []);
-////        $fields = ['title', 'description', 'seo_title', 'seo_description', 'meta_keywords'];
-//
-//        $categoriesToUpdate = $selectedCategories ? Category::whereIn('id', $selectedCategories)->get() : Category::all();
-//
-//        foreach ($categoriesToUpdate as $category) {
-//            Category::updateCatalogFields($request, $category, $fields, $category->id);
-//
-//            //Обновляем кэш для каждого каталога
-////            Cache::forget("category_{$category->id}");
-//        }
-//        return redirect()->route('admin.catalog.index')->with('success', 'Данные успешно обновлены.');
     }
 
     public function edit(Category $category)

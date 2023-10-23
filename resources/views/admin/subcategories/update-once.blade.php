@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Добавление категории</small></h2>
+                        <h2><small>Изменение категории</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -42,8 +42,9 @@
                                         </div>
                                     @endif
                                     <div class="container">
-                                        <form action="{{ route('admin.category.store') }}" method="POST" class="categories" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.subcategory.update', $subcategory->id) }}" method="POST" class="categories" enctype="multipart/form-data">
                                             @csrf
+                                            @method('patch')
                                             <div class="row">
                                                 <div class="col-md-6">
                                                    <div class="mb-3">
@@ -53,7 +54,7 @@
                                                            <div class=title>{{ $message }}</div>
                                                            @enderror
                                                        </label>
-                                                       <input type="text" name="title" class="form-control" placeholder="Введите название">
+                                                       <input type="text" name="title" class="form-control" placeholder="Введите название" value="{{ $subcategory->title ?? '' }}">
                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -64,7 +65,7 @@
                                                            <div class=title>{{ $message }}</div>
                                                            @enderror
                                                        </label>
-                                                       <input type="text" name="seo_title" class="form-control" placeholder="Введите seo название">
+                                                       <input type="text" name="seo_title" class="form-control" placeholder="Введите seo название" value="{{ $subcategory->seo_title }}">
                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -75,7 +76,7 @@
                                                            <div class=title>{{ $message }}</div>
                                                            @enderror
                                                        </label>
-                                                       <textarea class="form-control" name="description" placeholder="Введите описание"></textarea>
+                                                       <textarea class="form-control" name="description" placeholder="Введите описание">{{ $subcategory->description ?? '' }}</textarea>
                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -86,7 +87,7 @@
                                                                 <div class=title>{{ $message }}</div>
                                                            @enderror
                                                         </label>
-                                                        <textarea class="form-control" name="seo_description" placeholder="Введите seo описание"></textarea>
+                                                        <textarea class="form-control" name="seo_description" placeholder="Введите seo описание">{{ $subcategory->seo_description ?? '' }}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -97,13 +98,14 @@
                                                                 <div class=title>{{ $message }}</div>
                                                            @enderror
                                                         </label>
-                                                        <textarea class="form-control" name="meta_keywords" placeholder="Введите мета ключи"></textarea>
+                                                        <textarea class="form-control" name="meta_keywords" placeholder="Введите мета ключи">{{ $subcategory->meta_keywords }}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="">Выберите родительский каталог <br>
-                                                        <select id="e3" style="width: 300px;" name="parent_id_hidden" required>
-                                                            @foreach($catalogs as $catalog)
+                                                        <select id="e3" style="width: 300px;" name="parent_id_hidden">
+
+                                                            @foreach($categories as $catalog)
                                                                 <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
                                                             @endforeach
                                                         </select>
@@ -117,11 +119,12 @@
                                                         <label for="category_img" class="form-label">
                                                             Добавьте картинку
                                                         </label>
+                                                        <img src="{{ asset($subcategory->category_img) }}" alt="" style="width: 150px">
                                                         <input type="file" name="category_img" class="form-control" style="height: auto;">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <button type="submit" class="btn btn-success" style="margin-top: 27px;">Добавить категорию</button>
+                                                    <button type="submit" class="btn btn-success" style="margin-top: 27px;">Сохранить</button>
                                                 </div>
                                             </div>
                                         </form>

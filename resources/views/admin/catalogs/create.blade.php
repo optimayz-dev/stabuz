@@ -88,7 +88,7 @@
                                             </tbody>
                                         </table>
                                         <div class="btn-wrapper">
-                                            <button type="submit" class="btn btn-success">create</button>
+                                            <button type="submit" class="btn btn-success">Создать</button>
                                         </div>
                                     </form>
                                 </div>

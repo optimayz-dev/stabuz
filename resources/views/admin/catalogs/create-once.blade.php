@@ -1,32 +1,3 @@
-{{--<form action="{{ route('admin.subcategories.import') }}" method="POST" enctype="multipart/form-data">--}}
-{{--    @csrf--}}
-{{--    <input type="file" name="file" class="form-control">--}}
-{{--    <br>--}}
-{{--    <br>--}}
-{{--    <br>--}}
-{{--    <button class="btn btn-primary">Import User Data</button>--}}
-{{--</form>--}}
-
-{{--<table class="table table-bordered mt-3">--}}
-{{--    <tr>--}}
-{{--        <th colspan="3">--}}
-{{--            List Of Users--}}
-{{--            <a class="btn btn-danger float-end" href="{{ route('admin.subcategories.export') }}">Export Subcategories Data</a>--}}
-{{--        </th>--}}
-{{--    </tr>--}}
-{{--    <tr>--}}
-{{--        <th>ID</th>--}}
-{{--        <th>Name</th>--}}
-{{--        <th>Email</th>--}}
-{{--    </tr>--}}
-{{--    @foreach($subcategories as $subcategory)--}}
-{{--        <tr>--}}
-{{--            <td>{{ $subcategory->id }}</td>--}}
-{{--            <td>{{ $subcategory->title }}</td>--}}
-{{--            <td>{{ $subcategory->descr }}</td>--}}
-{{--        </tr>--}}
-{{--    @endforeach--}}
-{{--</table>--}}
 @extends('admin.__layouts.layout')
 @section('content')
     <div class="right_col" role="main">
@@ -34,7 +5,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Добавление подкатегории</small></h2>
+                        <h2><small>Plus Table Design</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -50,8 +21,8 @@
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('admin.category.index') }}">All categories</a>
-                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Create categories</a>
+                                    <a class="dropdown-item" href="{{ route('admin.catalog.index') }}">All catalogs</a>
+                                    <a class="dropdown-item" href="{{ route('admin.catalog.create') }}">Create catalog</a>
                                 </div>
                             </li>
 
@@ -63,7 +34,7 @@
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
                                     <p class="text-muted font-13 m-b-30">
-                                        При добавлении данных обратите внимание и выберите нужную локаль. <span class="text-danger">Данные будут добавляться на текущем языке</span>
+                                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
                                     </p>
                                     @if (session('success'))
                                         <div class="alert alert-success">
@@ -71,7 +42,7 @@
                                         </div>
                                     @endif
                                     <div class="container">
-                                        <form action="{{ route('admin.subcategory.store') }}" method="POST" class="categories" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.catalog.store') }}" method="POST" class="categories" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -89,7 +60,7 @@
                                                     <div class="mb-3">
                                                         <label for="seo_title" class="form-label">
                                                             Введите seo название
-                                                            @error('title')
+                                                            @error('seo_description')
                                                             <div class=title>{{ $message }}</div>
                                                             @enderror
                                                         </label>
@@ -111,7 +82,7 @@
                                                     <div class="mb-3">
                                                         <label for="seo_description" class="form-label">
                                                             Введите seo описание
-                                                            @error('title')
+                                                            @error('seo_description')
                                                             <div class=title>{{ $message }}</div>
                                                             @enderror
                                                         </label>
@@ -128,18 +99,6 @@
                                                         </label>
                                                         <textarea class="form-control" name="meta_keywords" placeholder="Введите мета ключи"></textarea>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="">Выберите родительский каталог <br>
-                                                        <select id="e3" style="width: 300px;" name="parent_id_hidden" required>
-                                                            @foreach($categories as $category)
-                                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-6">
-
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
@@ -162,44 +121,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-    {{--    @push('scripts')--}}
-    {{--        <script type="text/javascript">--}}
-
-    {{--            var i = 0;--}}
-
-    {{--            $("#add").click(function(){--}}
-
-    {{--                ++i;--}}
-
-    {{--                $("#datatable-checkbox").append('' +--}}
-    {{--                    '<tr>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<input type="text" name="addmore['+i+'][title]" placeholder="Назавние" class="updateSelected" />' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<input type="text" name="addmore['+i+'][seo_title]" placeholder="Seo назавние" class="updateSelected" />' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<textarea type="text" name="addmore['+i+'][description]" placeholder="Описание" class="updateSelected"></textarea>' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<textarea type="text" name="addmore['+i+'][seo_description]" placeholder="Seo Описание" class="updateSelected"></textarea>' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<textarea type="text" name="addmore['+i+'][meta_keywords]" placeholder="Мета ключи" class="updateSelected"></textarea>' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '<td>' +--}}
-    {{--                    '<button type="button" class="btn btn-danger remove-tr">Убрать</button>' +--}}
-    {{--                    '</td>' +--}}
-    {{--                    '</tr>');--}}
-    {{--            });--}}
-
-    {{--            $(document).on('click', '.remove-tr', function(){--}}
-    {{--                $(this).parents('tr').remove();--}}
-    {{--            });--}}
-
-    {{--        </script>--}}
-    {{--    @endpush--}}
 @endsection

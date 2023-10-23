@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class CatalogUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,6 @@ class StoreCategoryRequest extends FormRequest
             'seo_description' => 'nullable',
             'meta_keywords' => 'nullable',
             'category_img' => 'mimes:jpg,png,jpeg,webp,svg|nullable',
-            'parent_id_hidden' => 'nullable',
         ];
     }
 }

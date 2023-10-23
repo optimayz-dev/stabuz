@@ -28,10 +28,10 @@ class UpdateCatalogRequest extends FormRequest
         foreach ($this->request->all() as $key => $value) {
             if (str_starts_with($key, 'title_')) {
                 $catalogId = substr($key, strlen('title_'));
-                $rules[$key] = 'required';
-                $rules['seo_title_' . $catalogId] = 'required';
-                $rules['seo_description_' . $catalogId] = 'required';
-                $rules['meta_keywords_' . $catalogId] = 'required';
+                $rules[$key] = 'nullable';
+                $rules['seo_title_' . $catalogId] = 'nullable';
+                $rules['seo_description_' . $catalogId] = 'nullable';
+                $rules['meta_keywords_' . $catalogId] = 'nullable';
             }
         }
         return $rules;

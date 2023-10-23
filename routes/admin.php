@@ -54,16 +54,23 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/static-text-product', ProductSeoTextController::class);
             Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');
             Route::patch('/admin/attributes/bulk-update', [AttributeController::class, 'bulkUpdate'])->name('attribute.bulkUpdate');
+            Route::get('/admin/categories/{category}', [CategoryController::class, 'createFromParent'])->name('category.createFromParent');
+            Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'editFromParent'])->name('category.editFromParent');
+            Route::patch('/admin/categories/delete/{category}', [CategoryController::class, 'destroy'])->name('category.delete');
+            Route::post('/admin/categories/{category}', [CategoryController::class, 'storeFromParent'])->name('category.storeFromParent');
+            Route::post('/admin/categories/{category}/update', [CategoryController::class, 'updateFromParent'])->name('category.updateFromParent');
             Route::get('/admin/catalogs/edit-selected', [CatalogController::class, 'editSelected'])->name('editSelected');
-//            Route::patch('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateSelected');
+//
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
 
             Route::get('/search/catalog', [CatalogController::class, 'search'])->name('search.catalogs');
             Route::get('/search/category', [CategoryController::class, 'search'])->name('search.categories');
             Route::get('/search/attribute', [AttributeController::class, 'getAttributes'])->name('search.attribute');
 
+            Route::post('/admin/catalogs/update-selected', [CatalogController::class, 'updateSelected'])->name('updateCatalogs');
             Route::patch('/admin/categories/edit-selected', [CategoryController::class, 'editCategories'])->name('editCategories');
             Route::patch('/admin/categories/update-selected', [CategoryController::class, 'updateSelected'])->name('updateCategories');
+            Route::patch('/admin/subcategory/update-selected', [SubcategoryController::class, 'updateSelected'])->name('updateSubcategories');
 
 
             Route::post('/admin/brands-import', [BrandController::class, 'import'])->name('brand.import');
@@ -81,8 +88,9 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/update-subcategory-products', [ProductController::class, 'updateBySubcategory'])->name('update.subcategory-products');
             Route::get('/admin/get-product-parents', [ProductController::class, 'getProductParents'])->name('get.product.parents');
             Route::delete('/admin/delete-subcategory-products', [ProductController::class, 'deleteBySubcategory'])->name('delete.subcategory-products');
-//            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
+            Route::patch('/admin/catalog-bulk-action', [CatalogController::class, 'catalogBulkActions'])->name('catalog.handleBulkActions');
             Route::patch('/admin/category-bulk-action', [CategoryController::class, 'categoryBulkActions'])->name('category.handleBulkActions');
+            Route::patch('/admin/subcategory-bulk-action', [SubcategoryController::class, 'categoryBulkActions'])->name('subcategory.handleBulkActions');
 
             Route::get('/admin/product-import', [ProductController::class, 'importView'])->name('product.viewImport');
 

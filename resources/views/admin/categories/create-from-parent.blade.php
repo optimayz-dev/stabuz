@@ -42,7 +42,7 @@
                                         </div>
                                     @endif
                                     <div class="container">
-                                        <form action="{{ route('admin.category.store') }}" method="POST" class="categories" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.category.storeFromParent', $category->id) }}" method="POST" class="categories" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -100,18 +100,18 @@
                                                         <textarea class="form-control" name="meta_keywords" placeholder="Введите мета ключи"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="">Выберите родительский каталог <br>
-                                                        <select id="e3" style="width: 300px;" name="parent_id_hidden" required>
-                                                            @foreach($catalogs as $catalog)
-                                                                <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-6">
+{{--                                                <div class="col-md-6">--}}
+{{--                                                    <label for="">Выберите родительский каталог <br>--}}
+{{--                                                        <select id="e3" style="width: 300px;" name="parent_id_hidden">--}}
+{{--                                                            @foreach($catalogs as $catalog)--}}
+{{--                                                                <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </select>--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-md-6">--}}
 
-                                                </div>
+{{--                                                </div>--}}
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="category_img" class="form-label">
