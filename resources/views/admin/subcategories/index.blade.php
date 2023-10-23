@@ -90,7 +90,7 @@
                                                             </svg>
                                                         </a>
 
-                                                        <form action="{{ route('admin.subcategory.destroy', $subcategory->id) }}" method="post">
+                                                        <form action="{{ route('admin.category.delete', $subcategory->id) }}" method="post">
                                                             @csrf
                                                             @method('patch')
                                                             <button type="submit" class="btn btn-outline-danger">
