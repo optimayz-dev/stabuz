@@ -37,7 +37,7 @@
                                     </p>
 
                                     <h3 style="padding: 8px 0; border-top: 2px solid darkgray">{{ $category->title }}</h3>
-                                    <form action="{{ route('admin.editCategories') }}" method="post">
+                                    <form action="{{ route('admin.category.handleBulkActions') }}" method="post">
                                         @if (session('success'))
                                             <div class="alert alert-success">
                                                 {{ session('success') }}
@@ -92,7 +92,8 @@
                                         </table>
 {{--                                        {{  Form::hidden('url',URL::previous())  }}--}}
                                         <div class="btn-wrapper">
-                                            <button type="submit" class="action-btn"><i class="fa fa-edit"></i> edit selected</button>
+                                            <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> edit selected</button>
+                                            <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
                                         </div>
                                     </form>
                                 </div>
