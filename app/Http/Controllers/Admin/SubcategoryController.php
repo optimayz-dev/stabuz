@@ -79,7 +79,7 @@ class SubcategoryController extends Controller
 
         $category->save();
 
-        return redirect()->back()->with('success', 'Категория успешно добавлена');
+        return redirect()->route('admin.subcategory.index')->with('success', 'Категория успешно добавлена');
     }
 
 
@@ -120,7 +120,7 @@ class SubcategoryController extends Controller
 
         $subcategory->update();
 
-        return redirect()->route('admin.subcategory.index')->with('success', 'Категория успешно добавлена');
+        return redirect()->route('admin.subcategory.index')->with('success', 'Категория успешно обновлена');
     }
 
 
@@ -156,10 +156,8 @@ class SubcategoryController extends Controller
     public function updateSelected(UpdateCategoryRequest $request)
     {
 
-        dd($request->all());
         $locale = $request->getlocale;
         app()->setLocale($locale);
-
 
         foreach ($request->input('id') as $id){
             $category = Category::query()->with('translations')->where('id' , $id)->first();

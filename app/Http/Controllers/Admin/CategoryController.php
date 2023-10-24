@@ -115,7 +115,7 @@ class CategoryController extends Controller
 
         $categories->save();
 
-        return redirect()->back()->with('success', 'Категория успешно добавлена');
+        return to_route('admin.category.show', $category->id)->with('success', 'Категория успешно добавлена');
 
     }
 
