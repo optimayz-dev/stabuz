@@ -140,7 +140,7 @@ class CategoryController extends Controller
 
         $categories->update();
 
-        return redirect()->back()->with('success', 'Категория успешно обновлена');
+        return to_route('admin.category.show', $category->parent_id)->with('success', 'Категория успешно обновлена');
 
     }
 
