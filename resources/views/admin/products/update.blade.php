@@ -40,9 +40,8 @@
                                     <p class="text-danger font-13 m-b-30">
                                         При обновление данных, следует выбрать нужную языковую версию:
                                         <select name="getlocale" class="change-locale">
-                                                <option value="{{ \Illuminate\Support\Facades\App::currentLocale() }}" selected>{{ \Illuminate\Support\Facades\App::currentLocale() }}</option>
                                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                <option value="{{ $properties['native'] }}">{{ $properties['native'] }}</option>
+                                                <option value="{{ $properties['native'] }}" @if(app()->getLocale() == $properties['native']) selected @endif >{{ $properties['native'] }}</option>
                                             @endforeach
                                         </select>
                                     </p>

@@ -83,7 +83,7 @@
                                             </label>
                                         </div>
                                         <div class="input-wrapper">
-                                            <label for="">Выберите категории брендов <br>
+                                            <label for="">Выберите категории <br>
                                                 <select id="e1" style="width: 300px;" multiple name="categories_id[]" class="select">
                                                     @foreach($product->categories as $item)
                                                         <option value="{{ $item->id }}" selected> {{ $item->title }}</option>

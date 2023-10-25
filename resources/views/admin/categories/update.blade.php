@@ -26,9 +26,12 @@
                                     <div class="card-box table-responsive">
                                         <p class="text-danger font-13 m-b-30">
                                             При обновление данных, следует выбрать нужную языковую версию:
-                                            <select name="getlocale" class="change-locale">@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                    <option value="{{ $properties['native'] }}">{{ $properties['native'] }}</option>
+                                            <select name="getlocale" class="change-locale">
+
+                                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                    <option value="{{ $properties['native'] }}" @if(app()->getLocale() == $properties['native']) selected @endif >{{ $properties['native'] }}</option>
                                                 @endforeach
+
                                             </select>
                                         </p>
                                         @if (session('success'))
