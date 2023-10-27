@@ -7,7 +7,7 @@
                     <div class="x_title">
                         <h2><small>Поиск категорий</small></h2>
                         <form action="" class="search-form">
-                            <input type="text" name="search_category" id="search_category" class="search-input" placeholder="Введите название категории">
+                            <input type="text" name="search_category" id="search_category" class="search-input" placeholder="Введите название каталога">
                         </form>
                         <div id="search_results"></div>
                         <div class="clearfix"></div>

@@ -25,6 +25,10 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
     public function model(array $row)
     {
 
+//        ini_set('upload_max_filesize', '64M');
+
+//        ini_set('post_max_size', '64M');
+
         $product = Product::with('translations')->findOrNew($row['id']);
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
@@ -45,11 +49,12 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         $product->recommend = $row['recommend'];
         $product->credit = $row['credit'];
         $categoryId = explode(';', trim($row['category_id']));
-        $tagId = explode(';', trim($row['tag_id']));
-        $url = $row['image'] ?? '';
+//        $tagId = explode(';', trim($row['tag_id']));
+
 
         if (!empty($row['image'])){
-//            $contents = false;
+            $url = $row['image'] ?? '';
+            $contents = false;
             $contents = file_get_contents($url);
 
             $name = substr($url, strrpos($url, '/') + 1);
@@ -64,11 +69,11 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         if (!empty($row['category_id']))
             $product->categories()->sync($categoryId);
 
-
-        // Связываем с тегами
-        if  (!empty($row['tag_id']))
-            $product->tags()->sync($tagId);
-
+//
+//        // Связываем с тегами
+//        if  (!empty($row['tag_id']))
+//            $product->tags()->sync($tagId);
+//
 
     }
 
@@ -85,6 +90,6 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 
     public function batchSize(): int
     {
-        return 1000;
+        return 5000;
     }
 }

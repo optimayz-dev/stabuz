@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Route;
 //
             Route::delete('/admin/catalogs/delete-selected', [CatalogController::class, 'destroySelected'])->name('destroySelected');
 
-            Route::get('/search/catalog', [CatalogController::class, 'search'])->name('search.catalogs');
+//            Route::get('search/catalog', [CatalogController::class, 'search'])->name('search.catalogs');
             Route::get('/search/category', [CategoryController::class, 'search'])->name('search.categories');
             Route::get('/search/attribute', [AttributeController::class, 'getAttributes'])->name('search.attribute');
 
@@ -102,3 +102,4 @@ use Illuminate\Support\Facades\Route;
            // Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
 
     });
+

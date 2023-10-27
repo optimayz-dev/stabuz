@@ -5,7 +5,7 @@ $(document).ready(function () {
     parentInput.keyup(function () {
         var parent_id = parentInput.val();
 
-        if (parent_id.length >= 5) {
+        if (parent_id.length >= 3) {
             $.get(`/search/category?search=${parent_id}`)
                 .done(function (response) {
                     var suggestions = response;
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
         var categoryVal = $('#search_category').val()
 
-        if (categoryVal.length >= 5) {
+        if (categoryVal.length >= 3) {
             $.get(`/search/category?search=${categoryVal}`, function (response) {
                 var suggestions = response;
 

@@ -10,6 +10,7 @@ use App\Models\Admin\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
+use Matrix\Builder;
 
 
 class CategoryController extends Controller
@@ -22,7 +23,7 @@ class CategoryController extends Controller
 //        $categories= Cache::remember('categories', 60, function () {
             $categories = Category::where('lvl', 1)
                 ->with('translations')
-                ->get();
+                ->latest()->get();
 //        });
 
         $perPage = 10;
@@ -79,7 +80,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->back()->with('success', 'Категория успешно добавлена');
+        return redirect()->route('admin.category.index')->with('success', 'Категория успешно добавлена');
     }
 
     public function createFromParent(Category $category)
@@ -156,20 +157,26 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-//        $cacheKey = 'category_' . $category->id;
+
+        $categories = Category::query()->where('id', $category->id)
+            ->with(['translations', 'children.translations'])
+            ->whereHas('children', function ($query){
+                $query->orderBy('created_at', 'desc');
+            })
+            ->orderBy('created_at', 'asc')->first();
 
 //        $cachedData = Cache::remember($cacheKey, 24 * 60 * 60, function () use ($category) {
             $category->load([
                 'translations',
                 'children.translations',
-                'products' => function ($query) {
-                    $query->with([
-                        'translations',
-                        'prices.currency',
-                        'tags.translations',
-                    ]);
-                },
-            ]);
+//                'products' => function ($query) {
+//                    $query->with([
+//                        'translations',
+//                        'prices.currency',
+//                        'tags.translations',
+//                    ]);
+//                },
+            ])->orderBy('created_at', 'asc');
 //            return $category;
 //        });
 
@@ -181,7 +188,7 @@ class CategoryController extends Controller
     {
         $searchText = $request->query('search');
 
-        $categories = Category::query()->where('lvl', 1)->with('translations')->whereHas('translations', function ($query) use ($searchText) {
+        $categories = Category::query()->with('translations')->whereHas('translations', function ($query) use ($searchText) {
             $query->where('title', 'like', $searchText . '%');
         })
             ->limit(10)

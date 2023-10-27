@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CatalogStoreOnceRequest;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreCatalogRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCatalogRequest;
@@ -23,7 +24,7 @@ class CatalogController extends Controller
 //        $catalogs = Cache::remember('catalogs', 60, function () {
             $catalogs = Category::with('translations')
                 ->whereNull('lvl')
-                ->get();
+                ->latest()->get();
 //        });
         return view('admin.catalogs.index', compact('catalogs'));
     }
@@ -97,13 +98,14 @@ class CatalogController extends Controller
 
     public function search(Request $request)
     {
-        $searchText = $request->query('search');
+
+        $searchText = $request->input('search');
 
         $categories = Category::query()->with('translations')->whereHas('translations', function ($query) use ($searchText) {
-            $query->where('title', 'like', $searchText . '%');
+            $query->where('title', 'like', $searchText .'%');
         })
             ->limit(10)
-            ->get(); // Select only id and title fields
+            ->latest(); // Select only id and title fields
 
         return response()->json($categories);
     }

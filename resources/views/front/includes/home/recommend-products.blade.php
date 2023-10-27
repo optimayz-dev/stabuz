@@ -56,7 +56,7 @@
                                     <p class="goods_viewsCount" name="actualGoodsViewsCount">123</p>
                                 </div>
                             </div>
-                            <a href="productCard.html" class="goods_name"
+                            <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
                             <a href="/" class="goods_companyName"
                                name="actualGoodsCompanyName">{{ $product->brand->title }}</a>

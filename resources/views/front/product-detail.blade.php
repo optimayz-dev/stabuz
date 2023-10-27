@@ -79,7 +79,9 @@
                     @endif
                     </div>
                 </div>
-                <p class="product-photo_plan" name="productPlan">Рассрочка</p>
+                @if($product->credit)
+                    <p class="product-photo_plan" name="productPlan">Рассрочка</p>
+                @endif
             </div>
             <div class="product-content_purchase d-flex flex-wrap justify-content-between">
                 <div class="product-content_purchase--info d-lg-none  d-flex justify-content-between gap-2">
@@ -100,7 +102,7 @@
                             <path d="M6 11V10H15V11H6Z" fill="#999999"/>
                         </svg>
                     </button>
-                    <input value="1" type="text" class="goods-itemCount text-center"></input>
+                    <input value="1" type="text" class="goods-itemCount text-center">
                     <button class="goods-addProduct-plus"  type="button"><svg width="30" height="30" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.78249 17.2175C4.11108 18.5461 5.80382 19.4509 7.64664 19.8175C9.48946 20.184 11.3996 19.9959 13.1355 19.2769C14.8714 18.5578 16.3551 17.3402 17.399 15.7779C18.4428 14.2157 19 12.3789 19 10.5C19 8.62108 18.4428 6.78435 17.399 5.22208C16.3551 3.65982 14.8714 2.44218 13.1355 1.72314C11.3996 1.00411 9.48946 0.81598 7.64664 1.18254C5.80382 1.5491 4.11109 2.45389 2.78249 3.78248" stroke="#999999" stroke-linecap="round"/>
                             <path d="M5 11V10H14V11H5Z" fill="#999999"/>
@@ -160,7 +162,7 @@
                     </tr>
                     <tr>
                         <td>Бренд</td>
-                        <td><a href="/" name="productCompany">{{ $product->brand->title }}</a></td>
+                        <td><a href="{{ route('brand.detail', $product->brand->slug) }}" name="productCompany">{{ $product->brand->title }}</a></td>
                     </tr>
                     <tr>
                         @if($product->brand->country)
@@ -171,7 +173,9 @@
                     </tbody>
                 </table>
                 <div class="mt-sm-0 mt-3">
-                    <div class="product-instock_count">В наличии <span name="productInstockCount">52</span> шт</div>
+                    @if($product->amount)
+                    <div class="product-instock_count">В наличии <span name="productInstockCount">{{ $product->amount }}</span> шт</div>
+                    @endif
                     <p class="product-delivery"><a href="/">Доставка</a> по Ташкенту и Узбекистану</p>
                 </div>
             </div>

@@ -196,6 +196,9 @@ class ProductController extends Controller
     public function import()
     {
         $errors = [];
+//        dd(\request()->file('file'));
+        ini_set('upload_max_filesize', '50M');
+        ini_set('post_max_size', '55M');
         Excel::import(new ProductImport(), request()->file('file'));
 
         if (!empty($errors)) {

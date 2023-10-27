@@ -44,9 +44,9 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('#search_category').keyup(function () {
+    $('#search_catalog').keyup(function () {
 
-        var categoryVal = $('#search_category').val()
+        var categoryVal = $('#search_catalog').val()
 
         if (categoryVal.length >= 5) {
             $.get(`/search/catalog?search=${categoryVal}`, function (response) {
@@ -74,7 +74,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#search_category').on('input', function () {
+    $('#search_catalog').on('input', function () {
         // Очищаем контейнер с результатами при изменении значения поля
         $('#search_results').empty();
     });
