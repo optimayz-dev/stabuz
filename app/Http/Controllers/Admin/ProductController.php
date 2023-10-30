@@ -118,7 +118,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $product = Product::query()->with('categories', 'categories.translations', 'tags')->findOrFail($product->id);
+        $product = Product::query()->with('categories', 'categories.translations', 'tags', 'images')->findOrFail($product->id);
         $tags = Tag::with('translations')->get();
         $currencies = CurrencyCode::query()->get();
         $categories = Category::query()->with('translations')->get();
@@ -129,7 +129,8 @@ class ProductController extends Controller
             'tags' => $tags,
             'currencies' => $currencies,
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+
         ]);
     }
 
