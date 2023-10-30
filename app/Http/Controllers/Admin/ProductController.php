@@ -66,7 +66,7 @@ class ProductController extends Controller
 //        $product = new Product($request->validated());
         $product = new Product();
         if ($request->hasFile('file_url')) {
-            $path = $request->file('file_url')->store('images');
+            $path = $request->file('file_url')->store('images/products');
         }
 
         $product->title = $request->input('title');
@@ -145,7 +145,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         if ($request->file('file_url'))
-            $file_url = $request->file('file_url')->store('images');
+            $file_url = $request->file('file_url')->store('images/products');
 
         $product->title = $request->input('title');
         $product->description = $request->input('description');

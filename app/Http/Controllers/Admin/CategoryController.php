@@ -125,7 +125,7 @@ class CategoryController extends Controller
 
 
         if ($request->hasfile('category_img')) {
-            $image = $request->file('category_img')->store('images');
+            $image = $request->file('category_img')->store('images/categories');
         }
 
         $categories =  Category::findOrFail($category->id);
@@ -272,7 +272,7 @@ class CategoryController extends Controller
         }
 
         if ($request->hasfile('category_img')) {
-            $image = $request->file('category_img')->store('images');
+            $image = $request->file('category_img')->store('images/categories');
         }
 
         $category->title = $request->input('title');

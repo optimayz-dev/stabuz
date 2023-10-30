@@ -48,7 +48,7 @@ class BrandController extends Controller
 
         $brand = new Brand($request->validated());
         if ($request->hasFile('brand_logo')) {
-            $path = $request->file('brand_logo')->store('images');
+            $path = $request->file('brand_logo')->store('images/brands');
             $brand->brand_logo = $path;
         }
 
@@ -102,7 +102,7 @@ class BrandController extends Controller
         $brand->country_id = $request->input('country_id');
 
         if ($request->hasFile('brand_logo')) {
-            $path = $request->file('brand_logo')->store('images');
+            $path = $request->file('brand_logo')->store('images/brands');
         } else
             $path = $brand->brand_logo;
 

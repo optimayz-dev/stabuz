@@ -37,8 +37,8 @@ class BrandImport implements ToModel, WithBatchInserts, WithHeadingRow, WithCust
             $contents = false;
             $contents = $this->file_get_contents_curl($url);
             $name = substr($url, strrpos($url, '/') + 1);
-            Storage::put('images/' . $name, $contents);
-            $brand->brand_logo = 'images/' . $name;
+            Storage::put('images/brands' . $name, $contents);
+            $brand->brand_logo = 'images/brands' . $name;
         }
 
 

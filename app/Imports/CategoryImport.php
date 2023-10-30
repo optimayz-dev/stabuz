@@ -36,7 +36,6 @@ class CategoryImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, 
         $category->parent_id = $row['parent_id'];
         $category->lvl = $row['lvl'];
 
-        Cache::forget('categories');
         // Сохраняем в базу
         $category->save();
     }

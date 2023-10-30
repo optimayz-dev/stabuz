@@ -66,13 +66,13 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
                     $contents = false;
                     $contents = $this->file_get_contents_curl($url);
                     $name = substr($url, strrpos($url, '/') + 1);
-                    Storage::put('images/' . $name, $contents);
+                    Storage::put('images/products' . $name, $contents);
 
-                    if (file_exists(public_path('images/'.$name)))
+                    if (file_exists(public_path('images/products'.$name)))
                         break;
 
                     ProductGallery::query()->create([
-                        'image' => 'images/' . $name,
+                        'image' => 'images/products' . $name,
                         'product_id' => $product->id
                     ]);
                 }
