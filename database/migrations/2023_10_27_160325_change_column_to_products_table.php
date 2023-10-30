@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign('products_brand_id_foreign');
-            $table->dropColumn('brand_id');
-//            $table->bigInteger('brand_id')->nullable();
+//            $table->dropForeign('products_brand_id_foreign');
+//            $table->dropColumn('brand_id');
+            $table->bigInteger('brand_id')->nullable();
+            $table->float('price')->nullable()->change();
+            $table->float('old_price')->nullable()->change();
 //            $table->foreignIdFor(Brand::class)
 //                ->nullable()
 //                ->constrained()
