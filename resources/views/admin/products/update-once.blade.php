@@ -166,7 +166,7 @@
                                                 @error('file_url')
                                                 <div class=file_url>{{ $message }}</div>
                                                 @enderror
-                                                <img src="{{ asset($product->file_url ?? '') }}" alt="">
+                                                <img src="{{ asset($product->file_url ?? '') }}" alt="" style="width:150px">
                                                 <input type="file" name="file_url" >
                                             </label>
                                         </div>
