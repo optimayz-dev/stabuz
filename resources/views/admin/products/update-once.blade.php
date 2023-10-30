@@ -166,7 +166,10 @@
                                                 @error('file_url')
                                                 <div class=file_url>{{ $message }}</div>
                                                 @enderror
-                                                <img src="{{ asset($product->images->image ?? '') }}" alt="" style="width:150px">
+                                                @foreach($product->images as $image)
+                                                    <img src="{{ asset($image->image ?? '') }}" alt="" style="width:150px">
+                                                @endforeach
+                                                <br>
                                                 <input type="file" name="file_url" >
                                             </label>
                                         </div>
