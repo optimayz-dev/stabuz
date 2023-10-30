@@ -25,10 +25,6 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
     public function model(array $row)
     {
 
-//        ini_set('upload_max_filesize', '64M');
-
-//        ini_set('post_max_size', '64M');
-
         $product = Product::with('translations')->findOrNew($row['id']);
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
@@ -90,6 +86,6 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 
     public function batchSize(): int
     {
-        return 5000;
+        return 100000;
     }
 }
