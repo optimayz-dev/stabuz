@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Admin\Brand;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -29,10 +30,31 @@ class BrandImport implements ToModel, WithBatchInserts, WithHeadingRow, WithCust
         $brand->translateOrNew($locale)->description = $row['description'];
 
         // Опционально, если у вас есть другие поля, которые не зависят от языка
-        $brand->brand_logo = $row['image'];
+
+        if (!empty($row['image'])){
+            $url = $row['image'];
+
+            $contents = false;
+            $contents = $this->file_get_contents_curl($url);
+            $name = substr($url, strrpos($url, '/') + 1);
+            Storage::put('images/' . $name, $contents);
+            $brand->brand_logo = 'images/' . $name;
+        }
+
 
        // Сохраняем в базу
         $brand->save();
+    }
+
+    function file_get_contents_curl($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 
     public function batchSize(): int
