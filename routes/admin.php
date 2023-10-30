@@ -93,6 +93,7 @@ use Illuminate\Support\Facades\Route;
             Route::patch('/admin/subcategory-bulk-action', [SubcategoryController::class, 'categoryBulkActions'])->name('subcategory.handleBulkActions');
 
             Route::get('/admin/product-import', [ProductController::class, 'importView'])->name('product.viewImport');
+            Route::get('/admin/brand-import', [BrandController::class, 'importView'])->name('brand.viewImport');
 
             Route::get('/admin/category-import', [ImportCategoryController::class, 'viewImport'])->name('category.viewImport');
             Route::get('/admin/category-export', [ImportCategoryController::class, 'export'])->name('category.export');

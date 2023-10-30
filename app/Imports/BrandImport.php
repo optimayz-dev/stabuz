@@ -26,10 +26,10 @@ class BrandImport implements ToModel, WithBatchInserts, WithHeadingRow, WithCust
         // Создаём или обновляем перевод для текущего языка
         $locale = App::getLocale();
         $brand->translateOrNew($locale)->title = $row['title'];
-        $brand->translateOrNew($locale)->descr = $row['descr'];
+        $brand->translateOrNew($locale)->description = $row['description'];
 
         // Опционально, если у вас есть другие поля, которые не зависят от языка
-        $brand->file_url = $row['file_url'];
+        $brand->brand_logo = $row['image'];
 
        // Сохраняем в базу
         $brand->save();

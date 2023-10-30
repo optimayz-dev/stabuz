@@ -21,7 +21,7 @@
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-edit"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('admin.brand.create') }}">Add brand</a>
-                                    <a class="dropdown-item" href="{{  route('admin.editSelected') }}">Edit all</a>
+                                    <a class="dropdown-item" href="{{ route('admin.brand.viewImport') }}">Export/Import</a>
                                 </div>
                             </li>
 
@@ -95,9 +95,9 @@
                                             @endforeach
                                             </tbody>
                                         </table>
-                                        <div class="btn-wrapper">
-                                            <button type="submit" class="btn btn-primary">edit selected</button>
-                                        </div>
+{{--                                        <div class="btn-wrapper">--}}
+{{--                                            <button type="submit" class="btn btn-primary">edit selected</button>--}}
+{{--                                        </div>--}}
                                     </form>
                                 </div>
                             </div>

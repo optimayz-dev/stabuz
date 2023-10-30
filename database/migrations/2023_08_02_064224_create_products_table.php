@@ -23,8 +23,8 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('file_url')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('old_price')->nullable();
+            $table->float('price')->nullable();
+            $table->float('old_price')->nullable();
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
             $table->string('modification')->nullable();

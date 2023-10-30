@@ -128,10 +128,15 @@ class BrandController extends Controller
         return redirect()->back()->with('success', 'Успешно удален !');
     }
 
+    public function importView()
+    {
+        return view('admin.brands.export-import');
+    }
+
     public function import(Request $request)
     {
         Excel::import(new BrandImport(), request()->file('file'));
-        return redirect()->back()->with('success', 'data was successful imported');
+        return redirect()->back()->with('success', 'Бренды успешно импортированы !');
     }
 
     public function brandCategories(Brand $brand)
