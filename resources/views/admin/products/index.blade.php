@@ -94,6 +94,9 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                        <div class="d-flex">
+                                            {!! $products->links() !!}
+                                        </div>
                                         <div class="btn-wrapper">
                                             <button type="submit" class="action-btn" name="action" value="edit"><i class="fa fa-edit"></i> Edit Selected</button>
                                             <button type="submit" class="action-btn" name="action" value="delete" style="color: red"><i class="fa fa-trash"></i> Delete Selected</button>
