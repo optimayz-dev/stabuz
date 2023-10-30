@@ -32,7 +32,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()->with('translations')->get();
+        $products = Product::query()->with('translations')->select(['id'])->get();
 
         return view('admin.products.index', ['products' => $products]);
     }
