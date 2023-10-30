@@ -196,10 +196,11 @@ class ProductController extends Controller
     public function import()
     {
         $errors = [];
-//        dd(\request()->file('file'));
-        ini_set('upload_max_filesize', '50M');
-        ini_set('post_max_size', '55M');
-        Excel::import(new ProductImport(), request()->file('file'));
+        try {
+            Excel::import(new ProductImport(), request()->file('file'));
+        }catch (\Error $error){
+            return $error->getMessage();
+        }
 
         if (!empty($errors)) {
             return back()->with('errors', $errors);

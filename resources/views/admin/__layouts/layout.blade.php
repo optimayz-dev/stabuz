@@ -23,6 +23,11 @@
 
     <title>Document</title>
 </head>
+@if($errors->any())
+    @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+    @endforeach
+@endif
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">

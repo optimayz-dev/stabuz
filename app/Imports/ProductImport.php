@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\Models\Admin\Product;
+use App\Models\Admin\ProductGallery;
+use Illuminate\Http\File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -47,30 +49,55 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
         $categoryId = explode(';', trim($row['category_id']));
 //        $tagId = explode(';', trim($row['tag_id']));
 
+        if (!empty($row['image'])) {
 
-        if (!empty($row['image'])){
-            $url = $row['image'] ?? '';
-            $contents = false;
-            $contents = file_get_contents($url);
+            $urls = explode(';', trim($row['image']));
 
-            $name = substr($url, strrpos($url, '/') + 1);
-            Storage::put('images/' . $name, $contents);
+//            if (count($urls) <= 1) {
+//                $contents = false;
+//                $contents = $this->file_get_contents_curl($urls[0]);
+//                $name = substr($urls[0], strrpos($urls[0], '/') + 1);
+//                    Storage::put('images/' . $name, $contents);
+//                $product->file_url = 'images/' . $name;
+//            }
 
-            $product->file_url = 'images/' . $name;
+//            if (count($urls) > 1 && is_array($urls)){
+                foreach ($urls as $url) {
+                    $contents = false;
+                    $contents = $this->file_get_contents_curl($url);
+                    $name = substr($url, strrpos($url, '/') + 1);
+                    Storage::put('images/' . $name, $contents);
+
+                    if (file_exists(public_path('images/'.$name)))
+                        break;
+
+                    ProductGallery::query()->create([
+                        'image' => 'images/' . $name,
+                        'product_id' => $product->id
+                    ]);
+                }
+//            }
+
         }
 
         $product->save();
 
+
         // Связываем с категориями
         if (!empty($row['category_id']))
             $product->categories()->sync($categoryId);
+    }
 
-//
-//        // Связываем с тегами
-//        if  (!empty($row['tag_id']))
-//            $product->tags()->sync($tagId);
-//
 
+    function file_get_contents_curl($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
     }
 
 
