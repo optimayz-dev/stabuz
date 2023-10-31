@@ -62,20 +62,20 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 //            }
 
 //            if (count($urls) > 1 && is_array($urls)){
-                foreach ($urls as $url) {
-                    $contents = false;
-                    $contents = $this->file_get_contents_curl($url);
-                    $name = substr($url, strrpos($url, '/') + 1);
-                    Storage::put('images/products' . $name, $contents);
+            foreach ($urls as $url) {
+                $contents = false;
+                $contents = $this->file_get_contents_curl($url);
+                $name = substr($url, strrpos($url, '/') + 1);
+                Storage::put('images/products/' . $name, $contents);
 
-                    if (file_exists(public_path('images/products'.$name)))
-                        break;
+                if (file_exists(public_path('images/products/' . $name)))
+                    break;
 
-                    ProductGallery::query()->create([
-                        'image' => 'images/products' . $name,
-                        'product_id' => $product->id
-                    ]);
-                }
+                ProductGallery::query()->create([
+                    'image' => 'images/products/' . $name,
+                    'product_id' => $product->id
+                ]);
+            }
 //            }
 
         }
