@@ -167,7 +167,7 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-                            <img src=" {{ asset($product->images[0]->image) ?? ''  }}" alt="">
+                            <img src=" {{ asset($product->images[0]['image']) ?? ''  }}" alt="">
                             <img src="image/cards/Rectangle 604 (1).png" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
