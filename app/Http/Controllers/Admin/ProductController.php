@@ -32,7 +32,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()->with('translations')->select(['id'])->paginate(20);
+        $products = Product::query()->with('translations')->select(['id'])->paginate(50);
 
 //        return $products;
 
@@ -336,7 +336,11 @@ class ProductController extends Controller
 
     public function getimages()
     {
-        return ProductGallery::query()->get();
+        Product::query()->where('id' , '>', 11612)->delete();
+
+        return response()->json('success');
+
+//        return ProductGallery::query()->get();
     }
 
 }

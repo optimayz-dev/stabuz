@@ -83,10 +83,10 @@ class ProductImport implements ToModel, WithHeadingRow, WithCustomCsvSettings, W
 
         $product->save();
 
-
         // Связываем с категориями
         if (!empty($row['category_id']))
             $product->categories()->sync($categoryId);
+
     }
 
 
