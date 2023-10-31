@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductGallery extends Model
 {
     use HasFactory;
+
+    protected $table = 'product_galleries';
+
     protected $guarded = ['id'];
 }
