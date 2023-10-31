@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/search/catalog', [CatalogController::class, 'search'])->name('search.catalogs');
+Route::get('/products/gallery', [\App\Http\Controllers\Admin\ProductController::class, 'getimages']);

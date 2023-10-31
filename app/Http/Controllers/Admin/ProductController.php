@@ -332,4 +332,11 @@ class ProductController extends Controller
     {
 
     }
+
+
+    public function getimages()
+    {
+        return ProductGallery::query()->get();
+    }
+
 }
