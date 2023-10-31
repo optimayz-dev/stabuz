@@ -154,7 +154,9 @@
                     <div class="goods_item">
                         <div class="goods_header">
                             <div class="goods_header--menu d-flex align-items-center">
-                                <span class="goods-itemNew" name="goodsItemNew">New</span>
+                                @if($product->new)
+                                    <span class="goods-itemNew" name="goodsItemNew">New</span>
+                                @endif
                                 <button type="button">
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -165,7 +167,7 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-                            <img src=" {{ asset($product->file_url)  }}" alt="">
+                            <img src=" {{ asset($product->images->image) ?? ''  }}" alt="">
                             <img src="image/cards/Rectangle 604 (1).png" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
@@ -205,8 +207,8 @@
                             </div>
                             <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
-                            <a href="{{ route('brand.detail', $product->brand->slug) }}" class="goods_companyName"
-                               name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
+                            <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
+                               name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
                             <div class="goods-addProduct ">
                                 <div class="goods-addProduct_btns">
                                     <button class="goods-addProduct-minus disabled" type="button">
