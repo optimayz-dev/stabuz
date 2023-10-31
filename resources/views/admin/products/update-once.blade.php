@@ -152,7 +152,7 @@
                                         <div class="input-wrapper">
                                             <label for="">Выберите Бренд <br>
                                                 <select id="e2" style="width: 300px;" name="brand_id" class="select">
-                                                    @if($product->brand->id != null)
+                                                    @if($product->brand_id != null)
                                                         <option value="{{ $product->brand->id }}" selected>{{ $product->brand->title }}</option>
                                                     @endif
                                                     @foreach($brands as $brand)
