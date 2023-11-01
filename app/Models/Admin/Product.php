@@ -50,7 +50,7 @@ class Product extends Model implements TranslatableContract
 
     public function first_image()
     {
-        return $this->images()->first();
+        return $this->hasOne(ProductGallery::class, 'id', 'product_id');
     }
     public function brand(){
             return $this->belongsTo(Brand::class);

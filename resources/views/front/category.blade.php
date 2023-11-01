@@ -167,7 +167,13 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-                            <img src=" {{ asset($product->first_image->image) ?? ''  }}" alt="">
+{{--                            @foreach($product->images as $image)--}}
+{{--                                @dd($image)--}}
+{{--                            @endforeach--}}
+{{--                            @dd($product)--}}
+                            @foreach($product->images as $image)
+                                <img src=" {{ asset($image->image) ?? ''  }}" alt="">
+                            @endforeach
                             <img src="image/cards/Rectangle 604 (1).png" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)

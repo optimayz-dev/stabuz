@@ -36,9 +36,10 @@ class CategoryController extends Controller
             ->with([
                 'products',
                 'products.translations',
-                'products.first_image',
+                'products.images' => function($query){
+                    $query->first();
+                },
                 'translations',
-                'products.prices',
                 'children.translations',
                 'products.prices.currency',
                 'products.brand.translations',
