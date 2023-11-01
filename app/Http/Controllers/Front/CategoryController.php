@@ -13,12 +13,13 @@ class CategoryController extends Controller
     public function categoriesView()
     {
 //        $catalogs = Cache::remember('catalogs', 60, function () {
-            $catalogs = Category::with('translations')
-                ->whereNull('lvl')
-                ->get();
+        $catalogs = Category::with('translations')
+            ->whereNull('lvl')
+            ->get();
 //        });
         return view('front.categories', compact('catalogs'));
     }
+
     public function categoryView($slug)
     {
 //        $cacheKey = 'category' . $slug;
@@ -54,8 +55,8 @@ class CategoryController extends Controller
 //            ->first();
 
 
-        $category = Category::query()->whereHas('translations', function ($query)use ($slug){
-           $query->where('slug', $slug);
+        $category = Category::query()->whereHas('translations', function ($query) use ($slug) {
+            $query->where('slug', $slug);
         })->with([
             'translations',
             'children.translations',
@@ -65,10 +66,11 @@ class CategoryController extends Controller
 
         ])->first();
 
-        $products = Product::query()->whereHas('categories.translations', function ($query) use ($slug){
+        $products = Product::query()->whereHas('categories.translations', function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })
-            ->with(['translations', 'brand', 'brand.translations', 'images'])->paginate(30);
+        })->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
+            $q->first();
+        },])->paginate(30);
 
 
         return view('front.category', ['category' => $category, 'products' => $products]);

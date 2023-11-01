@@ -10,7 +10,9 @@ class RecommendProductsComposer
 {
     public function compose(View $view)
     {
-        $recommend_products = Product::query()->with('translations', 'brand', 'brand.translations')
+        $recommend_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function($q){
+            $q->first();
+        } ])
             ->orderBy('created_at', 'DESC')
             ->where('recommend', 1)->limit(10)->get();
 

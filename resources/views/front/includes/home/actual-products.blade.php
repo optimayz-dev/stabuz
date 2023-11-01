@@ -20,8 +20,9 @@
                             </button>
                         </div>
                         <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
-                        <img src="{{ asset($product->file_url) }}" alt="">
-
+                        @foreach($product->images as $image)
+                            <img src="{{ asset($image->image ?? '') }}" alt="">
+                        @endforeach
                         <div class="goods_header--installment d-flex align-items-center">
                             @if($product->old_price)
                                 @php
@@ -56,7 +57,8 @@
                                 <p class="goods_viewsCount" name="actualGoodsViewsCount">123</p>
                             </div>
                         </div>
-                        <a href="{{ route('product.detail', $product->slug) }}" class="goods_name" name="actualGoodsName">{{ $product->title }}</a>
+                        <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
+                           name="actualGoodsName">{{ $product->title }}</a>
                         <a href="{{ route('brand.detail', $product->brand->slug) }}" class="goods_companyName"
                            name="actualGoodsCompanyName">{{ $product->brand->title }}</a>
                         <div class="goods-addProduct ">

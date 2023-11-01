@@ -13,7 +13,9 @@ class RecentlyViewedProductsComposer
         if (!empty(session('products_recently_viewed'))) {
             $recent_products = array_unique(session('products_recently_viewed'));
 
-            $products = Product::query()->with('translations', 'brand', 'brand.translations')
+            $products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function($q){
+                $q->first();
+            }])
                 ->whereIn('id', $recent_products)->get();
 
         }
