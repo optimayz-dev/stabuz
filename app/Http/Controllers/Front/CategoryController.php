@@ -39,6 +39,8 @@ class CategoryController extends Controller
                 'products.images' => function($query){
                     $query->first();
                 },
+                'products.brand',
+//                'products.brand.translations',
                 'translations',
                 'children.translations',
                 'products.prices.currency',
