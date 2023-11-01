@@ -87,7 +87,7 @@
             </div>
             <div class="product-content_purchase d-flex flex-wrap justify-content-between">
                 <div class="product-content_purchase--info d-lg-none  d-flex justify-content-between gap-2">
-                    <p class="product-content_purchase--info_name" name="productName">{{ $product->brand->title }}</p>
+                    <p class="product-content_purchase--info_name" name="productName">{{ $product->brand->title ?? '' }}</p>
                     <div class="d-flex gap-2 align-items-center">
                         <span name="productProccent">-25%</span>
                         <h6 name="productCurrentPrice">5 630 040 сум</h6>
@@ -156,16 +156,18 @@
                     <tbody>
                     <tr>
                         <td>Артикул</td>
-                        <td id="product-vendorcode" name="productVendorCode">{{ $product->article }} <button class="product-copy_vendorcodeBtn"><img src="image/icons/copy.svg" alt=""></button></td>
+                        <td id="product-vendorcode" name="productVendorCode">{{ $product->article ?? '' }} <button class="product-copy_vendorcodeBtn"><img src="image/icons/copy.svg" alt=""></button></td>
                     </tr>
                     <tr>
                         <td>Модель</td>
-                        <td name="productModel">{{ $product->modification }}</td>
+                        <td name="productModel">{{ $product->modification ?? '' }}</td>
                     </tr>
+                    @if(!empty($product->brand->slug))
                     <tr>
                         <td>Бренд</td>
                         <td><a href="{{ route('brand.detail', $product->brand->slug) }}" name="productCompany">{{ $product->brand->title }}</a></td>
                     </tr>
+                    @endif
                     <tr>
                         @if($product->brand->country)
                         <td>Страна</td>
