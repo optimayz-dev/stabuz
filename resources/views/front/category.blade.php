@@ -209,7 +209,7 @@
                             </div>
                             <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
-                            @if($product->brand->slug)
+                            @if(!empty($product->brand->slug))
                                 <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
                                    name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
                             @endif
