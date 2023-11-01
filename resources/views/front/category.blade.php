@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="category-goods">
-                @foreach($category->products as $product)
+                @foreach($products as $product)
                     <div class="goods_item">
                         <div class="goods_header">
                             <div class="goods_header--menu d-flex align-items-center">
@@ -260,4 +260,5 @@
             </div>
         </div>
     </section>
+    {!! $products->links() !!}
 @endsection

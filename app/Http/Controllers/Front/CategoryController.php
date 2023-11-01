@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -29,31 +30,48 @@ class CategoryController extends Controller
 //                ->first();
 //        });
 
-        $category = Category::query()
-            ->whereHas('translations', function ($query) use ($slug){
-                $query->where('slug', $slug);
-            })
-            ->with([
-                'products',
-                'products.translations',
-                'products.images' => function($query){
-                    $query->first();
-                },
-                'products.brand',
+//        $category = Category::query()
+//            ->whereHas('translations', function ($query) use ($slug){
+//                $query->where('slug', $slug);
+//            })
+//            ->with([
+//                'products',
+//                'products.translations',
+//                'products.images' => function($query){
+//                    $query->first();
+//                },
+//                'products.brand',
+////                'products.brand.translations',
+//                'translations',
+//                'children.translations',
+//                'products.prices.currency',
 //                'products.brand.translations',
-                'translations',
-                'children.translations',
-                'products.prices.currency',
-                'products.brand.translations',
-                'brands.translations',
-                'brands.country',
-                'brands.country.translations',
-            ])
-
-            ->first();
+//                'brands.translations',
+//                'brands.country',
+//                'brands.country.translations',
+//            ])
+//
+//            ->first();
 
 
-        return view('front.category', compact('category'));
+        $category = Category::query()->whereHas('translations', function ($query)use ($slug){
+           $query->where('slug', $slug);
+        })->with([
+            'translations',
+            'children.translations',
+            'brands.translations',
+            'brands.country',
+            'brands.country.translations',
+
+        ])->first();
+
+        $products = Product::query()->whereHas('categories.translations', function ($query) use ($slug){
+            $query->where('slug', $slug);
+        })
+            ->with(['translations', 'brand', 'brand.translations', 'images'])->paginate(5);
+
+
+        return view('front.category', ['category' => $category, 'products' => $products]);
     }
 
 }
