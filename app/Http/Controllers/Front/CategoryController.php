@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $products = Product::query()->whereHas('categories.translations', function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->limit(1);
+            $q->firstOrfail();
         },])->paginate(30);
 
 

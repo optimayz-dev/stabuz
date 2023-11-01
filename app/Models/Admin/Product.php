@@ -8,6 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+
 //use Laravel\Scout\Searchable;
 
 class Product extends Model implements TranslatableContract
@@ -29,7 +30,7 @@ class Product extends Model implements TranslatableContract
         'characteristics',
     ];
 
-        public function tags()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
@@ -38,6 +39,7 @@ class Product extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Category::class);
     }
+
     public function prices()
     {
         return $this->hasMany(Price::class);
@@ -48,11 +50,13 @@ class Product extends Model implements TranslatableContract
         return $this->hasMany(ProductGallery::class);
     }
 
-    public function brand(){
-            return $this->belongsTo(Brand::class);
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 
-    public static function importFromArray(array $data){
+    public static function importFromArray(array $data)
+    {
 
         foreach ($data as $row) {
             $product = Product::findOrNew($row['id']);
@@ -67,7 +71,7 @@ class Product extends Model implements TranslatableContract
             $product->file_url = $row['file_url'];
             $product->save();
             $product->categories()->attach($categoryId);
-       }
+        }
     }
 
 //    public function toSearchableArray()
