@@ -209,8 +209,11 @@
                             </div>
                             <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
-                            <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
-                               name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
+                            @if($product->brand->slug)
+                                <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
+                                   name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
+                            @endif
+
                             <div class="goods-addProduct ">
                                 <div class="goods-addProduct_btns">
                                     <button class="goods-addProduct-minus disabled" type="button">
