@@ -32,10 +32,12 @@
             <a href="/" class="product-photo_slider-backbtn d-sm-none d-flex"><img src="" alt=""></a>
             <div class="product-photo_slider" name="productPhotoSlider">
                 <!-- ВЫВОД КАРТИНКОК ТОВАРА ИЗ БД -->
+                @foreach($product->images as $image)
                 <div class="product-photo_small goods-img">
                     <img src="image/cards/Group 511.svg" alt="">
-                    <img src="{{ asset($product->file_url) }}" alt="" >
+                    <img src="{{ asset($image->image) }}" alt="" >
                 </div>
+                @endforeach
 {{--                <div class="product-photo_small">--}}
 {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
 {{--                    <img src="image/product/Rectangle 1161.png" alt="" >--}}
@@ -59,7 +61,7 @@
             </div>
 
             <div class="product-photo_brand">
-                <img src="{{ asset($product->brand->brand_logo) }}" alt="" name="productCompanyImg">
+                <img src="{{ asset($product->brand->brand_logo ?? '') }}" alt="" name="productCompanyImg">
             </div>
             <div class="product-photo_large d-sm-flex d-none">
                 <img src="image/cards/Group 511.svg" alt="">

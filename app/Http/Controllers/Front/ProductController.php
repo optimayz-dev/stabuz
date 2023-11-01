@@ -36,10 +36,11 @@ class ProductController extends Controller
                 'brand.translations',
                 'brand.country',
                 'brand.country.translations',
+                'images'
             ])
             ->first();
 
-            session()->push('products_recently_viewed', $product->getKey());
+        session()->push('products_recently_viewed', $product->getKey());
 
         return view('front.product-detail', compact('product', 'seo'));
     }
