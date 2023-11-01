@@ -167,10 +167,6 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-{{--                            @foreach($product->images as $image)--}}
-{{--                                @dd($image)--}}
-{{--                            @endforeach--}}
-{{--                            @dd($product)--}}
                             @foreach($product->images as $image)
                                 <img src=" {{ asset($image->image) ?? ''  }}" alt="">
                             @endforeach
@@ -213,8 +209,8 @@
                             </div>
                             <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
-                            <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
-                               name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
+{{--                            <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"--}}
+{{--                               name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>--}}
                             <div class="goods-addProduct ">
                                 <div class="goods-addProduct_btns">
                                     <button class="goods-addProduct-minus disabled" type="button">
