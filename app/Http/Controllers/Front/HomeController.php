@@ -34,34 +34,22 @@ class HomeController extends Controller
             ->with('translations')
             ->get();
 
-        $new_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $new_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' ])->orderBy('created_at', 'DESC')
             ->where('new', 1)->limit(10)->get();
 
-        $popular_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $popular_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' ])->orderBy('created_at', 'DESC')
             ->where('popular', 1)->limit(10)->get();
 
-        $actual_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $actual_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' ])->orderBy('created_at', 'DESC')
             ->where('actual', 1)->limit(10)->get();
 
-        $recommend_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $recommend_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images'])->orderBy('created_at', 'DESC')
             ->where('recommend', 1)->limit(10)->get();
 
-        $credit_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $credit_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images'])->orderBy('created_at', 'DESC')
             ->where('credit', 1)->limit(10)->get();
 
-        $discount_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
-            $q->first();
-        }])->orderBy('created_at', 'DESC')
+        $discount_products = Product::query()->with(['translations', 'brand', 'brand.translations', 'images'])->orderBy('created_at', 'DESC')
             ->whereNotNull('old_price')->limit(10)->get();
 
 
