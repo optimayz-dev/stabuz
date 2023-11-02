@@ -52,7 +52,7 @@ class ProductController extends Controller
         $products = Product::query()->with('translations')
             ->whereHas('translations', function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->input('search')}%");
-            })->limit(20);
+            })->limit(20)->get();
 
 
         return response($products);
