@@ -168,7 +168,7 @@
                                 </button>
                             </div>
                             @foreach($product->images as $image)
-                                <img src=" {{ asset($image->image) ?? ''  }}" alt="">
+                                <img src="{{ asset($image->image) ?? ''  }}" alt="">
                             @endforeach
                             <img src="image/cards/Rectangle 604 (1).png" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
