@@ -37,7 +37,6 @@
                         @foreach($product->images as $image)
                             <img src="{{ asset($image->image ?? '') }}" alt="">
                         @endforeach
-
                         <div class="goods_header--installment d-flex align-items-center">
                             @if($product->old_price)
                                 @php

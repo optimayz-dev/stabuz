@@ -130,8 +130,37 @@
             </div>
             <a href="/" class="d-xl-block d-none"><img src="{{ asset('assets/front/images/mainLogo.png') }}" alt=""></a>
             <form action="index.html" method="get" class="header-search">
-                <input type="search" placeholder="Поиск" class="icon-search">
+                <input type="search" placeholder="Поиск" class="icon-search" id="search-input">
                 <button type="submit" class="icon-search"></button>
+                <div id="search-results" class="search-results row">
+                    <div class="search-results_goods col-md-7 col-12">
+                        <div class="d-flex align-items-center gap-3">
+                            <h6>Товары</h6>
+{{--                            <span class="search-results_goods--count">23 230 шт</span>--}}
+                        </div>
+                        <ul class="search-results_goods--list search-item">
+{{--                            <li>--}}
+{{--                                <a href="/" class="search-item">--}}
+{{--                                    <p>Пила дисковая аккумуляторная Ryobi r18cs-0 one+</p>--}}
+{{--                                    <h5>1 170 222 сум</h5>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+                        </ul>
+                    </div>
+                    <div class="search-results_categories col-md-5 col-12">
+                        <h6>Категории</h6>
+                        <ul class="search-results_categories--list">
+
+                            <li>
+                                <a href="/">
+                                    <p>Аккумуляторные инструменты</p>
+                                    <h5>Электроинструменты</h5>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
             </form>
             <div class="header-menu d-md-flex d-none justify-content-center gap-md-3 gap-2">
                 <a href="{{ route('cabinet.index') }}" class="">

@@ -44,4 +44,18 @@ class ProductController extends Controller
 
         return view('front.product-detail', compact('product', 'seo'));
     }
+
+
+    public function index(Request $request)
+    {
+
+        $products = Product::query()->with('translations')
+            ->whereHas('translations', function ($query) use ($request) {
+                $query->where('title', 'LIKE', "%{$request->input('search')}%");
+            })->get();
+
+
+        return response($products);
+    }
+
 }

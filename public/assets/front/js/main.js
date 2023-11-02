@@ -1632,3 +1632,42 @@ $(document).ready(function() {
         });
     });
 });
+$(document).ready(function() {
+    var searchResults = $('#search-results');
+    var searchInput = $('#search-input');
+    var searchItem = $('.search-item');
+    searchInput.on('input', function() {
+        var searchQuery = $(this).val().trim();
+        if (searchQuery === "") {
+            searchResults.removeClass('show');
+        } else {
+            $.ajax({
+                url: `/product`,
+                type: 'GET',
+                data: { search: searchQuery },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data)
+                    let htmlView = '';
+                    for(let i = 0; i < data.length; i++){
+                        htmlView += `
+                        <li>
+                            <a href="product/`+ data[i].slug +`" class="search-item">
+                                <p>`+ data[i].title +`</p>
+                            </a>
+                        </li>`;
+                    }
+                    $('.search-item').html(htmlView);
+
+                    // console.log(htmlView);
+                    // var goodsList = data.items;
+                    // var categoriesList = data.categories;
+                    searchResults.addClass('show');
+                },
+                error: function(error) {
+                    console.log('Произошла ошибка при выполнении запроса');
+                }
+            });
+        }
+    });
+});

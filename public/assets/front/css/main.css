@@ -4163,3 +4163,59 @@ input[type="range"]::-moz-range-thumb {
 #backButton{
     display: none;
 }
+/* search results */
+.search-results{
+    display: none;
+    position: absolute;
+    top: 69px;
+    right: -50%;
+    padding: 20px 86px;
+    background: var(--white);
+    border-top: 1px solid var(--grey);
+    width: 200%;
+    z-index: 10;
+    flex-wrap: nowrap;
+    max-height: 85vh;
+    overflow: scroll;
+}
+.search-results.show{
+    display: flex;
+}
+.search-results h6,
+.search-results_goods--list h5{
+    color: var(--black);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+}
+.search-results_goods--list h5{
+    font-style: 17px;
+}
+.search-results p{
+    color: var(--black);
+    font-size: 15px;
+    font-style: normal;
+    line-height: 140%;
+}
+.search-results_categories--list h5{
+    color: var(--grey2);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}
+.search-results_goods--count{
+    color: rgba(23, 23, 23, 0.50);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+.search-results_categories--list,
+.search-results_goods--list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
