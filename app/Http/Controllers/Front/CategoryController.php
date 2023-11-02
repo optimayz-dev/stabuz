@@ -70,6 +70,7 @@ class CategoryController extends Controller
             $query->where('slug', $slug);
         })->with(['translations', 'brand', 'brand.translations', 'images' => function ($q) {
             $q->limit(1);
+
         },])->paginate(30);
 
 
