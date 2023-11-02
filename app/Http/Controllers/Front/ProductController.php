@@ -46,13 +46,13 @@ class ProductController extends Controller
     }
 
 
-    public function index(Request $request)
+    public function search(Request $request)
     {
 
         $products = Product::query()->with('translations')
             ->whereHas('translations', function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->input('search')}%");
-            })->get();
+            })->limit(20);
 
 
         return response($products);

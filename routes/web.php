@@ -36,7 +36,7 @@ Route::group([
     Route::get('/locale/{locale}', [HomeController::class, 'changeLocale'])->name('locale');
 
     Route::get('/product/{slug}', [ProductController::class, 'detailProduct'])->name('product.detail');
-    Route::get('/product/', [ProductController::class, 'index'])->name('product.search');
+    Route::get('/product/', [ProductController::class, 'search'])->name('product.search');
     Route::get('/categories', [CategoryController::class, 'categoriesView'])->name('categories.view');
 
     Route::get('/category/{slug}', [CategoryController::class, 'categoryView'])->name('category.view');
