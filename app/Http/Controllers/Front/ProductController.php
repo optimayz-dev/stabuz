@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\StaticText;
 use App\Models\Admin\Tag;
@@ -52,10 +53,17 @@ class ProductController extends Controller
         $products = Product::query()->with('translations')
             ->whereHas('translations', function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->input('search')}%");
-            })->limit(20)->get();
+            })->limit(30)->get();
 
 
-        return response($products);
+        $categories = Category::query()->with('translations')
+            ->whereHas('translations', function ($query) use ($request){
+                $query->where('title', 'LIKE', "%{$request->input('search')}%");
+            })->limit(30)->get();
+
+
+
+        return response(['categories' => $categories, 'products' => $products]);
     }
 
 }

@@ -149,14 +149,14 @@
                     </div>
                     <div class="search-results_categories col-md-5 col-12">
                         <h6>Категории</h6>
-                        <ul class="search-results_categories--list">
+                        <ul class="search-results_categories--list search-item-category">
 
-                            <li>
-                                <a href="/">
-                                    <p>Аккумуляторные инструменты</p>
-                                    <h5>Электроинструменты</h5>
-                                </a>
-                            </li>
+{{--                            <li>--}}
+{{--                                <a href="/">--}}
+{{--                                    <p>Аккумуляторные инструменты</p>--}}
+{{--                                    <h5>Электроинструменты</h5>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
                         </ul>
                     </div>
