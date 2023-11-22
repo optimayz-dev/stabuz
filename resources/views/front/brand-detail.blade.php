@@ -73,11 +73,11 @@
                 <ul class="category-filter_list" name="brandList">
                     <li>
                         <input type="checkbox" name="brandCountry" id="brandCountry1" value="brandCountry1">
-                        <label for="brandCountry1">{{ $brand->country->title }}</label>
+                        <label for="brandCountry1">{{ $brand->country->title ?? '' }}</label>
                     </li>
 
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="/image/icons/chevroneBottom.svg" alt=""></button>
+                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
             </div>
             <button type="button" class="category-resetall_btn">Сбросить все</button>
         </form>
@@ -89,11 +89,11 @@
                 <div class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
                     <div class="category-counts d-flex gap-3">
                         <div class="category-count_goods d-flex gap-2">
-                            <img src="image/icons/countGoods.svg" alt="">
-                            <p name="categoryCountGoods">23 230 шт</p>
+                            <img src="{{ asset('assets/front/image/icons/countGoods.svg') }} " alt="">
+                            <p name="categoryCountGoods">{{ count($brand->products) }} шт</p>
                         </div>
                         <div class="category-count_views d-flex gap-2">
-                            <img src="image/icons/eye.svg" alt="">
+                            <img src="{{ asset('assets/front/image/icons/eye.svg') }} " alt="">
                             <p name="categoryCountViews">15 025</p>
                         </div>
                     </div>
@@ -130,8 +130,8 @@
                                     <button type="button" class="icon-heart">
                                     </button>
                                 </div>
+                                <img src=" {{ asset('assets/front/images/cards/Group 511.svg') }}" alt="">
                                 <img src=" {{ asset($product->file_url)  }}" alt="">
-                                <img src="image/cards/Rectangle 604 (1).png" alt="">
                                 <div class="goods_header--installment d-flex align-items-center">
                                     @if($product->old_price)
                                         @php
