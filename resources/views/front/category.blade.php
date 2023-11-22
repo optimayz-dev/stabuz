@@ -164,7 +164,7 @@
                                 </button>
                             </div>
                             <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
-                            <img src="{{ asset('/assets/front/image/cards/Rectangle 604 (1).png') }}" alt="">
+                            <img src="{{ asset('assets/front/images/cards/Rectangle 604 (1).png') }}" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
                                     @php
