@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\App;
 
 //use Laravel\Scout\Searchable;
 
+/**
+ * @property iterable $images
+ */
 class Product extends Model implements TranslatableContract
 {
     use HasFactory, Translatable;

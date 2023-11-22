@@ -10,6 +10,7 @@ use App\Models\Admin\Brand;
 use App\Models\Admin\BrandCategory;
 use App\Models\Admin\Catalog;
 use App\Models\Admin\Category;
+use App\Models\Admin\Currency;
 use App\Models\Admin\CurrencyCode;
 use App\Models\Admin\Price;
 use App\Models\Admin\Product;
@@ -28,7 +29,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        CurrencyCode::factory(3)->create();
+        Currency::query()->create([
+            'type' => 'sum',
+            'value' => 1200
+        ]);
+
+        Currency::query()->create([
+            'type' => 'rub',
+            'value' => 9300
+        ]);
+
 //        Admin::factory()->create([
 //            'name' => 'Test Admin',
 //            'email' => 'test@example.com',

@@ -5,8 +5,11 @@ namespace App\Providers;
 use App\Http\View\Composers\HeaderComposer;
 use App\Http\View\Composers\RecentlyViewedProductsComposer;
 use App\Http\View\Composers\RecommendProductsComposer;
+use App\Services\CurrencyService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Connection;
@@ -28,6 +31,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+//        dd(Http::get('https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/')->json([0]));
+
+        Blade::directive('currency', function ($amount){
+
+            $currency = (new CurrencyService())->rub($amount);
+
+            return $currency;
+        });
+
         // Для определения N + 1 запросов в рамках локальной разработки
         Model::preventLazyLoading(!app()->isProduction());
 

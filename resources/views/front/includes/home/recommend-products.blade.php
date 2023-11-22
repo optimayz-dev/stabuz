@@ -21,10 +21,7 @@
                                 </button>
                             </div>
                             <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
-                            @foreach($product->images as $image)
-                                <img src="{{ asset($image->image ?? '') }}" alt="">
-                            @endforeach
-
+                            <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
                                     @php
@@ -44,7 +41,7 @@
                             @if ($product->old_price)
                                 <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->old_price }} usd</p>
                             @endif
-                                <div class="mt-1 mb-1 d-flex align-items-center gap-3">
+                            <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                 <div class="goods_rewies d-flex align-items-center gap-1">
                                     <span class="icon-star active"></span>
                                     <span class="icon-star active"></span>

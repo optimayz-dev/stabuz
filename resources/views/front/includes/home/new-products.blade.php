@@ -19,7 +19,7 @@
                     <div class="goods_item">
                         <div class="goods_header goods-img">
                             <div class="goods_header--menu d-flex align-items-center">
-                                    <span class="goods-itemNew" name="goodsItemNew">New</span>
+                                <span class="goods-itemNew" name="goodsItemNew">New</span>
                                 <button type="button">
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -31,10 +31,7 @@
                                 </button>
                             </div>
                             <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
-                            @foreach($product->images as $image)
-                                <img src="{{ asset($image->image ?? '') }}" alt="">
-                            @endforeach
-
+                            <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
                                     @php

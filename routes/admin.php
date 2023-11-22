@@ -20,7 +20,9 @@ use App\Http\Controllers\Admin\PromotionBannerController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\StaticSeoTexts\ProductSeoTextController;
+use App\Http\Controllers\Admin\CurrencyController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -52,6 +54,7 @@ use Illuminate\Support\Facades\Route;
             Route::resource('/admin/main-banner', MainBannerController::class);
             Route::resource('/admin/promotion-banner', PromotionBannerController::class);
             Route::resource('/admin/static-text-product', ProductSeoTextController::class);
+            Route::resource('/admin/currency', CurrencyController::class);
             Route::patch('/admin/attribute-bulk-actions', [AttributeController::class, 'bulkActions'])->name('attribute.bulkActions');
             Route::patch('/admin/attributes/bulk-update', [AttributeController::class, 'bulkUpdate'])->name('attribute.bulkUpdate');
             Route::get('/admin/categories/{category}', [CategoryController::class, 'createFromParent'])->name('category.createFromParent');
@@ -100,7 +103,7 @@ use Illuminate\Support\Facades\Route;
             Route::post('/admin/category-import', [ImportCategoryController::class, 'import'])->name('category.import');
             Route::get('/admin/product-export', [ProductController::class, 'export'])->name('product.export');
             Route::get('/admin/product-excell', [\App\Http\Controllers\Controller::class, 'excel']);
-           // Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
+//            Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
 
     });
 

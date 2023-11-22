@@ -45,8 +45,8 @@
             @foreach($catalogs as $catalog)
                 <a href="{{ route('category.view', $catalog->slug) }}" class="popular-categories_item">
                     <div class="popular-categories_item--img">
-                        <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="" name="popularCategoriesImg">
-                        <img src="{{ asset( $catalog->category_img) }}" alt="">
+                        <img src="{{ asset('assets/front/images/circle.svg') }}" alt="" name="popularCategoriesImg">
+                        <img src="{{ asset( $catalog->category_img ?? '') }}" alt="">
                     </div>
                     <p name="popularCategoriesName">{{ $catalog->title }}</p>
                 </a>

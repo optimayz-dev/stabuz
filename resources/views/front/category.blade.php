@@ -10,10 +10,8 @@
         </ol>
     </nav>
     <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
-        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все
-            категории</a>
-        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png"
-                                                                  alt="">{{ $category->title }}</a>
+        <a href="categories.html" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+        <a href="categories.html" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
     </div>
     <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $category->title }}</h6>
     <!-- caregory nav -->
@@ -26,10 +24,10 @@
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
             <div class="category-categories d-flex flex-column">
-                <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все
+                <a href="/" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все
                     категории</a>
                 <a href="/" class="category-name_link d-none" name="parentCategoryName"><img
-                        src="/image/icons/greenArrLeft.png" alt="">{{ $category->title }}</a>
+                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
                 <span name="categoryName" class="category-name">{{ $category->title }}</span>
                 <ul class="category-categories_list" name="categoryCategoriesList">
                     @foreach($category->children as $child)
@@ -72,8 +70,7 @@
                     @endforeach
 
                 </ul>
-                <button class="category-filter_showall--btn">Все бренды<img src="/image/icons/chevroneBottom.svg"
-                                                                            alt=""></button>
+                <button class="category-filter_showall--btn">Все бренды<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
             </div>
             <div class="category-filter_nav">
                 <div class="d-flex justify-content-between mb-3 mt-4">
@@ -83,7 +80,6 @@
                 <ul class="category-filter_list" name="categoryCountryList">
 
                     @foreach($category->brands as $brand)
-
                         @if(!(empty($brand->country)))
                             <li>
                                 <input type="checkbox" name="country" id="country1" value="country1"> <label
@@ -92,7 +88,7 @@
                         @endif
                     @endforeach
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="/image/icons/chevroneBottom.svg"
+                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
                                                                             alt=""></button>
             </div>
             <div class="category-filter_nav">
@@ -114,7 +110,7 @@
                         <label for="perfomance3">Переносные</label>
                     </li>
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="/image/icons/chevroneBottom.svg"
+                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
                                                                             alt=""></button>
             </div>
             <button type="button" class="category-resetall_btn">Сбросить все</button>
@@ -123,16 +119,16 @@
             <div
                 class="d-flex flex-sm-row flex-column align-items-md-center align-items-start justify-content-md-end justify-content-between">
                 <a href="/" class="category-filters_btn d-md-none d-flex" data-bs-toggle="offcanvas"
-                   data-bs-target="#filters" aria-controls="filters"><img src="/image/icons/filters.png" alt="">Фильтры</a>
+                   data-bs-target="#filters" aria-controls="filters"><img src="{{ asset('assets/front/images/icons/filters.png') }} " alt="">Фильтры</a>
                 <div
                     class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
                     <div class="category-counts d-flex gap-3">
                         <div class="category-count_goods d-flex gap-2">
-                            <img src="image/icons/countGoods.svg" alt="">
-                            <p name="categoryCountGoods">23 230 шт</p>
+                            <img src="{{ asset('assets/front/images/icons/countGoods.svg') }}" alt="">
+                            <p name="categoryCountGoods">{{ count($products) }} шт</p>
                         </div>
                         <div class="category-count_views d-flex gap-2">
-                            <img src="image/icons/eye.svg" alt="">
+                            <img src="{{ asset('assets/front/images/icons/eye.svg') }}" alt="">
                             <p name="categoryCountViews">15 025</p>
                         </div>
                     </div>
@@ -167,10 +163,8 @@
                                 <button type="button" class="icon-heart">
                                 </button>
                             </div>
-                            @foreach($product->images as $image)
-                                <img src="{{ asset($image->image) ?? ''  }}" alt="">
-                            @endforeach
-                            <img src="image/cards/Rectangle 604 (1).png" alt="">
+                            <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
+                            <img src="{{ asset('/assets/front/image/cards/Rectangle 604 (1).png') }}" alt="">
                             <div class="goods_header--installment d-flex align-items-center">
                                 @if($product->old_price)
                                     @php
@@ -186,7 +180,8 @@
                         </div>
                         <div style="padding: 10px;">
                             <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
-                                {{ $product->price }} usd
+                                                                {{ $product->price }}
+{{--                                @currency({{$product->price}})--}}
                             </p>
                             @if($product->old_price)
                                 <p class="goods_oldPrice"
@@ -210,7 +205,8 @@
                             <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                name="actualGoodsName">{{ $product->title }}</a>
                             @if(!empty($product->brand->slug))
-                                <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}" class="goods_companyName"
+                                <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}"
+                                   class="goods_companyName"
                                    name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
                             @endif
 
