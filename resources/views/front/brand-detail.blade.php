@@ -5,7 +5,7 @@
     <nav class="container d-md-block d-none" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Главная</a></li>
-            <li class="breadcrumb-item"><a href="/">Бренды</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('brands') }}">Бренды</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ $brand->title }}</li>
         </ol>
     </nav>
@@ -18,8 +18,8 @@
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
             <div class="category-categories d-flex flex-column">
-                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>
-                <a href="{{ route('brands') }}" class="category-name_link" name="parentCategoryName"><img src="/image/icons/greenArrLeft.png" alt="">Все бренды</a>
+                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+                <a href="{{ route('brands') }}" class="category-name_link" name="parentCategoryName"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все бренды</a>
                 <span name="brandName" class="category-name">категории бренда {{ $brand->title }}</span>
                 <div class="accordion accordion-brand-category" id="accordionExample">
 
@@ -170,8 +170,8 @@
                                 </div>
                                 <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                    name="actualGoodsName">{{ $product->title }}</a>
-{{--                                <a href="{{ route('brand.detail', $product->brand->slug) }}" class="goods_companyName"--}}
-{{--                                   name="actualGoodsCompanyName">{{ $product->brand->title }}</a>--}}
+                                <a href="{{ route('brand.detail', $brand->slug) }}" class="goods_companyName"
+                                   name="actualGoodsCompanyName">{{ $brand->title }}</a>
                                 <div class="goods-addProduct ">
                                     <div class="goods-addProduct_btns">
                                         <button class="goods-addProduct-minus disabled" type="button">

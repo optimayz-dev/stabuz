@@ -19,10 +19,8 @@
                         <button type="button" class="icon-heart">
                         </button>
                     </div>
-                    <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
-                    @foreach($product->images as $image)
-                        <img src="{{ asset($image->image ?? '') }}" alt="">
-                    @endforeach
+                    <img src="{{ asset('assets/front/images/circle.svg') }}" alt="">
+                        <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
                     <div class="goods_header--installment d-flex align-items-center">
                         @if($product->old_price)
                             @php
