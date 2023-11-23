@@ -35,6 +35,7 @@ class BrandController extends Controller
             ->with([
                 'translations',
                 'products',
+                'products.images',
                 'products.prices',
                 'products.translations',
                 'categories',
