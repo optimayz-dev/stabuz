@@ -115,7 +115,7 @@
                                     </button>
                                 </div>
                                 <img src=" {{ asset('assets/front/images/cards/Group 511.svg') }}" alt="">
-                                <img src=" {{ asset($product->file_url)  }}" alt="">
+                                <img src=" {{ asset($product->images->first()->image ?? '')  }}" alt="">
                                 <div class="goods_header--installment d-flex align-items-center">
                                     @if($product->old_price)
                                         @php
