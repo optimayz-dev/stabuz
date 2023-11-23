@@ -725,6 +725,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     padding: 0 40px;
     z-index: 0;
 }
+
 .main-slider_item{
     display: block;
     width: 100%;
@@ -733,6 +734,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     border-radius: 20px;
     max-height: 400px;
 }
+
+.main-slider_item img{
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
 .main-slider .owl-dot{
     width: 10px;
     height: 10px;
@@ -3078,10 +3086,13 @@ input[type="range"]::-moz-range-thumb {
     width: 100%;
 }
 /* accordion-brand-category */
-.accordion-brand-category{
+.accordion-brand-category {
     max-width: 400px;
     display: flex;
+    overflow: scroll;
+    max-height: 600px;
     flex-direction: column;
+    padding-right: 5px;
     gap: 12px;
 }
 .accordion-brand-category_list a{

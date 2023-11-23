@@ -3,26 +3,26 @@
         <div class="healthy-info d-md-none d-flex flex-wrap justify-content-between gap-3">
             <div class="healthy-info_card flex-row">
                 <div class="healthy-info_card--img">
-                    <img src="image/healthy-info/Group 534812679.png" alt="">
+                    <img src="{{ asset('assets/front/images/healthy-info/Group 534812679.png') }}" alt="">
                 </div>
                 <p>Бесплатная курьерская доставка</p>
             </div>
             <div class="healthy-info_card">
                 <div class="healthy-info_card--img">
-                    <img src="image/healthy-info/Group 534812680.png" alt="">
+                    <img src="{{ asset('assets/front/images/healthy-info/Group 534812680.png') }}" alt="">
                 </div>
                 <p>Акции и скидки </p>
             </div>
             <div class="healthy-info_card">
                 <div class="healthy-info_card--img">
-                    <img src="image/healthy-info/Group 534812681.png" alt="">
+                    <img src="{{ asset('assets/front/images/healthy-info/Group 534812681.png') }} " alt="">
                 </div>
                 <p>Широкий ассортимент</p>
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center flex-lg-row flex-column gap-3">
             <div class="mailing-lext d-flex flex-column align-items-lg-start align-items-center">
-                <img src="image/whiteLogo.png" alt="">
+                <img src="{{ asset('assets/front/images/whiteLogo.png') }}" alt="">
                 <p>Будьте всегда в курсе!</p>
             </div>
             <form action="URL" class="mailing-form">

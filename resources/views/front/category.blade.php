@@ -10,8 +10,10 @@
         </ol>
     </nav>
     <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
-        <a href="categories.html" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
-        <a href="categories.html" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
+        <a href="categories.html" class="category-name_link"><img
+                src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+        <a href="categories.html" class="category-name_link"><img
+                src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
     </div>
     <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $category->title }}</h6>
     <!-- caregory nav -->
@@ -23,11 +25,10 @@
     <!-- category -->
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
+
             <div class="category-categories d-flex flex-column">
-                <a href="/" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все
-                    категории</a>
-                <a href="/" class="category-name_link d-none" name="parentCategoryName"><img
-                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
+                <a href="/" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
+                <a href="/" class="category-name_link d-none" name="parentCategoryName"><img src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title }}</a>
                 <span name="categoryName" class="category-name">{{ $category->title }}</span>
                 <ul class="category-categories_list" name="categoryCategoriesList">
                     @foreach($category->children as $child)
@@ -36,6 +37,7 @@
                     @endforeach
                 </ul>
             </div>
+
             <div class="category-price" id="categoryPrice">
                 <div class="d-flex justify-content-between mb-3 mt-4">
                     <h6 class="category-filter_title">Цена</h6>
@@ -64,13 +66,15 @@
                 <ul class="category-filter_list" name="categoryBrandsList">
                     @foreach($category->brands as $brand)
                         <li>
-                            <input type="checkbox" name="brand" id="brand1" value="brand1">
-                            <label for="brand1">{{ $brand->title }}</label>
+                            <label for="brand1"> <a style="color: unset;"
+                                                    href="{{ route('brand.detail', $brand->slug ?? '') }}">{{ $brand->title ?? ''}}</a>
+                            </label>
                         </li>
                     @endforeach
 
                 </ul>
-                <button class="category-filter_showall--btn">Все бренды<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
+                <button class="category-filter_showall--btn">Все бренды<img
+                        src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
             </div>
             <div class="category-filter_nav">
                 <div class="d-flex justify-content-between mb-3 mt-4">
@@ -88,8 +92,9 @@
                         @endif
                     @endforeach
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
-                                                                            alt=""></button>
+                <button class="category-filter_showall--btn">Все страны<img
+                        src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
+                        alt=""></button>
             </div>
             <div class="category-filter_nav">
                 <div class="d-flex justify-content-between mb-3 mt-4">
@@ -110,8 +115,9 @@
                         <label for="perfomance3">Переносные</label>
                     </li>
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
-                                                                            alt=""></button>
+                <button class="category-filter_showall--btn">Все страны<img
+                        src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }} "
+                        alt=""></button>
             </div>
             <button type="button" class="category-resetall_btn">Сбросить все</button>
         </form>
@@ -119,7 +125,8 @@
             <div
                 class="d-flex flex-sm-row flex-column align-items-md-center align-items-start justify-content-md-end justify-content-between">
                 <a href="/" class="category-filters_btn d-md-none d-flex" data-bs-toggle="offcanvas"
-                   data-bs-target="#filters" aria-controls="filters"><img src="{{ asset('assets/front/images/icons/filters.png') }} " alt="">Фильтры</a>
+                   data-bs-target="#filters" aria-controls="filters"><img
+                        src="{{ asset('assets/front/images/icons/filters.png') }} " alt="">Фильтры</a>
                 <div
                     class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
                     <div class="category-counts d-flex gap-3">
@@ -180,8 +187,8 @@
                         </div>
                         <div style="padding: 10px;">
                             <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
-                                                                {{ $product->price }}
-{{--                                @currency({{$product->price}})--}}
+                                {{ $product->price }}
+                                {{--                                @currency({{$product->price}})--}}
                             </p>
                             @if($product->old_price)
                                 <p class="goods_oldPrice"

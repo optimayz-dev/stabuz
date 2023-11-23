@@ -17,35 +17,19 @@
     <!-- brand -->
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
+
             <div class="category-categories d-flex flex-column">
-                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
-                <a href="{{ route('brands') }}" class="category-name_link" name="parentCategoryName"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все бренды</a>
-                <span name="brandName" class="category-name">категории бренда {{ $brand->title }}</span>
-                <div class="accordion accordion-brand-category" id="accordionExample">
-
-                @foreach($brand->categories as $category)
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#brandCategory{{ $category->id }}" aria-expanded="false" aria-controls="brandCategory1">
-                                {{ $category->title }}
-                            </button>
-                        </h2>
-                        <div id="brandCategory{{ $category->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <ul class="accordion-brand-category_list" name="accordionBrandCategoryList">
-                                    @foreach($category->children as $child)
-                                        <li><a href="/">{{ $child->title }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                @endforeach
-
-                </div>
+                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
+                <a href="{{ route('brands') }}" class="category-name_link d-none" name="parentCategoryName"><img src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt=""> Все Бренды</a>
+                <span name="categoryName" class="category-name"> Категории Бренда {{ $brand->title }}</span>
+                <ul class="category-categories_list" name="categoryCategoriesList">
+                    @foreach($brand->categories as $category)
+                        <li><a href="{{ route('category.view', $category->slug) }}" name="categoryCategoriesLink"
+                               class="category-categories-link">{{ $category->title }}</a></li>
+                    @endforeach
+                </ul>
             </div>
+
             <div class="category-price" id="categoryPrice">
                 <div class="d-flex justify-content-between mb-3 mt-4">
                     <h6 class="category-filter_title">Цена</h6>
