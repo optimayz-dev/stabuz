@@ -31,7 +31,7 @@ class UpdateProductRequest extends FormRequest
             'attribute_value' => 'nullable',
             'file_url' => 'nullable',
             'brand_id' => 'integer',
-            'price' => 'integer',
+            'price' => 'required',
             'modification' => 'nullable|string',
 
         ];

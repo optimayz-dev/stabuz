@@ -608,9 +608,7 @@
       border: 5px solid transparent;
       box-shadow: unset;
   }
-  .main-slider_item{
-    max-height: 270px;
-  }
+
   .main-slider .owl-dots{
     gap: 10px;
   }
@@ -618,9 +616,7 @@
   .main-slider .owl-dots{
     display: none;
   }
-  .main-slider_item{
-    max-height: 180px;
-  }
+
   .main-slider{
     max-width: unset;
     padding: 0;
