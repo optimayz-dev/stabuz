@@ -732,7 +732,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     /*height: 500px;*/
     background: linear-gradient(90deg, #A18CD1 0%, #FBC2EB 100%);
     border-radius: 20px;
-    /*max-height: 400px;*/
+    max-height: 400px;
 }
 
 .main-slider_item img{
