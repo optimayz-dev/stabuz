@@ -21,4 +21,5 @@
             @endforeach
         @endif
     </div>
+    {!! $brands->links('pagination') !!}
 @endsection

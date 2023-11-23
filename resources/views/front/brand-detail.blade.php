@@ -97,7 +97,7 @@
 
             <div class="category-goods">
 
-                @foreach($brand->products as $product)
+                @foreach($products as $product)
                      <div class="goods_item">
                             <div class="goods_header">
                                 <div class="goods_header--menu d-flex align-items-center">
@@ -202,9 +202,9 @@
                             </div>
                         </div>
                 @endforeach
-
             </div>
         </div>
     </section>
-
+    {!! $products->links('pagination') !!}
+    @include('front.includes.mailing')
 @endsection

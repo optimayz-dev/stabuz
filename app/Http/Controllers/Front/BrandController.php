@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Brand;
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -11,7 +12,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = Brand::query()->with('translations')->get();
+        $brands = Brand::query()->with('translations')->paginate(32);
 
         return view('front.brands', ['brands' => $brands]);
     }
@@ -34,23 +35,21 @@ class BrandController extends Controller
         $brand = Brand::query()
             ->with([
                 'translations',
-                'products',
-                'products.images',
-                'products.prices',
-                'products.translations',
                 'categories',
                 'categories.children.translations',
                 'categories.translations',
             ])
             ->whereHas('translations', function ($query) use ($slug){
                $query->where('slug', $slug);
-            })
-//            ->whereHas('categories.children', function ($query) use ($id){
-//                $query->where('id', $id->id);
-//            })
-            ->first();
+            })->first();
 
-        return view('front.brand-detail', ['brand' => $brand]);
+        $products = Product::query()
+            ->with([
+                'images',
+                'translations',
+            ])->where('brand_id', $brand->id)->paginate(30);
+
+        return view('front.brand-detail', ['brand' => $brand, 'products' => $products]);
     }
 
 

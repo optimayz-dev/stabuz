@@ -785,7 +785,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 .healthy-info_card{
     border-radius: 20px;
-    background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);
+    background: linear-gradient(90deg, #FFCE00 1.71%, #F08718 100%);
     display: flex;
     align-items: center;
     position: relative;

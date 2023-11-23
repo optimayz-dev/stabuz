@@ -15,7 +15,7 @@ class CategoryController extends Controller
 //        $catalogs = Cache::remember('catalogs', 60, function () {
         $catalogs = Category::with('translations')
             ->whereNull('lvl')
-            ->get();
+            ->paginate(32);
 //        });
         return view('front.categories', compact('catalogs'));
     }
