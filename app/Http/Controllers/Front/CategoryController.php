@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
         $products = Product::query()->whereHas('categories.translations', function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })->with(['translations', 'brand', 'brand.translations', 'images'])->paginate(30);
+        })->with(['translations', 'brand', 'brand.translations', 'images'])->paginate(1);
 
 
         return view('front.category', ['category' => $category, 'products' => $products]);

@@ -91,6 +91,11 @@ body{
 .pagination a:hover{
     color: var(--yellow);
 }
+
+.pagination a.active {
+    color: var(--yellow);
+}
+
 .pagination-btn{
     background: none;
     border: none;

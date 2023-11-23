@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
-
+//        Paginator::useBootstrap();
+        Paginator::defaultSimpleView('pagination');
 //        dd(Http::get('https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/')->json([0]));
 
         Blade::directive('currency', function ($amount){
