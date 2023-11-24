@@ -211,7 +211,6 @@
                                 @endif
                                     <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->price }} usd
                                     </p>
-                                @endforeach
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                     <div class="goods_rewies d-flex align-items-center gap-1">
                                         <span class="icon-star active"></span>

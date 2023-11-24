@@ -22,8 +22,18 @@ class MainBannerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string',
+            'title' => 'required',
+            'type' => 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg,webp,svg',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Заполните поле заголовок !',
+            'type.required' => 'Выберите тип баннера !',
+            'image.mimes' => 'Картинка должна быть в формате jpg,png,jpeg,webp,svg'
         ];
     }
 }

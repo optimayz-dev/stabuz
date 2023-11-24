@@ -1,8 +1,7 @@
 @extends('front.__layouts.layout')
 @section('seo_texts')
     <title>{{ $product->seo_title ?? str_replace('{name}', $product->title, $seo->seo_title) }}</title>
-    <meta name="description"
-          content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
+    <meta name="description" content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
 @endsection
 @section('content')
     @include('front.__layouts.header')
@@ -36,7 +35,7 @@
                 <!-- ВЫВОД КАРТИНКОК ТОВАРА ИЗ БД -->
                 @foreach($product->images as $image)
                     <div class="product-photo_small goods-img">
-                        <img src="image/cards/Group 511.svg" alt="">
+                        <img src="{{ asset('assets/front/images/cards/Group 511.svg') }}" alt="">
                         <img src="{{ asset($image->image) }}" alt="">
                     </div>
                 @endforeach
@@ -66,7 +65,7 @@
                 <img src="{{ asset($product->brand->brand_logo ?? '') }}" alt="" name="productCompanyImg">
             </div>
             <div class="product-photo_large d-sm-flex d-none">
-                <img src="image/cards/Group 511.svg" alt="">
+                <img src="{{ asset('assets/front/images/cards/Group 511.svg') }}" alt="">
                 <img src="" alt="">
             </div>
             <div class="product-photo_slider-count d-sm-none d-flex"></div>

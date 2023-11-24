@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
 {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
     <link href="{{ asset('/assets/admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <!-- Font Awesome -->
     <link href="{{ asset('/assets/admin/css/font-awesome.min.css') }}" rel="stylesheet">
 
@@ -23,11 +24,6 @@
 
     <title>Document</title>
 </head>
-@if($errors->any())
-    @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-    @endforeach
-@endif
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -111,7 +107,6 @@
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.main-banner.index') }}">Главный баннер</a></li>
                                     <li><a href="{{ route('admin.promotion-banner.index') }}">Баннер акций</a></li>
-                                    <li><a href="{{ route('admin.news.index') }}">Видеообзоры</a></li>
                                 </ul>
                             </li>
 
@@ -255,6 +250,18 @@
             </div>
         </div>
         <!-- /top navigation -->
+        @if($errors->any())
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger text-center">
+{{--                        {{ $errors }}--}}
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
         @yield('content')
         <!-- footer content -->
 
@@ -265,7 +272,7 @@
 <script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('/assets/admin/js/bootstrap.bundle.min.js') }}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <!-- Datatables -->
 <script src="{{ asset('assets/admin/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dataTables.bootstrap.min.js') }}"></script>
@@ -274,7 +281,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 @stack('scripts')
 <!-- Custom Theme Scripts -->
-
 <script src="{{ asset('/assets/admin/js/custom.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/index.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/axios/search.js') }}"></script>
