@@ -30,4 +30,12 @@ class CatalogStoreOnceRequest extends FormRequest
             'category_img' => 'mimes:jpg,png,jpeg,webp,svg|nullable',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Заполните заговок !',
+            'category_img.mimes' => 'Картинка должна быть в формате jpg,png,jpeg,webp,svg !'
+        ];
+    }
 }

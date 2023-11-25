@@ -27,8 +27,16 @@ class SubCategoryStoreRequest extends FormRequest
             'seo_title' => 'nullable',
             'seo_description' => 'nullable',
             'meta_keywords' => 'nullable',
-            'category_img' => 'mimes:jpg,png,jpeg,webp,svg',
+            'category_img' => 'mimes:jpg,png,jpeg,webp,svg|nullable',
             'parent_id_hidden' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Заполните заговок !',
+            'category_img.mimes' => 'Картинка должна быть в формате jpg,png,jpeg,webp,svg !'
         ];
     }
 }

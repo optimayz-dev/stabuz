@@ -31,4 +31,12 @@ class StoreCategoryRequest extends FormRequest
             'parent_id_hidden' => 'nullable',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Заполните заговок !',
+            'category_img.mimes' => 'Картинка должна быть в формате jpg,png,jpeg,webp,svg !'
+        ];
+    }
 }

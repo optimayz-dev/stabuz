@@ -31,8 +31,8 @@ class StoreProductRequest extends FormRequest
             'attribute_title' => 'nullable',
             'attribute_value' => 'nullable',
             'file_url' => 'nullable|mimes:jpg,png,jpeg,webp,svg',
-            'brand_id' => 'integer',
-            'price' => 'integer',
+            'brand_id' => 'integer|nullable',
+            'price' => 'string|required',
             'modification' => 'nullable|string',
             'active' => 'nullable',
             'popular' => 'nullable',
@@ -40,6 +40,16 @@ class StoreProductRequest extends FormRequest
             'actual' => 'nullable',
             'recommend' => 'nullable',
             'credit' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Заполните заговок !',
+            'price.required' => 'Заполните цену !',
+            'description.required' => 'Заполните описание !',
+            'file_url.mimes' => 'Картинка должна быть в формате jpg,png,jpeg,webp,svg !'
         ];
     }
 }

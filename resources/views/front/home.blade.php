@@ -3,11 +3,13 @@
     @include('front.__layouts.header')
     <!-- main-slider -->
     <div class="main-slider owl-carousel" style="border-radius: 20px;">
-
+{{--@dd($main_banners)--}}
         @foreach($main_banners as $banner)
+            @if($banner->type == '1330x400px')
             <a href="/" class="main-slider_item">
                 <img src="{{ asset($banner->image) }}" alt="">
             </a>
+            @endif
         @endforeach
     </div>
     <!-- healthy info -->
@@ -55,10 +57,13 @@
     </section>
     <!-- advertising banners -->
     <div class="advertising-banners container row gap-3 flex-nowrap justify-content-between">
-        <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
-           style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">Реклама</a>
-        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
-           style="background: linear-gradient(90deg, #F093FB 0%, #F5576C 100%);">Реклама</a>
+        @foreach($main_banners as $banner)
+            @if($banner->type == '410x450px')
+        <img src="{{ asset($banner->image) }}" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1" style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">
+            @endif
+        @endforeach
+        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2" style="background: linear-gradient(90deg, #F093FB 0%, #F5576C 100%);"><img
+                src="" alt=""></a>
     </div>
     <!-- novelties -->
     @include('front.includes.home.new-products')
@@ -89,9 +94,9 @@
     <!-- advertising banners -->
     <div class="advertising-banners container row flex-row-reverse gap-3 flex-nowrap justify-content-between">
         <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
-           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%);">Реклама</a>
+           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%);">Реклама1</a>
         <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
-           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%);">Реклама</a>
+           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%);">Реклама1</a>
     </div>
     <!-- Lawn mowers -->
     <section class="novelties container">

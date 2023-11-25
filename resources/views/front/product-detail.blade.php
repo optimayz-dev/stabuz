@@ -6,24 +6,27 @@
 @section('content')
     @include('front.__layouts.header')
     <!-- breadcrumb -->
-    {{--    <nav class="container d-md-block d-none" aria-label="breadcrumb">--}}
-    {{--        <ol class="breadcrumb">--}}
-    {{--            <li class="breadcrumb-item"><a href="/">Главная</a></li>--}}
-    {{--            <li class="breadcrumb-item"><a href="/">Категории</a></li>--}}
-    {{--            <li class="breadcrumb-item active" aria-current="page">{{ $category->title }}</li>--}}
-    {{--        </ol>--}}
-    {{--    </nav>--}}
-    {{--    <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">--}}
-    {{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>--}}
-    {{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">{{ $category->title }}</a>--}}
-    {{--    </div>--}}
-    {{--    <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $category->title }}</h6>--}}
-    {{--    <!-- caregory nav -->--}}
-    {{--    <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">--}}
-    {{--        @foreach($category->children as $child)--}}
-    {{--            <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $child->title }}</a></li>--}}
-    {{--        @endforeach--}}
-    {{--    </ul>--}}
+        <nav class="container d-md-block d-none" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('categories.view') }}">Категории</a></li>
+                @foreach($categories as $category)
+                    <li class="breadcrumb-item active" aria-current="page">{{ $category->title }}</li>
+                @endforeach
+            </ol>
+        </nav>
+        <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
+            <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+            <a href="{{ route('category.view', $categories->first()->slug) }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">{{ $categories->first()->title }}</a>
+        </div>
+{{--    @dd($categories)--}}
+{{--        <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $categories->first()->title }}</h6>--}}
+        <!-- caregory nav -->
+        <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
+            @foreach($categories as $category)
+                <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $category->title }}</a></li>
+            @endforeach
+        </ul>
 
     <h6 class="title mb-sm-5 mb-3 mt-3 container d-lg-flex d-none" name="productName">{{ $product->title }}</h6>
     <!-- product -->
@@ -39,26 +42,6 @@
                         <img src="{{ asset($image->image) }}" alt="">
                     </div>
                 @endforeach
-                {{--                <div class="product-photo_small">--}}
-                {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
-                {{--                    <img src="image/product/Rectangle 1161.png" alt="" >--}}
-                {{--                </div>--}}
-                {{--                <div class="product-photo_small">--}}
-                {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
-                {{--                    <img src="image/product/Rectangle 607.png" alt="" >--}}
-                {{--                </div>--}}
-                {{--                <div class="product-photo_small">--}}
-                {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
-                {{--                    <img src="image/product/7933750x0.jpg" alt="" >--}}
-                {{--                </div>--}}
-                {{--                <div class="product-photo_small">--}}
-                {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
-                {{--                    <img src="image/product/cashBack.png" alt="" >--}}
-                {{--                </div>--}}
-                {{--                <div class="product-photo_small">--}}
-                {{--                    <img src="image/cards/Group 511.svg" alt="">--}}
-                {{--                    <img src="image/product/Rectangle 1161.png" alt="" >--}}
-                {{--                </div>--}}
             </div>
 
             <div class="product-photo_brand">
@@ -93,7 +76,7 @@
                        name="productName">{{ $product->brand->title ?? '' }}</p>
                     <div class="d-flex gap-2 align-items-center">
                         <span name="productProccent">-25%</span>
-                        <h6 name="productCurrentPrice">5 630 040 сум</h6>
+                        <h6 name="productCurrentPrice">{{ $product->price ?? '' }}usd</h6>
                     </div>
                     <button type="button" class="product-content_func--btns">
                         <svg width="25" height="22" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -236,58 +219,14 @@
                         </p>
                         <h6>Характеристики</h6>
                         {!! $product->characteristics !!}
-                        {{--                        <table>--}}
-                        {{--                            <tbody>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Номинальная входная мощность</td>--}}
-                        {{--                                <td>800</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Энергия удара, J</td>--}}
-                        {{--                                <td>3.1</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Размер инструмента (длина х высота), мм</td>--}}
-                        {{--                                <td>326х233</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Номинальное число оборотов, об/мин</td>--}}
-                        {{--                                <td>0 – 900</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Число ударов при номинальном числе оборотов, уд/мин</td>--}}
-                        {{--                                <td>0 – 4.000</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Вес, кг</td>--}}
-                        {{--                                <td>3.6</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Зажим</td>--}}
-                        {{--                                <td>SDS plus</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Зажим</td>--}}
-                        {{--                                <td>SDS plus</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Зажим</td>--}}
-                        {{--                                <td>SDS plus</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            <tr>--}}
-                        {{--                                <td>Зажим</td>--}}
-                        {{--                                <td>SDS plus</td>--}}
-                        {{--                            </tr>--}}
-                        {{--                            </tbody>--}}
-                        {{--                        </table>--}}
                         <button class="product-more-btn" id="product-characteristics_moreBtn">Все характеристики<img
-                                class="icon" src="image/icons/greenArrRight.png" alt="arrow down"></button>
+                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}" alt="arrow down"></button>
                     </div>
                     <div class="product-description">
                         <h6>Описание товара</h6>
                         {!! $product->description !!}
                         <button class="product-more-btn" id="product-description_moreBtn">Развернуть описание<img
-                                class="icon" src="image/icons/greenArrRight.png" alt="arrow down"></button>
+                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}" alt="arrow down"></button>
                     </div>
                 </div>
             </div>
@@ -346,5 +285,4 @@
             </div>
         </div>
     </section>
-
 @endsection

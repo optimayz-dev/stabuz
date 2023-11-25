@@ -65,33 +65,33 @@
                                                     <label>
                                                         <select name="type" id="" class="select" title="Не выбрано">
                                                             <option value="" @if($banner->type == null) selected @endif></option>
-                                                            <option value="1330х400px" @if($banner->type == "1330х400px") selected @endif>Баннер на первом экране: десктоп
+                                                            <option value="1330x400px" @if($banner->type == "1330х400px") selected @endif>Баннер на первом экране: десктоп
                                                                 - 1330х400px
                                                             </option>
-                                                            <option value="536х270px" @if($banner->type == "536х270px") selected @endif>Баннер на первом экране: мобильный
+                                                            <option value="536x270px" @if($banner->type == "536х270px") selected @endif>Баннер на первом экране: мобильный
                                                                 - 536х270px
                                                             </option>
-                                                            <option value="410х450px"@if($banner->type == "410х450px") selected @endif>Рекламные баннеры на странице:
+                                                            <option value="410x450px"@if($banner->type == "410х450px") selected @endif>Рекламные баннеры на странице:
                                                                 левый - 410х450px
                                                             </option>
-                                                            <option value="840х450px"@if($banner->type == "840х450px") selected @endif>Рекламные баннеры на странице:
+                                                            <option value="840x450px"@if($banner->type == "840х450px") selected @endif>Рекламные баннеры на странице:
                                                                 правый - 840х450px
                                                             </option>
-                                                            <option value="536х290px"@if($banner->type == "536х290px") selected @endif>Рекламные баннеры на странице:
+                                                            <option value="536x290px"@if($banner->type == "536х290px") selected @endif>Рекламные баннеры на странице:
                                                                 мобильный - 536х290px
                                                             </option>
-                                                            <option value="238х420px"@if($banner->type == "238х420px") selected @endif>Рекламные блоки на главной
+                                                            <option value="238x420px"@if($banner->type == "238х420px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 1 вид: Десктоп вертикальный -
                                                                 238х420px
                                                             </option>
-                                                            <option value="536х220px"@if($banner->type == "536х220px") selected @endif>Рекламные блоки на главной
+                                                            <option value="536x220px"@if($banner->type == "536х220px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 1 вид: Мобильный горизонтальный -
                                                                 536х220px
                                                             </option>
-                                                            <option value="496х420px"@if($banner->type == "496х420px") selected @endif>Рекламные блоки на главной
+                                                            <option value="496x420px"@if($banner->type == "496х420px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Десктоп - 496х420px
                                                             </option>
-                                                            <option value="536х220px"@if($banner->type == "536х220px") selected @endif>Рекламные блоки на главной
+                                                            <option value="536x220px"@if($banner->type == "536х220px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Мобильный - 536x350px
                                                             </option>
                                                         </select>

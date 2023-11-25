@@ -41,9 +41,14 @@ class ProductController extends Controller
             ])
             ->first();
 
+        $categories = Category::query()->with('translations','children', 'products')->whereHas('products', function ($query) use ($product){
+            $query->where('product_id', $product->id);
+        })->get();
+
+
         session()->push('products_recently_viewed', $product->getKey());
 
-        return view('front.product-detail', compact('product', 'seo'));
+        return view('front.product-detail', compact('product', 'seo', 'categories'));
     }
 
 
