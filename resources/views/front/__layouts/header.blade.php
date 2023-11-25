@@ -26,7 +26,7 @@
 <header class="header container">
     <div class="header-info d-flex justify-content-between align-items-center">
         <a href="/" class="header-logo d-xl-none d-block">
-            <img src="image/mainLogo.png" alt="">
+            <img src="{{ asset('assets/front/images/mainLogo.png') }}" alt="">
         </a>
         <div class="header-info_benefit d-md-flex d-none align-items-center gap-md-4 gap-2">
             <a href="#!" class="d-flex align-items-center"><span class="d-lg-flex d-none">%</span>Скидки</a>
@@ -48,9 +48,9 @@
             <a href="#!">Контакты</a>
         </div>
         <div class="d-flex align-items-center gap-3">
-            <a href="/" class="d-md-none d-block"><img src="image/icons/mobile-telegram.png" alt=""></a>
+            <a href="/" class="d-md-none d-block"><img src="{{ asset('assets/front/images/icons/mobile-telegram.png') }}" alt=""></a>
             <div class="dropdown mobile-phone_drd d-sm-none d-block">
-                <button class="dropdown-toggle mobile-phone" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="image/icons/mobile-phone.png" alt="">
+                <button class="dropdown-toggle mobile-phone" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/front/images/icons/mobile-phone.png') }}" alt="">
                 </button>
                 <ul class="dropdown-menu">
                     <li class="mb-2"><a href="tel:+998781138885">+998 78 113 88 85</a></li>
@@ -58,7 +58,7 @@
                     <li><p class="dropdown-item">Пн — сб  ·  9 — 20</p></li>
                 </ul>
             </div>
-            <a href="/" class="d-none"><img src="image/icons/mobile-phone.png" alt=""></a>
+            <a href="/" class="d-none"><img src="{{ asset('assets/front/image/icons/mobile-phone.png') }}" alt=""></a>
             <div class="header-info_settings d-flex justify-content-center align-items-center gap-md-4 gap-3">
                 <div class="dropdown d-sm-block d-none">
                     <a href="tel:+998781138885">+998 78 113 88 85</a>
@@ -129,8 +129,8 @@
                 </div>
             </div>
             <a href="/" class="d-xl-block d-none"><img src="{{ asset('assets/front/images/mainLogo.png') }}" alt=""></a>
-            <form action="index.html" method="get" class="header-search">
-                <input type="search" placeholder="Поиск" class="icon-search" id="search-input">
+            <form action="" method="get" class="header-search">
+                <input type="search" name="search" placeholder="Поиск" class="icon-search" id="search-input">
                 <button type="submit" class="icon-search"></button>
                 <div id="search-results" class="search-results row">
                     <div class="search-results_goods col-md-7 col-12">
@@ -188,7 +188,7 @@
                     <p>Избранное</p>
                     <div class="menu-count">2</div>
                 </a>
-                <a href="basket.html" class="basket-btn_nav active">
+                <a href="{{ route('basket') }}" class="basket-btn_nav active">
                     <svg width="30" height="27" viewBox="0 0 30 27" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.104 23.0003C10.5464 23.0003 10.0945 23.448 10.0945 24.0002C10.0945 24.5523 10.5464 25 11.104 25C11.6617 25 12.1136 24.5523 12.1136 24.0002C12.1136 23.448 11.6617 23.0003 11.104 23.0003ZM8.07539 24.0002C8.07539 22.3433 9.43143 21.0003 11.104 21.0003C12.7766 21.0003 14.1327 22.3433 14.1327 24.0002C14.1327 25.657 12.7766 27 11.104 27C9.43143 27 8.07539 25.657 8.07539 24.0002Z"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2206 23.0003C22.6629 23.0003 22.211 23.448 22.211 24.0002C22.211 24.5523 22.6629 25 23.2206 25C23.7782 25 24.2301 24.5523 24.2301 24.0002C24.2301 23.448 23.7782 23.0003 23.2206 23.0003ZM20.1919 24.0002C20.1919 22.3433 21.548 21.0003 23.2206 21.0003C24.8932 21.0003 26.2492 22.3433 26.2492 24.0002C26.2492 25.657 24.8932 27 23.2206 27C21.548 27 20.1919 25.657 20.1919 24.0002Z"/>

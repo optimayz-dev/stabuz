@@ -1681,7 +1681,7 @@ $(document).ready(function () {
                     for (let i = 0; i < data.products.length; i++) {
                         htmlView += `
                         <li>
-                            <a href="product/` + data.products[i].slug + `" class="search-item">
+                            <a href="/product/` + data.products[i].slug + `" class="search-item">
                                 <p>` + data.products[i].title + `</p>
                             </a>
                         </li>`;
@@ -1690,7 +1690,7 @@ $(document).ready(function () {
                     for (let i = 0; i < data.categories.length; i++) {
                         categoryView += `
                         <li>
-                            <a href="category/` + data.categories[i].slug + `" class="search-item">
+                            <a href="/category/` + data.categories[i].slug + `" class="search-item">
                                 <p>` + data.categories[i].title + `</p>
                             </a>
                         </li>`;

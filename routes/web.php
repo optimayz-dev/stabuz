@@ -11,6 +11,7 @@ use App\Http\Controllers\Front\BrandController;
 use App\Http\Controllers\Front\NewsController;
 use App\Http\Controllers\Front\PromotionController;
 use App\Http\Controllers\Front\VideoReviewController;
+use App\Http\Controllers\Front\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,10 @@ Route::group([
 
     Route::get('login', [AuthController::class, 'loginPage'])->name('login.page');
     Route::post('login', [AuthController::class, 'login'])->name('login.user');
+
+    //Basket
+
+    Route::get('basket', [CartController::class, 'index'])->name('basket');
 });
 
 

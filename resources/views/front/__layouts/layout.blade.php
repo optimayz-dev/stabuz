@@ -28,9 +28,9 @@
                 <p>Пн — сб  ·  9 — 20</p>
             </div>
             <div class="footer-socials d-flex flex-sm-row flex-column gap-lg-5 gap-sm-3 gap-4">
-                <a href="/"><img src="image/icons/facebook.svg" alt=""></a>
-                <a href="/"><img src="image/icons/instagram.svg" alt=""></a>
-                <a href="/"><img src="image/icons/telegram.svg" alt=""></a>
+                <a href="/"><img src="{{ asset('assets/front/images/icons/facebook.svg') }}" alt=""></a>
+                <a href="/"><img src="{{ asset('assets/front/image/icons/instagram.svg') }}" alt=""></a>
+                <a href="/"><img src="{{ asset('assets/front/images/icons/telegram.svg') }}" alt=""></a>
             </div>
         </div>
         <div class="footer-delivery d-flex flex-column col-lg-3 col-md-3 col-sm-5 col-12 gap-2">
