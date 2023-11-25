@@ -65,7 +65,7 @@
                                                     @enderror
                                                     <label>
                                                         <select name="type" id="" class="select" title="Не выбрано">
-                                                                                                                            <option value="" selected></option>
+                                                            <option value="" selected></option>
                                                             <option value="1330x400px">Баннер на первом экране: десктоп
                                                                 - 1330х400px
                                                             </option>
@@ -92,7 +92,7 @@
                                                             <option value="496x420px">Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Десктоп - 496х420px
                                                             </option>
-                                                            <option value="536x220px">Рекламные блоки на главной
+                                                            <option value="536x350px">Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Мобильный - 536x350px
                                                             </option>
                                                         </select>

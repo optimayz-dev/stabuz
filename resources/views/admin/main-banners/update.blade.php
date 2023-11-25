@@ -91,7 +91,7 @@
                                                             <option value="496x420px"@if($banner->type == "496х420px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Десктоп - 496х420px
                                                             </option>
-                                                            <option value="536x220px"@if($banner->type == "536х220px") selected @endif>Рекламные блоки на главной
+                                                            <option value="536x350px"@if($banner->type == "536x350px") selected @endif>Рекламные блоки на главной
                                                                 странице в категориях 2 вид: Мобильный - 536x350px
                                                             </option>
                                                         </select>
