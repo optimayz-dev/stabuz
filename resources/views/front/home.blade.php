@@ -55,9 +55,22 @@
 
     <!-- advertising banners -->
     <div class="advertising-banners container row gap-3 flex-nowrap justify-content-between">
-        @foreach($main_banners['410x450px'] as $banner)
-            <img src="{{ asset($banner->image) }}" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1" style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">
-        @endforeach
+        <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
+           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%); display: block !important;">
+            @foreach($main_banners['410x450px'] as $key => $banner)
+                @if($loop->iteration == 1)
+                    <img src="{{ asset($banner->image) }}" alt="">
+                @endif
+            @endforeach
+        </a>
+        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
+           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%); display: block !important;">
+            @foreach($main_banners['840x450px'] as $key => $banner)
+                @if($loop->iteration == 1)
+                    <img src="{{ asset($banner->image) }}" alt="">
+                @endif
+            @endforeach
+        </a>
     </div>
     <!-- novelties -->
     @include('front.includes.home.new-products')
@@ -89,7 +102,7 @@
     <!-- advertising banners -->
     <div class="advertising-banners container row flex-row-reverse gap-3 flex-nowrap justify-content-between">
         <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
-           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%);">
+           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%); display: block !important;">
             @foreach($main_banners['840x450px'] as $key => $banner)
                 @if($loop->iteration == 2)
                     <img src="{{ asset($banner->image) }}" alt="">
@@ -97,7 +110,7 @@
             @endforeach
         </a>
         <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
-           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%);">
+           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%); display: block !important;">
             @foreach($main_banners['410x450px'] as $key => $banner)
                 @if($loop->iteration == 2)
                     <img src="{{ asset($banner->image) }}" alt="">
@@ -408,7 +421,6 @@
             <div class="tab-pane show fade active" id="tabNews">
                 <div class="useful-body">
                     @foreach($news as $item)
-
                         <a href="{{ route('news.detail', $item->slug) }}" class="useful-tab">
                             <img style="max-width: 200px" src="{{ asset($item->image) }}" alt="">
                             <div class="useful-teb_text">

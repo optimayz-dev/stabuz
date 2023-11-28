@@ -114,8 +114,8 @@
                                 <a><i class="fa fa-picture-o" aria-hidden="true"></i> Статичные тексты <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{ route('admin.static-text-product.index') }}">Для продуктов</a></li>
-                                    <li><a href="{{ route('admin.static-text-product.index') }}">Для категорий</a></li>
-                                    <li><a href="{{ route('admin.static-text-product.index') }}">Для брендов</a></li>
+                                    <li><a href="{{ route('admin.static-text-category.index') }}">Для категорий</a></li>
+                                    <li><a href="{{ route('admin.static-text-brand.index') }}">Для брендов</a></li>
                                 </ul>
                             </li>
 

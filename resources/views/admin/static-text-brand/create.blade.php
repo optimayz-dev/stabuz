@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><small>Статичный текст для категорий</small></h2>
+                        <h2><small>Статичный текст для брендов</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li class="dropdown" style="padding-right: 15px;">
                                 <a href="#" class="dropdown-toggle" style="color: #5A738E; font-size: 16px" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-language"></i></a>
@@ -30,7 +30,7 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('admin.static-text-category.store') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('admin.static-text-brand.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">Заголовок</label>

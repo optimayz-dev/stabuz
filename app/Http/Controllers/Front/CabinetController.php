@@ -13,5 +13,4 @@ class CabinetController extends Controller
     }
 
 
-
 }
