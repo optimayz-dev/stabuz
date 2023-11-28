@@ -1,32 +1,37 @@
 @extends('front.__layouts.layout')
 @section('seo_texts')
     <title>{{ $product->seo_title ?? str_replace('{name}', $product->title, $seo->seo_title) }}</title>
-    <meta name="description" content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
+    <meta name="description"
+          content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
 @endsection
 @section('content')
     @include('front.__layouts.header')
     <!-- breadcrumb -->
-        <nav class="container d-md-block d-none" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('categories.view') }}">Категории</a></li>
-                @foreach($categories as $category)
-                    <li class="breadcrumb-item active" aria-current="page">{{ $category->title }}</li>
-                @endforeach
-            </ol>
-        </nav>
-        <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
-            <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
-            <a href="{{ route('category.view', $categories->first()->slug) }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">{{ $categories->first()->title }}</a>
-        </div>
-{{--    @dd($categories)--}}
-{{--        <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $categories->first()->title }}</h6>--}}
-        <!-- caregory nav -->
-        <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
+    <nav class="container d-md-block d-none" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('categories.view') }}">Категории</a></li>
             @foreach($categories as $category)
-                <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $category->title }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $category->title }}</li>
             @endforeach
-        </ul>
+        </ol>
+    </nav>
+    <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
+        <a href="{{ route('categories.view') }}" class="category-name_link"><img
+                src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+        <a href="{{ route('category.view', $categories->first()->slug) }}" class="category-name_link"><img
+                src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">{{ $categories->first()->title }}
+        </a>
+    </div>
+    {{--    @dd($categories)--}}
+    {{--        <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name">{{ $categories->first()->title }}</h6>--}}
+    <!-- caregory nav -->
+    <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
+        @foreach($categories as $category)
+            <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $category->title }}</a>
+            </li>
+        @endforeach
+    </ul>
 
     <h6 class="title mb-sm-5 mb-3 mt-3 container d-lg-flex d-none" name="productName">{{ $product->title }}</h6>
     <!-- product -->
@@ -70,53 +75,62 @@
                     <p class="product-photo_plan" name="productPlan">Рассрочка</p>
                 @endif
             </div>
-            <div class="product-content_purchase d-flex flex-wrap justify-content-between">
-                <div class="product-content_purchase--info d-lg-none  d-flex justify-content-between gap-2">
-                    <p class="product-content_purchase--info_name"
-                       name="productName">{{ $product->brand->title ?? '' }}</p>
-                    <div class="d-flex gap-2 align-items-center">
-                        <span name="productProccent">-25%</span>
-                        <h6 name="productCurrentPrice">{{ $product->price ?? '' }}usd</h6>
+
+            <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <div class="product-content_purchase d-flex flex-wrap justify-content-between">
+                    <div class="product-content_purchase--info d-lg-none  d-flex justify-content-between gap-2">
+                        <p class="product-content_purchase--info_name"
+                           name="productName">{{ $product->brand->title ?? '' }}</p>
+                        <div class="d-flex gap-2 align-items-center">
+                            <span name="productProccent">-25%</span>
+                            <h6 name="productCurrentPrice">{{ $product->price ?? '' }}usd</h6>
+                        </div>
+                        <button type="button" class="product-content_func--btns">
+                            <svg width="25" height="22" viewBox="0 0 29 26" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M5 8.89256C5 6.71638 6.73126 5 8.80838 5C9.80909 5 10.7747 5.40303 11.4912 6.12989L13.0756 7.73734C13.4515 8.11865 13.9646 8.33333 14.5 8.33333C15.0354 8.33333 15.5485 8.11865 15.9244 7.73734L17.5088 6.12989C18.2253 5.40303 19.1909 5 20.1916 5C22.2687 5 24 6.71638 24 8.89256C24 9.93411 23.5919 10.9273 22.8744 11.6552L14.5 20.151L6.12558 11.6552C5.40811 10.9273 5 9.93411 5 8.89256ZM8.80838 1C4.4683 1 1 4.56145 1 8.89256C1 10.9766 1.81576 12.9809 3.27688 14.4632L13.0756 24.404C13.4515 24.7853 13.9646 25 14.5 25C15.0354 25 15.5485 24.7853 15.9244 24.404L25.7231 14.4632C27.1842 12.9809 28 10.9766 28 8.89256C28 4.56145 24.5317 1 20.1916 1C18.1113 1 16.1222 1.83864 14.6601 3.32189L14.5 3.48434L14.3399 3.32189C12.8778 1.83865 10.8887 1 8.80838 1Z"
+                                    stroke="white" stroke-width="2"/>
+                            </svg>
+                        </button>
                     </div>
-                    <button type="button" class="product-content_func--btns">
-                        <svg width="25" height="22" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="product-add_btns d-flex align-items-center justify-content-between">
+                        <button class="goods-addProduct-minus disabled" type="button">
+                            <svg width="30" height="30" viewBox="0 0 20 21" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M17.2175 17.2175C15.8889 18.5461 14.1962 19.4509 12.3534 19.8175C10.5105 20.184 8.60041 19.9959 6.86451 19.2769C5.12861 18.5578 3.64491 17.3402 2.60104 15.7779C1.55717 14.2157 1 12.3789 1 10.5C1 8.62108 1.55716 6.78435 2.60104 5.22208C3.64491 3.65982 5.12861 2.44218 6.86451 1.72314C8.6004 1.00411 10.5105 0.81598 12.3534 1.18254C14.1962 1.5491 15.8889 2.45389 17.2175 3.78248"
+                                    stroke="#999999" stroke-linecap="round"/>
+                                <path d="M6 11V10H15V11H6Z" fill="#999999"/>
+                            </svg>
+                        </button>
+                        <input value="1" type="text" name="product_qty" class="goods-itemCount text-center">
+                        <button class="goods-addProduct-plus" type="button">
+                            <svg width="30" height="30" viewBox="0 0 20 21" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.78249 17.2175C4.11108 18.5461 5.80382 19.4509 7.64664 19.8175C9.48946 20.184 11.3996 19.9959 13.1355 19.2769C14.8714 18.5578 16.3551 17.3402 17.399 15.7779C18.4428 14.2157 19 12.3789 19 10.5C19 8.62108 18.4428 6.78435 17.399 5.22208C16.3551 3.65982 14.8714 2.44218 13.1355 1.72314C11.3996 1.00411 9.48946 0.81598 7.64664 1.18254C5.80382 1.5491 4.11109 2.45389 2.78249 3.78248"
+                                    stroke="#999999" stroke-linecap="round"/>
+                                <path d="M5 11V10H14V11H5Z" fill="#999999"/>
+                                <path d="M10 15H9L9 6L10 6L10 15Z" fill="#999999"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="button" class="product-buyinclick_btn">Купить в 1 клик</button>
+                    <button type="submit" class="product-buy_btn goods-item_addToBasket">В корзину
+                        <svg width="44" height="44" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M5 8.89256C5 6.71638 6.73126 5 8.80838 5C9.80909 5 10.7747 5.40303 11.4912 6.12989L13.0756 7.73734C13.4515 8.11865 13.9646 8.33333 14.5 8.33333C15.0354 8.33333 15.5485 8.11865 15.9244 7.73734L17.5088 6.12989C18.2253 5.40303 19.1909 5 20.1916 5C22.2687 5 24 6.71638 24 8.89256C24 9.93411 23.5919 10.9273 22.8744 11.6552L14.5 20.151L6.12558 11.6552C5.40811 10.9273 5 9.93411 5 8.89256ZM8.80838 1C4.4683 1 1 4.56145 1 8.89256C1 10.9766 1.81576 12.9809 3.27688 14.4632L13.0756 24.404C13.4515 24.7853 13.9646 25 14.5 25C15.0354 25 15.5485 24.7853 15.9244 24.404L25.7231 14.4632C27.1842 12.9809 28 10.9766 28 8.89256C28 4.56145 24.5317 1 20.1916 1C18.1113 1 16.1222 1.83864 14.6601 3.32189L14.5 3.48434L14.3399 3.32189C12.8778 1.83865 10.8887 1 8.80838 1Z"
-                                stroke="white" stroke-width="2"/>
+                                d="M10.519 56.481C15.0642 61.0262 20.8552 64.1215 27.1596 65.3755C33.4639 66.6295 39.9986 65.9859 45.9372 63.5261C51.8758 61.0662 56.9516 56.9006 60.5228 51.556C64.0939 46.2114 66 39.9279 66 33.5C66 27.0721 64.0939 20.7886 60.5228 15.444C56.9516 10.0994 51.8758 5.93377 45.9372 3.47392C39.9986 1.01407 33.464 0.370459 27.1596 1.62448C20.8552 2.8785 15.0642 5.97382 10.519 10.519"
+                                stroke-width="2" stroke-linecap="round"/>
+                            <path d="M28.3333 17L42 33.5M42 33.5L28.3333 50M42 33.5H0.999999" stroke-width="2"
+                                  stroke-linecap="round"/>
                         </svg>
                     </button>
                 </div>
-                <div class="product-add_btns d-flex align-items-center justify-content-between">
-                    <button class="goods-addProduct-minus disabled" type="button">
-                        <svg width="30" height="30" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M17.2175 17.2175C15.8889 18.5461 14.1962 19.4509 12.3534 19.8175C10.5105 20.184 8.60041 19.9959 6.86451 19.2769C5.12861 18.5578 3.64491 17.3402 2.60104 15.7779C1.55717 14.2157 1 12.3789 1 10.5C1 8.62108 1.55716 6.78435 2.60104 5.22208C3.64491 3.65982 5.12861 2.44218 6.86451 1.72314C8.6004 1.00411 10.5105 0.81598 12.3534 1.18254C14.1962 1.5491 15.8889 2.45389 17.2175 3.78248"
-                                stroke="#999999" stroke-linecap="round"/>
-                            <path d="M6 11V10H15V11H6Z" fill="#999999"/>
-                        </svg>
-                    </button>
-                    <input value="1" type="text" class="goods-itemCount text-center">
-                    <button class="goods-addProduct-plus" type="button">
-                        <svg width="30" height="30" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M2.78249 17.2175C4.11108 18.5461 5.80382 19.4509 7.64664 19.8175C9.48946 20.184 11.3996 19.9959 13.1355 19.2769C14.8714 18.5578 16.3551 17.3402 17.399 15.7779C18.4428 14.2157 19 12.3789 19 10.5C19 8.62108 18.4428 6.78435 17.399 5.22208C16.3551 3.65982 14.8714 2.44218 13.1355 1.72314C11.3996 1.00411 9.48946 0.81598 7.64664 1.18254C5.80382 1.5491 4.11109 2.45389 2.78249 3.78248"
-                                stroke="#999999" stroke-linecap="round"/>
-                            <path d="M5 11V10H14V11H5Z" fill="#999999"/>
-                            <path d="M10 15H9L9 6L10 6L10 15Z" fill="#999999"/>
-                        </svg>
-                    </button>
-                </div>
-                <button type="button" class="product-buyinclick_btn">Купить в 1 клик</button>
-                <button type="button" class="product-buy_btn goods-item_addToBasket">В корзину
-                    <svg width="44" height="44" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10.519 56.481C15.0642 61.0262 20.8552 64.1215 27.1596 65.3755C33.4639 66.6295 39.9986 65.9859 45.9372 63.5261C51.8758 61.0662 56.9516 56.9006 60.5228 51.556C64.0939 46.2114 66 39.9279 66 33.5C66 27.0721 64.0939 20.7886 60.5228 15.444C56.9516 10.0994 51.8758 5.93377 45.9372 3.47392C39.9986 1.01407 33.464 0.370459 27.1596 1.62448C20.8552 2.8785 15.0642 5.97382 10.519 10.519"
-                            stroke-width="2" stroke-linecap="round"/>
-                        <path d="M28.3333 17L42 33.5M42 33.5L28.3333 50M42 33.5H0.999999" stroke-width="2"
-                              stroke-linecap="round"/>
-                    </svg>
-                </button>
-            </div>
+            </form>
+
             <div class="product-content_funcs d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center gap-4">
                     <div class="goods_rewies d-flex align-items-center gap-1">
@@ -220,13 +234,15 @@
                         <h6>Характеристики</h6>
                         {!! $product->characteristics !!}
                         <button class="product-more-btn" id="product-characteristics_moreBtn">Все характеристики<img
-                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}" alt="arrow down"></button>
+                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}"
+                                alt="arrow down"></button>
                     </div>
                     <div class="product-description">
                         <h6>Описание товара</h6>
                         {!! $product->description !!}
                         <button class="product-more-btn" id="product-description_moreBtn">Развернуть описание<img
-                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}" alt="arrow down"></button>
+                                class="icon" src="{{ asset('assets/front/images/icons/greenArrRight.png') }}"
+                                alt="arrow down"></button>
                     </div>
                 </div>
             </div>

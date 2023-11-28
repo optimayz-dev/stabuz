@@ -153,6 +153,9 @@
             </div>
             <div class="category-goods">
                 @foreach($products as $product)
+                    <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <div class="goods_item">
                         <div class="goods_header">
                             <div class="goods_header--menu d-flex align-items-center">
@@ -216,7 +219,7 @@
                                    name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
                             @endif
 
-                            <div class="goods-addProduct ">
+                            <div class="goods-addProduct">
                                 <div class="goods-addProduct_btns">
                                     <button class="goods-addProduct-minus disabled" type="button">
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
@@ -227,7 +230,7 @@
                                             <path d="M6 11V10H15V11H6Z" fill="#999999"/>
                                         </svg>
                                     </button>
-                                    <p class="goods-itemCount">1</p>
+                                    <input value="1" type="text" name="product_qty" class="goods-itemCount">
                                     <button class="goods-addProduct-plus" type="button">
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -239,7 +242,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <button type="button" class="goods-item_addToBasket">
+                                <button type="submit" class="goods-item_addToBasket">
                                     <svg width="30" height="27" viewBox="0 0 30 27" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                               d="M28.0386 3.84668H5.8078C5.50821 3.84668 5.2244 3.981 5.03446 4.21269C4.84452 4.44438 4.76846 4.74902 4.82722 5.0428L6.7503 14.6582C6.84378 15.1256 7.25419 15.4621 7.73088 15.4621H26.4561C26.918 15.4664 27.3663 15.306 27.7207 15.0095C28.0713 14.7161 28.307 14.3087 28.3867 13.859L29.9605 6.18212L29.9645 6.1613C30.0162 5.87909 30.0053 5.58899 29.9326 5.31145C29.86 5.03391 29.7273 4.77569 29.544 4.55498C29.3607 4.33428 29.1313 4.15647 28.8718 4.03409C28.6123 3.91171 28.3291 3.84774 28.0422 3.84669L28.0386 3.84668ZM27.9877 5.84668L26.4265 13.4621H8.55068L7.0276 5.84668H27.9877Z"
@@ -261,6 +264,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 @endforeach
             </div>
         </div>

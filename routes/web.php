@@ -12,6 +12,7 @@ use App\Http\Controllers\Front\NewsController;
 use App\Http\Controllers\Front\PromotionController;
 use App\Http\Controllers\Front\VideoReviewController;
 use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,17 @@ Route::group([
     //Basket
 
     Route::get('basket', [CartController::class, 'index'])->name('basket');
+
+    Route::post('cart', [CartController::class, 'addToCart'])->name('cart.add-product');
+    Route::get('cart/product-minus/{id}', [CartController::class, 'minusProduct'])->name('cart.product-minus');
+    Route::get('cart/product-plus/{id}', [CartController::class, 'plusProduct'])->name('cart.product-plus');
+    Route::get('cart/product-delete/{id}', [CartController::class, 'deleteProduct'])->name('cart.product-delete');
+
+    //Order
+
+    Route::post('checkout-order', [OrderController::class, 'checkout'])->name('order.checkout');
+    Route::get('checkout-order/entity', [OrderController::class, 'checkoutEntity'])->name('order.checkout-entity');
+    Route::post('checkout-order/create', [OrderController::class, 'createOrder'])->name('order.create');
 });
 
 

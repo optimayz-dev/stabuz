@@ -9,18 +9,20 @@
             <li class="breadcrumb-item active" aria-current="page">{{ $brand->title }}</li>
         </ol>
     </nav>
-{{--    <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">--}}
-{{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>--}}
-{{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все бренды</a>--}}
-{{--    </div>--}}
+    {{--    <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">--}}
+    {{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все категории</a>--}}
+    {{--        <a href="categories.html" class="category-name_link"><img src="/image/icons/greenArrLeft.png" alt="">Все бренды</a>--}}
+    {{--    </div>--}}
     <h6 class="title mb-sm-5 mb-3 mt-3 container" name="brandName">{{ $brand->title }} в Ташкенте и Узбекистане</h6>
     <!-- brand -->
     <section class="category container d-flex justify-content-between gap-4" id="category">
         <form action="" class="category-filter d-md-block d-none" id="category-filter">
 
             <div class="category-categories d-flex flex-column">
-                <a href="{{ route('categories.view') }}" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
-                <a href="{{ route('brands') }}" class="category-name_link d-none" name="parentCategoryName"><img src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt=""> Все Бренды</a>
+                <a href="{{ route('categories.view') }}" class="category-name_link"><img
+                        src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
+                <a href="{{ route('brands') }}" class="category-name_link d-none" name="parentCategoryName"><img
+                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} " alt=""> Все Бренды</a>
                 <span name="categoryName" class="category-name"> Категории Бренда {{ $brand->title }}</span>
                 <ul class="category-categories_list" name="categoryCategoriesList">
                     @foreach($brand->categories as $category)
@@ -40,7 +42,8 @@
                 </div>
                 <div class="range-input">
                     <input type="range" name="min-price" class="range-min" min="0" max="1000000" value="0" step="100">
-                    <input type="range" name="max-price" class="range-max" min="0" max="1000000" value="1000000" step="100">
+                    <input type="range" name="max-price" class="range-max" min="0" max="1000000" value="1000000"
+                           step="100">
                 </div>
                 <div class="category-price_minmax d-flex justify-content-between align-items-center mt-3">
                     <p class="input-min-value">0</p>
@@ -61,16 +64,20 @@
                     </li>
 
                 </ul>
-                <button class="category-filter_showall--btn">Все страны<img src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
+                <button class="category-filter_showall--btn">Все страны<img
+                        src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
             </div>
             <button type="button" class="category-resetall_btn">Сбросить все</button>
         </form>
 
 
         <div class="category-main">
-            <div class="d-flex flex-sm-row flex-column align-items-md-center align-items-start justify-content-md-end justify-content-between">
-                <a href="/" class="category-filters_btn d-md-none d-flex" data-bs-toggle="offcanvas" data-bs-target="#filters" aria-controls="filters"><img src="/image/icons/filters.png" alt="">Фильтры</a>
-                <div class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
+            <div
+                class="d-flex flex-sm-row flex-column align-items-md-center align-items-start justify-content-md-end justify-content-between">
+                <a href="/" class="category-filters_btn d-md-none d-flex" data-bs-toggle="offcanvas"
+                   data-bs-target="#filters" aria-controls="filters"><img src="/image/icons/filters.png" alt="">Фильтры</a>
+                <div
+                    class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
                     <div class="category-counts d-flex gap-3">
                         <div class="category-count_goods d-flex gap-2">
                             <img src="{{ asset('assets/front/image/icons/countGoods.svg') }} " alt="">
@@ -98,14 +105,18 @@
             <div class="category-goods">
 
                 @foreach($products as $product)
-                     <div class="goods_item">
+                    <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <div class="goods_item">
                             <div class="goods_header">
                                 <div class="goods_header--menu d-flex align-items-center">
                                     @if($product->new)
                                         <span class="goods-itemNew" name="goodsItemNew">New</span>
                                     @endif
                                     <button type="button">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="24" height="24" viewBox="0 0 24 24"
+                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M5 6.42857C5 5.61167 5.64333 5 6.375 5C7.10667 5 7.75 5.61167 7.75 6.42857C7.75 7.24548 7.10667 7.85714 6.375 7.85714C5.64333 7.85714 5 7.24548 5 6.42857ZM6.375 1C3.37588 1 1 3.46129 1 6.42857C1 9.39585 3.37588 11.8571 6.375 11.8571C8.66277 11.8571 10.5884 10.4236 11.3725 8.42857L21 8.42857C22.1046 8.42857 23 7.53314 23 6.42857C23 5.324 22.1046 4.42857 21 4.42857L11.3725 4.42857C10.5884 2.43359 8.66277 1 6.375 1ZM16.25 17.5714C16.25 16.7545 16.8933 16.1429 17.625 16.1429C18.3567 16.1429 19 16.7545 19 17.5714C19 18.3883 18.3567 19 17.625 19C16.8933 19 16.25 18.3883 16.25 17.5714ZM17.625 12.1429C15.3372 12.1429 13.4116 13.5764 12.6275 15.5714L3 15.5714C1.89543 15.5714 1 16.4669 1 17.5714C1 18.676 1.89543 19.5714 3 19.5714L12.6275 19.5714C13.4116 21.5664 15.3372 23 17.625 23C20.6241 23 23 20.5387 23 17.5714C23 14.6042 20.6241 12.1429 17.625 12.1429Z"
                                                 stroke="white" stroke-width="2"/>
@@ -167,7 +178,7 @@
                                                 <path d="M6 11V10H15V11H6Z" fill="#999999"/>
                                             </svg>
                                         </button>
-                                        <p class="goods-itemCount">1</p>
+                                        <input value="1" type="text" name="product_qty" class="goods-itemCount">
                                         <button class="goods-addProduct-plus" type="button">
                                             <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -179,8 +190,9 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <button type="button" class="goods-item_addToBasket">
-                                        <svg width="30" height="27" viewBox="0 0 30 27" xmlns="http://www.w3.org/2000/svg">
+                                    <button type="submit" class="goods-item_addToBasket">
+                                        <svg width="30" height="27" viewBox="0 0 30 27"
+                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                   d="M28.0386 3.84668H5.8078C5.50821 3.84668 5.2244 3.981 5.03446 4.21269C4.84452 4.44438 4.76846 4.74902 4.82722 5.0428L6.7503 14.6582C6.84378 15.1256 7.25419 15.4621 7.73088 15.4621H26.4561C26.918 15.4664 27.3663 15.306 27.7207 15.0095C28.0713 14.7161 28.307 14.3087 28.3867 13.859L29.9605 6.18212L29.9645 6.1613C30.0162 5.87909 30.0053 5.58899 29.9326 5.31145C29.86 5.03391 29.7273 4.77569 29.544 4.55498C29.3607 4.33428 29.1313 4.15647 28.8718 4.03409C28.6123 3.91171 28.3291 3.84774 28.0422 3.84669L28.0386 3.84668ZM27.9877 5.84668L26.4265 13.4621H8.55068L7.0276 5.84668H27.9877Z"
                                                   fill="#F08718"/>
@@ -201,6 +213,7 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                 @endforeach
             </div>
         </div>
