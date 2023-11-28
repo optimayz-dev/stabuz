@@ -58,7 +58,6 @@
         @foreach($main_banners['410x450px'] as $banner)
             <img src="{{ asset($banner->image) }}" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1" style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">
         @endforeach
-        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2" style="background: linear-gradient(90deg, #F093FB 0%, #F5576C 100%);"><img src="" alt=""></a>
     </div>
     <!-- novelties -->
     @include('front.includes.home.new-products')

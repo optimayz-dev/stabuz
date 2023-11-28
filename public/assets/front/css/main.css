@@ -1086,7 +1086,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin-bottom: 70px;
 }
 .advertising-banner{
-    display: block;
+    display: block !important;
     height: 450px;
     border-radius: 20px;
     min-width: 195px;
