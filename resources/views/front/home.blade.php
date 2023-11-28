@@ -52,6 +52,7 @@
             @endforeach
         </div>
     </section>
+
     <!-- advertising banners -->
     <div class="advertising-banners container row gap-3 flex-nowrap justify-content-between">
         @foreach($main_banners['410x450px'] as $banner)
