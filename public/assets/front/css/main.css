@@ -1090,6 +1090,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: 450px;
     border-radius: 20px;
     min-width: 195px;
+    padding: 0;
+}
+.advertising-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
 }
 .advertising-banner.long{
     min-width: 580px;
