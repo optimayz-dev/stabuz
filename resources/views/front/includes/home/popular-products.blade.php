@@ -2,7 +2,13 @@
     <section class="goods-discount container">
         <h6 class="title" style="margin-bottom: 30px;">Популярное</h6>
         <div class="d-flex justify-content-between flex-md-row flex-column">
-            <a href="/" class="goods-advertising_banner" name="popularAdvertisingBanner">Реклама</a>
+            <a href="/" class="goods-advertising_banner" name="popularAdvertisingBanner">
+                @foreach($main_banners['238x420px'] as $key => $banner)
+                    @if($loop->iteration == 4)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            </a>
             <div class="goods-discount_slider owl-carousel">
                 @foreach($popular_products as $product)
                     <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">

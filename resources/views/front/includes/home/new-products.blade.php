@@ -129,14 +129,11 @@
                 @endforeach
             </div>
             <a href="/" class="goods-advertising_banner" name="noveltiesAdvertisingBanner">
-                {{--                @foreach($main_banners as $key => $banner)--}}
-                {{--                    @if($banner->type == '238x420px')--}}
-                {{--                        @dd($key)--}}
-                {{--                        @if($loop->iteration == 1)--}}
-                {{--                            <img src="{{ asset($banner->image) }}" alt="">--}}
-                {{--                        @endif--}}
-                {{--                    @endif--}}
-                {{--                @endforeach--}}
+                @foreach($main_banners['238x420px'] as $key => $banner)
+                    @if($loop->iteration == 1)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
             </a>
         </div>
     </section>

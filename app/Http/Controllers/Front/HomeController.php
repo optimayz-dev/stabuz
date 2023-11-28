@@ -57,7 +57,10 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->limit(10)->get();
 
-        $main_banners = MainBanner::query()->get();
+
+        config()->set('database.connections.mysql.strict', false);
+
+        $main_banners = MainBanner::query()->get()->groupBy('type');
 
         $promotion_banners = PromotionBanner::query()->with('translations')
             ->limit(3)->get();

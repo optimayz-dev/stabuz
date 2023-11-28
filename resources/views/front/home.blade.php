@@ -3,13 +3,10 @@
     @include('front.__layouts.header')
     <!-- main-slider -->
     <div class="main-slider owl-carousel" style="border-radius: 20px;">
-{{--@dd($main_banners)--}}
-        @foreach($main_banners as $banner)
-            @if($banner->type == '1330x400px')
+        @foreach($main_banners['1330x400px'] as $banner)
             <a href="/" class="main-slider_item">
                 <img src="{{ asset($banner->image) }}" alt="">
             </a>
-            @endif
         @endforeach
     </div>
     <!-- healthy info -->
@@ -57,13 +54,10 @@
     </section>
     <!-- advertising banners -->
     <div class="advertising-banners container row gap-3 flex-nowrap justify-content-between">
-        @foreach($main_banners as $banner)
-            @if($banner->type == '410x450px')
-        <img src="{{ asset($banner->image) }}" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1" style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">
-            @endif
+        @foreach($main_banners['410x450px'] as $banner)
+            <img src="{{ asset($banner->image) }}" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1" style="background: linear-gradient(90deg, #E0C3FC 0%, #8EC5FC 100%);">
         @endforeach
-        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2" style="background: linear-gradient(90deg, #F093FB 0%, #F5576C 100%);"><img
-                src="" alt=""></a>
+        <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2" style="background: linear-gradient(90deg, #F093FB 0%, #F5576C 100%);"><img src="" alt=""></a>
     </div>
     <!-- novelties -->
     @include('front.includes.home.new-products')
@@ -94,9 +88,21 @@
     <!-- advertising banners -->
     <div class="advertising-banners container row flex-row-reverse gap-3 flex-nowrap justify-content-between">
         <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
-           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%);">Реклама1</a>
+           style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%);">
+            @foreach($main_banners['840x450px'] as $key => $banner)
+                @if($loop->iteration == 2)
+                    <img src="{{ asset($banner->image) }}" alt="">
+                @endif
+            @endforeach
+        </a>
         <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
-           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%);">Реклама1</a>
+           style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%);">
+            @foreach($main_banners['410x450px'] as $key => $banner)
+                @if($loop->iteration == 2)
+                    <img src="{{ asset($banner->image) }}" alt="">
+                @endif
+            @endforeach
+        </a>
     </div>
     <!-- Lawn mowers -->
     <section class="novelties container">
@@ -219,7 +225,15 @@
                     @endif
                 @endforeach
             </div>
-            <a href="/" class="goods-advertising_banner laptop-banner" name="lawnMowersAdvertisingBanner">Реклама</a>
+            <a href="/" class="goods-advertising_banner laptop-banner" name="lawnMowersAdvertisingBanner">
+                @if(isset($main_banners['496x420px']) )
+                @foreach($main_banners['496x420px'] as $key => $banner)
+                    @if($loop->iteration == 1)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+                @endif
+            </a>
         </div>
     </section>
     <!-- laptop -->
@@ -238,7 +252,15 @@
             </a>
         </div>
         <div class="d-flex justify-content-between flex-md-row flex-column">
-            <a href="/" class="goods-advertising_banner laptop-banner" name="laptopAdvertisingBanner">Реклама</a>
+            <a href="/" class="goods-advertising_banner laptop-banner" name="laptopAdvertisingBanner">
+                @if(isset($main_banners['496x420px']) )
+                @foreach($main_banners['496x420px'] as $key => $banner)
+                    @if($loop->iteration == 2)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+                @endif
+            </a>
             <div class="laptop-slider owl-carousel">
                 @foreach($tags as $tag)
                     @if($tag->title == 'actual')

@@ -14,7 +14,13 @@
             </a>
         </div>
         <div class="d-flex justify-content-between flex-md-row flex-column">
-            <a href="/" class="goods-advertising_banner" name="discountAdvertisingBanner">Реклама</a>
+            <a href="/" class="goods-advertising_banner" name="discountAdvertisingBanner">
+                @foreach($main_banners['238x420px'] as $key => $banner)
+                    @if($loop->iteration == 2)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            </a>
             <div class="goods-discount_slider owl-carousel">
                 @foreach($discount_products as $product)
                     <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">
