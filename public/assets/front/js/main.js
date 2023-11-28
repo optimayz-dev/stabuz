@@ -1708,10 +1708,10 @@ $(document).ready(function () {
             });
         }
     });
-});
-$(document).on('click', function(event) {
-    if (!$(event.target).closest('#search-results').length && !$(event.target).is('#search-input')) {
-        searchResults.removeClass('show');
-    }
+    $(document).on('click', function (event) {
+        if (!$(event.target).closest('#search-results').length && !$(event.target).is('#search-input')) {
+            searchResults.removeClass('show');
+        }
+    });
 });
 
