@@ -82,6 +82,7 @@
             <img src="{{ asset('/assets/front/images/intend (1).png') }}" alt="">
         </a>
     </div>
+
     <!-- reccomend -->
     @include('front.includes.home.recommend-products')
     <!-- popular -->
