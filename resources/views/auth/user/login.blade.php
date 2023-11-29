@@ -7,7 +7,7 @@
             <h6>Авторизация</h6>
             <div class="login_inpts">
                 <p>E-mail *</p>
-                <input type="text" required name="email">
+                <input type="text" required name="login">
             </div>
             <div class="login_inpts">
                 <p>Пароль *</p>

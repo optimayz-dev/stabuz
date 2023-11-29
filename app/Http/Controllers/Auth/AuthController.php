@@ -24,7 +24,7 @@ class AuthController extends Controller
     {
 
         $user = User::query()->create([
-           'email' => $request->input('email'),
+           'login' => $request->input('login'),
            'password' => bcrypt($request->input('password')),
            'name' => $request->input('name')
         ]);
@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'login' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -53,8 +53,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+            'login' => 'The provided credentials do not match our records.',
+        ])->onlyInput('login');
     }
 
     public function logout()

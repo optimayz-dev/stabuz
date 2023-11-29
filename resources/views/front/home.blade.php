@@ -3,11 +3,24 @@
     @include('front.__layouts.header')
     <!-- main-slider -->
     <div class="main-slider owl-carousel" style="border-radius: 20px;">
-        @foreach($main_banners['1330x400px'] as $banner)
-            <a href="/" class="main-slider_item">
-                <img src="{{ asset($banner->image) }}" alt="">
-            </a>
-        @endforeach
+        @desktop
+        @if(isset($main_banners['1330x400px']))
+            @foreach($main_banners['1330x400px'] as $banner)
+                <a href="/" class="main-slider_item">
+                    <img src="{{ asset($banner->image) }}" alt="">
+                </a>
+            @endforeach
+        @endif
+        @enddesktop
+        @mobile
+        @if(isset($main_banners['536x270px']))
+            @foreach($main_banners['536x270px'] as $banner)
+                <a href="/" class="main-slider_item">
+                    <img src="{{ asset($banner->image) }}" alt="">
+                </a>
+            @endforeach
+        @endif
+        @endmobile
     </div>
     <!-- healthy info -->
     <!-- healthy info -->
@@ -57,19 +70,45 @@
     <div class="advertising-banners container row gap-3 flex-nowrap justify-content-between">
         <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
            style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%); display: block !important;">
-            @foreach($main_banners['410x450px'] as $key => $banner)
-                @if($loop->iteration == 1)
-                    <img src="{{ asset($banner->image) }}" alt="">
-                @endif
-            @endforeach
+            @desktop
+            @if(isset($main_banners['410x450px']))
+                @foreach($main_banners['410x450px'] as $key => $banner)
+                    @if($loop->iteration == 1)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @enddesktop
+            @mobile
+            @if(isset($main_banners['536x290px']))
+                @foreach($main_banners['536x290px'] as $banner)
+                    @if($loop->iteration == 1)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @endmobile
         </a>
         <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
            style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%); display: block !important;">
-            @foreach($main_banners['840x450px'] as $key => $banner)
-                @if($loop->iteration == 1)
-                    <img src="{{ asset($banner->image) }}" alt="">
-                @endif
-            @endforeach
+            @desktop
+            @if(isset($main_banners['840x450px']))
+                @foreach($main_banners['840x450px'] as $key => $banner)
+                    @if($loop->iteration == 1)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @enddesktop
+            @mobile
+            @if(isset($main_banners['536x290px']))
+                @foreach($main_banners['536x290px'] as $banner)
+                    @if($loop->iteration == 2)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @endmobile
         </a>
     </div>
     <!-- novelties -->
@@ -103,19 +142,45 @@
     <div class="advertising-banners container row flex-row-reverse gap-3 flex-nowrap justify-content-between">
         <a href="/" class="advertising-banner col-sm-4 col-11" name="advertisingBanner1"
            style="background: linear-gradient(90deg, #84FAB0 0%, #8FD3F4 100%); display: block !important;">
-            @foreach($main_banners['410x450px'] as $key => $banner)
-                @if($loop->iteration == 2)
-                    <img src="{{ asset($banner->image) }}" alt="">
-                @endif
-            @endforeach
+            @desktop
+            @if(isset($main_banners['410x450px']))
+                @foreach($main_banners['410x450px'] as $banner)
+                    @if($loop->iteration == 2)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @enddesktop
+            @mobile
+            @if(isset($main_banners['536x290px']))
+                @foreach($main_banners['536x290px'] as $banner)
+                    @if($loop->iteration == 3)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @endmobile
         </a>
         <a href="/" class="advertising-banner long col-sm-8 col-11" name="advertisingBanner2"
            style="background: linear-gradient(90deg, #A1C4FD 0%, #C2E9FB 100%); display: block !important;">
-            @foreach($main_banners['840x450px'] as $key => $banner)
-                @if($loop->iteration == 2)
-                    <img src="{{ asset($banner->image) }}" alt="">
-                @endif
-            @endforeach
+            @desktop
+            @if(isset($main_banners['840x450px']))
+                @foreach($main_banners['840x450px'] as $banner)
+                    @if($loop->iteration == 2)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @enddesktop
+            @mobile
+            @if(isset($main_banners['536x290px']))
+                @foreach($main_banners['536x290px'] as $banner)
+                    @if($loop->iteration == 4)
+                        <img src="{{ asset($banner->image) }}" alt="">
+                    @endif
+                @endforeach
+            @endif
+            @endmobile
         </a>
     </div>
     <!-- Lawn mowers -->
@@ -240,13 +305,24 @@
                 @endforeach
             </div>
             <a href="/" class="goods-advertising_banner laptop-banner" name="lawnMowersAdvertisingBanner">
+                @desktop
                 @if(isset($main_banners['496x420px']) )
-                @foreach($main_banners['496x420px'] as $key => $banner)
-                    @if($loop->iteration == 1)
-                        <img src="{{ asset($banner->image) }}" alt="">
-                    @endif
-                @endforeach
+                    @foreach($main_banners['496x420px'] as $key => $banner)
+                        @if($loop->iteration == 1)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
                 @endif
+                @enddesktop
+                @mobile
+                @if(isset($main_banners['536x350px']))
+                    @foreach($main_banners['536x350px'] as $banner)
+                        @if($loop->iteration == 1)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
+                @endif
+                @endmobile
             </a>
         </div>
     </section>
@@ -267,13 +343,24 @@
         </div>
         <div class="d-flex justify-content-between flex-md-row flex-column">
             <a href="/" class="goods-advertising_banner laptop-banner" name="laptopAdvertisingBanner">
+                @desktop
                 @if(isset($main_banners['496x420px']) )
-                @foreach($main_banners['496x420px'] as $key => $banner)
-                    @if($loop->iteration == 2)
-                        <img src="{{ asset($banner->image) }}" alt="">
-                    @endif
-                @endforeach
+                    @foreach($main_banners['496x420px'] as $key => $banner)
+                        @if($loop->iteration == 2)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
                 @endif
+                @enddesktop
+                @mobile
+                @if(isset($main_banners['536x350px']))
+                    @foreach($main_banners['536x350px'] as $banner)
+                        @if($loop->iteration == 2)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
+                @endif
+                @endmobile
             </a>
             <div class="laptop-slider owl-carousel">
                 @foreach($tags as $tag)

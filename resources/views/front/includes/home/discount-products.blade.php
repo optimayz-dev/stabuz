@@ -15,11 +15,24 @@
         </div>
         <div class="d-flex justify-content-between flex-md-row flex-column">
             <a href="/" class="goods-advertising_banner" name="discountAdvertisingBanner">
-                @foreach($main_banners['238x420px'] as $key => $banner)
-                    @if($loop->iteration == 2)
-                        <img src="{{ asset($banner->image) }}" alt="">
-                    @endif
-                @endforeach
+                @desktop
+                @if(isset($main_banners['238x420px']))
+                    @foreach($main_banners['238x420px'] as $key => $banner)
+                        @if($loop->iteration == 2)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
+                @endif
+                @enddesktop
+                @mobile
+                @if(isset($main_banners['536x220px']))
+                    @foreach($main_banners['536x220px'] as $key => $banner)
+                        @if($loop->iteration == 2)
+                            <img src="{{ asset($banner->image) }}" alt="">
+                        @endif
+                    @endforeach
+                @endif
+                @endmobile
             </a>
             <div class="goods-discount_slider owl-carousel">
                 @foreach($discount_products as $product)

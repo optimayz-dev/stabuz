@@ -11,8 +11,8 @@
                     <input type="text" required name="name">
                 </div>
                 <div class="login_inpts">
-                    <p>E-mail *</p>
-                    <input type="text" required name="email">
+                    <p>E-mail / Телефон *</p>
+                    <input type="text" required name="login">
                 </div>
                 <div class="login_inpts">
                     <p>Пароль *</p>
