@@ -87,7 +87,7 @@
         </svg>
         <p>Сравнить</p>
     </a>
-    <a href="basket.html" class="footer-menu_item basket-btn_nav">
+    <a href="{{ route('basket') }}" class="footer-menu_item basket-btn_nav">
         <svg width="30" height="27" viewBox="0 0 30 27" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M11.104 23.0003C10.5464 23.0003 10.0945 23.448 10.0945 24.0002C10.0945 24.5523 10.5464 25 11.104 25C11.6617 25 12.1136 24.5523 12.1136 24.0002C12.1136 23.448 11.6617 23.0003 11.104 23.0003ZM8.07539 24.0002C8.07539 22.3433 9.43143 21.0003 11.104 21.0003C12.7766 21.0003 14.1327 22.3433 14.1327 24.0002C14.1327 25.657 12.7766 27 11.104 27C9.43143 27 8.07539 25.657 8.07539 24.0002Z"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2206 23.0003C22.6629 23.0003 22.211 23.448 22.211 24.0002C22.211 24.5523 22.6629 25 23.2206 25C23.7782 25 24.2301 24.5523 24.2301 24.0002C24.2301 23.448 23.7782 23.0003 23.2206 23.0003ZM20.1919 24.0002C20.1919 22.3433 21.548 21.0003 23.2206 21.0003C24.8932 21.0003 26.2492 22.3433 26.2492 24.0002C26.2492 25.657 24.8932 27 23.2206 27C21.548 27 20.1919 25.657 20.1919 24.0002Z"/>
@@ -96,13 +96,13 @@
         <p>Корзина</p>
         <div class="menu-count total_quantity"></div>
     </a>
-    <a href="favorites.html" class="footer-menu_item">
+    <a href="#!" class="footer-menu_item">
         <svg width="30" height="26" viewBox="0 0 30 26" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.07107 2C4.71811 2 2 4.71811 2 8.07107C2 9.68122 2.63963 11.2254 3.77817 12.364L15 23.5858L26.2218 12.364C27.3604 11.2254 28 9.68121 28 8.07107C28 4.71811 25.2819 2 21.9289 2C20.3188 2 18.7746 2.63963 17.636 3.77817L15.7071 5.70711C15.3166 6.09763 14.6834 6.09763 14.2929 5.70711L12.364 3.77818C11.2254 2.63963 9.68121 2 8.07107 2ZM0 8.07107C0 3.61354 3.61354 0 8.07107 0C10.2116 0 12.2646 0.850343 13.7782 2.36396L15 3.58579L16.2218 2.36396C17.7354 0.850341 19.7884 0 21.9289 0C26.3865 0 30 3.61354 30 8.07107C30 10.2116 29.1497 12.2646 27.636 13.7782L15.7071 25.7071C15.3166 26.0976 14.6834 26.0976 14.2929 25.7071L2.36396 13.7782C0.850339 12.2646 0 10.2116 0 8.07107Z"/>
         </svg>
         <p>Избранное</p>
     </a>
-    <a href="sign-in.html" class="footer-menu_item">
+    <a href="{{ route('cabinet.index') }}" class="footer-menu_item">
         <svg width="29" height="29" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 2C7.59644 2 2 7.59644 2 14.5C2 17.703 3.20472 20.6247 5.18575 22.8365C5.90603 21.5901 6.98002 20.5158 8.30238 19.6991C10.099 18.5893 12.2773 18 14.5 18C16.7227 18 18.901 18.5893 20.6976 19.6991C22.02 20.5158 23.094 21.5901 23.8142 22.8365C25.7953 20.6247 27 17.703 27 14.5C27 7.59644 21.4036 2 14.5 2ZM22.3059 24.2637C21.7856 23.1614 20.8793 22.162 19.6466 21.4006C18.1888 20.5002 16.3795 20 14.5 20C12.6205 20 10.8112 20.5002 9.35337 21.4006C8.12067 22.162 7.21442 23.1614 6.6941 24.2637C8.83308 25.976 11.547 27 14.5 27C17.453 27 20.1669 25.976 22.3059 24.2637ZM0 14.5C0 6.49187 6.49187 0 14.5 0C22.5081 0 29 6.49187 29 14.5C29 22.5081 22.5081 29 14.5 29C6.49187 29 0 22.5081 0 14.5ZM14.5 8C12.567 8 11 9.567 11 11.5C11 13.433 12.567 15 14.5 15C16.433 15 18 13.433 18 11.5C18 9.567 16.433 8 14.5 8ZM9 11.5C9 8.46243 11.4624 6 14.5 6C17.5376 6 20 8.46243 20 11.5C20 14.5376 17.5376 17 14.5 17C11.4624 17 9 14.5376 9 11.5Z"/>
         </svg>
@@ -111,7 +111,7 @@
 </section>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="mobile-catalog" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-        <button data-bs-dismiss="offcanvas" class="mobile-catalog_backBtn"><img src="image/icons/mobileArrLeft.png" alt=""></button>
+        <button data-bs-dismiss="offcanvas" class="mobile-catalog_backBtn"><img src="{{ asset('assets/front/images/icons/mobileArrLeft.png') }}" alt=""></button>
         <form action="index.html" method="get" class="header-search">
             <input type="search" placeholder="Я ищу..." class="icon-search">
             <button type="submit" class="icon-search"></button>
@@ -144,13 +144,13 @@
                 </ul>
             </div>
         </div>
-        <a href="category.html">Все категории</a>
+        <a href="{{ route('categories.view') }}">Все категории</a>
         <button id="backButton">Вернуться назад</button>
     </div>
 </div>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="mobile-compare" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-        <button data-bs-dismiss="offcanvas" class="mobile-catalog_backBtn"><img src="image/icons/mobileArrLeft.png" alt=""></button>
+        <button data-bs-dismiss="offcanvas" class="mobile-catalog_backBtn"><img src="{{ asset('assets/front/images/icons/mobileArrLeft.png') }}" alt=""></button>
         <form action="index.html" method="get" class="header-search">
             <input type="search" placeholder="Я ищу..." class="icon-search">
             <button type="submit" class="icon-search"></button>

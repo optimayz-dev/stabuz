@@ -1,28 +1,133 @@
-@if($new_products)
-    <section class="novelties container">
-        <div class="title-box d-flex flex-sm-row flex-column gap-sm-5 gap-1 align-items-sm-end align-items-start">
-            <h6 class="title">Новинки</h6>
-            <a href="{{ route('new.products') }}" class="title-link">Все новинки
-                <svg width="41" height="32" viewBox="0 0 41 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M21.9922 2.26949C24.7543 1.7283 27.6171 2.00617 30.2181 3.06742C32.819 4.12862 35.0399 5.92485 36.6015 8.22698C38.163 10.529 38.9956 13.234 38.9956 16C38.9956 18.766 38.163 21.471 36.6015 23.773C35.0399 26.0751 32.819 27.8714 30.2181 28.9326C27.6171 29.9938 24.7543 30.2717 21.9922 29.7305C19.2302 29.1893 16.6949 27.8539 14.7062 25.8949C14.3123 25.5069 13.6778 25.511 13.289 25.9041C12.9001 26.2971 12.9042 26.9303 13.2981 27.3182C15.5688 29.5549 18.4602 31.0766 21.606 31.693C24.7518 32.3094 28.0126 31.9932 30.9767 30.7838C33.9409 29.5744 36.4765 27.5254 38.2614 24.8941C40.0464 22.2626 41 19.1674 41 16C41 12.8326 40.0464 9.73742 38.2614 7.10592C36.4765 4.47458 33.9409 2.42563 30.9767 1.21621C28.0126 0.00682724 24.7518 -0.309406 21.606 0.306966C18.4602 0.92335 15.5688 2.4451 13.2981 4.68175C12.9042 5.06974 12.9001 5.7029 13.289 6.09593C13.6778 6.48897 14.3123 6.49305 14.7062 6.10505C16.6949 4.14613 19.2302 2.81066 21.9922 2.26949Z"
-                          fill=""/>
-                    <path
-                        d="M23.2 8.60007C22.8686 8.15824 22.9582 7.53144 23.4 7.20007C23.8418 6.8687 24.4686 6.95824 24.8 7.40007L30.8 15.4001C31.0667 15.7556 31.0667 16.2445 30.8 16.6001L24.8 24.6001C24.4686 25.0419 23.8418 25.1314 23.4 24.8001C22.9582 24.4687 22.8686 23.8419 23.2 23.4001L28 17H0.988025C0.442355 17 0 16.5523 0 16C0 15.4477 0.442355 15 0.988025 15H28L23.2 8.60007Z"
-                        fill=""/>
-                </svg>
-            </a>
-        </div>
-        <div class="d-flex justify-content-between flex-md-row flex-column-reverse">
-            <div class="novelties-slider owl-carousel">
-                @foreach($new_products as $product)
+@extends('front.__layouts.layout')
+@section('content')
+    @include('front.__layouts.header')
+    <!-- breadcrumb -->
+    <nav class="container d-md-block d-none" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('categories.view') }}">Категории</a></li>
+        </ol>
+    </nav>
+    <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
+        <a href="{{ route('categories.view') }}" class="category-name_link"><img
+                src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
+        <a href="#" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title ?? '' }}</a>
+    </div>
+    <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name"> Результаты поиска</h6>
+    <!-- caregory nav -->
+    <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
+        @if($category != null)
+            @foreach($category->children as $child)
+                <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $child->title }}</a>
+                </li>
+            @endforeach
+        @endif
+    </ul>
+    <!-- category -->
+    <section class="category container d-flex justify-content-between gap-4" id="category">
+        <form action="" class="category-filter d-md-block d-none" id="category-filter">
+            <div class="category-categories d-flex flex-column">
+                <a href="{{ route('categories.view') }}" class="category-name_link"><img
+                        src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
+                <a href="/" class="category-name_link d-none" name="parentCategoryName"><img
+                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} "
+                        alt="">{{ $category->title ?? ''}}
+                </a>
+                <span name="categoryName" class="category-name">{{ $category->title ?? ''}}</span>
+                <ul class="category-categories_list" name="categoryCategoriesList">
+                    @if($category != null)
+                        @foreach($category->children as $child)
+                            <li><a href="{{ route('category.view', $child->slug) }}" name="categoryCategoriesLink"
+                                   class="category-categories-link">{{ $child->title }}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
+            <div class="category-price" id="categoryPrice">
+                <div class="d-flex justify-content-between mb-3 mt-4">
+                    <h6 class="category-filter_title">Цена</h6>
+                    <button id="category-price_reset--btn" class="category-price_reset--btn">Сбросить</button>
+                </div>
+                <div class="category-price_slider">
+                    <div class="category-price_progress"></div>
+                </div>
+                <div class="range-input">
+                    <input type="range" name="min-price" class="range-min" min="0" max="1000000" value="0" step="100">
+                    <input type="range" name="max-price" class="range-max" min="0" max="1000000" value="1000000"
+                           step="100">
+                </div>
+                <div class="category-price_minmax d-flex justify-content-between align-items-center mt-3">
+                    <p class="input-min-value">0</p>
+                    <input type="text" class="priceInptmin d-none" value="0">
+                    <p class="input-max-value">1 000 000</p>
+                    <input type="text" class="priceInptmax d-none" value="1000000">
+                </div>
+            </div>
+            <div class="category-filter_nav">
+                <div class="d-flex justify-content-between mb-3 mt-4">
+                    <h6 class="category-filter_title">Бренды</h6>
+                    <button class="category-filter_reset--btn">Сбросить</button>
+                </div>
+                <ul class="category-filter_list" name="categoryBrandsList">
+                    @if($category != null)
+                        @foreach($category->brands as $brand)
+                            <li>
+                                <label for="brand1"> <a style="color: unset;"
+                                                        href="{{ route('brand.detail', $brand->slug ?? '') }}">{{ $brand->title ?? ''}}</a>
+                                </label>
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
+                <button class="category-filter_showall--btn">Все бренды<img
+                        src="{{ asset('assets/front/images/icons/chevroneBottom.svg') }}" alt=""></button>
+            </div>
+            <button type="button" class="category-resetall_btn">Сбросить все</button>
+        </form>
+        <div class="category-main">
+            <div
+                class="d-flex flex-sm-row flex-column align-items-md-center align-items-start justify-content-md-end justify-content-between">
+                <a href="/" class="category-filters_btn d-md-none d-flex" data-bs-toggle="offcanvas"
+                   data-bs-target="#filters" aria-controls="filters"><img
+                        src="{{ asset('assets/front/images/icons/filters.png') }} " alt="">Фильтры</a>
+                <div
+                    class="category-main_bar d-flex align-items-lg-center align-items-end flex-lg-row flex-column justify-content-end gap-lg-5 gap-1">
+                    <div class="category-counts d-flex gap-3">
+                        <div class="category-count_goods d-flex gap-2">
+                            <img src="{{ asset('assets/front/images/icons/countGoods.svg') }}" alt="">
+                            <p name="categoryCountGoods">{{ count($products) }} шт</p>
+                        </div>
+                        <div class="category-count_views d-flex gap-2">
+                            <img src="{{ asset('assets/front/images/icons/eye.svg') }}" alt="">
+                            <p name="categoryCountViews">15 025</p>
+                        </div>
+                    </div>
+                    <form action="" class="category-main_filter d-flex align-items-center">
+                        <p>Сортировать по:</p>
+                        <select name="" id="" class="custom-select" placeholder="Популярности">
+                            <option value="popularity">популярности</option>
+                            <option value="date">дате добавления</option>
+                            <option value="price-asc" class="icon-arrD">цене</option>
+                            <option value="price-desc" class="icon-arrT">цене</option>
+                            <option value="alphabet-asc" class="icon-arrD">алфавиту</option>
+                            <option value="alphabet-asc" class="icon-arrT">алфавиту</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="category-goods">
+                @if($products)
+                @foreach($products as $product)
                     <form data-action="{{ route('cart.add-product') }}" method="post" class="cart">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="goods_item">
-                            <div class="goods_header goods-img">
+                            <div class="goods_header">
                                 <div class="goods_header--menu d-flex align-items-center">
-                                    <span class="goods-itemNew" name="goodsItemNew">New</span>
+                                    @if($product->new)
+                                        <span class="goods-itemNew" name="goodsItemNew">New</span>
+                                    @endif
                                     <button type="button">
                                         <svg width="24" height="24" viewBox="0 0 24 24"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -31,10 +136,10 @@
                                                 stroke="white" stroke-width="2"/>
                                         </svg>
                                     </button>
-                                    <button type="button" class="icon-heart addToFavoritesBtn">
+                                    <button type="button" class="icon-heart">
                                     </button>
                                 </div>
-                                <img src="{{ asset('/assets/front/images/circle.svg') }}" alt="">
+                                <img src="{{ asset('assets/front/images/cards/Group 511.svg') }}" alt="">
                                 <img src="{{ asset($product->images->first()->image ?? '') }}" alt="">
                                 <div class="goods_header--installment d-flex align-items-center">
                                     @if($product->old_price)
@@ -42,21 +147,22 @@
                                             $old_price = $product->old_price;
                                             $price = $product->price;
                                         @endphp
-                                        <span class="goods_proccent" name="actualGoodsProccent">-{{ number_format(($old_price - $price) / $price * 100)   }}%</span>
+                                        <span class="goods_proccent" name="actualGoodsProccent">-{{ ($old_price - $price) / $price * 100  }}%</span>
                                     @endif
-                                    @if($product->credit == 1)
+                                    @if($product->credit)
                                         <p>Рассрочка</p>
                                     @endif
                                 </div>
                             </div>
-                            <div style="padding: 15px;">
-                                {{--                                @foreach($product->prices as $price)--}}
-                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price }}
-                                    usd</p>
-                                {{--                                @endforeach--}}
-                                @if ($product->old_price)
-                                    <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->old_price }}
-                                        usd</p>
+                            <div style="padding: 10px;">
+                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
+                                    {{ $product->price }}
+                                    {{--                                @currency({{$product->price}})--}}
+                                </p>
+                                @if($product->old_price)
+                                    <p class="goods_oldPrice"
+                                       name="actualGoodsOldPrice">{{ $product->old_price }} usd
+                                    </p>
                                 @endif
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
                                     <div class="goods_rewies d-flex align-items-center gap-1">
@@ -75,13 +181,14 @@
                                 <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"
                                    name="actualGoodsName">{{ $product->title }}</a>
                                 @if(!empty($product->brand->slug))
-                                    <a href="{{ route('brand.detail', $product->brand->slug ) }}"
+                                    <a href="{{ route('brand.detail', $product->brand->slug) ?? ''}}"
                                        class="goods_companyName"
-                                       name="actualGoodsCompanyName">{{ $product->brand->title  }}</a>
+                                       name="actualGoodsCompanyName">{{ $product->brand->title ?? '' }}</a>
                                 @endif
-                                <div class="goods-addProduct ">
+
+                                <div class="goods-addProduct">
                                     <div class="goods-addProduct_btns">
-                                        <button class="goods-addProduct-minus" type="button">
+                                        <button class="goods-addProduct-minus disabled" type="button">
                                             <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -127,27 +234,10 @@
                         </div>
                     </form>
                 @endforeach
+                @endif
             </div>
-            <a href="/" class="goods-advertising_banner" name="noveltiesAdvertisingBanner">
-                @desktop
-                @if(isset($main_banners['238x420px']))
-                    @foreach($main_banners['238x420px'] as $key => $banner)
-                        @if($loop->iteration == 1)
-                            <img src="{{ asset($banner->image) }}" alt="">
-                        @endif
-                    @endforeach
-                @endif
-                @enddesktop
-                @mobile
-                @if(isset($main_banners['536x220px']))
-                    @foreach($main_banners['536x220px'] as $key => $banner)
-                        @if($loop->iteration == 1)
-                            <img src="{{ asset($banner->image) }}" alt="">
-                        @endif
-                    @endforeach
-                @endif
-                @endmobile
-            </a>
         </div>
     </section>
-@endif
+    {!! $products->links('pagination') !!}
+    @include('front.includes.mailing')
+@endsection

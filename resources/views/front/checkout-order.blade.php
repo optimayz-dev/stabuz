@@ -6,7 +6,9 @@
         <div class="title-box d-flex  gap-1 align-items-end">
             <h6 class="title">Оформление заказа</h6>
         </div>
-        <form action="url">
+        <form action="{{ route('order.create') }}" method="post">
+            @csrf
+            <input type="hidden" name="order_type" value="individual">
             <div class="order-form d-flex flex-lg-row flex-column justify-content-between">
                 <div class="order-left">
                     <div id="paymentMethod">
@@ -27,7 +29,7 @@
                                 </div>
                                 <div class="order-radio">
                                     <input class="order-payment_method" type="radio" value="installmentPlan"
-                                           id="installmentPlan" name="paymentMethod">
+                                           id="installmentPlan" name="payment_type">
                                     <label for="installmentPlan">
                                         <h6>Рассрочка</h6>
                                         <div class="installment-plan_banks">
@@ -47,7 +49,7 @@
                                             </div>
                                             <div class="installment-plan_bank">
                                                 <input class="installment-bank" type="radio" value="credit_intendbank"
-                                                       id="intendbank" name="installmentPlanBank" name="payment_type">
+                                                       id="intendbank" name="payment_type">
                                                 <label for="intendbank">
                                                     <img src="image/banks/image 85 (2).png" alt="">
                                                 </label>
@@ -193,12 +195,13 @@
                         </div>
                         <div class="basket-all_price d-lg-flex d-none justify-content-between mb-4">
                             <h5>Всего: {{ $overall_price }}</h5>
+                            <input type="hidden" value="{{ $overall_price }}" name="order_price">
                             <div>
                                 <h6 class="text-end"><i class="total-order_price" id="checkoutTotalPrice"></i> сум</h6>
                             </div>
                         </div>
                         <div class="basket-order_fixed">
-                            <button type="button" class="order_button" data-bs-toggle="modal"
+                            <button type="submit" class="order_button" data-bs-toggle="modal"
                                     data-bs-target="#orderCuccesful">Оформить заказ
                             </button>
                         </div>
@@ -226,6 +229,7 @@
                     <div class="goods-in-order-accordion-content">
                         <div class="goods-in-order_products">
                             <!-- ШАБЛОН -->
+{{--                            <input type="hidden" value="{{ $products }}" name="product">--}}
                             @foreach($products as $product)
                                 <div class="goods-in-order_product">
                                     <div class="basket-product d-flex justify-content-between">
@@ -233,8 +237,8 @@
                                                                              alt=""></div>
                                         <div>
                                             <p class="basket-product_name">{{ $product['title'] ?? '' }}</p>
-                                            <input value="{{ $product['count'] ?? '' }}" type="text" class="item_count"
-                                                   disabled>шт</input>
+                                            <input type="hidden" value="{{ $product['id'] }}" name="products[]">
+                                            <input value="{{ $product['count'] ?? '' }}" type="text" class="item_count" name="count[]">шт</input>
                                         </div>
                                     </div>
                                 </div>

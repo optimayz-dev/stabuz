@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="goods_views d-flex gap-1">
                                         <span class="icon-eye"></span>
-                                        <p class="goods_viewsCount" name="actualGoodsViewsCount">123</p>
+                                        <p class="goods_viewsCount" name="actualGoodsViewsCount">{{ $product->views }}</p>
                                     </div>
                                 </div>
                                 <a href="{{ route('product.detail', $product->slug) }}" class="goods_name"

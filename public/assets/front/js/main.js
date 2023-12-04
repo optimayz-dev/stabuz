@@ -62,6 +62,7 @@ $(document).ready(function () {
         dots: true,
         responsiveClass: true,
         nav: true,
+        autoplayHoverPause: true,
         margin: 36,
         navText: [
             '<img src="image/slider/arrowLeft.png" alt="">',

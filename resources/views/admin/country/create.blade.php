@@ -63,42 +63,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script type="text/javascript">
-
-            var i = 0;
-
-            $("#add").click(function(){
-
-                ++i;
-
-                $("#datatable-checkbox").append('' +
-                    '<tr>' +
-                        '<td>' +
-                            '<input type="text" name="addmore['+i+'][title]" placeholder="Назавние" class="updateSelected" />' +
-                        '</td>' +
-                        '<td>' +
-                            '<input type="text" name="addmore['+i+'][seo_title]" placeholder="Seo назавние" class="updateSelected" />' +
-                        '</td>' +
-                        '<td>' +
-                            '<textarea type="text" name="addmore['+i+'][description]" placeholder="Описание" class="updateSelected"></textarea>' +
-                        '</td>' +
-                        '<td>' +
-                            '<textarea type="text" name="addmore['+i+'][seo_description]" placeholder="Seo Описание" class="updateSelected"></textarea>' +
-                        '</td>' +
-                        '<td>' +
-                            '<textarea type="text" name="addmore['+i+'][meta_keywords]" placeholder="Мета ключи" class="updateSelected"></textarea>' +
-                        '</td>' +
-                        '<td>' +
-                            '<button type="button" class="btn btn-danger remove-tr">Убрать</button>' +
-                        '</td>' +
-                    '</tr>');
-            });
-
-            $(document).on('click', '.remove-tr', function(){
-                $(this).parents('tr').remove();
-            });
-
-        </script>
-    @endpush
 @endsection

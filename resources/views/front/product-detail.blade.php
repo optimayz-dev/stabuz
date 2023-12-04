@@ -143,7 +143,7 @@
                     </div>
                     <div class="goods_views d-flex align-items-center gap-1">
                         <span class="icon-eye"></span>
-                        <p class="goods_viewsCount" name="productGoodsViewsCount">123</p>
+                        <p class="goods_viewsCount" name="productGoodsViewsCount">{{ $product->views }}</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3">

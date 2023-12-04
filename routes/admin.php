@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\StaticSeoTexts\ProductSeoTextController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\StaticSeoTexts\CategorySeoTextController;
 use App\Http\Controllers\Admin\StaticSeoTexts\BrandSeoTextController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -108,6 +109,12 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/product-export', [ProductController::class, 'export'])->name('product.export');
             Route::get('/admin/product-excell', [\App\Http\Controllers\Controller::class, 'excel']);
 //            Route::get('/admin/brands/categories/{slug}', [BrandController::class, 'brandCategories'])->name('brand.categories');
+
+            // Orders
+
+            Route::get('/admin/order', [OrderController::class, 'index'])->name('order.index');
+            Route::get('/admin/order/{order}/show', [OrderController::class, 'show'])->name('order.show');
+            Route::post('/admin/order/{order}/update', [OrderController::class, 'update'])->name('order.update');
 
     });
 

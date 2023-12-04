@@ -41,11 +41,14 @@ class ProductController extends Controller
             ])
             ->first();
 
+        $product->increment('views');
+
         $categories = Category::query()->with('translations','children', 'products')->whereHas('products', function ($query) use ($product){
             $query->where('product_id', $product->id);
         })->get();
 
 
+        config(['session.lifetime' => 1440]);
         session()->push('products_recently_viewed', $product->getKey());
 
         return view('front.product-detail', compact('product', 'seo', 'categories'));

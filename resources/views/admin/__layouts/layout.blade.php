@@ -122,7 +122,7 @@
                             <li>
                                 <a><i class="fa fa-file-text-o"></i> Заказы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="{{ route('admin.brand.index') }}">Заказы</a></li>
+                                    <li><a href="{{ route('admin.order.index') }}">Заказы</a></li>
                                 </ul>
                             </li>
 {{--                            <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>--}}

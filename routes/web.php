@@ -13,6 +13,8 @@ use App\Http\Controllers\Front\PromotionController;
 use App\Http\Controllers\Front\VideoReviewController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\OrderController;
+use App\Http\Controllers\Front\SearchController;
+use App\Http\Controllers\Front\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,11 +89,17 @@ Route::group([
 
     //Order
 
+//    Route::post('order/create', [OrderController::class])->name('order.create');
     Route::post('checkout-order', [OrderController::class, 'checkout'])->name('order.checkout');
-    Route::get('checkout-order/entity', [OrderController::class, 'checkoutEntity'])->name('order.checkout-entity');
+    Route::post('checkout-order/entity', [OrderController::class, 'checkoutEntity'])->name('order.checkout-entity');
     Route::post('checkout-order/create', [OrderController::class, 'createOrder'])->name('order.create');
+
+    //Search
+    Route::get('search', [SearchController::class, 'index'])->name('search');
+
+    //Favorites
+    Route::get('favorite', [FavoriteController::class, 'index'])->name('favorite');
+
 });
 
-
-//Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 
