@@ -14,6 +14,7 @@
 {{--        <a href="#" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title ?? '' }}</a>--}}
     </div>
     <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name"> Результаты поиска</h6>
+    <h4 class="mb-sm-5 mb-3 mt-5 container" name="category-name"> По запросу "{{ request()->input('q') }}"</h4>
     <!-- caregory nav -->
     <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
         @if($category != null)
