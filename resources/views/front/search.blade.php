@@ -11,14 +11,14 @@
     <div class="container d-md-none d-flex align-items-center gap-sm-5 gap-3">
         <a href="{{ route('categories.view') }}" class="category-name_link"><img
                 src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt="">Все категории</a>
-        <a href="#" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title ?? '' }}</a>
+{{--        <a href="#" class="category-name_link"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">{{ $category->title ?? '' }}</a>--}}
     </div>
     <h6 class="title mb-sm-5 mb-3 mt-3 container" name="category-name"> Результаты поиска</h6>
     <!-- caregory nav -->
     <ul class="category-nav_list container d-md-none d-flex align-items-center gap-3" name="categoryCategoriesList">
         @if($category != null)
-            @foreach($category->children as $child)
-                <li><a href="/" name="categoryCategoriesLink" class="category-categories-link">{{ $child->title }}</a>
+            @foreach($category as $item)
+                <li><a href="{{ route('category.view', $item->slug) }}" name="categoryCategoriesLink" class="category-categories-link">{{ $item->title }}</a>
                 </li>
             @endforeach
         @endif
@@ -29,16 +29,16 @@
             <div class="category-categories d-flex flex-column">
                 <a href="{{ route('categories.view') }}" class="category-name_link"><img
                         src="{{ asset('assets/front/images/icons/greenArrLeft.png') }} " alt="">Все категории</a>
-                <a href="/" class="category-name_link d-none" name="parentCategoryName"><img
-                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} "
-                        alt="">{{ $category->title ?? ''}}
-                </a>
-                <span name="categoryName" class="category-name">{{ $category->title ?? ''}}</span>
+{{--                <a href="/" class="category-name_link d-none" name="parentCategoryName"><img--}}
+{{--                        src="{{ asset('/assets/front/images/icons/greenArrLeft.png') }} "--}}
+{{--                        alt="">{{ $category->title ?? ''}}</a>--}}
+
+{{--                <span name="categoryName" class="category-name">{{ $category->title ?? ''}}</span>--}}
                 <ul class="category-categories_list" name="categoryCategoriesList">
                     @if($category != null)
-                        @foreach($category->children as $child)
-                            <li><a href="{{ route('category.view', $child->slug) }}" name="categoryCategoriesLink"
-                                   class="category-categories-link">{{ $child->title }}</a></li>
+                        @foreach($category as $item)
+                            <li><a href="{{ route('category.view', $item->slug) }}" name="categoryCategoriesLink"
+                                   class="category-categories-link">{{ $item->title }}</a></li>
                         @endforeach
                     @endif
                 </ul>
@@ -70,7 +70,8 @@
                     <button class="category-filter_reset--btn">Сбросить</button>
                 </div>
                 <ul class="category-filter_list" name="categoryBrandsList">
-                    @if($category != null)
+{{--                    @dd($category)--}}
+                    @if(!empty($category->brands))
                         @foreach($category->brands as $brand)
                             <li>
                                 <label for="brand1"> <a style="color: unset;"

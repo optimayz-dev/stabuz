@@ -23,7 +23,7 @@ class SearchController extends Controller
             'brands.country',
             'brands.country.translations',
 
-        ])->first();
+        ])->get();
 
 
         $products = Product::query()->whereHas('translations', function ($query) use ($search) {
