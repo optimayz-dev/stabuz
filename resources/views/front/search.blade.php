@@ -158,12 +158,12 @@
                             </div>
                             <div style="padding: 10px;">
                                 <p class="goods_currentPrice" name="actualGoodsCurrentPrice">
-                                    {{ $product->price }}
+                                    {{ $currency($product->price) }}
                                     {{--                                @currency({{$product->price}})--}}
                                 </p>
                                 @if($product->old_price)
                                     <p class="goods_oldPrice"
-                                       name="actualGoodsOldPrice">{{ $product->old_price }} usd
+                                       name="actualGoodsOldPrice">{{ $currency($product->old_price) }}
                                     </p>
                                 @endif
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
