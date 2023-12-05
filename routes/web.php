@@ -15,6 +15,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\OrderController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\Front\FavoriteController;
+use App\Http\Controllers\Front\CurrencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,9 @@ Route::group([
 
     //Favorites
     Route::get('favorite', [FavoriteController::class, 'index'])->name('favorite');
+
+    //Currency
+    Route::get('currency/{currency}', [CurrencyController::class, 'setCurrency'])->name('currency');
 
 });
 

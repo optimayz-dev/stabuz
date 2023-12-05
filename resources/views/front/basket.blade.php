@@ -57,10 +57,10 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <h6 class="basket-product_currentPrice">{{ $product['price'] ?? ''}}</h6>
+                                    <h6 class="basket-product_currentPrice">{{ $currency($product['price']) }}</h6>
                                     @if(!empty($product['old_price']))
                                         <p class="goods_oldPrice basket-product_oldPrice"
-                                           name="actualGoodsOldPrice">{{ $product['old_price'] }}</p>
+                                           name="actualGoodsOldPrice">{{ $currency($product['old_price']) }}</p>
                                     @endif
                                     <div class="basket-product_folltrash d-flex justify-content-end gap-3">
                                         <button type="button" class="icon-heart">

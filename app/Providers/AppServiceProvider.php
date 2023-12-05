@@ -32,23 +32,23 @@ class AppServiceProvider extends ServiceProvider
     {
 //        Paginator::useBootstrap();
         Paginator::defaultSimpleView('pagination');
-//        dd(Http::get('https://cbu.uz/ru/arkhiv-kursov-valyut/json/RUB/')->json([0]));
 
-        Blade::directive('currency', function ($amount){
+        \view()->share('currency', function ($amount) {
 
-            $currency = (new CurrencyService())->rub($amount);
+            if (session('currency') == 'uzs')
+                return (new CurrencyService())->sum($amount) . ' uzs';
 
-            return $currency;
+            return $amount . ' $';
         });
 
         // Для определения N + 1 запросов в рамках локальной разработки
         Model::preventLazyLoading(!app()->isProduction());
 
-        DB::whenQueryingForLongerThan(500, function (Connection $connection){
+        DB::whenQueryingForLongerThan(500, function (Connection $connection) {
 
         });
 
-        View::composer('front.__layouts.header',HeaderComposer::class);
+        View::composer('front.__layouts.header', HeaderComposer::class);
         View::composer('front.includes.recently-viewed-products', RecentlyViewedProductsComposer::class);
         View::composer('front.includes.recommend-products', RecommendProductsComposer::class);
     }

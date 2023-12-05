@@ -194,10 +194,10 @@
                             <span>в течение 3 дней</span>
                         </div>
                         <div class="basket-all_price d-lg-flex d-none justify-content-between mb-4">
-                            <h5>Всего: {{ $overall_price }}</h5>
-                            <input type="hidden" value="{{ $overall_price }}" name="order_price">
+                            <h5>Всего: {{ $currency($overall_price)  }}</h5>
+                            <input type="hidden" value="{{ $currency($overall_price) }}" name="order_price">
                             <div>
-                                <h6 class="text-end"><i class="total-order_price" id="checkoutTotalPrice"></i> сум</h6>
+                                <h6 class="text-end"><i class="total-order_price" id="checkoutTotalPrice"></i></h6>
                             </div>
                         </div>
                         <div class="basket-order_fixed">

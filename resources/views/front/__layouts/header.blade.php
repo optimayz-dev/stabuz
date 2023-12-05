@@ -80,14 +80,16 @@
                     </ul>
                 </div>
                 <div class="dropdown">
-                    <a href="#!">UZS</a>
+                    <a href="#!">{{ session('currency') }}</a>
                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">USD</a></li>
-                        <li><a class="dropdown-item" href="#">RUB</a></li>
+                        <li><a class="dropdown-item" href="{{ route('currency', 'usd') }}">USD</a></li>
+                        <li><a class="dropdown-item" href="{{ route('currency', 'rub') }}">RUB</a></li>
+                        <li><a class="dropdown-item" href="{{ route('currency', 'uzs') }}">UZS</a></li>
                     </ul>
                 </div>
+
                 <div class="dropdown d-md-block d-none">
                     <a href="#!">{{ \Illuminate\Support\Facades\App::getLocale() }}</a>
                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

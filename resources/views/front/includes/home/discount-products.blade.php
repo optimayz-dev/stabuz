@@ -73,11 +73,11 @@
                             </div>
                             <div style="padding: 15px;">
                                 {{--                                @foreach($product->prices as $price)--}}
-                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $product->price ?? ''}}
+                                <p class="goods_currentPrice" name="actualGoodsCurrentPrice">{{ $currency($product->price) }}
                                     usd</p>
                                 {{--                                @endforeach--}}
                                 @if ($product->old_price)
-                                    <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $product->old_price }}
+                                    <p class="goods_oldPrice" name="actualGoodsOldPrice">{{ $currency($product->old_price) }}
                                         usd</p>
                                 @endif
                                 <div class="mt-1 mb-1 d-flex align-items-center gap-3">
