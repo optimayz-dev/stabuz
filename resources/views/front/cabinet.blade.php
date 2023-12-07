@@ -566,54 +566,37 @@
                     <button type="button" data-bs-dismiss="offcanvas"><img src="{{ asset('assets/front/images/icons/greenArrLeft.png') }}" alt=""></button>
                     <h3>Мои отзывы</h3>
                 </div>
+                @foreach($user->reviews as $review)
                 <div class="cabinet-main_reviews d-flex flex-column gap-5">
                     <div class="product-review">
                         <div class="d-flex gap-3 align-items-center">
-                            <img src="image/product/7933750x0.jpg" alt="" class="cabinet-main_reviews--img" name="cabinetMainReviewsImg">
+                            <img src="{{ asset($review->product->images->first()->image ?? '') }}" alt="" class="cabinet-main_reviews--img" name="cabinetMainReviewsImg">
                             <div>
-                                <h6 class="product-review_name" name="productReviewName">Перфоратор GBH 3-28 DFR Professional</h6>
+                                <h6 class="product-review_name" name="productReviewName">{{ $review->product->title ?? '' }}</h6>
                                 <div class="mt-1 mb-2 d-flex align-items-center gap-3">
                                     <div class="goods_rewies d-flex align-items-center gap-1">
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star"></span>
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $review->grade)
+                                                <span class="icon-star active"></span>
+                                            @else
+                                                <span class="icon-star"></span>
+                                            @endif
+                                        @endfor
                                     </div>
-                                    <p class="product-review_date" name="productReviewDate">2 июня 2023</p>
+                                    <p class="product-review_date" name="productReviewDate">{{ $review->created_at }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="product-review_text mb-3" name="productReviewText">Высокая производительность при снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого класса повышает удобство работы благодаря системе Bosch Vibration Control.</p>
+                        <p class="product-review_text mb-3" name="productReviewText">{{ $review->description ?? '' }}</p>
                         <div class="product-review_imgs d-flex gap-sm-3 gap-2" name="productReviewImgs">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                        </div>
-                    </div>
-                    <div class="product-review">
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="image/product/7933750x0.jpg" alt="" class="cabinet-main_reviews--img" name="cabinetMainReviewsImg">
-                            <div>
-                                <h6 class="product-review_name" name="productReviewName">Перфоратор GBH 3-28 DFR Professional</h6>
-                                <div class="mt-1 mb-2 d-flex align-items-center gap-3">
-                                    <div class="goods_rewies d-flex align-items-center gap-1">
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star active"></span>
-                                        <span class="icon-star"></span>
-                                    </div>
-                                    <p class="product-review_date" name="productReviewDate">2 июня 2023</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="product-review_text mb-3" name="productReviewText">Высокая производительность при снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого класса повышает удобство работы благодаря системе Bosch Vibration Control.</p>
-                        <div class="product-review_imgs d-flex gap-sm-3 gap-2" name="productReviewImgs">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
+                            @foreach($review->images as $image)
+                                <img src="{{ asset($image->image ?? '') }}" alt="" class="product-review_img" style="width: 75px; height: 75px">
+                            @endforeach
                         </div>
                     </div>
                 </div>
+            @endforeach
+
             </div>
             <div class="cabinet-main_tab cmt" id="cabinetTab6" tabindex="-1" aria-labelledby="offcanvasExampleLabel">
                 <div class="cabinet-main_back--btn">
@@ -624,7 +607,7 @@
                     <div class="cabinet-main_inpts">
                         <div class="cabinet-main_inpt">
                             <p>Имя и фамилия *</p>
-                            <input type="text" required name="cabinetProfileName">
+                            <input type="text" required name="name" value="{{ $user->name }}">
                         </div>
                         <div class="cabinet-main_inpt">
                             <p>Отчество</p>
@@ -632,11 +615,11 @@
                         </div>
                         <div class="cabinet-main_inpt">
                             <p>Телефон *</p>
-                            <input type="text" required data-phone-pattern="" name="cabinetProfilePhone">
+                            <input type="text" required data-phone-pattern="" name="phone">
                         </div>
                         <div class="cabinet-main_inpt">
                             <p>E-mail *</p>
-                            <input type="email" required name="cabinetProfileEmail">
+                            <input type="email" required name="login" value="{{ $user->login }}">
                         </div>
                         <div class="cabinet-main_inpt">
                             <p>Пол</p>

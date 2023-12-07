@@ -16,7 +16,8 @@ use App\Http\Controllers\Front\OrderController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\Front\FavoriteController;
 use App\Http\Controllers\Front\CurrencyController;
-
+use App\Http\Controllers\Front\ApplicationController;
+use App\Http\Controllers\Front\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +104,12 @@ Route::group([
 
     //Currency
     Route::get('currency/{currency}', [CurrencyController::class, 'setCurrency'])->name('currency');
+
+    //Application
+    Route::post('application/store', [ApplicationController::class, 'store'])->name('application.store');
+
+    //Review Products
+    Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
 
 });
 

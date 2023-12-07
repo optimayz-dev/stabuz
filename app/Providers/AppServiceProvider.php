@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-//        Paginator::useBootstrap();
+        Paginator::useBootstrap();
         Paginator::defaultSimpleView('pagination');
 
         \view()->share('currency', function ($amount) {

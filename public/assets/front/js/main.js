@@ -883,21 +883,21 @@ $(document).ready(function () {
     $('#product-review_download--img').on('click', 'img', function () {
         $(this).remove();
     });
-    $('.add-review_product--form').each(function () {
-        var $form = $(this);
-        var $inputs = $form.find('input');
-        var $button = $form.find('button');
-        $inputs.on('input', function () {
-            var $input1 = $form.find('input[name="product-review_inpt--name"]');
-            var $input2 = $form.find('input[name="product-review_inpt--phone"]');
-            var $check = $('label[class="checked"]');
-            if ($input1.val() && $check.on("keyup change") && $input2.val()) {
-                $button.removeClass('disabled');
-            } else {
-                $button.addClass('disabled');
-            }
-        });
-    });
+    // $('.add-review_product--form').each(function () {
+    //     var $form = $(this);
+    //     var $inputs = $form.find('input');
+    //     var $button = $form.find('button');
+    //     $inputs.on('input', function () {
+    //         var $input1 = $form.find('input[name="product-review_inpt--name"]');
+    //         var $input2 = $form.find('input[name="product-review_inpt--phone"]');
+    //         var $check = $('label[class="checked"]');
+    //         if ($input1.val() && $check.on("keyup change") && $input2.val()) {
+    //             $button.removeClass('disabled');
+    //         } else {
+    //             $button.addClass('disabled');
+    //         }
+    //     });
+    // });
 });
 $('.review-grade_stars input[type="checkbox"]').on('change', function () {
     var checkbox = $(this);

@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\StaticSeoTexts\CategorySeoTextController;
 use App\Http\Controllers\Admin\StaticSeoTexts\BrandSeoTextController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ApplicationController;
+use App\Http\Controllers\Admin\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -115,6 +117,14 @@ use Illuminate\Support\Facades\Route;
             Route::get('/admin/order', [OrderController::class, 'index'])->name('order.index');
             Route::get('/admin/order/{order}/show', [OrderController::class, 'show'])->name('order.show');
             Route::post('/admin/order/{order}/update', [OrderController::class, 'update'])->name('order.update');
+
+            //Applications
+            Route::get('admin/application', [ApplicationController::class, 'index'])->name('application.index');
+
+            //Reviews
+            Route::get('admin/reviews', [ReviewController::class, 'index'])->name('review.index');
+            Route::get('admin/reviews/{review}', [ReviewController::class, 'show'])->name('review.show');
+            Route::post('admin/reviews/{review}', [ReviewController::class, 'update'])->name('review.update');
 
     });
 

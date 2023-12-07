@@ -51,6 +51,11 @@ class Product extends Model implements TranslatableContract
         return $this->hasMany(ProductGallery::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class)->where('status', 'accepted');
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);

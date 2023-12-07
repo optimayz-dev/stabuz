@@ -1,8 +1,7 @@
 @extends('front.__layouts.layout')
 @section('seo_texts')
     <title>{{ $product->seo_title ?? str_replace('{name}', $product->title, $seo->seo_title) }}</title>
-    <meta name="description"
-          content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
+    <meta name="description" content="{{ $product->seo_description ?? str_replace('{name}', $product->title, $seo->meta_description) }}">
 @endsection
 @section('content')
     @include('front.__layouts.header')
@@ -218,7 +217,7 @@
             </a>
             <a href="#productReviews" class="tabs-links product-reviews_link" data-bs-toggle="tab">
                 Отзывы
-                <span name="productReviewsCount" id="productReviewsCount">25</span>
+                <span name="productReviewsCount" id="productReviewsCount">{{ count($product->reviews) }}</span>
             </a>
             <button type="button" class="product-add_review--btn d-none" id="productAdRreviewBtn" data-bs-toggle="modal"
                     data-bs-target="#addReviewProductModal">Написать отзыв
@@ -250,55 +249,156 @@
                 <div class="d-md-none d-flex justify-content-between align-items-center mb-4 mt-5">
                     <p class="mobile-review_title">
                         Отзывы
-                        <span name="productReviewsCount">25</span>
+                        <span name="productReviewsCount">{{ count($product->reviews) }}</span>
                     </p>
-                    <button type="button" id="productAdRreviewBtn" data-bs-toggle="modal"
-                            data-bs-target="#addReviewProductModal">Написать отзыв
+                    <button type="button" class="product-add_review--btn" id="productAdRreviewBtn"
+                            data-bs-toggle="modal" data-bs-target="#addReviewProductModal">Написать отзыв
                     </button>
                 </div>
                 <div class="product-reviews">
-                    <div class="product-review">
-                        <h6 class="product-review_name" name="productReviewName">Константин</h6>
-                        <div class="mt-1 mb-2 d-flex align-items-center gap-3">
-                            <div class="goods_rewies d-flex align-items-center gap-1">
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star"></span>
+
+                    @foreach($product->reviews as $review)
+                        <div class="product-review">
+                            <h6 class="product-review_name" name="productReviewName">{{ $review->name }}</h6>
+                            <div class="mt-1 mb-2 d-flex align-items-center gap-3">
+                                <div class="goods_rewies d-flex align-items-center gap-1">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        @if($i <= $review->grade)
+                                            <span class="icon-star active"></span>
+                                        @else
+                                            <span class="icon-star"></span>
+                                        @endif
+                                    @endfor
+                                </div>
+                                <p class="product-review_date" name="productReviewDate">{{ $review->created_at }}</p>
                             </div>
-                            <p class="product-review_date" name="productReviewDate">2 июня 2023</p>
-                        </div>
-                        <p class="product-review_text mb-3" name="productReviewText">Высокая производительность при
-                            снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого
-                            класса повышает удобство работы благодаря системе Bosch Vibration Control.</p>
-                        <div class="product-review_imgs d-flex gap-sm-3 gap-2" name="productReviewImgs">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                        </div>
-                    </div>
-                    <div class="product-review">
-                        <h6 class="product-review_name" name="productReviewName">Константин</h6>
-                        <div class="mt-1 mb-2 d-flex align-items-center gap-3">
-                            <div class="goods_rewies d-flex align-items-center gap-1">
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star active"></span>
-                                <span class="icon-star"></span>
+                            <p class="product-review_text mb-3" name="productReviewText">{{ $review->description }}</p>
+                            <div class="product-review_imgs d-flex gap-sm-3 gap-2" name="productReviewImgs">
+                                @foreach($review->images as $image)
+                                    <img src="{{ asset($image->image) }}" alt="" class="product-review_img" style="height: 150px; width: 150px">
+                                @endforeach
                             </div>
-                            <p class="product-review_date" name="productReviewDate">2 июня 2023</p>
                         </div>
-                        <p class="product-review_text mb-3" name="productReviewText">Высокая производительность при
-                            снижении вибрации на 20%. Снижение вибрации по сравнению с другими перфораторами этого
-                            класса повышает удобство работы благодаря системе Bosch Vibration Control.</p>
-                        <div class="product-review_imgs d-flex gap-sm-3 gap-2" name="productReviewImgs">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                            <img src="image/product/review.png" alt="" class="product-review_img">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
+    <div class="product_modal--slider" id="productModalSlider1">
+        <button type="button" class="product_modal--slider_closebtn" id="productModalSliderClosebtn1"><img
+                src="image/icons/close-btn.png" alt=""></button>
+        <div class="product-photo_modal--slider_large">
+            @foreach($product->images as $image)
+                <div><img src="{{ asset($image->image) }}" alt=""></div>
+            @endforeach
+        </div>
+        <div class="product-photo_modal--slider_small">
+            @foreach($product->images as $image)
+                <div><img src="{{ asset($image->image) }}" alt=""></div>
+            @endforeach
+        </div>
+    </div>
+
+{{--        <div class="product_modal--slider" id="productModalSlider2">--}}
+{{--            <button type="button" class="product_modal--slider_closebtn"><img src="{{ asset('assets/front/images/icons/close-btn.png') }}" alt="" id="productModalSliderClosebtn2"></button>--}}
+{{--            <div class="product-photo_modal--slider_large">--}}
+{{--                @foreach($product->images as $image)--}}
+{{--                    <div><img src="{{ asset($image->image) }}" alt=""></div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--            <div class="product-photo_modal--slider_small">--}}
+{{--                @foreach($product->images as $image)--}}
+{{--                    <div><img src="{{ asset($image->image) }}" alt=""></div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+    <div class="modal fade" id="addReviewProductModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('review.store') }}" class="add-review_product--form" method="post"
+                      enctype="multipart/form-data">
+                    @csrf
+                    <div class="add-review_product--form_header d-flex justify-content-between">
+                        <div class="add-review_product--form_header--info d-flex align-items-center gap-3">
+                            <img src="{{ asset($product->images->first()->image ?? '') }}" alt="" name="productImage">
+                            <input type="hidden" value="{{ $product->id }}" name="product_id">
+                            <div>
+                                <p>Отзыв к товару</p>
+                                <h6 name="productName">Перфоратор GBH 3-28 DFR Professional</h6>
+                            </div>
+                        </div>
+                        <button type="button" data-bs-dismiss="modal"><img
+                                src="{{ asset('assets/front/images/icons/close-btn.png') }}" alt=""></button>
+                    </div>
+                    <div class="add-review_product--form_body d-flex flex-wrap justify-content-between w-100 gap-4">
+                        @if(!auth('web')->user())
+                            <div class="d-flex justify-content-between w-100 flex-wrap">
+                                <div class="product-review_inpt">
+                                    <p>Имя / логин *</p>
+                                    <input required type="text" name="name">
+                                </div>
+                                <div class="product-review_inpt mt-md-0 mt-2">
+                                    <p>Телефон / e-mail *</p>
+                                    <input required type="text" name="email">
+                                </div>
+                            </div>
+                        @endif
+                        <div class="d-flex justify-content-between w-100 flex-wrap">
+                            <div class="product-review_inpt">
+                                <div class="d-flex justify-content-between">
+                                    <p>Сообщение</p>
+                                    <div id="product-review_counter--text">0 / 600</div>
+                                </div>
+                                <textarea id="product-review_text-area" maxlength="600" name="description"></textarea>
+                            </div>
+                            <div class="product-review_inpt">
+                                <div class="mb-3">
+                                    <p>Оценка товара *</p>
+                                    <div class="review-grade_stars">
+                                        <label class="unchecked"><input type="checkbox" name="grade" value="1"><i
+                                                class="fa icon-star"></i></label>
+                                        <label class="unchecked"><input type="checkbox" name="grade" value="2"><i
+                                                class="fa icon-star"></i></label>
+                                        <label class="unchecked"><input type="checkbox" name="grade" value="3"><i
+                                                class="fa icon-star"></i></label>
+                                        <label class="unchecked"><input type="checkbox" name="grade" value="4"><i
+                                                class="fa icon-star"></i></label>
+                                        <label class="unchecked"><input type="checkbox" name="grade" value="5"><i
+                                                class="fa icon-star"></i></label>
+                                    </div>
+                                </div>
+                                <div class="product-review_download--imgs mb-3">
+                                    <p>Фотографии</p>
+                                    <div class="d-flex gap-2">
+                                        <div id="product-review_download--img" class="d-flex gap-2">
+                                        </div>
+                                        <button type="button" id="add-image-button"><img
+                                                src="{{ asset('assets/front/images/icons/plus.png') }}" alt=""></button>
+                                        <input type="file" name="images[]" id="image-upload" accept=".jpg, .jpeg, .png"
+                                               style="display: none;" multiple>
+                                    </div>
+                                    <p class="mt-3">Можно загрузить до 5 фотографий формата .jpg, .jpeg, .png</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-review_product--form_footer d-flex w-100 justify-content-between mt-4 flex-wrap">
+                        <p class="col-md-6 col-12">* Все поля, отмеченные звездочкой, обязательны для заполнения</p>
+                        <button type="submit">Отправить
+                            <svg width="44" height="44" viewBox="0 0 67 67" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.519 56.481C15.0642 61.0262 20.8552 64.1215 27.1596 65.3755C33.4639 66.6295 39.9986 65.9859 45.9372 63.5261C51.8758 61.0662 56.9516 56.9006 60.5228 51.556C64.0939 46.2114 66 39.9279 66 33.5C66 27.0721 64.0939 20.7886 60.5228 15.444C56.9516 10.0994 51.8758 5.93377 45.9372 3.47392C39.9986 1.01407 33.464 0.370459 27.1596 1.62448C20.8552 2.8785 15.0642 5.97382 10.519 10.519"
+                                    stroke-width="2" stroke-linecap="round"/>
+                                <path d="M28.3333 17L42 33.5M42 33.5L28.3333 50M42 33.5H0.999999" stroke-width="2"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

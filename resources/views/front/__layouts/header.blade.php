@@ -7,12 +7,12 @@
 <!-- Модальное окно -->
 <div class="modal fade phone" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="URL" class="modal-content phone-form" name="phone-form">
+        <form action="{{ route('application.store') }}" class="modal-content phone-form" name="phone-form" method="post">
+            @csrf
             <div class="modal-body d-flex flex-column">
                 <h4>Обратный звонок</h4>
-                <input class="phone-name" name="phone-name" type="text" required placeholder="Имя*">
-                <input class="phone-phone" data-phone-pattern="" name="phone-phone" type="text" required
-                       placeholder="Номер телефона*">
+                <input class="phone-name" name="name" type="text" required placeholder="Имя*">
+                <input class="phone-phone" data-phone-pattern="" name="phone" type="text" required placeholder="Номер телефона*">
             </div>
             <div class="modal-footer justify-content-between">
                 <button class="phone-btn" disabled type="submit">Отправить

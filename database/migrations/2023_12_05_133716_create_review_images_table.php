@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('review_images', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('product_id')->nullable();
+            $table->bigInteger('review_id');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('review_images');
     }
 };

@@ -253,6 +253,7 @@
         </div>
     </div>
 </div>
+
 <script src="{{ asset('/assets/front/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/assets/front/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('/assets/front/js/bootstrap.bundle.min.js') }}"></script>

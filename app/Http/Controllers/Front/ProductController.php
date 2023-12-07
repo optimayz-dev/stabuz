@@ -37,7 +37,9 @@ class ProductController extends Controller
                 'brand.translations',
                 'brand.country',
                 'brand.country.translations',
-                'images'
+                'images',
+                'reviews',
+                'reviews.images'
             ])
             ->first();
 
